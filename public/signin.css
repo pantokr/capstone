@@ -1,0 +1,84 @@
+html,
+body {
+  height: 100%;
+}
+.w-100{
+  width:100%;
+}
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+
+.id-password-forgot{
+  text-decoration: none;
+}
+
+.btn {
+  
+    /* -webkit-box-sizing: border-box;
+    box-sizing: border-box; */
+    margin-top :1rem;
+    color: white;
+    font-size: 1.2rem;
+
+    font-weight: bold;
+    border-style: solid;
+    border:0;
+    outline:0;
+    border-width: 1px;
+    padding: 1.675rem 0;
+    
+    margin-top :1rem;
+    
+    color: white;
+    
+    font-weight: normal;
+    letter-spacing: -0.05rem;
+    text-align: center;
+}
+
+#gooLogin{
+ 
+  background-color: #313131;
+  margin-bottom: 1rem;
+  /* color : white;
+  font-size: 1.0rem;
+  border-radius: 3px;
+  border: 0;
+  width: 9rem;
+  height: 3.5rem;
+  cursor: pointer; */
+ 
+}
