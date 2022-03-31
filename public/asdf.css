@@ -1,0 +1,62 @@
+/*h1은 설명을 위한 css이기 때문에 지우셔도 됩니다.
+지우지 않을 경우 다른 h1코드 스타일과 충돌할 가능성이 있습니다*/
+h1 {
+    font-size: 35px;
+    text-align: center;
+    padding: 4% 0px;
+    letter-spacing: 1px;
+  }
+  
+  
+  /*div변경과 관련된 코드입니다.
+  색 등의 디자인은 보이기 위해서 표시해놨으니
+  스타일 추가 및 변경이 가능합니다.*/
+  .main input[type=radio] {
+      display: none;
+  }
+  #tab-1:checked ~ .tab label:nth-child(1),
+  #tab-2:checked ~ .tab label:nth-child(2),
+  #tab-3:checked ~ .tab label:nth-child(3),
+  #tab-4:checked ~ .tab label:nth-child(4) {
+      background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+  }
+  .content > div {
+      display: none;
+  }
+  #tab-1:checked ~ .content div:nth-child(1),
+  #tab-2:checked ~ .content div:nth-child(2),
+  #tab-3:checked ~ .content div:nth-child(3),
+  #tab-4:checked ~ .content div:nth-child(4)  {
+      display: block;
+  }
+  .main {
+    margin: 0 auto;
+    main-width:1380px;
+    max-width: 100%;
+  }
+  .tab {
+    overflow: hidden;
+  }
+  .tab label {
+      font-size: 18px;
+      cursor: pointer;
+      float: left;
+      width: 25%;
+      text-align: center;
+      padding: 15px 0;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 2px;
+      user-select: none;
+      -webkit-user-select: none;
+  }
+  .content {
+    background-color: rgba(0, 0, 0, 0.2);
+    min-height: 250px;
+  }
+  .content > div{
+     padding: 30px;
+     line-height: 1.5;
+     font-size: 17px;
+  }
