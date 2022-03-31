@@ -20,9 +20,10 @@
   <link href="cover.css" rel="stylesheet">
 </head>
 
-<body class="d-flex h-100 text-center text-dark bg-light">
-
+<body>
   
+<!-- class="d-flex h-100 text-center text-dark bg-light"> -->
+<nav class="navbar">
   <div class="cover-container d-flex w-100 h-100 p- mx-auto flex-column">
 
     <header class="mb-auto">
@@ -41,23 +42,31 @@
       
       
     </header>
+</nav>
+
+  
+  <div class="cover-container d-flex w-100 h-100 p- mx-auto flex-column">
+
+    <header class="mb-auto">
+      
+        
+      
+    </header>
     
       <main class="justify-content-center row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 ">
         <div class="col">
           <div class="span">
-            <img src="images/start.png"  class="card-img-top feature" alt="..." onclick = "window.open('about:blank').location.href='meeting_start.html'">
+            <img src="images/start.png"  class="card-img-top feature" alt="..." onclick = "window.open('about::blank').location.href='meeting_start.html'">
             <div class="card-body">
-              <!-- <h5 class="card-title">Card title</h5> -->
-              <button class="bg_btn_style">소개팅 시작하기</button>
-              <!-- <p class="card-text">소개팅 시작하자.</p> -->
+              <button class="bg_btn_style" onclick = "window.open('about::blank').location.href='meeting_start.html'">소개팅 시작하기</button>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="span">
-            <img src="images/participate.png"  class="card-img-top feature" alt="..." onclick = "window.open('about:blank').location.href='meeting_start.html'">
+            <img src="images/participate.png"  class="card-img-top feature" alt="..." onclick = "window.open('about:blank').location.href='meeting_participate.html'">
             <div class="card-body">
-              <button class="bg_btn_style">소개팅 참여하기</button> 
+              <button class="bg_btn_style" onclick="window.open('participate_popup.html','participate_meeting', 'width=430,height=300,location=no,status=no,scrollbars=yes');">소개팅 참여하기</button> 
               <!-- <h5 class="card-title">Card title</h5> -->
               <!-- <p class="card-text">소개팅 참여하자.</p> -->
             </div>
@@ -66,11 +75,10 @@
 
         
       </main>
-
+<!-- 
       <div class="px-3">
-      <br>
-      <button type="button" class="btn btn-lg btn-primary" onclick = "location.href='signin.html'">Sign in</button>
-        
+      <br> -->
+      
     </div>
 
     <footer class="mt-auto text-white-50">
