@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "meecord-223cc"
+  },
+  "targets": {
+    "meecord-223cc": {
+      "hosting": {
+        "mee-cord": [
+          "mee-cord"
+        ]
+      }
+    }
   }
 }
