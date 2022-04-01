@@ -1,8 +1,21 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+// import { provider } from "./auth_google_provider_create.js"
 
-const signInWithGoogleButton = document.getElementById('gooLogin');
+const firebaseConfig = {
+  apiKey: "AIzaSyAGjIonDdr_Y_697rDdZy2xj78ePRT_Lco",
+  authDomain: "meecord-223cc.firebaseapp.com",
+  databaseURL: "https://meecord-223cc-default-rtdb.firebaseio.com",
+  projectId: "meecord-223cc",
+  storageBucket: "meecord-223cc.appspot.com",
+  messagingSenderId: "291741382850",
+  appId: "1:291741382850:web:b7893d764decad8933e35b"
+};
 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+const provider = new GoogleAuthProvider();
 
 const signInWithGoogle = () => {
 
@@ -26,4 +39,7 @@ signInWithPopup(auth, provider)
   });
 }
 
+const signInWithGoogleButton = document.getElementById('gooLogin');
 signInWithGoogleButton.addEventListener('click', signInWithGoogle);
+
+
