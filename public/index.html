@@ -49,70 +49,14 @@
         <!-- Custom styles for this template -->
         <link href="signin.css" rel="stylesheet">
 
+        <script type = "module" src="./index.js"></script>
+        <script type = "module" src="./auth_google_provider_create.js"></script>
+        <script type = "module" src="./auth_google_signin_popup.js"></script>
+        <script type = "module" src="./auth_state_listener.js"></script>
+
     </head>
     <body class="text-center">
-        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
-
-        <script>
-            const firebaseConfig = {
-                apiKey: "AIzaSyAGjIonDdr_Y_697rDdZy2xj78ePRT_Lco",
-                authDomain: "meecord-223cc.firebaseapp.com",
-                databaseURL: "https://meecord-223cc-default-rtdb.firebaseio.com",
-                projectId: "meecord-223cc",
-                storageBucket: "meecord-223cc.appspot.com",
-                messagingSenderId: "291741382850",
-                appId: "1:291741382850:web:d91f54be8c6b004733e35b"
-            };
-            firebase.initializeApp(firebaseConfig);
-
-            var provider = new firebase
-                .auth
-                .GoogleAuthProvider();
-
-            function authpop() {
-                firebase
-                    .auth()
-                    .signInWithPopup(provider)
-                    .then(function (result) {
-                        
-                        var token = result.credential.accessToken;
-                        var user = result.user;
-                    })
-                    .catch(function (error) {
-                        alertmsg = 'errorCode: ' + error.code + '\r\n';
-                        alertmsg += 'errorMessage: ' + error.message + '\r\n';
-                        alertmsg += 'email: ' + error.email + '\r\n';
-                        alertmsg += 'credential: ' + error.credential + '\r\n';
-                        alert(alertmsg);
-                        console.log(alertmsg);
-                    });
-            }
-
-            function authredirect() {
-                firebase
-                    .auth()
-                    .signInWithRedirect(provider);
-                firebase
-                    .auth()
-                    .getRedirectResult()
-                    .then(function (result) {
-                        if (result.credential) {
-                            
-                            var token = result.credential.accessToken;
-                        }
-                        var user = result.user;
-                    })
-                    .catch(function (error) {
-                        alertmsg = 'errorCode: ' + error.code + '\r\n';
-                        alertmsg += 'errorMessage: ' + error.message + '\r\n';
-                        alertmsg += 'email: ' + error.email + '\r\n';
-                        alertmsg += 'credential: ' + error.credential + '\r\n';
-                        alert(alertmsg);
-                        console.log(alertmsg);
-                    });
-            }
-        </script>
+        
         <main class="form-signin">
             <form>
                 <a href="https://meecord-223cc.web.app"><img class="mb-4" src="images/meecord-logo.png" alt="" width="132" height="48"></a>
@@ -150,8 +94,7 @@
                 <button
                     class="w-100 btn btn-lg btn-primary"
                     type="button"
-                    id="gooLogin"
-                    onclick="authpop()">Continue with Google</button>
+                    id="gooLogin">Continue with Google</button>
 
                 <div>
                     <div class="separator"></div>
@@ -171,8 +114,5 @@
 
             </form>
         </main>
-
-        <!-- <script type="module" src="./auth_google_provider_create.js"></script> -->
-        <!-- <script type="module" src="google_auth.js"></script> -->
     </body>
 </html>
