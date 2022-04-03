@@ -1,8 +1,22 @@
-.navbar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 0.001px solid rgb(216, 216, 216);
-    background-color: white;
-    padding: 13px; 
+
+.container > .row{
+    /* border: 1px solid red; */
+    height:45vh;
+}
+
+.row > .opponent-cam,
+.row > .my-cam{
+    border:3px solid rgb(104, 162, 236);
+    border-collapse:separate;
+    height:100%;
+    /* margin:5px; */
+}
+
+.row > .minute,
+.row > .recommended-question{
+    border: 3px solid rgb(243, 170, 182);
+    border-collapse:separate;
+    height:200%;
+    /* margin:5px; */
+    
 }
