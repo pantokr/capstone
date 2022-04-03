@@ -88,10 +88,34 @@ body {
   .feature{
     cursor:pointer
   }
+  .gray-sector{
+    background-color: rgb(248,249,250);
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
+
+
+
+
 .container{
     text-align: center;
+    padding-left: 10rem;
+    padding-right: 10rem;
     justify-content: center;
-}
+ }
+  
+  .big_title{
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .small_title{
+    margin-top: 0.5rem;
+      font-size: 1rem;
+      color: rgb(199, 199, 199);
+  }
+ 
+  
 .my_box_wrap{
       display:flex;
       flex-wrap: wrap;
@@ -101,11 +125,11 @@ body {
       padding-left: 12rem;
       padding-right: 12rem;
   }
-  .my_box {
+.my_box {
     display: flex;
     flex-direction: column;
-    width: 50rem;
-    height: 100rem;
+    width: 35rem;
+    height: 33rem;
     padding: 2.5rem;
     margin: 1rem 1rem 1rem;
     border: 1px solid rgb(216, 216, 216);
@@ -116,21 +140,7 @@ body {
     --tw-shadow: 0 1px 3px 0 rgb(0 0 0/0.1),0 1px 2px -1px rgb(0 0 0/0.1);
     --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color),0 1px 2px -1px var(--tw-shadow-color);
 }
-.my_box_title {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.4rem;
-    font-weight: bold;
-}
-.my_box hr{
-    width: 100%;
-    border-top: 0.001px solid rgb(216, 216, 216);
-    border-bottom: 0.001px solid white;
-    margin-top: 1rem;
-    margin-bottom: 1.3rem;
-}
+
 
 .text-gray-700 {
     --tw-text-opacity: 1;
@@ -148,4 +158,167 @@ body {
 }
 .block {
     display: block;
+}
+
+.pic{
+  
+  border-radius: 50%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  position: relative; 
+}
+.btnUser{
+  display: block;
+  border: 0;
+  padding: 0;
+  position: relative;
+  background: none;
+  justify-content: center;
+  
+}
+.user_png{
+  width: 100px;
+  height: 100px;
+}
+.changePic{  
+  padding:5px;
+  color: #313131;
+  float:right;
+  font-weight: bold;
+  font-size: rem;
+  border: none;
+  background:none;
+  margin-bottom: 2rem;
+}
+
+
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;;
+}
+.column{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.large-3{
+  flex-basis: 25%;
+  max-width: 25%;
+  margin-bottom: 1rem;
+}
+.large-7{
+  flex-basis: 75%;
+  max-width: 75%;
+  margin-bottom: 1rem;
+}
+.span{
+  text-align: center;
+  justify-content: center;
+}
+.twoBtn{
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.btn_box{
+  text-align: center;
+  width: 200px;
+}
+.logout_btn .edit_btn{
+ text-transform: none;
+ box-sizing: border-box;
+ 
+}
+button {
+  background-color: #F9B514;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.close{
+  color: #aaa;
+  float:right;
+  
+  font-size: 1rem;
+}
+.modal {
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal .bg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modalBox {
+  position: absolute;
+  background-color: #fff;
+  width: 700px;
+  height: 500px;
+  padding: 15px;
+  
+}
+.modal_content .modal_title{
+  margin-top:1rem;
+  margin-bottom:1rem;
+  
+}
+.modal_title{
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.modalBox button {
+  display: block;
+  width: 80px;
+  margin: 0 auto;
+}
+
+.hidden {
+  display: none;
+}
+.form-floating{
+  margin-bottom: 1rem;
+}
+.form-register {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-register .checkbox {
+  font-weight: 30;
+}
+
+.form-register .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-register input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-register input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
