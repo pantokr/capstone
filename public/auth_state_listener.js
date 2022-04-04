@@ -5,7 +5,7 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         const uid = user.uid;
         location.href = "./mypage.html";
-        console.log(user.displayName)
+        console.log(user.displayName);
         // ...
     } else {
         console.log("No logged in user.");
