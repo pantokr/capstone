@@ -4,7 +4,7 @@ const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
     if (user) {
         const uid = user.uid;
-        location.href = "./mypage.html";
+        location.href = "./cover.html";
         console.log(user.displayName);
         // ...
     } else {
