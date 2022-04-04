@@ -23,6 +23,8 @@ body {
 
 .cover-container {
   max-width: 80em;
+  text-align: center;
+  justify-content: center;
 }
 /* .card{
   max-width: 15em;
@@ -66,12 +68,12 @@ body {
   border-bottom-color: rgb(104, 162, 236);
 }
 .navbar_menu {
-  display: flex;
-  font-size: 20px;
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-  margin-left: min(50%, 800px);
+display: flex;
+font-size: 20px;
+list-style: none;
+padding-left: 0;
+margin: 0;
+margin-left: min(50%, 800px);
 }
 ul {
   display: block;
@@ -164,10 +166,14 @@ button {
   display: none;
 }
 
+.card-body{
+  justify-content: center;
+  align-items: center;
+}
 
 
 
-/* meeting_start 속성 */
+meeting_start 속성
 
 
 .container > .row{
