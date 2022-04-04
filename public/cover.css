@@ -163,3 +163,38 @@ button {
 .hidden {
   display: none;
 }
+
+
+
+
+/* meeting_start 속성 */
+
+
+.container > .row{
+  /* border: 1px solid red; */
+  height:90vh;
+}
+
+.opponent-cam{
+  border:3px solid rgb(104, 162, 236);
+  border-collapse:separate;
+  height:45vh;
+  /* margin:5px; */
+}
+
+.my-cam{
+  border:3px solid rgb(104, 162, 236);
+  border-collapse:separate;
+  height:45vh;
+  /* margin:5px; */
+}
+
+.minute,
+.recommended-question{
+  border: 3px solid rgb(243, 170, 182);
+  border-collapse:separate;
+  height:90vh;
+  /* margin:5px; */
+  
+}
+
