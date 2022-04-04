@@ -4,8 +4,9 @@ const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
     if (user) {
         const uid = user.uid;
-        location.href = "./cover.html";
         console.log(user.displayName);
+        location.href = "./cover.html";
+        alert('who');
         // ...
     } else {
         console.log("No logged in user.");
@@ -13,4 +14,5 @@ onAuthStateChanged(auth, (user) => {
         // User is signed out ...
     }
 });
+
 // [END auth_state_listener_modular]
