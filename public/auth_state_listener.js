@@ -4,8 +4,9 @@ const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
     if (user) {
         const uid = user.uid;
-        // alert("로그인 되어있는 유저 : " + user.displayName);
-        // location.href = "./mypage.html";
+        location.href = "./mypage.html";
+
+        alert(user.displayName);
         // ...
     } else {
         alert("로그인 되어있는 유저 없음");
