@@ -5,11 +5,10 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         const uid = user.uid;
         location.href = "./mypage.html";
-
-        alert(user.displayName);
+        console.log(user.displayName)
         // ...
     } else {
-        alert("로그인 되어있는 유저 없음");
+        console.log("No logged in user.");
 
         // User is signed out ...
     }

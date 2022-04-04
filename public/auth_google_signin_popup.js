@@ -5,7 +5,7 @@ const auth = getAuth();
 
 var btn = document.getElementById('gooLogin');
 
-btn.addEventListener('click', (e) => {
+function signInGoogle() {
     signInWithPopup(auth, provider)
         .then((result) => {
             // This gives you a Google Access Token. You can use it to access the Google
@@ -24,4 +24,5 @@ btn.addEventListener('click', (e) => {
             const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
         });
-});
+}
+btn.addEventListener('click', signInGoogle);
