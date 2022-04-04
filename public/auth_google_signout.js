@@ -1,20 +1,22 @@
 import {getAuth, signOut} from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
 
 const auth = getAuth();
-const btn = document.getElementById('logout_btn');
 
 function signOutGoogle() {
     signOut(auth)
-        .then(() => {
-            // Sign-out successful.
-            location.href = "./index.html";
-        })
-        .catch((error) => {
-            // An error happened.
-        });
+    .then(() => {
+        // Sign-out successful.
+        location.href = "./index.html";
+    })
+    .catch((error) => {
+        // An error happened.
+    });
 }
 
-btn.addEventListener('click', signOutGoogle);
+const btn = document.getElementById('signout_btn');
+if(btn){
+    btn.addEventListener('click', signOutGoogle);
+}
 
 export {
     signOutGoogle
