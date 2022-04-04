@@ -23,6 +23,8 @@ body {
 
 .cover-container {
   max-width: 80em;
+  text-align: center;
+  justify-content: center;
 }
 /* .card{
   max-width: 15em;
@@ -66,12 +68,12 @@ body {
   border-bottom-color: rgb(104, 162, 236);
 }
 .navbar_menu {
-  display: flex;
-  font-size: 20px;
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-  margin-left: min(50%, 800px);
+display: flex;
+font-size: 20px;
+list-style: none;
+padding-left: 0;
+margin: 0;
+margin-left: min(50%, 800px);
 }
 ul {
   display: block;
@@ -164,6 +166,10 @@ button {
   display: none;
 }
 
+.card-body{
+  justify-content: center;
+  align-items: center;
+}
 
 
 
@@ -179,6 +185,7 @@ button {
   border:3px solid rgb(104, 162, 236);
   border-collapse:separate;
   height:45vh;
+  font-family: 'Jua', sans-serif;
   /* margin:5px; */
 }
 
@@ -186,15 +193,88 @@ button {
   border:3px solid rgb(104, 162, 236);
   border-collapse:separate;
   height:45vh;
+  font-family: 'Jua', sans-serif;
   /* margin:5px; */
 }
 
-.minute,
-.recommended-question{
+.minute{
   border: 3px solid rgb(243, 170, 182);
   border-collapse:separate;
   height:90vh;
+  font-family: 'Jua', sans-serif;
   /* margin:5px; */
   
 }
 
+.recommended-question{
+  background-color:aliceblue;
+  border-collapse:separate;
+  height:90vh;
+  font-family: 'Jua', sans-serif;
+  border-radius:40px;
+  
+  /* margin:5px; */
+  
+}
+
+.keyword-question{
+  background-color:rgb(107, 165, 241);
+  height:6%;
+  width:100%;
+  position:relative;
+  border-radius:40px;
+  /* top:20px;
+  left:20px; */
+}
+.keyword-question>p{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  font-size:large;
+  color: aliceblue;
+}
+
+.rq-content{
+  position:relative;
+  height:39%;
+}
+.rq-content>p{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  font-size:large;
+  color: rgb(107, 165, 241);
+}
+
+.random-question{
+  background-color:rgb(107, 165, 241);
+  height:6%;
+  width:100%;
+  position:relative;
+  border-radius:40px;
+  /* top:20px;
+  left:20px; */
+}
+.random-question>p{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  font-size:large;
+  color: aliceblue;
+}
+
+.cv-content{
+  position:relative;
+  height:auto;
+}
+.cv-content>p{
+  position:absolute;
+  left:5%;
+  top:5%;
+  
+  font-size:large;
+  color: rgb(107, 165, 241)
+}

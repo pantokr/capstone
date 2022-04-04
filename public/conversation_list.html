@@ -25,38 +25,37 @@
   
 <nav class="navbar">
   <div class="cover-container d-flex w-100 h-100 p- mx-auto flex-column">
-
-    <header class="mb-auto">
-      
         <div>
           <img class="float-md-start mb-0" src="images/meecord-logo.png" onclick = "location.href='cover.html'" alt="" width="132" height="48">
           <nav class="nav justify-content-center float-md-end">
             <a class="nav-link feature"  onclick = "location.href='cover.html'">홈</a>
-            <a class="nav-link feature" onclick = "location.href='conversation_list.html'">대화목록</a>
+            <a class="nav-link feature active" onclick = "location.href='conversation_list.html'">대화목록</a>
             <a class="nav-link feature" onclick = "location.href='mypage.html'">마이페이지</a>
             <a class="nav-link feature" onclick = "location.href='introduction.html'">소개</a>
           </nav>
         </div>
       
       
-    </header>
 </nav>
-  <div class="gray-sector">
-    <div class="container">
-      <div class="big_title">대화 목록</div>
+
+<div class="gray-sector">
+  <div class="table-container">
+    <div class="big_title">대화 목록</div>
       <div class="small_title">미팅 후의 기록을 찾아보세요</div>
     </div>
   </div>
+
   <div class="white-sector">
-    <div class="container d-flex w-100 h-100 p- mx-auto flex-row">
-      <div class="search_filter ">
+    <div class="table-container d-flex w-100 h-100 p- mx-auto">
+      <div class="search row">
+        <div class="search_filter col">
           <select class="select">
             <option value="title" selected>제목</option>
             <option value="date">날짜</option>
             <option value="length">길이</option>
           </select>
-      </div>
-      <div class="search_area flex-row">
+        </div>
+        <div class="search_area col">
           <div class="serach_inner">
             <label for="input_serach_text" class="blind">검색</label>
             <input type="text" class="input_text" id="input_serach_text" placeholder="검색" value >
@@ -64,47 +63,95 @@
           <div class="search_icon">
             <img src="images/search.png" class="icon_search" alt="">
           </div>
-      </div>
-    </div>      
+         </div>
+      </div> 
+    </div>  
     
     
     
-<!--       
+      
     <div class="table_update">
-      <div class="container">
+      <div class="table-container">
         <div class="listview_area">
           <div class="listview_header">
-            <div class="cell_order false">
+            <div class="cell_order false " style="width:20%;">
               <button type="button" class="btn1">번호</button>
             </div>
-            <div class="cell_name">
+            <div class="cell_name" style="width:30%;">
               <button type="button" class="btn1">제목</button>
             </div>
-            <div class="cell_date">
+            <div class="cell_date" style="width:25%;">
               <button type="button" class="btn1">날짜</button>
             </div>
-            <div class="cell_length">
+            <div class="cell_length" style="width:25%;">
               <button type="button" class="btn1">길이</button>
             </div>
           </div>
-
+          
           <ul class="listview_list" id="infinity-scroll">
-
+            <div class="list_componentouter">
+              <div class="list_component">
+                <li class="list_item ">
+                  <a class="list_item_1 row">
+                    <div class="cell_order false col" style="width:20%;">
+                      <button type="button" class="btn1">1</button>
+                    </div>
+                    <div class="cell_name col" style="width:30%;">
+                      <button type="button"  class="btn1">현빈과의 미팅</button>
+                    </div>
+                    <div class="cell_date col" style="width:25%;">
+                      <button type="button" class="btn1">3.23 수</button>
+                    </div>
+                    <div class="cell_length col" style="width:25%;">
+                      <button type="button" class="btn1">7분</button>
+                    </div>
+                  </a>
+                </li>
+                
+                <br>
+                </div>
+                <li class="list_item">
+                  <a class="list_item_1 row">
+                    <div class="cell_order false col" style="width:20%;">
+                      <button type="button" class="btn1">2</button>
+                    </div>
+                    <div class="cell_name col" style="width:30%;">
+                      <button type="button col" class="btn1">문상훈과의 미팅</button>
+                    </div>
+                    <div class="cell_date col " style="width:25%;">
+                      <button type="button" class="btn1">3.12 토</button>
+                    </div>
+                    <div class="cell_length col " style="width:25%;">
+                      <button type="button" class="btn1">3분</button>
+                    </div>
+                  </a>
+                </li>
+              </div>
+            </div>
           </ul>
-        </div>    
+           
+        </div>
 
       </div>
-        <table class="conversation_table" stype="margin-top:0">
+
+        <!-- <table class="conversation_table table-bordered" stype="margin-top:0">
+          <thead>
+            <tr>
+              <th class="coversation_table_th" style="width:12%">번호</th>
+              <th class="coversation_table_th" style="width:50%">제목</th>
+              <th class="coversation_table_th" style="width:20%">날짜</th>
+              <th class="coversation_table_th" style="width:28%">길이</th>
+          </tr>
+          </thead>
             <tbody>
-                <tr>
-                    <th class="coversation_table_th" wtyle="width:12%">번호</th>
-                    <th class="coversation_table_th" wtyle="width:50%">제목</th>
-                    <th class="coversation_table_th" wtyle="width:20%">날짜</th>
-                    <th class="coversation_table_th" wtyle="width:28%">길이</th>
-                </tr>
+                
                 <tr>
                     <td class="conversation_table_td">1</td>
-                    <td class="conversation_table_td">현빈과의미팅</td>
+                    <td class="conversation_table_td">
+                      <a href="">
+                        현빈과의미팅 
+                      </a>
+                      </td>
                     <td class="conversation_table_td">2021.12.9</td>
                     <td class="conversation_table_td">59:22</td>
                 </tr>
@@ -118,7 +165,6 @@
         </table> -->
         
         
-    <!-- </main> -->
 
     <footer class="mt-auto text-white-50">
     </footer>
