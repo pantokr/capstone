@@ -3,10 +3,25 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Meecord</title>
-        <script src="cover.js"></script>
 
-        <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/">
+        <meta property="og:title" content="Meecord"/>
+        <meta property="og:type" content=""/>
+        <meta property="og:url" content="https://mee-cord.web.app/"/>
+        <meta property="og:description" content=""/>
+        <meta property="og:image" content="/images/logo_1600_630.png"/>
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="630"/>
+
+        <meta name="title" content="Meecord">
+        <meta name="description" content="">
+        <meta name="author" content="Oh, Jung, Song, Joo">
+        <meta name="generator" content="Hugo 0.88.1">
+
+        <title>Meecord</title>
+        <link href="images/logo.ico" rel="shortcut icon" type="image/x-icon">
+        <link
+            rel="canonical"
+            href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 
         <!-- Bootstrap core CSS -->
         <link
@@ -18,9 +33,7 @@
         <!-- Custom styles for this template -->
         <link href="mypage.css" rel="stylesheet">
 
-        <script type="module" src="./index.js?v=1.0"></script>
-        <script type="module" src="./auth_google_signout.js?v=1.0"></script>
-        <script type="module" src="./auth_loggedInUser.js"></script>
+        <script type="module" src="./mypage.js?v=1.0"></script>
     </head>
 
     <body>
@@ -58,7 +71,7 @@
                     <div class="my_box_wrap">
                         <div class="shadow my_box">
                             <button type="button" class="btnUser">
-                                <img src="images/user.png" class="user_png" alt="">
+                                <img src="images/user.png" id = "profile_img" class="user_png" alt="">
                             </button>
                             <button type="button" class="changePic">
                                 프로필 사진 바꾸기
@@ -66,14 +79,20 @@
 
                             <div class="row personal">
                                 <div class="cloumn large-3">
-                                    <span >아이디</span>
+                                    <span >고유 아이디</span>
                                 </div>
-
+                                <div class="cloumn large-7">
+                                    <span id = "uid_span"style="text-align:center;"></span>
+                                </div>
                             </div>
+                            
 
                             <div class="row personal">
                                 <div class="cloumn large-3">
-                                    <span>비밀번호</span>
+                                    <span>Email</span>
+                                </div>
+                                <div class="cloumn large-7">
+                                    <span id = "email_span" style="text-align:center;"></span>
                                 </div>
 
                             </div>
@@ -83,7 +102,7 @@
                                     <span>이름</span>
                                 </div>
                                 <div class="cloumn large-7">
-                                    <span style="text-align:center;">현빈</span>
+                                    <span id = "name_span"style="text-align:center;"></span>
                                 </div>
                             </div>
 

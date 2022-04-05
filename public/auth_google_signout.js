@@ -1,5 +1,5 @@
 import {getAuth, signOut} from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
-
+import './index.js';
 const auth = getAuth();
 
 function signOutGoogle() {
