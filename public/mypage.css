@@ -106,13 +106,15 @@ li {
 }
 
 .big_title{
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
+  text-align: center;
 }
 .small_title{
   margin-top: 0.5rem;
-    font-size: 1rem;
-    color: rgb(199, 199, 199);
+  font-size: 1rem;
+  color: rgb(199, 199, 199);
+  text-align: center;
 }
 
 
