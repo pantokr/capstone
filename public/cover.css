@@ -26,8 +26,28 @@ body {
   text-align: center;
   justify-content: center;
 }
+.content{
+  padding:2rem;
+  width: 6em;
+  text-align: center;
+  justify-content: center;
+}
+.span{
+  width: 20em;
+  
+  /* align-items: center;
+  text-align: center;
+  justify-content: center; */
+}
+.btn{
+  
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
 /* .card{
   max-width: 15em;
+  justify-content: center;
 } */
 
 
