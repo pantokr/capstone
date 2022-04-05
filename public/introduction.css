@@ -103,13 +103,15 @@ li {
   padding: 202px 0 93px;
   text-align: center;
 }
-
+/* 
 .title_desc{
   width: 520px;
   margin: 24px auto 0;
   font-size: 1.2rem;
   line-height: 3.2rem;
-}
+  align-items:center;
+  justify-content: center;
+} */
 p{
   display: block;
   margin-block-start: 1em;
@@ -121,9 +123,9 @@ p{
 .title{
   text-align: center;
   display: block;
-  font-size: 5-2rem;
+  font-size: 2rem;
   font-weight: 800;
-  line-height: 7rem;
+  line-height: 3rem;
 }
 .feature_list .item .sec_feature{
   display: flex;
@@ -155,9 +157,9 @@ li{
 }
 .sec_title{
   display: block;
-  font-size: 5.2rem;
+  font-size: 4rem;
   font-weight: 800;
-  line-height: 7rem;
+  line-height: 5rem;
 }
 *, *::before, *::after{
   box-sizing: content-box;
