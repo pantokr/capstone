@@ -46,15 +46,14 @@
             </div>
 
          <div class="white-sector">
-             <div class="table-container d-flex w-100 h-100 p- mx-auto" st>
-                <div class="note_header" style="width: 70rem;  text-align: left; 
-                border-bottom:0.001px solid rgb(216, 216, 216); ">
-                    <div class="title_area" style="font-size:2rem; margin-bottom:1rem;">현빈과의 미팅</div>
-                    <div class="sub_area" style="font-size:1rem;">
+             <div class="note-container d-flex w-100 h-100 p- mx-auto flex-column" >
+                <div class="note_header" style="padding: 1rem 0 1rem 0; border-bottom: 1px solid #efefef;">
+                    <div class="title_area">현빈과의 미팅</div>
+                    <div class="sub_area">
                         <span class="sub_date">3.23 수</span>
                         <span class="sub_length">7분</span>
                     </div>
-                    <div class="note_view"  style="text-align: right;">
+                    <div class="note_view"  style="text-align: right; ">
                         <select class="select" style="font-size:1rem;">
                             <option value="title" selected>미팅 기록 + 감정분석 보기</option>
                             <option value="date">미팅기록만 보기</option>
@@ -63,6 +62,62 @@
                     </div>
                     
                 </div>
+                <div class="note_main">
+                    <div class="conversation_record">
+                        <div class="conversation_area row">
+                            <div class="conv_left col">
+                                <div class="conv_title" style="padding:1rem;">음성기록</div>
+                                <div class="conv_r">
+                                    <div class="search_area col justify-content-center" style="text-align:center;">
+                                        <div class="serach_inner">
+                                          <label for="input_serach_text" class="blind">검색</label>
+                                          <input type="text" class="input_text" id="input_serach_text" placeholder="검색" value >
+                                        </div>
+                                        <div class="search_icon">
+                                          <img src="images/search.png" class="icon_search" alt="">
+                                        </div>
+                                       </div>
+                                </div>
+                            </div>
+                            <div class="conv_right col">
+                                <div class="analysis_area">
+                                    <div class="conv_title" style="padding:1rem;">분석</div>
+                                    <div class="keyword_area row">
+                                        <div class="my_box_wrap">
+                                            <div class="my_box">
+                                                <div class="keyword_title" style="padding:1rem;">주요키워드</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="emotion_area row">
+                                        <div class="my_box_wrap">
+                                            <div class="my_box">
+                                                <div class="emotion_title" style="padding:1rem;">감정분석</div>
+                                            </div>
+                                        </div>
+                                        
+
+                                    </div>
+                                    <!-- <div class="my_box_wrap">
+                                        <div class="my_box">
+                                            <div class="keyword_title" style="padding:1rem;">주요키워드</div>
+                                        </div>
+                                    </div>
+                                    <div class="my_box_wrap">
+                                        <div class="my_box">
+                                            <div class="emotion_title" style="padding:1rem;">감정분석</div>
+                                        </div>
+                                    </div> -->
+
+                                </div>
+                               
+                            </div>
+                         </div>
+                    </div>
+                    
+                </div>
+              
+                    
              </div>
          </div>
 
