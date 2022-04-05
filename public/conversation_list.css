@@ -189,10 +189,10 @@ input{
 .listview_area{
   display: flex;
   flex: 1;
-  margin-top: 15px;
+  margin-top: 1rem;
   flex-direction: column;
-  padding-left: 20%;
-  padding-right: 20%;
+  padding-left: 15%;
+  padding-right: 15%;
   
   
   
@@ -201,7 +201,7 @@ input{
   display: flex;
   flex: none;
   width: 100%;
-  margin: 0 40px 0 40px;
+  /* margin: 0 40px 0 40px; */
   font-size: 1.3rem;
   color: #666;
   line-height: 3rem;
@@ -225,9 +225,11 @@ button{
 
 .listview_list{
   width: 100%;
-  /* height: auto; */
-  /* min-height: calc(100vh - 399px); */
+  height: auto;
+  min-height: calc(100vh - 399px);
   /* padding: 0 16px 0 28px; */
+  padding: 0;
+  
     overflow: hidden;
     -webkit-overflow-scrolling: touch;
     
@@ -243,6 +245,7 @@ button{
 
 .list_item{
   display: block;
+  width: 100%;
   /* border-bottom: 1px solid #efefef; */
 }
 table {
