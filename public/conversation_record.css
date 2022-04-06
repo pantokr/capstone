@@ -19,7 +19,7 @@
 
 .select{
 
-  width: 14rem;
+  width: 30%;
   height: 3rem;
   border: none;
 
@@ -52,8 +52,8 @@
 .my_box {
 display: flex;
 flex-direction: column;
-width: 40rem;
-height: 20rem;
+width: 100%;
+height: 15rem;
 /* padding: 2.5rem; */
 margin: 0 1rem 1rem 1rem;
 border: 1px solid rgb(216, 216, 216);
