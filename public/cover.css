@@ -112,6 +112,7 @@ li {
   width: 9rem;
   height: 3.5rem;
   cursor: pointer;
+  justify-content: center;
 }
 
 button {
