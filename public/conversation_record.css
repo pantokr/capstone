@@ -1,6 +1,15 @@
+.title{
+  text-align: left;
+  justify-content: left;
+}
+.contianer{
+  max-width: 80em;
+  padding-left: 8%;
+  padding-right: 8%;
+}
 .note-container{
   max-width: 80em;
-  text-align: center;
+  text-align: left;
   justify-content: center;
 }
 
@@ -34,9 +43,6 @@
 }
 .conversation_area{
   padding: 1rem;
-}
-.conv_left{
-  border-right: 1px solid #efefef;
 }
 
 

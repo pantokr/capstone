@@ -45,9 +45,9 @@
               </div>
             </div>
 
-         <div class="white-sector">
+         <!-- <div class="white-sector"> -->
              <div class="note-container d-flex w-100 h-100 p- mx-auto flex-column" >
-                <div class="note_header" style="padding: 1rem 0 1rem 0; border-bottom: 1px solid #efefef;">
+                <!-- <div class="note_header" style="padding: 1rem 0 1rem 0; border-bottom: 1px solid #efefef;"> -->
                     <div class="title_area">현빈과의 미팅</div>
                     <div class="sub_area">
                         <span class="sub_date">3.23 수</span>
@@ -61,12 +61,15 @@
                           </select>
                     </div>
                     
-                </div>
-                <div class="note_main">
-                    <div class="conversation_record">
-                        <div class="conversation_area row">
-                            <div class="conv_left col">
-                                <div class="conv_title" style="padding:1rem;">음성기록</div>
+                <!-- </div> -->
+             </div>
+             <div class="note-container w-100 h-100 p- mx-auto row justify-content-left" >
+            
+                <!-- <div class="note_main"> -->
+                    <!-- <div class="conversation_record"> -->
+                        <!-- <div class="conversation_area  "> -->
+                            <div class="conv_left col-lg-5 col-md-7">
+                                <div class="conv_title title" style="padding:1rem;">음성기록</div>
                                 <div class="conv_r" style="padding:1rem;">
                                     <div class="search_area col justify-content-center" style="text-align:center;">
                                         <div class="serach_inner">
@@ -79,20 +82,20 @@
                                        </div>
                                 </div>
                             </div>
-                            <div class="conv_right col">
+                            <div class="conv_right col-lg-5 col-md-7">
                                 <div class="analysis_area">
                                     <div class="conv_title" style="padding:1rem;">분석</div>
                                     <div class="keyword_area row">
                                         <div class="my_box_wrap">
                                             <div class="my_box">
-                                                <div class="keyword_title" style="padding:1rem;">주요키워드</div>
+                                                <div class="keyword_title title" style="padding:1rem;">주요키워드</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="emotion_area row">
                                         <div class="my_box_wrap">
                                             <div class="my_box">
-                                                <div class="emotion_title" style="padding:1rem;">감정분석</div>
+                                                <div class="emotion_title title" style="padding:1rem;">감정분석</div>
                                             </div>
                                         </div>
                                         
@@ -112,18 +115,44 @@
                                 </div>
                                
                             </div>
-                         </div>
-                    </div>
+                         <!-- </div> -->
+                    <!-- </div> -->
                     
-                </div>
+                <!-- </div> -->
               
                     
              </div>
-         </div>
+         <!-- </div> -->
 
             <footer class="mt-auto text-white-50"></footer>
         </div>
 
     </body>
-
+    <script>
+        //coversation_record 설정
+    
+        // <!-- 모바일 환경일때 mycam 가림 + 대화록, 질문추천 창 사이즈 조절 -->
+    
+        var conv_left = document.getElementById('conv_left');
+        var conv_right = document.getElementById('conv_right');
+       
+    
+        {/* // 웹페이지 로드할때 */}
+        window.onload = function(event){
+          var innerWidth = window.innerWidth;
+          if(innerWidth<="768"){ adjustHalfSize();}
+          else{ adjustOriginSize();}
+        }
+    
+        
+        
+        adjustOriginSize = function(){
+          min.style.height = "90vh";
+          rq.style.height = "90vh";
+        }
+        adjustHalfSize = function(){
+          min.style.height = "45vh";
+          rq.style.height = "45vh";
+        }
+      </script>
 </html>
