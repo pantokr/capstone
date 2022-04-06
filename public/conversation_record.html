@@ -47,10 +47,10 @@
             </div>
 
          <!-- <div class="white-sector"> -->
-             <div class="note-container d-flex w-100 h-100 p- mx-auto flex-column" >
+             <div class="note-container d-flex flex-column w-100 h-100 p- mx-auto " >
                 <!-- <div class="note_header" style="padding: 1rem 0 1rem 0; border-bottom: 1px solid #efefef;"> -->
-                    <div class="title_area">현빈과의 미팅</div>
-                    <div class="sub_area">
+                    <div class="title_area row">현빈과의 미팅</div>
+                    <div class="sub_area row">
                         <span class="sub_date">3.23 수</span>
                         <span class="sub_length">7분</span>
                     </div>
@@ -64,15 +64,15 @@
                     
                 <!-- </div> -->
              </div>
-             <div class="note-container w-100 h-100 p- mx-auto row justify-content-left" >
+             <div class="note-container w-100 h-100 p- mx-auto d-flex flex-row justify-content-center" >
             
                 <!-- <div class="note_main"> -->
                     <!-- <div class="conversation_record"> -->
                         <!-- <div class="conversation_area  "> -->
-                            <div class="conv_left col-lg-5 col-md-7">
+                            <div class="conv_left  col-lg-5 col-sm-5">
                                 <div class="conv_title title" style="padding:1rem;">음성기록</div>
                                 <div class="conv_r" style="padding:1rem;">
-                                    <div class="search_area col justify-content-center" style="text-align:center;">
+                                    <div class="search_area col justify-content-start" style="width: 70%;">
                                         <div class="serach_inner">
                                           <label for="input_serach_text" class="blind">검색</label>
                                           <input type="text" class="input_text" id="input_serach_text" placeholder="검색" value >
@@ -83,25 +83,25 @@
                                        </div>
                                 </div>
                             </div>
-                            <div class="conv_right col-lg-5 col-md-7">
-                                <div class="analysis_area">
+                            <div class="conv_right col-lg-5 col-sm-5">
+                                <div class="analysis_area row-vh d-flex flex-column">
                                     <div class="conv_title" style="padding:1rem;">분석</div>
-                                    <div class="keyword_area row">
-                                        <div class="my_box_wrap">
-                                            <div class="my_box">
-                                                <div class="keyword_title title" style="padding:1rem;">주요키워드</div>
+                                    <!-- <div class="keyword_area row"> -->
+                                        <!-- <div class="my_box_wrap"> -->
+                                            <div class="my_box d-flex">
+                                                <div class="keyword_title title">주요키워드</div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="emotion_area row">
-                                        <div class="my_box_wrap">
-                                            <div class="my_box">
-                                                <div class="emotion_title title" style="padding:1rem;">감정분석</div>
+                                        <!-- </div> -->
+                                    <!-- </div> -->
+                                    <!-- <div class="emotion_area row"> -->
+                                        <!-- <div class="my_box_wrap"> -->
+                                            <div class="my_box d-flex">
+                                                <div class="emotion_title title">감정분석</div>
                                             </div>
-                                        </div>
+                                        <!-- </div> -->
                                         
 
-                                    </div>
+                                    <!-- </div> -->
                                     <!-- <div class="my_box_wrap">
                                         <div class="my_box">
                                             <div class="keyword_title" style="padding:1rem;">주요키워드</div>
@@ -129,31 +129,5 @@
         </div>
 
     </body>
-    <script>
-        //coversation_record 설정
-    
-        // <!-- 모바일 환경일때 mycam 가림 + 대화록, 질문추천 창 사이즈 조절 -->
-    
-        var conv_left = document.getElementById('conv_left');
-        var conv_right = document.getElementById('conv_right');
-       
-    
-        {/* // 웹페이지 로드할때 */}
-        window.onload = function(event){
-          var innerWidth = window.innerWidth;
-          if(innerWidth<="768"){ adjustHalfSize();}
-          else{ adjustOriginSize();}
-        }
-    
-        
-        
-        adjustOriginSize = function(){
-          min.style.height = "90vh";
-          rq.style.height = "90vh";
-        }
-        adjustHalfSize = function(){
-          min.style.height = "45vh";
-          rq.style.height = "45vh";
-        }
-      </script>
+   
 </html>

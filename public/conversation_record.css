@@ -1,6 +1,7 @@
 .title{
   text-align: left;
   justify-content: left;
+  padding:1rem;
 }
 .contianer{
   max-width: 80em;
@@ -9,6 +10,7 @@
 }
 .note-container{
   max-width: 80em;
+  
   text-align: left;
   justify-content: center;
 }
@@ -48,9 +50,9 @@
 
 .my_box_wrap{
   display:flex;
-  flex-wrap: wrap;
-  justify-content: left;
-  align-content: left;
+  /* flex-wrap: wrap; */
+  /* justify-content: left;
+  align-content: left; */
   /* margin-top: 1.5rem; */
   /* padding-left: 12rem;
   padding-right: 12rem; */
@@ -58,10 +60,11 @@
 .my_box {
 display: flex;
 flex-direction: column;
-width: 100%;
+width: 95%;
 height: 15rem;
-/* padding: 2.5rem; */
-margin: 0 1rem 1rem 1rem;
+/* padding: 1rem; */
+/* margin: 0 1rem 1rem 1rem; */
+margin: 1rem;
 border: 1px solid rgb(216, 216, 216);
 background-color: white;
 font-size: 1rem;
