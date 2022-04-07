@@ -49,15 +49,15 @@
 
 </head>
 
-<body onload="showMyFace();">
+<body >
 
   <style>
     video {
-      background-color: #ddd;
+      
       border-radius: 7px;
-      margin: 10px 0px 0px 10px;
-      width: 320px;
-      height: 240px;
+      padding: 1rem;
+      width: 100%;
+      height: 90%;
       transform: rotateY(180deg);
       -webkit-transform:rotateY(180deg); /* Safari and Chrome */
       -moz-transform:rotateY(180deg); /* Firefox */
@@ -65,7 +65,7 @@
 
     button {
       margin: 5px 0px 0px 10px !important;
-      width: 654px;
+      width: 100%;
     }
   </style>
 
@@ -95,7 +95,7 @@
   <!-- 데스크탑 크기일 때 grid와 모바일 크기일 때 grid 구분 -->
   <div class="container">
     <div class="row" style="height:45vh">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <div class="opponent-cam d-flex flex-column">상대 화면
           <video id="friendsVideo" autoplay muted playsinline></video>
         </div>
@@ -110,7 +110,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="recommended-question" id="rq">
           <div class="keyword-question-title">
             <p>키워드 질문</p>
@@ -133,7 +133,7 @@
       </div>
     </div>
     <div class="row" id="mycam">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <div class="my-cam d-flex flex-column">
           내 화면
           <video id="yourVideo" autoplay muted playsinline></video>
@@ -220,28 +220,33 @@
     // <!-- 모바일 환경일때 mycam 가림 + 대화록, 질문추천 창 사이즈 조절 -->
 
     var mycam = document.getElementById('mycam');
+    var yourvideo = document.getElementById('yourVideo');
     var min = document.getElementById('min');
     var rq = document.getElementById('rq');
 
-    // {/* // 웹페이지 로드할때 */ }
-    // window.onload = function (event) {
-    //   var innerWidth = window.innerWidth;
-    //   if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
-    //   else { showMyCam(); adjustOriginSize(); }
-    // }
+     {/* // 웹페이지 로드할때 */ }
+     window.onload = function (event) {
+       showMyFace();
+       var innerWidth = window.innerWidth;
+       if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
+       else { showMyCam(); adjustOriginSize(); }
+     }
 
-    // {/* // 웹페이지 사이즈 조정할때 */ }
-    // window.onresize = function (event) {
-    //   var innerWidth = window.innerWidth;
-    //   if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
-    //   else { showMyCam(); adjustOriginSize() }
-    // }
+     {/* // 웹페이지 사이즈 조정할때 */ }
+     window.onresize = function (event) {
+       showMyFace();
+       var innerWidth = window.innerWidth;
+       if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
+       else { showMyCam(); adjustOriginSize() }
+     }
 
     hideMyCam = function () {
       mycam.style.display = "none";
+      yourvideo.style.dixplay = "none";
     }
     showMyCam = function () {
       mycam.style.display = "block";
+      
     }
     adjustOriginSize = function () {
       min.style.height = "90vh";
