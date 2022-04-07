@@ -20,13 +20,73 @@ document.querySelectorAll("input").forEach(input => {
 })
 
 let today = new Date();
-for (var i = today.getFullYear() - 10; i > today.getFullYear() - 100; i--) {
+
+//year
+var year = today.getFullYear();
+for (var y = year - 10; y > year - 100; y--) {
   var newOpt = document.createElement('option');
-  newOpt.innerText = i.toString();
-  newOpt.setAttribute('value', i.toString());
+  newOpt.innerText = y.toString();
+  newOpt.setAttribute('value', y.toString());
 
   floating_birth_year.appendChild(newOpt);
 }
+
+// month
+for (var m = 1; m <= 12; m++) {
+  var newOpt = document.createElement('option');
+  newOpt.innerText = m.toString();
+  newOpt.setAttribute('value', m.toString());
+
+  floating_birth_month.appendChild(newOpt);
+}
+
+var by = floating_birth_year.value;
+var bm = floating_birth_month.value;
+
+if ([1, 3, 5, 7, 8, 10, 12].indexOf(Number(bm)) > -1) {
+  for (var d = 1; d <= 31; d++) {
+
+    var newOpt = document.createElement('option');
+    newOpt.innerText = d;
+    newOpt.setAttribute('value', d);
+
+    floating_birth_date.appendChild(newOpt);
+  }
+} else {
+  if (bm == 2) {
+    if (by % 4 == 0 && by % 100 != 0 || by % 400 == 0) {
+      for (var d = 1; d <= 29; d++) {
+
+        var newOpt = document.createElement('option');
+        newOpt.innerText = d;
+        newOpt.setAttribute('value', d);
+
+        floating_birth_date.appendChild(newOpt);
+      }
+    }
+    else {
+      for (var d = 1; d <= 28; d++) {
+
+        var newOpt = document.createElement('option');
+        newOpt.innerText = d;
+        newOpt.setAttribute('value', d);
+
+        floating_birth_date.appendChild(newOpt);
+      }
+    }
+  }
+  else {
+    for (var d = 1; d <= 30; d++) {
+
+      var newOpt = document.createElement('option');
+      newOpt.innerText = d;
+      newOpt.setAttribute('value', d);
+
+      floating_birth_date.appendChild(newOpt);
+    }
+  }
+}
+
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -80,6 +140,65 @@ function writeUserData() {
       console.error(error);
     });
 }
+
+function reloadDate() {
+
+  while (floating_birth_date.hasChildNodes()) {
+    floating_birth_date.removeChild(floating_birth_date.firstChild);
+  }
+
+  var by = floating_birth_year.value;
+  var bm = floating_birth_month.value;
+
+  if ([1, 3, 5, 7, 8, 10, 12].indexOf(Number(bm)) > -1) {
+    for (var d = 1; d <= 31; d++) {
+
+      var newOpt = document.createElement('option');
+      newOpt.innerText = d;
+      newOpt.setAttribute('value', d);
+
+      floating_birth_date.appendChild(newOpt);
+    }
+  } else {
+    if (bm == 2) {
+      if (by % 4 == 0 && by % 100 != 0 || by % 400 == 0) {
+        for (var d = 1; d <= 29; d++) {
+
+          var newOpt = document.createElement('option');
+          newOpt.innerText = d;
+          newOpt.setAttribute('value', d);
+
+          floating_birth_date.appendChild(newOpt);
+        }
+      }
+      else {
+        for (var d = 1; d <= 28; d++) {
+
+          var newOpt = document.createElement('option');
+          newOpt.innerText = d;
+          newOpt.setAttribute('value', d);
+
+          floating_birth_date.appendChild(newOpt);
+        }
+      }
+    }
+    else {
+      for (var d = 1; d <= 30; d++) {
+
+        var newOpt = document.createElement('option');
+        newOpt.innerText = d;
+        newOpt.setAttribute('value', d);
+
+        floating_birth_date.appendChild(newOpt);
+      }
+    }
+  }
+}
+
+if (floating_birth_date) {
+  floating_birth_month.addEventListener('change', reloadDate);
+}
+
 
 if (register_btn) {
   register_btn.addEventListener('click', writeUserData);
