@@ -49,7 +49,7 @@
 
 </head>
 
-<body>
+<body onload="showMyFace();">
 
   <style>
     video {
@@ -58,7 +58,9 @@
       margin: 10px 0px 0px 10px;
       width: 320px;
       height: 240px;
-
+      transform: rotateY(180deg);
+      -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+      -moz-transform:rotateY(180deg); /* Firefox */
     }
 
     button {
@@ -221,20 +223,19 @@
     var min = document.getElementById('min');
     var rq = document.getElementById('rq');
 
-    {/* // 웹페이지 로드할때 */ }
-    window.onload = function (event) {
-      showMyFace();
-      var innerWidth = window.innerWidth;
-      if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
-      else { showMyCam(); adjustOriginSize(); }
-    }
+    // {/* // 웹페이지 로드할때 */ }
+    // window.onload = function (event) {
+    //   var innerWidth = window.innerWidth;
+    //   if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
+    //   else { showMyCam(); adjustOriginSize(); }
+    // }
 
-    {/* // 웹페이지 사이즈 조정할때 */ }
-    window.onresize = function (event) {
-      var innerWidth = window.innerWidth;
-      if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
-      else { showMyCam(); adjustOriginSize() }
-    }
+    // {/* // 웹페이지 사이즈 조정할때 */ }
+    // window.onresize = function (event) {
+    //   var innerWidth = window.innerWidth;
+    //   if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
+    //   else { showMyCam(); adjustOriginSize() }
+    // }
 
     hideMyCam = function () {
       mycam.style.display = "none";
