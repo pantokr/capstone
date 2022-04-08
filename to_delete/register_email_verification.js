@@ -16,7 +16,7 @@ function sendEmail() {
         const actionCodeSettings = {
             // URL you want to redirect back to. The domain (www.example.com) for this
             // URL must be in the authorized domains list in the Firebase Console.
-            url: "http://localhost:5500/",            // This must be true.
+            url: "http://localhost:5500/public/register_email.html",            // This must be true.
             handleCodeInApp: true
           };
 

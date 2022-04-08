@@ -47,7 +47,7 @@ if (btn) {
 }
 
 function writeUserData(uid, name, email, photoUrl) {
-    const db = getDatabase(app);
+    const db = getDatabase();
     const dbRef = ref(db);
     console.log(name);
 
