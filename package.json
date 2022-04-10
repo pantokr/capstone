@@ -1,7 +1,8 @@
 {
     "type": "module",
     "dependencies": {
-        "firebase": "^9.6.10"
+        "express": "^4.17.3",
+        "firebase": "^8.10.0"
     },
     "name": "meecord",
     "version": "1.0.0",

@@ -55,7 +55,25 @@
   //var servers = {'iceServers': [{'urls': 'turn:13.250.13.83:3478?transport=udp','YzYNCouZM1mhqhmseWk6': 'beaver','YzYNCouZM1mhqhmseWk6': 'webrtc.websitebeaver@gmail.com'}]};
 
   // 아래 서버정보는 https://gist.github.com/sagivo/3a4b2f2c7ac6e1b5267c2f1f59ac6c6b  에서 참고했음
-  var servers = { 'urls': 'turn:numb.viagenie.ca', 'credential': 'websitebeaver', 'username': 'osr0907@email.com' }
+  var servers = {'iceServers': [
+    // {'urls': 'stun:stun.services.mozilla.com'}, 
+    {'urls': 'turn:numb.viagenie.ca','credential': 'beaver','username': 'webrtc.websitebeaver@gmail.com'}]};
+//   const servers = {
+//    credential: {
+//       serviceId: '{549086e2-76bb-4108-ab7c-d356c6bba91e}', // 콘솔에서 획득한 Service ID
+//       key: '{b7cc7fbe8ca990669ed4afc7d5e6330fe2b212d20ebcd9ab4a62c35e0da90279}'               // 콘솔에서 획득한 Service Key
+//    },
+//    view: {
+//       local: '#localVideo', // 로컬(자신) 비디오 태그 지정
+//       remote: '#remoteVideo', // 리모트(상대방) 비디오 태그 지정
+//    },
+//    media: {
+//       video: true, // true로 설정 시 비디오를 사용함
+//       audio: true // true로 설정 시 오디오를 사용함
+//    }
+// }
+
+
   var pc = new RTCPeerConnection(servers);
   pc.onicecandidate = (event => event.candidate ? sendMessage(yourId, JSON.stringify({ 'ice': event.candidate })) : console.log("Sent All Ice"));
   pc.onaddstream = (event => friendsVideo.srcObject = event.stream);
