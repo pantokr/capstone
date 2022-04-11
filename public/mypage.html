@@ -29,7 +29,7 @@
 
         <!-- Custom styles for this template -->
         <link href="mypage.css" rel="stylesheet">
-
+        <script src="mypage.js"></script>
         <script type="module" src="./mypage.js?v=1.0"></script>
     </head>
 
@@ -71,7 +71,7 @@
 
                             <div class="row personal">
                                 <div class="cloumn large-3">
-                                    <span>아이디</span>
+                                    <span>참여코드</span>
                                 </div>
                                 <div class="cloumn large-7">
                                     <span id = "uid_span"style="text-align:center;"></span>
@@ -94,10 +94,27 @@
                                     <span>이름</span>
                                 </div>
                                 <div class="cloumn large-7">
-                                    <span id = "name_span"style="text-align:center;"></span>
+                                    <span id = "name_span"style="text-align:center;"> </span>
                                 </div>
                             </div>
 
+                            <div class="row personal">
+                                <div class="cloumn large-3">
+                                    <span>나이</span>
+                                </div>
+                                <div class="cloumn large-7">
+                                    <span id = "name_span"style="text-align:center;"> </span>
+                                </div>
+                            </div>
+
+                            <div class="row personal">
+                                <div class="cloumn large-3">
+                                    <span>성별</span>
+                                </div>
+                                <div class="cloumn large-7">
+                                    <span id = "name_span"style="text-align:center;"> </span>
+                                </div>
+                            </div>
                             <!-- <div class="row personal"> <div class="cloumn large-3"> <span >생년월일</span>
                             </div> </div> <div class="row personal"> <div class="cloumn large-3">
                             <span>성별</span> </div> </div> -->
@@ -105,15 +122,13 @@
                             <div class="twoBtn">
                                 
                                 <div class="btn_box">
-                                    <button class="edit_btn confimBtn btn-primary openBtn" style="margin-top:1rem">편집</button>
+                                    <button class="edit_btn confimBtn openBtn">편집</button>
                                     <div class="modal hidden">
                                         <div class="bg"></div>
                                         <div class="modalBox">
-                                            <!-- <div class="close">X</div> -->
                                             <span class="close">X</span>
                                             <div class="modal_content">
                                                 <div class="modal_title">개인 정보를 수정하세요.</div>
-                                                <!-- ID -->
                                                 
                                                 <!-- NAME -->
                                                 <div class="form-floating">
@@ -124,6 +139,79 @@
                                                         placeholder="name@example.com">
                                                     <label for="floatingInput">이름</label>
                                                 </div>
+                                               
+                                                <!-- AGE -->
+                                                
+                                                
+                                                <div class="row" style="margin:0; padding:0;">
+                                                  <div class="col-4" style="padding:0; ">
+                                                    <div class="form-floating">
+                                                      <input type="text" class="form-control" id="floatingInputGrid" placeholder="년" >
+                                                      <label for="floatingInputGrid">년</label>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-4" style="padding:0; padding-left:0.5rem;">
+                                                    <div class="form-floating" >
+                                                      <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+                                                      </select>
+                                                      <label for="floatingSelectGrid">월</label>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-4" style="padding:0; padding-left:0.5rem;">
+                                                    <div class="form-floating">
+                                                      <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+                                                        <option value="13">13</option>
+                                                        <option value="14">14</option>
+                                                        <option value="15">15</option>
+                                                        <option value="16">16</option>
+                                                        <option value="17">17</option>
+                                                        <option value="18">18</option>
+                                                        <option value="19">19</option>
+                                                        <option value="20">20</option>
+                                                        <option value="21">21</option>
+                                                        <option value="22">22</option>
+                                                        <option value="23">23</option>
+                                                        <option value="24">24</option>
+                                                        <option value="25">25</option>
+                                                        <option value="26">26</option>
+                                                        <option value="27">27</option>
+                                                        <option value="28">28</option>
+                                                        <option value="29">29</option>
+                                                        <option value="30">30</option>
+                                                        <option value="31">31</option>
+                                                      </select>
+                                                      <label for="floatingSelectGrid">일</label>
+
+                                                    </div>
+                                                  </div>
+                                                  </div>
+
                                                 <div class="form-floating">
                                                     <select
                                                         class="form-select"
@@ -135,11 +223,10 @@
                                                     <label for="floatingSelectGrid">성별</label>
 
                                                 </div>
-                                                -->
+                                               
 
                                                 <button
-                                                    class="confimBtn btn-primary"
-                                                    style="margin-top:1rem"
+                                                    class="edit_btn confimBtn" 
                                                     onclick="window.open('about::blank').location.href=''">확인</button>
                                             </div>
 
@@ -176,11 +263,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <header class="mb-auto"> </header> -->
-
-            <!-- <main class="justify-content-center row row-cols-1 row-cols-md-3
-            row-cols-lg-4 g-4"> <div class="gray_sec justify-content-center"> <div
-            class="container"> <div class="big_title">마이페이지</div> </div> </div> -->
+         
             <footer class="mt-auto text-white-50"></footer>
         </div>
 
