@@ -103,7 +103,7 @@
                                     <span>나이</span>
                                 </div>
                                 <div class="cloumn large-7">
-                                    <span id = "name_span"style="text-align:center;"> </span>
+                                    <span id = "age_span"style="text-align:center;"> </span>
                                 </div>
                             </div>
 
@@ -112,13 +112,11 @@
                                     <span>성별</span>
                                 </div>
                                 <div class="cloumn large-7">
-                                    <span id = "name_span"style="text-align:center;"> </span>
+                                    <span id = "gender_span"style="text-align:center;"> </span>
                                 </div>
                             </div>
-                            <!-- <div class="row personal"> <div class="cloumn large-3"> <span >생년월일</span>
-                            </div> </div> <div class="row personal"> <div class="cloumn large-3">
-                            <span>성별</span> </div> </div> -->
 
+                            
                             <div class="twoBtn">
                                 
                                 <div class="btn_box">
@@ -126,7 +124,7 @@
                                     <div class="modal hidden">
                                         <div class="bg"></div>
                                         
-                                        <div class="modalBox">
+                                        <div class="modalBox" id="update">
                                             
                                             <span class="close">X</span>
                                             <div class="modal_content">
@@ -138,6 +136,7 @@
                                                         type="name"
                                                         class="form-control"
                                                         id="floatingName"
+                                                        value=""
                                                         placeholder="name@example.com">
                                                     <label for="floatingInput">이름</label>
                                                 </div>
@@ -148,13 +147,13 @@
                                                 <div class="row" style="margin:0; padding:0; width:100%;">
                                                   <div class="col-4" style="padding:0; ">
                                                     <div class="form-floating">
-                                                      <input type="text" class="form-control" id="floatingInputGrid" placeholder="년" >
+                                                      <input type="text" class="form-control" id="floatingYear" placeholder="년" >
                                                       <label for="floatingInputGrid">년</label>
                                                     </div>
                                                   </div>
                                                   <div class="col-4" style="padding:0; padding-left:0.5rem;">
                                                     <div class="form-floating" >
-                                                      <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                                                      <select class="form-select" id="floatingMonth" aria-label="Floating label select example">
 
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
@@ -174,8 +173,7 @@
                                                   </div>
                                                   <div class="col-4" style="padding:0; padding-left:0.5rem;">
                                                     <div class="form-floating">
-                                                      <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
-
+                                                      <select class="form-select" id="floatingDate" aria-label="Floating label select example">
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
                                                         <option value="3">3</option>
@@ -217,7 +215,7 @@
                                                 <div class="form-floating">
                                                     <select
                                                         class="form-select"
-                                                        id="floatingSelect"
+                                                        id="floatingGender"
                                                         aria-label="Floating label select example">
                                                         <option value="male">남자</option>
                                                         <option value="female">여자</option>
@@ -228,8 +226,8 @@
                                                
 
                                                 <button
-                                                    class="edit_btn confimBtn" 
-                                                    onclick="window.open('about::blank').location.href=''">확인</button>
+                                                    type="submit"
+                                                    class="updateBtn" id="updateBtn">수정하기</button>
                                             </div>
 
                                         </div>
@@ -259,6 +257,7 @@
                                         document
                                             .querySelector(".bg")
                                             .addEventListener("click", close);
+                                        
                                     </script>
                                 </div>
                             </div>
@@ -269,6 +268,31 @@
          
             <footer class="mt-auto text-white-50"></footer>
         </div>
-
+        <script src="mypage.js"></script>
     </body>
+    <!-- <script>
+        function handleUpdateonClick(){
+
+            const changed_name = document.getElementById('floatingName').value;
+            const changed_year = document.getElementById('floatingYear').value;
+            const changed_month = document.getElementById('floatingMonth');
+            const changed_date = document.getElementById('floatingDate');
+            const changed_gender = document.getElementById('floatingGender');
+            const updateBtn = document.getElementById('updateBtn');
+        
+            console.log(changed_name);
+            console.log(changed_year);
+            console.log(changed_month.value);
+            console.log(changed_date.value);
+            console.log(changed_gender.value);
+            
+            document.querySelector(".modal").classList.add("hidden");
+
+            name_span.innerText = changed_name.value;
+            age_span.innerText = `${changed_year.value} . ${changed_month.value} . ${changed_date.value}`;
+            gender_span.innerText = changed_gender === "male" ? "남자" : "여자";
+            
+        }
+        
+    </script> -->
 </html>

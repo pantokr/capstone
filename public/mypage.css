@@ -278,7 +278,7 @@ button {
   position: absolute;
   background-color: #fff;
   width: 50%;
-  height: 50%;
+  /* height: 50%; */
   padding-top:3%;
   padding-right:3%;
   padding-left: 3%;
