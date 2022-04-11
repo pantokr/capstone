@@ -41,7 +41,7 @@ body {
   align-items: center;
   /* border-bottom:; */
   background-color: white;
-  /* padding:13rem; */
+  padding-bottom:1rem;
   border-bottom: 0.001px solid rgb(216, 216, 216);
 }
 

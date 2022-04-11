@@ -277,9 +277,12 @@ button {
 .modalBox {
   position: absolute;
   background-color: #fff;
-  width: 40rem;
-  height: 30rem;
-  padding:5%;
+  width: 50%;
+  height: 50%;
+  padding-top:3%;
+  padding-right:3%;
+  padding-left: 3%;
+  padding : 3%;
   
   
 }

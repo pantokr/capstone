@@ -4,6 +4,12 @@
 
 
 /* Custom default button */
+/*
+ * Globals
+ */
+
+
+/* Custom default button */
 .btn-secondary,
 .btn-secondary:hover,
 .btn-secondary:focus {
@@ -41,7 +47,7 @@ body {
   align-items: center;
   /* border-bottom:; */
   background-color: white;
-  /* padding:13rem; */
+  padding-bottom:1rem;
   border-bottom: 0.001px solid rgb(216, 216, 216);
 }
 
@@ -62,6 +68,7 @@ body {
 
 .nav-link + .nav-link {
   margin-left: 1rem;
+  font-weight: 700;
 }
 .active {
   color: rgb(104, 162, 236);
@@ -97,7 +104,6 @@ li {
 .feature{
   cursor:pointer
 }
-
 
 
 
