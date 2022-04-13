@@ -109,6 +109,42 @@ li {
 
 /* meeting_start 속성 */
 
+video {
+
+  /* border-radius: 7px; */
+  top:0;
+  left:0;
+  width: 100%;
+  height: 90%;
+  padding:1.5rem;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  /* Safari and Chrome */
+  -moz-transform: rotateY(180deg);
+  /* Firefox */
+  object-fit: cover;
+  position: absolute;
+}
+canvas {
+    /* border-radius: 7px; */
+    padding:1.5rem;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 90%;
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    /* Safari and Chrome */
+    -moz-transform: rotateY(180deg);
+    /* Firefox */
+    object-fit: cover;
+    position: absolute;
+}
+button {
+  margin: 5px 0px 0px 10px !important;
+  width: 100%;
+}
+
 
 .container > .row{
   /* border: 1px solid red; */

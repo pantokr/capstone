@@ -51,26 +51,6 @@
 
 <body>
 
-  <style>
-    video {
-
-      border-radius: 7px;
-      padding: 1rem;
-      width: 100%;
-      height: 90%;
-      transform: rotateY(180deg);
-      -webkit-transform: rotateY(180deg);
-      /* Safari and Chrome */
-      -moz-transform: rotateY(180deg);
-      /* Firefox */
-    }
-
-    button {
-      margin: 5px 0px 0px 10px !important;
-      width: 100%;
-    }
-  </style>
-
   <nav class="navbar">
     <div class="cover-container  d-flex w-100 h-100 p- mx-auto flex-column">
         <div>
@@ -93,6 +73,7 @@
       <div class="col-md-5">
         <div class="opponent-cam d-flex flex-column">상대 화면
           <video id="friendsVideo" autoplay playsinline></video>
+          
         </div>
       </div>
       <div class="col-md-4">
@@ -129,9 +110,11 @@
     </div>
     <div class="row" id="mycam">
       <div class="col-md-5">
-        <div class="my-cam d-flex flex-column">
-          내 화면
-          <video id="yourVideo" autoplay muted playsinline></video>
+        <div class="my-cam">
+          
+            
+            <canvas id="canvas" ></canvas>
+            <video id="yourVideo" autoplay muted playsinline></video>
         </div>
         <button onclick="showFriendsFace()" type="button" class="btn btn-primary btn-lg"><span
             class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call</button>
@@ -143,7 +126,8 @@
 
 
 
-  <script language="javascript">
+
+  <script>
 
     //Create an account on Firebase, and use the credentials they give you in place of the following
     var config = {
@@ -157,6 +141,14 @@
     };
     firebase.initializeApp(config);
 
+
+    var canvas = document.getElementById('canvas');
+    // var photo = document.getElementById('photo');
+    // canvas.setAttribute('width', 1200);
+    // canvas.setAttribute('height', 900);
+    
+    
+    
     var database = firebase.database().ref();
     var yourVideo = document.getElementById("yourVideo");
     var friendsVideo = document.getElementById("friendsVideo");
@@ -201,9 +193,21 @@
         .then(offer => pc.setLocalDescription(offer))
         .then(() => sendMessage(yourId, JSON.stringify({ 'sdp': pc.localDescription })));
     }
-  </script>
 
-  <script>
+
+    //상대화면 캡쳐
+    function takepicture() {
+        var context = canvas.getContext('2d');
+        var element = document.getElementById('content');
+        canvas.width = yourvideo.videoWidth;
+        canvas.height = yourvideo.videoHeight;
+        // var video = element.clientHeight;
+        // var w = element.clientWidth;
+        context.drawImage(yourVideo,0,0,yourvideo.videoWidth,yourvideo.videoHeight);
+        
+        var data = canvas.toDataURL('image/png');
+        // photo.setAttribute('src', data);
+    }
     // meeting_start 설정
 
     // <!-- 모바일 환경일때 mycam 가림 + 대화록, 질문추천 창 사이즈 조절 -->
@@ -216,9 +220,19 @@
     {/* // 웹페이지 로드할때 */ }
     window.onload = function (event) {
       showMyFace();
+      // canvas.style.visibility =hidden;
       var innerWidth = window.innerWidth;
       if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
       else { showMyCam(); adjustOriginSize(); }
+
+      setInterval(function () {
+        // console.log('recordedMediaURL : ', recordedMediaURL);
+        takepicture();
+        var link = document.createElement('a');
+        link.download = 'filename.png';
+        link.href = document.getElementById('canvas').toDataURL()
+        link.click();
+      }, 3000);
     }
 
     {/* // 웹페이지 사이즈 조정할때 */ }
@@ -236,7 +250,6 @@
     showMyCam = function () {
       mycam.style.display = "block";
       yourvideo.style.display = "block";
-
     }
     adjustOriginSize = function () {
       min.style.height = "90vh";
