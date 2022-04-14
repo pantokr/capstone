@@ -99,6 +99,8 @@ li {
   cursor:pointer
 }
 
+
+
 .gray-sector{
   background-color: rgb(248,249,250);
   padding-top: 1rem;
@@ -125,11 +127,11 @@ li {
   color: rgb(199, 199, 199);
   text-align: center;
 }
-.intro{
+/* .intro{
   position: relative;
   padding: 202px 0 93px;
   text-align: center;
-}
+} */
 /* 
 .title_desc{
   width: 520px;
@@ -143,8 +145,8 @@ p{
   display: block;
   margin-block-start: 1em;
   margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  /* margin-inline-start: 0px;
+  margin-inline-end: 0px; */
   
 }
 .title{
@@ -158,10 +160,11 @@ p{
 }
 
 .feature_list .item .sec_feature{
-  display: flex;
+  /* display: flex; */
   position: relation;
   justify-content: center;
   text-align: center;
+  /* width: 80%; */
 }
 ul{
   display: block;
