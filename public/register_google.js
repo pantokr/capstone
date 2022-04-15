@@ -1,6 +1,6 @@
 import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import {getDatabase, ref, set} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
-import './index.js';
+import './firebase_initialization.js';
 
 const auth = getAuth();
 
@@ -33,7 +33,7 @@ for (var y = year - 10; y > year - 100; y--) {
 }
 
 // month
-for (var m = 1; m <= 12; m++) {
+for (var m = 1; m<= 12; m++) {
     var newOpt = document.createElement('option');
     newOpt.innerText = m.toString();
     newOpt.setAttribute('value', m.toString());
@@ -44,15 +44,9 @@ for (var m = 1; m <= 12; m++) {
 var by = floating_birth_year.value;
 var bm = floating_birth_month.value;
 
-if ([
-    1,
-    3,
-    5,
-    7,
-    8,
-    10,
-    12
-].indexOf(Number(bm)) > -1) {
+var month_31 = [1,3,5,7,8,10,12];
+
+if (month_31.indexOf(Number(bm)) > -1) {
     for (var d = 1; d <= 31; d++) {
 
         var newOpt = document.createElement('option');
@@ -96,8 +90,6 @@ if ([
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-
-        console.log("Logged in user.");
 
         const uid = user.uid;
         const name = user.displayName;
@@ -156,15 +148,7 @@ function reloadDate() {
     var by = floating_birth_year.value;
     var bm = floating_birth_month.value;
 
-    if ([
-        1,
-        3,
-        5,
-        7,
-        8,
-        10,
-        12
-    ].indexOf(Number(bm)) > -1) {
+    if (month_31.indexOf(Number(bm)) > -1) {
         for (var d = 1; d <= 31; d++) {
 
             var newOpt = document.createElement('option');

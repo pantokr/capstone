@@ -3,11 +3,10 @@ import {
     signInWithPopup,
     GoogleAuthProvider
 } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
-import { getDatabase, ref, get, child, set } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+import './firebase_initialization.js'
 
-import { app } from './index.js'
-import { provider } from './auth_google_provider_create.js';
-
+const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
 var btn = document.getElementById('gooLogin');
