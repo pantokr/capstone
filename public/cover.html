@@ -24,6 +24,7 @@
 
     <!-- custom CSS -->
     <link href="cover.css" rel="stylesheet">
+    <link href="nav.css" rel="stylesheet">
 
     <!-- animate CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -50,20 +51,19 @@
 
     <div class="cover-container d-flex w-100 h-100 p- mx-auto flex-column">
 
-        <header class="mb-auto"></header>
-
-        <main class="justify-content-center row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-            <div class="col">
+        
+        <main class="justify-content-center row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4" style="margin-top:3rem;">
+            <div class="col" style="margin:3rem;">
                 <div class="span">
                     <img src="images/start.png" class="card-img-top feature  animate__animated animate__zoomIn"
-                        alt="..." onclick="window.open('about::blank').location.href='meeting_start.html'">
+                        alt="..." onclick="window.open('about::blank').location.href='meeting_start.html'" >
                     <div class="card-body">
                         <button class="bg_btn_style"
                             onclick="window.open('about::blank').location.href='meeting_start.html'">소개팅 시작하기</button>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col" style="margin:3rem;">
                 <div class="span">
                     <img src="images/participate.png" class="card-img-top feature animate__animated animate__zoomIn"
                         alt="...">
@@ -71,7 +71,7 @@
                         <button class="bg_btn_style openBtn">소개팅 참여하기</button>
                         <div class="modal hidden">
                             <div class="bg"></div>
-                            <div class="modalBox">
+                            <div class="modalBox animate__animated animate__fadeIn">
                                 <!-- <div class="close">X</div> -->
                                 <span class="close">X</span>
                                 <div class="modal_content">
