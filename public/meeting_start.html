@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 
 <head>
@@ -7,17 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- <meta property="og:title" content="Meecord"/>
-        <meta property="og:type" content=""/>
-        <meta property="og:url" content="https://mee-cord.web.app/"/>
-        <meta property="og:description" content=""/>
-        <meta property="og:image" content="/images/logo_1600_630.png"/>
-        <meta property="og:image:width" content="1200"/>
-        <meta property="og:image:height" content="630"/>
+  <meta property="og:type" content=""/>
+  <meta property="og:url" content="https://mee-cord.web.app/"/>
+  <meta property="og:description" content=""/>
+  <meta property="og:image" content="/images/logo_1600_630.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
 
-        <meta name="title" content="Meecord">
-        <meta name="description" content="">
-        <meta name="author" content="Oh, Jung, Song, Joo">
-        <meta name="generator" content="Hugo 0.88.1"> -->
+  <meta name="title" content="Meecord">
+  <meta name="description" content="">
+  <meta name="author" content="Oh, Jung, Song, Joo">
+  <meta name="generator" content="Hugo 0.88.1"> -->
 
   <title>Meecord</title>
   <link href="images/logo.ico" rel="shortcut icon" type="image/x-icon">
@@ -54,7 +54,13 @@
   <nav class="navbar" style="border-bottom: 0.001px solid rgb(216, 216, 216);">
     <div class="cover-container  d-flex w-100 h-100 p- mx-auto flex-column">
         <div>
-            <img class="float-md-start mb-0 feature" src="images/meecord-logo.png" alt="" width="132" height="48">
+            <img 
+                class="float-md-start mb-0 feature" 
+                src="images/meecord-logo.png" 
+                onclick="location.href='cover.html'" 
+                alt="" 
+                width="132" 
+                height="48">
             <nav class="nav justify-content-center float-md-end">
                 <a class="nav-link feature active" onclick="location.href='cover.html'">홈</a>
                 <a class="nav-link feature" onclick="location.href='conversation_list.html'">대화목록</a>
@@ -68,42 +74,40 @@
 
 
   <!-- 데스크탑 크기일 때 grid와 모바일 크기일 때 grid 구분 -->
-  <div class="container">
-    <div class="row" style="height:45vh">
+
+  <div class="container" >
+    <div class="row" style="height:45vh;">
       <div class="col-md-5">
         <div class="opponent-cam">
           <canvas id="canvas" ></canvas>
           <video id="friendsVideo" autoplay playsinline></video>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="minute" id="min">
-          <div class="minute-title">
-            <p>대화록</p>
-          </div>
-          <div class="min-content">
-            <p>내용</p>
+      <div class="col-md-4 " >
+        <div class="minute box_part" id="min" style="overflow-y:auto;">
+          <div class="minute-title">대화록</div>
+          
+          <div class="min-content" >
+            <p>대화 내용
+             
+            </p>
           </div>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 box_part">
         <div class="recommended-question" id="rq">
-          <div class="keyword-question-title">
-            <p>키워드 질문</p>
-          </div>
+          <div class="keyword-question-title">키워드 질문</div>
           <div class="rq-content">
             <p>내용</p>
           </div>
-          <div class="random-question-title">
-            <p>랜덤 질문</p>
-          </div>
+
+          <div class="random-question-title">랜덤 질문</div>
           <div class="rq-content">
             <p>내용</p>
           </div>
-          <div class="conversation-atmosphere">
-            <div class="cv-content">
-              <p>현재 대화 분위기는 기쁨입니다.</p>
-            </div>
+          <div class="conversation-atmosphere-title">대화 분위기</div>
+          <div class="cv-content">
+            <p>현재 대화 분위기는 기쁨입니다.</p>
           </div>
         </div>
       </div>
@@ -112,8 +116,6 @@
       <div class="col-md-5">
         <div class="my-cam d-flex flex-column">
           
-            
-            
             <video id="yourVideo" autoplay muted playsinline></video>
         </div>
         <button onclick="showFriendsFace()" type="button" class="btn btn-primary btn-lg"><span
@@ -123,8 +125,6 @@
 
     </div>
   </div>
-
-
 
 
   <script>
