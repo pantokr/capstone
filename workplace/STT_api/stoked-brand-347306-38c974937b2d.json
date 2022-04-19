@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "stoked-brand-347306",
+  "private_key_id": "38c974937b2d6ef946f5ae76e0c9c264dad28381",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDNAZKPpYt0EfcR\nzF4oE4Rojuq0T6YumMw2bL97dyDzigQMO/Qr4UNxkxT/CZoG4WYEsZLSDj9UTip5\nhTRY/UyFNm/pYqQ29e/+l3f9DAG2/Tf2kwkQMkvWj8iVxXuJWenoMRxpNMQTT7DH\ng1XRD860nI1CwQ02Jg3u5DBPCM1PR9GuaAUUNINUaea2aYkaIMtvKxtEeP/3b8lt\nQzRcpa2JEHsSgyw95exyWt6MhygxzGSZMOOQJolSHQZoVJBeS8hes71cUw+oC+d+\n7DE/ujWZcHxI/MVR6C7BskwBH1+6r32AiwIIp2wMBEDoTGd87dg9yKl+TEbBeT5L\n04/3V74/AgMBAAECggEAXx6DqjLdaZWMVa3FYkLsBLeLHu515Njwp6/9iIPVvioj\nhqmquVFjwabE7zC9TsP2WecqgFwr9inue0Pa7g9ZGdYQRvGF0Bp8qFwPSFHx2b3T\n4YyHgARWO8+q+hMPJsOZTCq9S/M3pt4q3+eIQeBbwGGDCZ4ZSy6M+HLYF1O2LzoG\nxsMGgGOrKPTfpxBUBYBA0ewBa0QNikjbgqyPuQS6K+GtAL6qUTg3GDWtH38ErGSs\nhRCLImwOuOINR+f5RfDHZPZ6dBUUi3+FjLWpUAVhsEpRFUSJNcTnceEjq0BKWZSA\n9bJDGioIeNlXCXYBbwW3KR+lv1TjruFaSOAnnPsPgQKBgQDuVGu9RdZb0ia/tE6k\nNBTSw3BJ8MImthbpWD2ttbR5a0U8+o5D8/XKwMO9HajgvBWJlVVVPQu/NJJ/0avZ\nG/AxABrTT2bmGfmhvd5BeMs+VesSxN4c8DeieWYF5kdvRlIm8GAlpSbfvboEjPSC\nGk05VAlgcu8LKwZevSYGQ05faQKBgQDcNKhzsKXaWnUwVjnqtYStjnV8VikAVSlp\nYWWMQznH4PGgAEkjJ4Af8GNtfu4jiH5ob9h0xhQ/MliRJWX2HW6siWIHQlXly5h+\nXEVQyBbj9CX29MAK9q9tLTfR41AuMwtImmCq2UFZ1fyDlxu6PQ2KyPUbqJsaSOK7\npAHsmSQjZwKBgQCBH6X7twGrX9F0ncjZuAnsIs0Mkm9uL8t8Az3vhnnQKukpX4qC\nkIODpSqnpJEhqWV11D2WX+ukXWRd8ghMKZHZyne+Ms/KLRqNoePvzvU2wbAJzDWW\nsiNCWMmIurnLNOs/g45j9vV31UAaRRAYCQ372Gb4JW0TvOzHmW0niYHFuQKBgBBT\niyXAtBtDV6r0yaiAOs0PYeCNFs8igUaB5SCIH3GVWPTO8J09oX88uHJ21bsmtJCT\nsk2+HeQtnGluh2e++OSr7uuw3GOEO9Mqji0WGLRf9qyfqtllPs5uatQR8XDrceu5\nHm+sWe8KMYWkH3cobaebjKi3UICbZMwatdXP6OEDAoGBAM2XAfVDDXWCv4F0INgh\nxSvllQ/jOkD+wBQ3KFxe8jjJ6hWKJNF6gMoXaXDv+bgQhFqbfjfIgNndJN3k8HHh\nZYTXJ1T1HmsTU0+SI14WLB6wMq6N4PPdZLkvUKetKKrgHHxsYSkt4NnUzpNJT8v4\nhokDRRrgSiqXVwep/GSsci/y\n-----END PRIVATE KEY-----\n",
+  "client_email": "meecord@stoked-brand-347306.iam.gserviceaccount.com",
+  "client_id": "115519170277645267075",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/meecord%40stoked-brand-347306.iam.gserviceaccount.com"
+}
