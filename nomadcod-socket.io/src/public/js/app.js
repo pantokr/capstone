@@ -8,7 +8,7 @@ const camerasSelect = document.getElementById("cameras");
 const call = document.getElementById("call");
 const mycam = document.getElementById("mycam"); //myFace video 담는 div
 const opponentcam = document.getElementById("opponent-cam"); //peerFace video 담는 div
-
+const canvas = document.getElementById('canvas');
 call.hidden = true;
 
 let myStream;
@@ -221,7 +221,38 @@ function makeConnection() {
   
   function handleAddStream(data) {
     peerFace.srcObject = data.stream;
+    //3초 간격으로 상대 화면 캡쳐
+    setInterval(function () {
+      // console.log('recordedMediaURL : ', recordedMediaURL);
+      takepicture();
+      var link = document.createElement('a');
+      link.download = 'filename.png';
+      link.href = document.getElementById('canvas').toDataURL()
+      //다운로드 하려면 주석해제
+      // link.click();
+    }, 3000);
   }
+
+
+
+
+//상대화면 캡쳐
+function takepicture() {
+  var context = canvas.getContext('2d');
+  // var element = document.getElementById('content');
+  canvas.width = peerFace.videoWidth;
+  canvas.height = peerFace.videoHeight;
+  // var video = element.clientHeight;
+  // var w = element.clientWidth;
+  context.drawImage(peerFace,0,0,peerFace.videoWidth,peerFace.videoHeight);
+  
+  // var data = canvas.toDataURL('image/png');
+  // photo.setAttribute('src', data);
+}
+
+
+
+
 
 
 
