@@ -50,34 +50,17 @@
         </div>
     </nav>
 
-    <div id = "marinpart" class="cover-container d-flex w-100 h-100 p- mx-auto flex-column">
+    <div class="cover-container d-flex w-100 h-100 p- mx-auto flex-column">
 
         
         <main class="justify-content-center row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4" style="margin-top:3rem;">
             <div class="col" style="margin:3rem;">
                 <div class="span">
-                    <!-- <img src="images/start.png" class="card-img-top feature  animate__animated animate__zoomIn"
-                        alt="..." onclick="window.open('about::blank').location.href='meeting_start.html'" > -->
-                        <img src="images/start.png" class="card-img-top feature  animate__animated animate__zoomIn"
-                        alt="...">
+                    <img src="images/start.png" class="card-img-top feature  animate__animated animate__zoomIn"
+                        alt="..." onclick="window.open('about::blank').location.href='meeting/src/views/home.html'" >
                     <div class="card-body">
-                        <button id="b1" class="bg_btn_style startBtn" >소개팅 시작하기</button>
-                           
-                        <!-- <div class="modal hidden">
-                            <div class="bg"></div>
-                            <div class="modalBox animate__animated animate__fadeIn">
-                               
-                                <span class="close">X</span>
-                                <div class="modal_content">
-                                    <div class="modal_title">미팅룸의 이름을 생성해주세요.</div>
-                                    <input type="text" class="form-control" id="floatingInput"
-                                        placeholder="미팅룸의 이름을 생성해주세요.">
-                                    <button class="confimBtn btn-primary" style="margin-top:1rem"
-                                        onclick="window.open('about::blank').location.href='meeting_start.html'">만들기</button>
-                                </div>
-
-                            </div>
-                        </div> -->
+                        <button class="bg_btn_style"
+                            onclick="window.open('about::blank').location.href='meeting/src/views/home.html'">소개팅 시작하기</button>
                     </div>
                 </div>
             </div>
@@ -86,13 +69,12 @@
                     <img src="images/participate.png" class="card-img-top feature animate__animated animate__zoomIn"
                         alt="...">
                     <div class="card-body">
-                        <button id="b2" class="bg_btn_style participateBtn">소개팅 참여하기</button>
-                        
-                        <!-- <div class="modalPT hidden">
-                            <div class="bgPT"></div>
+                        <button class="bg_btn_style openBtn">소개팅 참여하기</button>
+                        <div class="modal hidden">
+                            <div class="bg"></div>
                             <div class="modalBox animate__animated animate__fadeIn">
-                            
-                                <span class="closePT">X</span>
+                                <!-- <div class="close">X</div> -->
+                                <span class="close">X</span>
                                 <div class="modal_content">
                                     <div class="modal_title">참여코드를 입력하세요.</div>
                                     <input type="text" class="form-control" id="floatingInput"
@@ -102,37 +84,40 @@
                                 </div>
 
                             </div>
-                        </div> -->
+                        </div>
 
                     </div>
                 </div>
             </div>
 
-            <div id="m1" class="modal" style="display:none; ">
-                <div class="update_modal_content">
-                    <div id="c1" class="close">X</div>
-                    <div class="modal_title">미팅룸의 이름을 생성하세요.</div>
-                    <input type="text" class="form-contorl" id="floatingInput" 
-                        placeholder="미팅룸의 이름을 생성하세요.">
-                        <button class="confimBtn btn-primary" style="margin-top:1rem"
-                        onclick="window.open('about::blank').location.href='meeting_start.html'">확인</button>
-                </div>
-            </div>
-
-            <div id="m2" class="modal" style="display:none;">
-                <div class="update_modal_content">
-                    <div id="c2" class="close">X</div>
-                    <div class="modal_title">참여코드를 입력하세요.</div>
-                    <input type="text" class="form-contorl" id="floatingInput" 
-                        placeholder="참여코드를 입력하세요.">
-                        <button class="confimBtn btn-primary" style="margin-top:1rem"
-                        onclick="window.open('about::blank').location.href='meeting_start.html'">확인</button>
-                </div>
-            </div>
         </main>
 
         <footer class="mt-auto text-white-50"></footer>
-        
+        <!-- <script>
+            const open = () => {
+                document
+                    .querySelector(".modal")
+                    .classList
+                    .remove("hidden");
+            }
+
+            const close = () => {
+                document
+                    .querySelector(".modal")
+                    .classList
+                    .add("hidden");
+            }
+
+            document
+                .querySelector(".openBtn")
+                .addEventListener("click", open);
+            document
+                .querySelector(".close")
+                .addEventListener("click", close);
+            document
+                .querySelector(".bg")
+                .addEventListener("click", close);
+        </script> -->
     </div>
 
 </body>
