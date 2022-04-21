@@ -19,8 +19,9 @@
   
   
     <!-- custom CSS -->
-    <link href="home.css?ver=0.1" type="text/css" rel="stylesheet">
-    <link href="nav.css?ver=0.1" type="text/css" rel="stylesheet" >
+    <link href="/public/css/home.css" rel="stylesheet">
+    <!-- <link href="nav.css"  rel="stylesheet" > -->
+    <link href="/public/css/nav.css" rel="stylesheet"></script>
     
     <!-- animate CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -31,13 +32,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet"> -->
   
     <!-- webrtc -->
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta name="apple-mobile-web-app-capable" content="yes"> -->
+
     
-    <!-- <script type="module" src="home.css"></script> -->
-    <!-- <script type="module" src="app.js"></script> -->
-    <script type="module" src="home.js"></script>
+
+    <!-- <script type="module" src="home.js"></script> -->
     
 
 </head>
@@ -68,7 +69,7 @@
         <h1>Noom</h1>
     </header> -->
 
-    <!-- <main> -->
+    <main>
         <div id="welcome">
             <form>   
                 <input placeholder="room name" required type="text">
@@ -95,16 +96,7 @@
                       <canvas id="canvas" ></canvas>
                       <video id="peerFace" autoplay playsinline  width=100% height=auto></video>
                     </div>
-                    <!-- <select id="cameras"></select>
-                    
-                    <div class="my-cam">  
-                      <video id="myFace" autoplay muted playsinline  width=100% height=auto></video>
-                     </div>
-                    <button onclick="showFriendsFace()" type="button" class="callBtn btn btn-primary btn-lg">
-                    <span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call</button>
-                    <button id="mute">Mute</button>
-                    <button id="camera">Turn Camera Off</button>
-                    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script> -->
+
                   </div>
                   <div class="col-md-4 " >
                     <div class="minute box_part" id="min" style="overflow-y:auto;">
@@ -142,8 +134,8 @@
                         <video id="myFace" autoplay muted playsinline  width="400" height="400"></video>
                     </div>
                     <select id="cameras"></select>
-                    <button onclick="showFriendsFace()" type="button" class="callBtn btn btn-primary btn-lg">
-                      <span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call</button>
+                    <!-- <button onclick="showFriendsFace()" type="button" class="callBtn btn btn-primary btn-lg">
+                      <span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call</button> -->
                     <button id="mute">Mute</button>
                     <button id="camera">Turn Camera Off</button>
                     <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
@@ -152,10 +144,11 @@
                 </div>
               </div>
         </div>
-    <!-- </main> -->
+    </main>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/public/js/app.js"></script>
+
     
 </body>
 </html>

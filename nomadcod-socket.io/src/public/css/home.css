@@ -2,12 +2,10 @@
  * Globals
  */
 
-
 /* Custom default button */
 /*
  * Globals
  */
-
 
 /* Custom default button */
 .btn-secondary,
@@ -17,13 +15,12 @@
   text-shadow: none; /* Prevent inheritance from `body` */
 }
 
-
 /*
  * Base structure
  */
 
 body {
-  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
   /* box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5); */
 }
 
@@ -36,20 +33,15 @@ body {
   max-width: 15em;
 } */
 
-
-
-
-
 /* meeting_start 속성 */
 
-.opponent-cam>video {
-
+.opponent-cam > video {
   /* border-radius: 7px; */
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 45vh;
-  padding:1.5rem;
+  padding: 1.5rem;
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
   /* Safari and Chrome */
@@ -59,9 +51,9 @@ body {
   position: absolute;
 }
 
-video{
-  top:0;
-  left:0;
+video {
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   transform: rotateY(180deg);
@@ -73,111 +65,104 @@ video{
   /* position: absolute; */
 }
 canvas {
-    /* border-radius: 7px; */
-    
-    top:0;
-    left:0;
-    width: 100%;
-    height: 45vh;
-    padding:1.5rem;
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg);
-    /* Safari and Chrome */
-    -moz-transform: rotateY(180deg);
-    /* Firefox */
-    object-fit: cover;
-    position: absolute;
+  /* border-radius: 7px; */
+
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 45vh;
+  padding: 1.5rem;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  /* Safari and Chrome */
+  -moz-transform: rotateY(180deg);
+  /* Firefox */
+  object-fit: cover;
+  position: absolute;
 }
 button {
   margin: 5px 0px 0px 10px !important;
   width: 100%;
 }
 
-
-
-.container > .row{
+.container > .row {
   /* border: 1px solid red; */
-  height:90vh;
+  height: 90vh;
 }
 
-.opponent-cam{
-  border:3px solid rgb(104, 162, 236);
-  border-collapse:separate;
-  height:45vh;
-  font-family: 'Jua', sans-serif;
+.opponent-cam {
+  border: 3px solid rgb(104, 162, 236);
+  border-collapse: separate;
+  height: 45vh;
+  font-family: "Jua", sans-serif;
   /* margin:5px; */
 }
 
-.my-cam{
-  border:3px solid rgb(104, 162, 236);
-  border-collapse:separate;
-  height:45vh;
-  font-family: 'Jua', sans-serif;
+.my-cam {
+  border: 3px solid rgb(104, 162, 236);
+  border-collapse: separate;
+  height: 45vh;
+  font-family: "Jua", sans-serif;
   /* margin:5px; */
 }
 
-.minute{
+.minute {
   /* background-color:rgb(255, 240, 242); */
-  border-collapse:separate;
-  height:90vh;
+  border-collapse: separate;
+  height: 90vh;
   /* font-family: 'Jua', sans-serif; */
   /* border-radius: 20px 20px 40px 40px; */
   /* margin:5px; */
-  
 }
-.box_part{
+.box_part {
   border: 1px solid rgb(216, 216, 216);
- 
 }
-.minute-title  {
-    height:6%;
-    width:100%;
-    margin: 1rem 0 1rem;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    position:relative;
-    font-size:1.5rem;
-}
-
-
-.min-content{
-    position:relative;
-    height:35%;
-    margin: 1rem;
-}
-.min-content>p{
-    position:absolute;
-    width: 100%;
-    height: 100%;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    font-size:small;
-}
-
-.recommended-question{
-  border-collapse:separate;
-  height:90vh;
-  font-family: 'Jua', sans-serif;
-  border-radius: 20px 20px 40px 40px;
-  
-  /* margin:5px; */
-  
-}
-
-.keyword-question-title{
-  height:6%;
-  width:100%;
-  position:relative;
+.minute-title {
+  height: 6%;
+  width: 100%;
   margin: 1rem 0 1rem;
   text-align: center;
   align-items: center;
   justify-content: center;
-  position:relative;
-  font-size:1.5rem;
-  
- }
+  position: relative;
+  font-size: 1.5rem;
+}
+
+.min-content {
+  position: relative;
+  height: 35%;
+  margin: 1rem;
+}
+.min-content > p {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: small;
+}
+
+.recommended-question {
+  border-collapse: separate;
+  height: 90vh;
+  font-family: "Jua", sans-serif;
+  border-radius: 20px 20px 40px 40px;
+
+  /* margin:5px; */
+}
+
+.keyword-question-title {
+  height: 6%;
+  width: 100%;
+  position: relative;
+  margin: 1rem 0 1rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-size: 1.5rem;
+}
 /* .keyword-question-title > p{
   position:absolute;
   width: 100%;
@@ -189,31 +174,30 @@ button {
   
 } */
 
-.rq-content{
-  position:relative;
-  height:24%;
+.rq-content {
+  position: relative;
+  height: 24%;
 }
-.rq-content>p{
-  position:absolute;
+.rq-content > p {
+  position: absolute;
   width: 100%;
   height: 100%;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  font-size:small;
-  
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: small;
 }
 
-.random-question-title{
-  height:6%;
-  width:100%;
-  position:relative;
+.random-question-title {
+  height: 6%;
+  width: 100%;
+  position: relative;
   margin: 1rem 0 1rem;
   text-align: center;
   align-items: center;
   justify-content: center;
-  position:relative;
-  font-size:1.5rem;
+  position: relative;
+  font-size: 1.5rem;
 }
 
 /* .random-question-title>p{
@@ -235,31 +219,27 @@ button {
   position:relative;
   font-size:1.5rem;
 } */
-.conversation-atmosphere-title{
-  height:6%;
-  width:100%;
-  position:relative;
+.conversation-atmosphere-title {
+  height: 6%;
+  width: 100%;
+  position: relative;
   margin: 1rem 0 1rem;
   text-align: center;
   align-items: center;
   justify-content: center;
-  position:relative;
-  font-size:1.5rem;
+  position: relative;
+  font-size: 1.5rem;
 }
-.cv-content{
-  position:relative;
-  height:9%;
+.cv-content {
+  position: relative;
+  height: 9%;
 }
-.cv-content>p{
- 
-  position:absolute;
+.cv-content > p {
+  position: absolute;
   width: 100%;
   height: 100%;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  font-size:small;
-
-  
-  
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: small;
 }

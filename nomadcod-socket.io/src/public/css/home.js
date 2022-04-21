@@ -1,23 +1,21 @@
 //Create an account on Firebase, and use the credentials they give you in place of the following
-var config = {
-    apiKey: "AIzaSyAGjIonDdr_Y_697rDdZy2xj78ePRT_Lco",
-    authDomain: "meecord-223cc.firebaseapp.com",
-    databaseURL: "https://meecord-223cc-default-rtdb.firebaseio.com",
-    projectId: "meecord-223cc",
-    storageBucket: "meecord-223cc.appspot.com",
-    messagingSenderId: "291741382850",
-    appId: "1:291741382850:web:d91f54be8c6b004733e35b"
-  };
-  firebase.initializeApp(config);
+// var config = {
+//     apiKey: "AIzaSyAGjIonDdr_Y_697rDdZy2xj78ePRT_Lco",
+//     authDomain: "meecord-223cc.firebaseapp.com",
+//     databaseURL: "https://meecord-223cc-default-rtdb.firebaseio.com",
+//     projectId: "meecord-223cc",
+//     storageBucket: "meecord-223cc.appspot.com",
+//     messagingSenderId: "291741382850",
+//     appId: "1:291741382850:web:d91f54be8c6b004733e35b"
+//   };
+//   firebase.initializeApp(config);
 
 
   var canvas = document.getElementById('canvas');
-  // var photo = document.getElementById('photo');
-  // canvas.setAttribute('width', 1200);
-  // canvas.setAttribute('height', 900);
-  
-  
-  
+  var mycam = document.getElementById('mycam'); //mycam -> myFace
+  var yourvideo = document.getElementById('peerFace'); // yourVideo -> yourcam ->peerFace  
+  var min = document.getElementById('min');
+  var rq = document.getElementById('rq');
   var database = firebase.database().ref();
   var yourVideo = document.getElementById("myFace");
   var friendsVideo = document.getElementById("peerFace");
@@ -96,14 +94,11 @@ var config = {
 
   // <!-- 모바일 환경일때 mycam 가림 + 대화록, 질문추천 창 사이즈 조절 -->
 
-  var mycam = document.getElementById('mycam'); //mycam -> myFace
-  var yourvideo = document.getElementById('peerFace'); // yourVideo -> yourcam ->peerFace  
-  var min = document.getElementById('min');
-  var rq = document.getElementById('rq');
+
 
   {/* // 웹페이지 로드할때 */ }
   window.onload = function (event) {
-    showMyFace();
+    // showMyFace();
     console.log("load completed")
     // canvas.style.visibility =hidden;
     var innerWidth = window.innerWidth;
@@ -115,7 +110,7 @@ var config = {
 
   {/* // 웹페이지 사이즈 조정할때 */ }
   window.onresize = function (event) {
-    showMyFace();
+    // showMyFace();
     var innerWidth = window.innerWidth;
     if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
     else { showMyCam(); adjustOriginSize() }
