@@ -51,6 +51,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
 
         <script type="module" src="meeting_start.js"></script>
+        <script src="./media_capture.js"></script>
         <!-- <script src="./test.js"></script> -->
     </head>
 
@@ -118,7 +119,7 @@
             <div class="row" id="mycam">
                 <div class="col-md-5">
                     <div class="my-cam d-flex flex-column">
-                        <canvas id="canvas"></canvas>
+                        <canvas id="canvas" display="none"></canvas>
                         <video
                             id="yourVideo"
                             autoplay="autoplay"
