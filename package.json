@@ -21,5 +21,8 @@
         "url": "https://github.com/pantokr/meecord/issues"
     },
     "homepage": "https://github.com/pantokr/meecord#readme",
-    "description": ""
+    "description": "",
+    "devDependencies": {
+        "firebase-functions-test": "^0.3.3"
+    }
 }
