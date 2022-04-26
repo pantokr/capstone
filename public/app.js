@@ -1,3 +1,6 @@
+import { app } from "./firebase_initialization.js";
+import { getFirestore, collection, doc, getDoc, setDoc, addDoc, updateDoc, onSnapshot, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
 mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
 
 const configuration = {
@@ -36,8 +39,8 @@ async function createRoom() {
   document.querySelector('#createBtn').style.display = "none";
   document.querySelector('#joinBtn').style.display = "none";
 
-  const db = firebase.firestore();
-  const roomRef = await db.collection('rooms').doc();
+  const db = getFirestore();
+  const roomRef = await doc(collection(db, 'rooms'));
 
   console.log('Create PeerConnection with configuration: ', configuration);
   peerConnection = new RTCPeerConnection(configuration);
@@ -49,7 +52,7 @@ async function createRoom() {
   });
 
   // Code for collecting ICE candidates below
-  const callerCandidatesCollection = roomRef.collection('callerCandidates');
+  const callerCandidatesCollection = collection(roomRef, 'callerCandidates');
 
   peerConnection.addEventListener('icecandidate', event => {
     if (!event.candidate) {
@@ -57,7 +60,7 @@ async function createRoom() {
       return;
     }
     console.log('Got candidate: ', event.candidate);
-    callerCandidatesCollection.add(event.candidate.toJSON());
+    addDoc(callerCandidatesCollection, event.candidate.toJSON());
   });
   // Code for collecting ICE candidates above
 
@@ -72,12 +75,12 @@ async function createRoom() {
       sdp: offer.sdp,
     },
   };
-  await roomRef.set(roomWithOffer);
+  await setDoc(roomRef, roomWithOffer);
   //룸 번호 생성
   roomId = roomRef.id;
   console.log(`New room created with SDP offer. Room ID: ${roomRef.id}`);
   document.querySelector(
-      '#currentRoom').innerText = `Current room is ${roomRef.id} - You are the caller!`;
+    '#currentRoom').innerText = `Current room is ${roomRef.id} - You are the caller!`;
   // Code for creating a room above
 
   peerConnection.addEventListener('track', event => {
@@ -89,7 +92,7 @@ async function createRoom() {
   });
 
   // Listening for remote session description below
-  roomRef.onSnapshot(async snapshot => {
+  onSnapshot(roomRef, async snapshot => {
     const data = snapshot.data();
     if (!peerConnection.currentRemoteDescription && data && data.answer) {
       console.log('Got remote description: ', data.answer);
@@ -100,7 +103,7 @@ async function createRoom() {
   // Listening for remote session description above
 
   // Listen for remote ICE candidates below
-  roomRef.collection('calleeCandidates').onSnapshot(snapshot => {
+  onSnapshot(collection(roomRef, 'calleeCandidates'), snapshot => {
     snapshot.docChanges().forEach(async change => {
       if (change.type === 'added') {
         let data = change.doc.data();
@@ -120,13 +123,13 @@ function joinRoom() {
   document.querySelector('#joinBtn').style.display = "none";
 
   document.querySelector('#confirmJoinBtn').
-      addEventListener('click', async () => {
-        roomId = document.querySelector('#room-id').value;
-        console.log('Join room: ', roomId);
-        document.querySelector(
-            '#currentRoom').innerText = `Current room is ${roomId} - You are the callee!`;
-        await joinRoomById(roomId);
-      }, {once: true});
+    addEventListener('click', async () => {
+      roomId = document.querySelector('#room-id').value;
+      console.log('Join room: ', roomId);
+      document.querySelector(
+        '#currentRoom').innerText = `Current room is ${roomId} - You are the callee!`;
+      await joinRoomById(roomId);
+    }, { once: true });
   roomDialog.open();
 
   setInterval(function () {
@@ -140,12 +143,12 @@ function joinRoom() {
 }
 
 async function joinRoomById(roomId) {
-  const db = firebase.firestore();
-  const roomRef = db.collection('rooms').doc(`${roomId}`);
-  const roomSnapshot = await roomRef.get();
-  console.log('Got room:', roomSnapshot.exists);
+  const db = getFirestore();
+  const roomRef = doc(collection(db, 'rooms'),`${roomId}`);
+  const roomSnapshot = await getDoc(roomRef);
+  console.log('Got room:', roomSnapshot.exists());
 
-  if (roomSnapshot.exists) {
+  if (roomSnapshot.exists()) {
     console.log('Create PeerConnection with configuration: ', configuration);
     peerConnection = new RTCPeerConnection(configuration);
     registerPeerConnectionListeners();
@@ -154,14 +157,14 @@ async function joinRoomById(roomId) {
     });
 
     // Code for collecting ICE candidates below
-    const calleeCandidatesCollection = roomRef.collection('calleeCandidates');
+    const calleeCandidatesCollection = collection(roomRef, 'calleeCandidates');
     peerConnection.addEventListener('icecandidate', event => {
       if (!event.candidate) {
         console.log('Got final candidate!');
         return;
       }
       console.log('Got candidate: ', event.candidate);
-      calleeCandidatesCollection.add(event.candidate.toJSON());
+      addDoc(calleeCandidatesCollection, event.candidate.toJSON());
     });
     // Code for collecting ICE candidates above
 
@@ -187,11 +190,11 @@ async function joinRoomById(roomId) {
         sdp: answer.sdp,
       },
     };
-    await roomRef.update(roomWithAnswer);
+    await updateDoc(roomRef, roomWithAnswer);
     // Code for creating SDP answer above
 
     // Listening for remote ICE candidates below
-    roomRef.collection('callerCandidates').onSnapshot(snapshot => {
+    onSnapshot(collection(roomRef, 'callerCandidates'), snapshot => {
       snapshot.docChanges().forEach(async change => {
         if (change.type === 'added') {
           let data = change.doc.data();
@@ -208,7 +211,7 @@ async function joinRoomById(roomId) {
 
 async function openUserMedia(e) {
   const stream = await navigator.mediaDevices.getUserMedia(
-      {video: true, audio: true});
+    { video: true, audio: true });
   document.querySelector('#localVideo').srcObject = stream;
   localStream = stream;
   remoteStream = new MediaStream();
@@ -245,17 +248,17 @@ async function hangUp(e) {
 
   // Delete room on hangup
   if (roomId) {
-    const db = firebase.firestore();
-    const roomRef = db.collection('rooms').doc(roomId);
-    const calleeCandidates = await roomRef.collection('calleeCandidates').get();
+    const db = getFirestore();
+    const roomRef = getDoc(roomId, collection(db, 'rooms'));
+    const calleeCandidates = await getDoc(collection(roomRef,'calleeCandidates'));
     calleeCandidates.forEach(async candidate => {
-      await candidate.ref.delete();
+      await deleteDoc(candidate.ref);
     });
-    const callerCandidates = await roomRef.collection('callerCandidates').get();
+    const callerCandidates = await getDoc(collection(roomRef,'calleeCandidates'));
     callerCandidates.forEach(async candidate => {
-      await candidate.ref.delete();
+      await deleteDoc(candidate.ref);
     });
-    await roomRef.delete();
+    await deleteDoc(roomRef);
   }
 
   document.location.reload(true);
@@ -264,7 +267,7 @@ async function hangUp(e) {
 function registerPeerConnectionListeners() {
   peerConnection.addEventListener('icegatheringstatechange', () => {
     console.log(
-        `ICE gathering state changed: ${peerConnection.iceGatheringState}`);
+      `ICE gathering state changed: ${peerConnection.iceGatheringState}`);
   });
 
   peerConnection.addEventListener('connectionstatechange', () => {
@@ -277,7 +280,7 @@ function registerPeerConnectionListeners() {
 
   peerConnection.addEventListener('iceconnectionstatechange ', () => {
     console.log(
-        `ICE connection state change: ${peerConnection.iceConnectionState}`);
+      `ICE connection state change: ${peerConnection.iceConnectionState}`);
   });
 }
 
@@ -285,64 +288,64 @@ init();
 
 
 //상대화면 캡쳐
-function takepicture() {
-  var context = canvas.getContext('2d');
-  var remoteVideo = getElementById('remoteVideo');
-  // var element = document.getElementById('content');
-  canvas.width = remoteVideo.videoWidth;
-  canvas.height = remoteVideo.videoHeight;
-  // var video = element.clientHeight;
-  // var w = element.clientWidth;
-  context.drawImage(remoteVideo,0,0,remoteVideo.videoWidth,remoteVideo.videoHeight);
-  
-  var data = canvas.toDataURL('image/png');
-  photo.setAttribute('src', data);
+// function takepicture() {
+//   var context = canvas.getContext('2d');
+//   var remoteVideo = getElementById('remoteVideo');
+//   // var element = document.getElementById('content');
+//   canvas.width = remoteVideo.videoWidth;
+//   canvas.height = remoteVideo.videoHeight;
+//   // var video = element.clientHeight;
+//   // var w = element.clientWidth;
+//   context.drawImage(remoteVideo, 0, 0, remoteVideo.videoWidth, remoteVideo.videoHeight);
+
+//   var data = canvas.toDataURL('image/png');
+//   photo.setAttribute('src', data);
+// }
+
+
+
+// <!-- 모바일 환경일때 mycam 가림 + 대화록, 질문추천 창 사이즈 조절 -->
+
+var mycam = document.getElementById('mycam'); //mycam -> myFace
+var opponentcam = document.getElementById('opponent-cam'); // yourVideo -> yourcam ->peerFace  
+var min = document.getElementById('min');
+var rq = document.getElementById('rq');
+var buttons = document.getElementById('buttons');
+
+/* // 웹페이지 로드할때 */
+window.onload = function (event) {
+  // showMyFace();
+  console.log("load completed")
+  // canvas.style.visibility =hidden;
+  var innerWidth = window.innerWidth;
+  if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
+  else { showMyCam(); adjustOriginSize(); }
+
+
 }
 
+/* // 웹페이지 사이즈 조정할때 */
+window.onresize = function (event) {
+  // showMyFace();
+  var innerWidth = window.innerWidth;
+  if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
+  else { showMyCam(); adjustOriginSize() }
+}
 
-
-  // <!-- 모바일 환경일때 mycam 가림 + 대화록, 질문추천 창 사이즈 조절 -->
-
-  var mycam = document.getElementById('mycam'); //mycam -> myFace
-  var opponentcam = document.getElementById('opponent-cam'); // yourVideo -> yourcam ->peerFace  
-  var min = document.getElementById('min');
-  var rq = document.getElementById('rq');
-  var buttons = document.getElementById('buttons');
-
-  /* // 웹페이지 로드할때 */ 
-  window.onload = function (event) {
-    // showMyFace();
-    console.log("load completed")
-    // canvas.style.visibility =hidden;
-    var innerWidth = window.innerWidth;
-    if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
-    else { showMyCam(); adjustOriginSize(); }
-
-
-  }
-
-  /* // 웹페이지 사이즈 조정할때 */ 
-  window.onresize = function (event) {
-    // showMyFace();
-    var innerWidth = window.innerWidth;
-    if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
-    else { showMyCam(); adjustOriginSize() }
-  }
-
-  hideMyCam = function () {
-    mycam.style.display = "none";
-    yourvideo.style.display = "none";
-  }
-  showMyCam = function () {
-    mycam.style.display = "block";
-    // yourvideo.style.display = "block";
-  }
-  adjustOriginSize = function () {
-    min.style.height = "90vh";
-    rq.style.height = "90vh";
-  }
-  adjustHalfSize = function () {
-    min.style.height = "45vh";
-    rq.style.height = "45vh";
-  }
+var hideMyCam = function () {
+  mycam.style.display = "none";
+  yourvideo.style.display = "none";
+}
+var showMyCam = function () {
+  mycam.style.display = "block";
+  // yourvideo.style.display = "block";
+}
+var adjustOriginSize = function () {
+  min.style.height = "90vh";
+  rq.style.height = "90vh";
+}
+var adjustHalfSize = function () {
+  min.style.height = "45vh";
+  rq.style.height = "45vh";
+}
 
