@@ -181,11 +181,25 @@ canvas {
     object-fit: cover;
     position: absolute;
 }
+.btnSector{
+  margin: .1rem;
+  text-align: center;
+  justify-content: center;
+}
 button {
-  margin: 5px 0px 0px 10px !important;
+  margin: 0.1rem !important;
+  margin-top : 0.2rem;
   width: 100%;
 }
 
+#createBtn, #joinBtn , #hangupBtn, #confirmJoinBtn , #cancelBtn{
+  
+  background-color: #313131;
+  border-radius: 4px;
+  text-align: center;
+color: white;
+  cursor: pointer;
+}
 
 
 .container > .row{
@@ -287,7 +301,7 @@ button {
   height:24%;
 }
 .rq-content>p{
-  position:absolute;
+  /* position:absolute; */
   width: 100%;
   height: 100%;
   left:50%;

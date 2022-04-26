@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>meeting-room</title>
 
-  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+  <!-- <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet"> -->
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
   <!-- 삭제 시 오류뜸, 대체 요망 -->
@@ -115,10 +115,11 @@
           </div>
         </div>
       </div>
+
     </div>
 
     <!-- row -->
-    <div class="row" id="mycam">
+    <div class="row" id="mycam" style="height:45vh;">
       <div class="col-md-5">
         <div class="my-cam d-flex flex-column">
 
@@ -134,45 +135,40 @@
 
     </div>
     <!-- 자동으로 카메라, 마이크 켜지게 구현, 이 부분은 삭제 -->
-    <div class="row" id="buttons">
+    <div class="row" id="buttons" style="height: auto;">
       <!-- <button class="mdc-button mdc-button--raised" id="cameraBtn">
         <i class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
         <span class="mdc-button__label">Open camera & microphone</span>
-    </button> -->
-
+      </button> -->
+      <div class="btnSector col-md-5 row">
       <!-- 클릭 시 룸 번호 생성 -->
-      <button class="mdc-button mdc-button--raised col-md-2" id="createBtn">
+        <button class="mdc-button mdc-button--raised btn col" id="createBtn">
         <!--disabled 삭제-->
-        <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
-        <span class="mdc-button__label">Create room</span>
-      </button>
+          <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
+          <span class="mdc-button__label">Create room</span>
+        </button>
 
       <!-- 클릭 시 룸 조인 모달 생성 -->
-      <button class="mdc-button mdc-button--raised col-md-2" id="joinBtn">
+        <button class="mdc-button mdc-button--raised btn col" id="joinBtn">
         <!--disabled 삭제-->
-        <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
-        <span class="mdc-button__label">Join room</span>
-      </button>
+          <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
+          <span class="mdc-button__label">Join room</span>
+        </button>
 
       <!-- 클릭 시 룸 연결 끊기 -->
-      <button class="mdc-button mdc-button--raised col-md-2" id="hangupBtn">
-        <!--disabled 삭제-->
-        <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
-        <span class="mdc-button__label">Hangup</span>
-      </button>
+        <button class="mdc-button mdc-button--raised btn col" id="hangupBtn">
+          <!--disabled 삭제-->
+          <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
+          <span class="mdc-button__label">Hangup</span>
+        </button>
 
       <!-- 룸 번호 뜨는 곳 -->
-      <div>
-        <span id="currentRoom"></span>
-      </div>
+        <div>
+          <span id="currentRoom"></span>
+        </div>
     </div>
-  </div>
 
-
-
-
-
-  <div class="mdc-dialog" id="room-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
+    <div class="mdc-dialog" id="room-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
     aria-describedby="my-dialog-content">
     <div class="mdc-dialog__container">
       <div class="mdc-dialog__surface">
@@ -180,13 +176,13 @@
         <div class="mdc-dialog__content" id="my-dialog-content">
           Enter ID for room to join:
           <div class="mdc-text-field">
-            <input type="text" id="room-id" class="mdc-text-field__input">
-            <label class="mdc-floating-label" for="my-text-field">Room ID</label>
+            <!-- <label class="mdc-floating-label" for="my-text-field">Room ID</label> -->
+            <input type="text" id="room-id" class="mdc-text-field__input" placeholder="Room ID" style="border-radius:4px;">
             <div class="mdc-line-ripple"></div>
           </div>
         </div>
         <footer class="mdc-dialog__actions">
-          <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+          <button type="button" class="mdc-button mdc-dialog__button" id="cancelBtn" data-mdc-dialog-action="no">
             <span class="mdc-button__label">Cancel</span>
           </button>
           <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
@@ -197,6 +193,13 @@
     </div>
     <div class="mdc-dialog__scrim"></div>
   </div>
+  </div>
+
+
+
+
+
+  
 </body>
 
 </html>
