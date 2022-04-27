@@ -197,20 +197,28 @@ button {
   background-color: #313131;
   border-radius: 4px;
   text-align: center;
-color: white;
+  color: white;
   cursor: pointer;
 }
 
 
-.container > .row{
+/* .container > .row{ */
   /* border: 1px solid red; */
-  height:90vh;
-}
+  /* height:90vh; */
+/* } */
+#rq , #ep , #min{
+  /* border-collapse:separate; */
 
+  font-family: 'Jua', sans-serif;
+  border-radius: 5px;
+  border: 1px solid rgb(216, 216, 216);
+    margin-top :.5rem;
+    padding: 1rem;
+}
 .opponent-cam{
   border:3px solid rgb(104, 162, 236);
   border-collapse:separate;
-  height:45vh;
+  height:40rem;
   font-family: 'Jua', sans-serif;
   /* margin:5px; */
 }
@@ -218,7 +226,7 @@ color: white;
 .my-cam{
   border:3px solid rgb(104, 162, 236);
   border-collapse:separate;
-  height:45vh;
+  /* height:45vh; */
   font-family: 'Jua', sans-serif;
   /* margin:5px; */
 }
