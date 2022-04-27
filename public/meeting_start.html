@@ -75,6 +75,40 @@
     </div>
   </nav>
 
+   <!-- 자동으로 카메라, 마이크 켜지게 구현, 이 부분은 삭제 -->
+   <div class="row justify-content-center" id="buttons">
+    <!-- <button class="mdc-button mdc-button--raised" id="cameraBtn">
+      <i class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
+      <span class="mdc-button__label">Open camera & microphone</span>
+    </button> -->
+
+    <!-- 클릭 시 룸 번호 생성 -->
+    <button class="mdc-button mdc-button--raised col-md-2" id="createBtn">
+      <!--disabled 삭제-->
+      <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
+      <span class="mdc-button__label">Create room</span>
+    </button>
+
+    <!-- 클릭 시 룸 조인 모달 생성 -->
+    <button class="mdc-button mdc-button--raised col-md-2" id="joinBtn">
+      <!--disabled 삭제-->
+      <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
+      <span class="mdc-button__label">Join room</span>
+    </button>
+
+    <!-- 클릭 시 룸 연결 끊기 -->
+    <button class="mdc-button mdc-button--raised col-md-2" id="hangupBtn">
+      <!--disabled 삭제-->
+      <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
+      <span class="mdc-button__label">Hangup</span>
+    </button>
+
+    <!-- 룸 번호 뜨는 곳 -->
+    <div class="justify-content-center">
+      <span id="currentRoom"></span>
+    </div>
+  </div>
+
   <div class="container" id="myStream">
     <!-- container -->
     <!-- row -->
@@ -84,11 +118,11 @@
         <!-- 상대방카메라 -->
         <div class="opponent-cam">
           <canvas id="canvas"></canvas>
-          <video id="remoteVideo" autoplay playsinline width=100% height=auto></video>
+          <video id="remoteVideo" autoplay playsinline width="400" height="400"></video>
         </div>
         <!-- 키워드 -->
         <div class="recommended-question" id="rq">
-          <div class="keyword-question-title">키워드 질문</div>
+          <div class="keyword-question-title" id="title">키워드 질문</div>
           <div class="rq-content">
             <p>내용</p>
           </div>
@@ -102,10 +136,18 @@
         <div class="my-cam">
           <video id="localVideo" autoplay muted playsinline width="400" height="400"></video>
         </div>
-      
+
+        <!-- 감정인식 -->
+        <div class="emotion_part" id="ep">
+          <div id="title">감정인식</div>
+          <div class="content">
+            <span id="ep-content">감정인식중.</span>
+          </div>
+        </div>
+
         <!-- 대화록 -->
         <div class="minute box_part" id="min" style="overflow-y:auto;">
-          <div class="minute-title">대화록</div>
+          <div class="minute-title" id="title">대화록</div>
 
           <div class="min-content" contenteditable>
             <p>대화 내용</p>
@@ -141,39 +183,7 @@
       <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script> -->
      
 
-    <!-- 자동으로 카메라, 마이크 켜지게 구현, 이 부분은 삭제 -->
-    <div class="row" id="buttons">
-      <!-- <button class="mdc-button mdc-button--raised" id="cameraBtn">
-        <i class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
-        <span class="mdc-button__label">Open camera & microphone</span>
-      </button> -->
-
-      <!-- 클릭 시 룸 번호 생성 -->
-      <button class="mdc-button mdc-button--raised col-md-2" id="createBtn">
-        <!--disabled 삭제-->
-        <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
-        <span class="mdc-button__label">Create room</span>
-      </button>
-
-      <!-- 클릭 시 룸 조인 모달 생성 -->
-      <button class="mdc-button mdc-button--raised col-md-2" id="joinBtn">
-        <!--disabled 삭제-->
-        <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
-        <span class="mdc-button__label">Join room</span>
-      </button>
-
-      <!-- 클릭 시 룸 연결 끊기 -->
-      <button class="mdc-button mdc-button--raised col-md-2" id="hangupBtn">
-        <!--disabled 삭제-->
-        <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
-        <span class="mdc-button__label">Hangup</span>
-      </button>
-
-      <!-- 룸 번호 뜨는 곳 -->
-      <div>
-        <span id="currentRoom"></span>
-      </div>
-    </div>
+   
   
 
 
@@ -194,7 +204,7 @@
           </div>
         </div>
         <footer class="mdc-dialog__actions">
-          <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+          <button id="cancelBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
             <span class="mdc-button__label">Cancel</span>
           </button>
           <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
