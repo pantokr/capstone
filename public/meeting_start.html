@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="widt=hdevice-width, initial-scale=1">
   <title>meeting-room</title>
 
   <!-- <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet"> -->
@@ -53,6 +53,7 @@
 
   <!-- <script type="module" src="home.js"></script> -->
   <script type="module" src="./app.js"></script>
+  <script type="module" src="./media_capture.js"></script>
 </head>
 
 <body>
@@ -81,7 +82,7 @@
     <div class="row" style="height:45vh;">
       <div class="col-md-5">
         <div class="opponent-cam">
-          <canvas id="canvas"></canvas>
+
           <video id="remoteVideo" autoplay playsinline width=100% height=auto></video>
         </div>
 
@@ -122,7 +123,7 @@
     <div class="row" id="mycam" style="height:45vh;">
       <div class="col-md-5">
         <div class="my-cam d-flex flex-column">
-
+          <canvas id="canvas"></canvas>
           <video id="localVideo" autoplay muted playsinline width="400" height="400"></video>
         </div>
         <!-- <select id="cameras"></select> -->

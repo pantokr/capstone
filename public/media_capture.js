@@ -3,13 +3,13 @@ let mediaRecorder = null; // 녹음 데이터 저장 배열
 const audioArray = [];
 
 
-recordStart();
+// recordStart();
 
 setInterval(() => {
-    recordStop();
+    // recordStop();
 
-    recordStart();
-    takeMyPicture();
+    // recordStart();
+    // takeMyPicture();
 }, 5000);
 
 async function recordStart(event) {
@@ -34,6 +34,7 @@ async function recordStart(event) {
         } // 녹음 시작
         mediaRecorder.start();
         isRecording = true;
+        console.log("start recording");
     }
 }
 
@@ -41,17 +42,22 @@ async function recordStop(event) {
     if (isRecording) { // 녹음 종료
         mediaRecorder.stop();
         isRecording = false;
+        console.log("stop recording");
     }
 }
 
 function takeMyPicture() {
     var context = canvas.getContext('2d');
     // var element = document.getElementById('content');
-    canvas.width = yourVideo.videoWidth;
-    canvas.height = yourVideo.videoHeight;
+    canvas.width = localVideo.videoWidth;
+    canvas.height = localVideo.videoHeight;
     // var video = element.clientHeight; var w = element.clientWidth;
-    context.drawImage(yourVideo, 0, 0, yourVideo.videoWidth, yourVideo.videoHeight);
+    context.drawImage(localVideo, 0, 0, localVideo.videoWidth, localVideo.videoHeight);
 
     var data = canvas.toDataURL('image/png');
     console.log(data);
 }
+
+
+
+export {recordStart, recordStop, takeMyPicture};
