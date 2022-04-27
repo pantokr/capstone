@@ -368,6 +368,9 @@ recognition.lang = 'ko-KR';
 let makeNewTextContent = function () {
     p = document.createElement('p');
     document.querySelector('.chatLog').appendChild(p);
+    // 스크롤바 자동 아래 내림
+    var scrollDown = document.getElementById("scrollDown");
+    scrollDown.scrollTop = scrollDown.scrollHeight;
 };
 
 let p = null;
@@ -379,6 +382,7 @@ recognition.onstart = function () {
 };
 recognition.onend = function () {
     recognition.start();
+    recordStop();
 };
 
 recognition.onresult = function (e) {
@@ -388,7 +392,7 @@ recognition.onresult = function (e) {
     // texts.replace(/느낌표|강조|뿅/gi, '❗️');
 
     p.textContent = texts;
-    recordStop();
+    
 };
 
 //-----------------------------------------------------------------------------------------------------------------
