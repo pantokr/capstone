@@ -24,9 +24,7 @@ async function recordStart(event) {
         mediaRecorder.onstop = (event) => { // 녹음이 종료되면, 배열에 담긴 오디오 데이터(Blob)들을 합친다: 코덱도 설정해준다.
             const blob = new Blob(audioArray, {"type": "audio/wav codecs=opus"});
             audioArray.splice(0); // 기존 오디오 데이터들은 모두 비워 초기화한다.  Blob 데이터에 접근할 수 있는 주소를 생성한다.
-            const blobURL = window
-                .URL
-                .createObjectURL(blob); // audio엘리먼트로 재생한다.
+            
             var reader = new FileReader();
             reader.readAsDataURL(blob);
             reader.onloadend = function () {
