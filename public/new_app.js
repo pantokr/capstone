@@ -38,7 +38,7 @@ function init() {
   document.getElementById("firScreen").hidden = false;
 //   document.querySelector(".modal").classList.add("hidden");
 
-  // roomDialog = new mdc.dialog.MDCDialog(document.querySelector('#room-dialog'));
+  roomDialog = new mdc.dialog.MDCDialog(document.querySelector('#room-dialog'));
 }
 
 // createBtn 클릭시 
@@ -49,7 +49,7 @@ async function createRoom() {
   document.querySelector('#createBtn').style.display = "none";
   document.querySelector('#joinBtn').style.display = "none";
 
-  document.getElementById("firScreen").hidden = true;
+  
   secScreen.hidden = false;
 
   const db = getFirestore();
@@ -96,6 +96,8 @@ async function createRoom() {
     '#currentRoom').innerText = `Current room is ${roomRef.id} - You are the caller!`;
   // Code for creating a room above
 
+
+
   peerConnection.addEventListener('track', event => {
     console.log('Got remote track:', event.streams[0]);
     event.streams[0].getTracks().forEach(track => {
@@ -125,6 +127,14 @@ async function createRoom() {
       }
     });
   });
+
+  // function sleep(ms) {
+  //   const wakeUpTime = Date.now() + ms;
+  //   while (Date.now() < wakeUpTime) {}
+  // }
+  // sleep(1000);
+
+  // document.getElementById("firScreen").hidden = true;
   // Listen for remote ICE candidates above
 }
 
@@ -140,7 +150,7 @@ function joinRoom() {
   document.querySelector('#joinBtn').style.display = "none";
   
   
-  document.querySelector(".modal").classList.remove("hidden");
+  // document.querySelector(".modal").classList.remove("hidden");
 
 
   document.querySelector('#confirmJoinBtn').
@@ -151,16 +161,18 @@ function joinRoom() {
         '#currentRoom').innerText = `Current room is ${roomId} - You are the callee!`;
       await joinRoomById(roomId);
     }, { once: true });
-  // roomDialog.open();
+  roomDialog.open();
 
-  setInterval(function () {
-    // console.log('recordedMediaURL : ', recordedMediaURL);
-    takepicture();
-    var link = document.createElement('a');
-    link.download = 'filename.png';
-    link.href = document.getElementById('canvas').toDataURL()
-    link.click();
-  }, 3000);
+  document.getElementById("firScreen").hidden = true;
+
+  // setInterval(function () {
+  //   // console.log('recordedMediaURL : ', recordedMediaURL);
+  //   takepicture();
+  //   var link = document.createElement('a');
+  //   link.download = 'filename.png';
+  //   link.href = document.getElementById('canvas').toDataURL()
+  //   link.click();
+  // }, 3000);
 }
 
 async function joinRoomById(roomId) {

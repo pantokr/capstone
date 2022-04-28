@@ -94,6 +94,8 @@
                 <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
                 <span class="mdc-button__label">끝내기</span>
             </button>
+
+
         
             
         </div>
@@ -131,38 +133,47 @@
         </div>
         <div class="mdc-dialog__scrim"></div> -->
         
-        <div class="mdc-dialog" id="room-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
-            <div class="mdc-dialog__container">
-                <div class="mdc-dialog__surface" >
-                    <h2 class="mdc-dialog__title" id="my-dialog-title">Join room</h2>
-                    <div class="mdc-dialog__content" id="my-dialog-content">
-                        Enter ID for room to join:
-                        <div class="mdc-text-field">
-                        <label class="mdc-floating-label" for="my-text-field">Room ID</label>
-                        <input type="text" id="room-id" class="mdc-text-field__input" placeholder="Room ID" style="border-radius:4px;">
-                    <div class="mdc-line-ripple"></div>
-                    </div>
-                </div>
-                <footer class="mdc-dialog__actions">
-                    <button type="button" class="mdc-button mdc-dialog__button" id="cancelBtn" data-mdc-dialog-action="no">
-                    <span class="mdc-button__label">Cancel</span>
-                    </button>
-                    <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
-                    <span class="mdc-button__label">Join</span>
-                    </button>
-                </footer>
-            </div>
-        </div>
-        <div class="mdc-dialog__scrim"></div>
-    
-    </div>
+
   </div>
     </div>
+
+    <div class="mdc-dialog" id="room-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
+      <div class="mdc-dialog__container">
+          <div class="mdc-dialog__surface" >
+              <h2 class="mdc-dialog__title" id="my-dialog-title">Join room</h2>
+              <div class="mdc-dialog__content" id="my-dialog-content">
+                  Enter ID for room to join:
+                  <div class="mdc-text-field">
+                  <label class="mdc-floating-label" for="my-text-field">Room ID</label>
+                  <input type="text" id="room-id" class="mdc-text-field__input" placeholder="Room ID" style="border-radius:4px;">
+              <div class="mdc-line-ripple"></div>
+              </div>
+          </div>
+          <footer class="mdc-dialog__actions">
+              <button type="button" class="mdc-button mdc-dialog__button" id="cancelBtn" data-mdc-dialog-action="no">
+              <span class="mdc-button__label">Cancel</span>
+              </button>
+              <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+              <span class="mdc-button__label">Join</span>
+              </button>
+          </footer>
+        </div>
+      </div>
+    <div class="mdc-dialog__scrim"></div>
+
+  </div>
     
+
+  <div class="roomNum justify-content-center">
+    <span id="currentRoom" style="color:black"></span>
+  </div>
 
   <div class="container" id="myStream">
     <!-- container -->
     <!-- row -->
+      <!-- 룸 번호 뜨는 곳 -->
+      <!-- <div class="roomNum" style="background: #313131;"> -->
+
     <div class="row" >
         <div class="col-md-8">
             <div class="opponent-cam d-flex">
@@ -184,10 +195,7 @@
 
                 <video id="localVideo" autoplay  playsinline style="height:30%"></video>
             </div>
-            <!-- 룸 번호 뜨는 곳 -->
-            <div class="roomNum" style="background: #313131;">
-                <span id="currentRoom" style="color:black"></span>
-            </div>
+
             
             <div class="emotion_part" id="ep" style="height: 20%;">
                 <div id="title">감정인식</div>

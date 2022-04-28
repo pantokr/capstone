@@ -103,13 +103,14 @@
       <span class="mdc-button__label">Hangup</span>
     </button>
 
+
+  </div>
+
+  <div class="container" id="myStream">
     <!-- 룸 번호 뜨는 곳 -->
     <div class="justify-content-center">
       <span id="currentRoom"></span>
     </div>
-  </div>
-
-  <div class="container" id="myStream">
     <!-- container -->
     <!-- row -->
     <div class="row" >
@@ -118,7 +119,7 @@
         <!-- 상대방카메라 -->
         <div class="opponent-cam">
           <canvas id="canvas"></canvas>
-          <video id="remoteVideo" autoplay playsinline width="400" height="400"></video>
+          <video id="remoteVideo" autoplay playsinline></video>
         </div>
         <!-- 키워드 -->
         <div class="recommended-question" id="rq">
