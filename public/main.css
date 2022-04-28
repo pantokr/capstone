@@ -117,7 +117,8 @@ div#videos > video {
 
 body {
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-  /* box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5); */
+  width: 100vw;
+  height : 100vh;
 }
 
 .cover-container {
@@ -134,15 +135,29 @@ body {
 
 
 /* meeting_start 속성 */
-
-.opponent-cam>video {
+canvas {
+  
+  top:0;
+  left:0;
+  /* width: 100%;
+  height: 45vh; */
+  padding:1.5rem;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  /* Safari and Chrome */
+  -moz-transform: rotateY(180deg);
+  /* Firefox */
+  object-fit: cover;
+  position: absolute;
+}
+.opponent-cam > video {
 
   /* border-radius: 7px; */
   top:0;
   left:0;
   width: 100%;
   /* height: 45vh; */
-  padding:1.5rem;
+  /* padding:1.5rem; */
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
   /* Safari and Chrome */
@@ -163,49 +178,41 @@ video{
   
   object-fit: cover;
 }
-canvas {
-    /* border-radius: 7px; */
-    
-    top:0;
-    left:0;
-    /* width: 100%;
-    height: 45vh; */
-    padding:1.5rem;
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg);
-    /* Safari and Chrome */
-    -moz-transform: rotateY(180deg);
-    /* Firefox */
-    object-fit: cover;
-    /* position: absolute; */
-}
-.btnSector{
-  margin: .1rem;
+
+#buttons{
+  margin: 1rem;
   text-align: center;
   justify-content: center;
-}
-button {
-  margin: 0.1rem !important;
-  margin-top : 0.2rem;
-  width: 100%;
+  height : 10wh;
 }
 
-#createBtn, #joinBtn , #hangupBtn, #confirmJoinBtn , #cancelBtn{
-  
+.container{
+  height: 100vh;
+}
+
+#createBtn, #joinBtn , #hangupBtn, 
+#confirmJoinBtn , #cancelBtn, #roomnumBtn{
+  width: 10rem;
+  height: 3rem;
   background-color: #313131;
   border-radius: 4px;
+  margin : 0.5rem;
   text-align: center;
   color: white;
   cursor: pointer;
 }
 
+#setting > .col {
+  margin: .8rem;
+  text-align: center;
+}
+#cameraBtn, #muteBtn {
+  background: transparent;
+  width :1.5rem;
+  height: 1.5rem;
+}
 
-/* .container > .row{ */
-  /* border: 1px solid red; */
-  /* height:90vh; */
-/* } */
 #rq , #ep , #min{
-  /* border-collapse:separate; */
 
   font-family: 'Jua', sans-serif;
   border-radius: 5px;
@@ -224,9 +231,7 @@ button {
 .my-cam{
   border:3px solid rgb(104, 162, 236);
   border-collapse:separate;
-  /* height:45vh; */
   font-family: 'Jua', sans-serif;
-  /* margin:5px; */
 }
 
 

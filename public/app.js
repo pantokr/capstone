@@ -26,9 +26,12 @@ function init() {
   // 자동으로 카메라, 마이크 켜지게 구현, 버튼 클릭 대신 window.onload 사용
   // document.querySelector('#cameraBtn').addEventListener('click', openUserMedia);
   window.onload = openUserMedia();
-  document.querySelector('#hangupBtn').addEventListener('click', hangUp);
+  // document.querySelector('#hangupBtn').addEventListener('click', hangUp);
   document.querySelector('#createBtn').addEventListener('click', createRoom);
   document.querySelector('#joinBtn').addEventListener('click', joinRoom);
+  
+  document.querySelector('#roomNum').style.display = "none";
+
   roomDialog = new mdc.dialog.MDCDialog(document.querySelector('#room-dialog'));
 
 }
@@ -39,6 +42,9 @@ async function createRoom() {
   // document.querySelector('#joinBtn').disabled = true;
   document.querySelector('#createBtn').style.display = "none";
   document.querySelector('#joinBtn').style.display = "none";
+
+  document.querySelector('#roomNum').style.display = "block";
+  
   console.log('createBtn has clicked!');
   const db = getFirestore();
   const roomRef = await doc(collection(db, 'rooms'));
@@ -81,7 +87,8 @@ async function createRoom() {
   roomId = roomRef.id;
   console.log(`New room created with SDP offer. Room ID: ${roomRef.id}`);
   document.querySelector(
-    '#currentRoom').innerText = `Current room is ${roomRef.id} - You are the caller!`;
+    '#currentRoom').innerText = `현재 참여하신 룸은 ${roomRef.id} 입니다`;
+    // `Current room is ${roomRef.id} - You are the caller!`;
   // Code for creating a room above
 
   peerConnection.addEventListener('track', event => {
@@ -122,25 +129,29 @@ function joinRoom() {
   // document.querySelector('#joinBtn').disabled = true;
   document.querySelector('#createBtn').style.display = "none";
   document.querySelector('#joinBtn').style.display = "none";
+  
+  document.querySelector('#roomNum').style.display = "block";
 
   document.querySelector('#confirmJoinBtn').
     addEventListener('click', async () => {
       roomId = document.querySelector('#room-id').value;
       console.log('Join room: ', roomId);
       document.querySelector(
-        '#currentRoom').innerText = `Current room is ${roomId} - You are the callee!`;
+        '#currentRoom').innerText = 
+        // `Current room is ${roomId} - You are the callee!`;
+        `현재 참여하신 룸은 ${roomId} 입니다`;
       await joinRoomById(roomId);
     }, { once: true });
   roomDialog.open();
 
-  setInterval(function () {
-    // console.log('recordedMediaURL : ', recordedMediaURL);
-    takepicture();
-    var link = document.createElement('a');
-    link.download = 'filename.png';
-    link.href = document.getElementById('canvas').toDataURL()
-    link.click();
-  }, 3000);
+  // setInterval(function () {
+  //   console.log('recordedMediaURL : ', recordedMediaURL);
+  //   takepicture();
+  //   var link = document.createElement('a');
+  //   link.download = 'filename.png';
+  //   link.href = document.getElementById('canvas').toDataURL()
+  //   link.click();
+  // }, 3000);
 }
 
 async function joinRoomById(roomId) {
@@ -213,8 +224,10 @@ async function joinRoomById(roomId) {
 async function openUserMedia(e) {
   const stream = await navigator.mediaDevices.getUserMedia(
     { video: true, audio: true });
+
   document.querySelector('#localVideo').srcObject = stream;
   localStream = stream;
+
   remoteStream = new MediaStream();
   document.querySelector('#remoteVideo').srcObject = remoteStream;
 
@@ -222,7 +235,7 @@ async function openUserMedia(e) {
   // document.querySelector('#cameraBtn').disabled = true;
   document.querySelector('#joinBtn').disabled = false;
   document.querySelector('#createBtn').disabled = false;
-  document.querySelector('#hangupBtn').disabled = false;
+  // document.querySelector('#hangupBtn').disabled = false;
 }
 
 async function hangUp(e) {
@@ -303,50 +316,45 @@ init();
 //   photo.setAttribute('src', data);
 // }
 
+const muteBtn = document.getElementById("muteBtn");
+const cameraBtn = document.getElementById("cameraBtn");
 
+let muted = false;
+let cameraOff = false;
 
-// <!-- 모바일 환경일때 mycam 가림 + 대화록, 질문추천 창 사이즈 조절 -->
-
-var mycam = document.getElementById('mycam'); //mycam -> myFace
-var opponentcam = document.getElementById('opponent-cam'); // yourVideo -> yourcam ->peerFace  
-var min = document.getElementById('min');
-var rq = document.getElementById('rq');
-var buttons = document.getElementById('buttons');
-
-/* // 웹페이지 로드할때 */
-window.onload = function (event) {
-  // showMyFace();
-  console.log("load completed")
-  // canvas.style.visibility =hidden;
-  var innerWidth = window.innerWidth;
-  if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
-  else { showMyCam(); adjustOriginSize(); }
-
-
+// 오디오처리
+function handleMuteClick() {
+  // 오디오 on/off
+  localStream.getAudioTracks().forEach((track) => (track.enabled = !track.enabled));
+  // 오디오 on/off 버튼 처리
+  if (!muted) {
+    // muteBtn.innerText = "Unmute";
+    document.getElementById("muteBtn").src = "images/mute.png";
+    muted = true;
+  } else {
+    // muteBtn.innerText = "Mute";
+    document.getElementById("muteBtn").src = "images/unmute.png";
+    muted = false;
+  }
+}
+// 카메라 처리
+function handleCameraClick() {
+  // 카메라 on/off
+  localStream.getVideoTracks().forEach((track) => (track.enabled = !track.enabled));
+  
+  // 카메라 on/off 버튼 처리
+  if (cameraOff) {
+    // cameraBtn.innerText = "Turn Camera Off";
+    document.getElementById("cameraBtn").src = "images/cameraon.png";
+    cameraOff = false;
+  } else {
+    // cameraBtn.innerText = "Turn Camera On";
+    document.getElementById("cameraBtn").src = "images/cameraoff.png";
+    cameraOff = true;
+  }
 }
 
-/* // 웹페이지 사이즈 조정할때 */
-window.onresize = function (event) {
-  // showMyFace();
-  var innerWidth = window.innerWidth;
-  if (innerWidth <= "768") { hideMyCam(); adjustHalfSize(); }
-  else { showMyCam(); adjustOriginSize() }
-}
 
-var hideMyCam = function () {
-  mycam.style.display = "none";
-  yourvideo.style.display = "none";
-}
-var showMyCam = function () {
-  mycam.style.display = "block";
-  // yourvideo.style.display = "block";
-}
-var adjustOriginSize = function () {
-  min.style.height = "90vh";
-  rq.style.height = "90vh";
-}
-var adjustHalfSize = function () {
-  min.style.height = "45vh";
-  rq.style.height = "45vh";
-}
-
+// 카메라, 오디오 버튼 addEventListener
+muteBtn.addEventListener("click", handleMuteClick);
+cameraBtn.addEventListener("click", handleCameraClick);

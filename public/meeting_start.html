@@ -55,7 +55,7 @@
   <script type="module" src="./app.js"></script>
 </head>
 
-<body>
+<body style="width: 100%; height : 100%;">
 
 
   <!-- navbar -->
@@ -97,20 +97,19 @@
     </button>
 
     <!-- 클릭 시 룸 연결 끊기 -->
-    <button class="mdc-button mdc-button--raised col-md-2" id="hangupBtn">
-      <!--disabled 삭제-->
+    <!-- <button class="mdc-button mdc-button--raised col-md-2" id="hangupBtn">
       <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
       <span class="mdc-button__label">Hangup</span>
-    </button>
+    </button> -->
 
-
+   <!-- 룸 번호 뜨는 곳 -->
+     <div id="roomNum" class="justify-content-center col-md-2" style="width : 20rem;">
+       <span id="currentRoom"></span>
+    </div>
   </div>
 
   <div class="container" id="myStream">
-    <!-- 룸 번호 뜨는 곳 -->
-    <div class="justify-content-center">
-      <span id="currentRoom"></span>
-    </div>
+    
     <!-- container -->
     <!-- row -->
     <div class="row" >
@@ -131,11 +130,25 @@
 
       </div>
 
-      <div class="col-md-4 ">
 
+
+      <div class="col-md-4 ">
         <!-- 나의 카메라 -->
         <div class="my-cam">
-          <video id="localVideo" autoplay muted playsinline width="400" height="400"></video>
+          <video id="localVideo" autoplay muted playsinline width="400" height="400" ></video>
+        </div>
+
+        
+      
+        <!-- 오디오, 카메라 설정 -->
+        <div class="row " id="setting">
+          <div class="col" >
+            <img src="images/unmute.png" alt="" id="muteBtn">
+          </div>
+          <div class="col">
+            <img src="images/cameraon.png" alt="" id="cameraBtn" >
+          </div>
+          <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
         </div>
 
         <!-- 감정인식 -->
@@ -163,27 +176,9 @@
     </div>
         
   </div>
-          <!-- <div class="random-question-title">랜덤 질문</div>
-          <div class="rq-content">
-            <p>내용</p>
-          </div>
-          <div class="conversation-atmosphere-title">대화 분위기</div>
-          <div class="cv-content">
-            <p>현재 대화 분위기는 기쁨입니다.</p>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
+         
    
-        <!-- <select id="cameras"></select> -->
-        <!-- <button onclick="showFriendsFace()" type="button" class="callBtn btn btn-primary btn-lg">
-        <span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call</button> -->
-        <!-- <button id="mute">Mute</button>
-      <button id="camera">Turn Camera Off</button>
-      <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script> -->
-     
-
+  
    
   
 
@@ -200,16 +195,16 @@
           Enter ID for room to join:
           <div class="mdc-text-field">
             <input type="text" id="room-id" class="mdc-text-field__input">
-            <label class="mdc-floating-label" for="my-text-field">Room ID</label>
+            <!-- <label class="mdc-floating-label" for="my-text-field">Room ID</label> -->
             <div class="mdc-line-ripple"></div>
           </div>
         </div>
-        <footer class="mdc-dialog__actions">
-          <button id="cancelBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
-            <span class="mdc-button__label">Cancel</span>
-          </button>
+        <footer class="mdc-dialog__actions justify-content-center" >
           <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
             <span class="mdc-button__label">Join</span>
+          </button>
+          <button id="cancelBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+            <span class="mdc-button__label">Cancel</span>
           </button>
         </footer>
       </div>
