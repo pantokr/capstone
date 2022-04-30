@@ -29,7 +29,7 @@ function init() {
   // document.querySelector('#hangupBtn').addEventListener('click', hangUp);
   document.querySelector('#createBtn').addEventListener('click', createRoom);
   document.querySelector('#joinBtn').addEventListener('click', joinRoom);
-  
+
   document.querySelector('#roomNum').style.display = "none";
 
   roomDialog = new mdc.dialog.MDCDialog(document.querySelector('#room-dialog'));
@@ -44,7 +44,7 @@ async function createRoom() {
   document.querySelector('#joinBtn').style.display = "none";
 
   document.querySelector('#roomNum').style.display = "block";
-  
+
   console.log('createBtn has clicked!');
   const db = getFirestore();
   const roomRef = await doc(collection(db, 'rooms'));
@@ -88,7 +88,7 @@ async function createRoom() {
   console.log(`New room created with SDP offer. Room ID: ${roomRef.id}`);
   document.querySelector(
     '#currentRoom').innerText = `현재 참여하신 룸은 ${roomRef.id} 입니다`;
-    // `Current room is ${roomRef.id} - You are the caller!`;
+  // `Current room is ${roomRef.id} - You are the caller!`;
   // Code for creating a room above
 
   peerConnection.addEventListener('track', event => {
@@ -125,49 +125,72 @@ async function createRoom() {
 
   //-------------------------STT-------------------------------------
 
-  // const chatRef = await doc(collection(db, 'chats'), `${roomRef.id}`);
-  // await setDoc(chatRef, {
-  //   text: []
-  // });
+  const chatRef = await doc(collection(db, 'chats'), `${roomRef.id}`);
+  const callerCollection = collection(chatRef, 'callerChat');
 
-  // async function addChatting() {
-  //   await updateDoc(chatRef, {
-  //     text: arrayUnion(p.textContent)
-  //   });
-  // }
+  async function addChatting() {
+    if (p.textContent != "") {
+      await addDoc(callerCollection, {
+        text: p.textContent
+      });
+    }
+  }
 
-  // window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  onSnapshot(collection(chatRef, 'callerChat'), snapshot => {
+    snapshot.docChanges().forEach(async change => {
+      if (change.type === 'added') {
+        let data = change.doc.data();
+        console.log(`added data: ${JSON.parse(JSON.stringify(data)).text}`);
+        //p = document.createElement('p');
+        document.querySelector('.chatLog').appendChild(p);
+      }
+    });
+  });
 
-  // let recognition = new SpeechRecognition();
-  // recognition.interimResults = true;
-  // recognition.lang = 'ko-KR';
+  onSnapshot(collection(chatRef, 'calleeChat'), snapshot => {
+    snapshot.docChanges().forEach(async change => {
+      if (change.type === 'added') {
+        let data = change.doc.data();
+        console.log(`added data: ${JSON.parse(JSON.stringify(data)).text}`);
+        //p = document.createElement('p');
+        document.querySelector('.chatLog').appendChild(p);
+      }
+    });
+  });
+
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  let recognition = new SpeechRecognition();
+  recognition.interimResults = true;
+  recognition.lang = 'ko-KR';
 
 
-  // let makeNewTextContent = function () {
-  //   p = document.createElement('p');
-  //   document.querySelector('.chatLog').appendChild(p);
-  // };
+  let makeNewTextContent = function () {
+    p = document.createElement('p');
+    document.querySelector('.chatLog').appendChild(p);
+  };
 
-  // let p = null;
+  let p = null;
 
-  // recognition.start();
-  // recognition.onstart = function () {
-  //   makeNewTextContent(); // 음성 인식 시작시마다 새로운 문단을 추가한다.
-  // };
+  recognition.start();
+  recognition.onstart = function () {
+    p = document.createElement('p');
+    // makeNewTextContent(); // 음성 인식 시작시마다 새로운 문단을 추가한다.
+  };
 
-  // recognition.onend = async function () {
-  //   await addChatting();
-  //   recognition.start();
-  // };
+  recognition.onend = async function () {
+    await addChatting();
+    recognition.start();
+  };
 
-  // recognition.onresult = function (e) {
-  //   let texts = Array.from(e.results)
-  //     .map(results => results[0].transcript).join("");
+  recognition.onresult = function (e) {
+    let texts = Array.from(e.results)
+      .map(results => results[0].transcript).join("");
 
-  //   texts.replace(/느낌표|강조|뿅/gi, '❗️');
+    texts.replace(/느낌표|강조|뿅/gi, '❗️');
 
-  //   p.textContent = texts;
-  // };
+    p.textContent = texts;
+  };
 
 }
 
@@ -177,7 +200,7 @@ function joinRoom() {
   // document.querySelector('#joinBtn').disabled = true;
   document.querySelector('#createBtn').style.display = "none";
   document.querySelector('#joinBtn').style.display = "none";
-  
+
   document.querySelector('#roomNum').style.display = "block";
 
   document.querySelector('#confirmJoinBtn').
@@ -185,7 +208,7 @@ function joinRoom() {
       roomId = document.querySelector('#room-id').value;
       console.log('Join room: ', roomId);
       document.querySelector(
-        '#currentRoom').innerText = 
+        '#currentRoom').innerText =
         // `Current room is ${roomId} - You are the callee!`;
         `현재 참여하신 룸은 ${roomId} 입니다`;
       await joinRoomById(roomId);
@@ -204,7 +227,7 @@ function joinRoom() {
 
 async function joinRoomById(roomId) {
   const db = getFirestore();
-  const roomRef = doc(collection(db, 'rooms'),`${roomId}`);
+  const roomRef = doc(collection(db, 'rooms'), `${roomId}`);
   const roomSnapshot = await getDoc(roomRef);
   console.log('Got room:', roomSnapshot.exists());
 
@@ -270,16 +293,39 @@ async function joinRoomById(roomId) {
 
 
   // joinRoom STT------------------------------------------------------------------------
+
   const chatRef = await doc(collection(db, 'chats'), `${roomRef.id}`);
-  await setDoc(chatRef, {
-    text: []
-  });
+  const calleeCollection = collection(chatRef, 'calleeChat');
 
   async function addChatting() {
-    await updateDoc(chatRef, {
-      text: arrayUnion(p.textContent)
-    });
+    if (p.textContent != "") {
+      await addDoc(calleeCollection, {
+        text: p.textContent
+      });
+    }
   }
+
+  onSnapshot(collection(chatRef, 'callerChat'), snapshot => {
+    snapshot.docChanges().forEach(async change => {
+      if (change.type === 'added') {
+        let data = change.doc.data();
+        console.log(`added data: ${JSON.parse(JSON.stringify(data)).text}`);
+        //p = document.createElement('p');
+        document.querySelector('.chatLog').appendChild(p);
+      }
+    });
+  });
+
+  onSnapshot(collection(chatRef, 'calleeChat'), snapshot => {
+    snapshot.docChanges().forEach(async change => {
+      if (change.type === 'added') {
+        let data = change.doc.data();
+        console.log(`added data: ${JSON.parse(JSON.stringify(data)).text}`);
+        //p = document.createElement('p');
+        document.querySelector('.chatLog').appendChild(p);
+      }
+    });
+  });
 
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -297,7 +343,8 @@ async function joinRoomById(roomId) {
 
   recognition.start();
   recognition.onstart = function () {
-    makeNewTextContent(); // 음성 인식 시작시마다 새로운 문단을 추가한다.
+    p = document.createElement('p');
+    // makeNewTextContent(); // 음성 인식 시작시마다 새로운 문단을 추가한다.
   };
 
   recognition.onend = async function () {
@@ -358,11 +405,11 @@ async function hangUp(e) {
   if (roomId) {
     const db = getFirestore();
     const roomRef = getDoc(roomId, collection(db, 'rooms'));
-    const calleeCandidates = await getDoc(collection(roomRef,'calleeCandidates'));
+    const calleeCandidates = await getDoc(collection(roomRef, 'calleeCandidates'));
     calleeCandidates.forEach(async candidate => {
       await deleteDoc(candidate.ref);
     });
-    const callerCandidates = await getDoc(collection(roomRef,'calleeCandidates'));
+    const callerCandidates = await getDoc(collection(roomRef, 'calleeCandidates'));
     callerCandidates.forEach(async candidate => {
       await deleteDoc(candidate.ref);
     });
@@ -435,7 +482,7 @@ function handleMuteClick() {
 function handleCameraClick() {
   // 카메라 on/off
   localStream.getVideoTracks().forEach((track) => (track.enabled = !track.enabled));
-  
+
   // 카메라 on/off 버튼 처리
   if (cameraOff) {
     // cameraBtn.innerText = "Turn Camera Off";
