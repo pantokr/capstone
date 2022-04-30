@@ -1,5 +1,5 @@
 import { app } from "./firebase_initialization.js";
-import { getFirestore, collection, doc, getDoc, setDoc, addDoc, updateDoc, onSnapshot, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { getFirestore, collection, doc, getDoc, setDoc, addDoc, updateDoc, onSnapshot, deleteDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
 
@@ -121,6 +121,54 @@ async function createRoom() {
     });
   });
   // Listen for remote ICE candidates above
+
+
+  //-------------------------STT-------------------------------------
+
+  // const chatRef = await doc(collection(db, 'chats'), `${roomRef.id}`);
+  // await setDoc(chatRef, {
+  //   text: []
+  // });
+
+  // async function addChatting() {
+  //   await updateDoc(chatRef, {
+  //     text: arrayUnion(p.textContent)
+  //   });
+  // }
+
+  // window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  // let recognition = new SpeechRecognition();
+  // recognition.interimResults = true;
+  // recognition.lang = 'ko-KR';
+
+
+  // let makeNewTextContent = function () {
+  //   p = document.createElement('p');
+  //   document.querySelector('.chatLog').appendChild(p);
+  // };
+
+  // let p = null;
+
+  // recognition.start();
+  // recognition.onstart = function () {
+  //   makeNewTextContent(); // 음성 인식 시작시마다 새로운 문단을 추가한다.
+  // };
+
+  // recognition.onend = async function () {
+  //   await addChatting();
+  //   recognition.start();
+  // };
+
+  // recognition.onresult = function (e) {
+  //   let texts = Array.from(e.results)
+  //     .map(results => results[0].transcript).join("");
+
+  //   texts.replace(/느낌표|강조|뿅/gi, '❗️');
+
+  //   p.textContent = texts;
+  // };
+
 }
 
 function joinRoom() {
@@ -219,6 +267,52 @@ async function joinRoomById(roomId) {
     });
     // Listening for remote ICE candidates above
   }
+
+
+  // joinRoom STT------------------------------------------------------------------------
+  const chatRef = await doc(collection(db, 'chats'), `${roomRef.id}`);
+  await setDoc(chatRef, {
+    text: []
+  });
+
+  async function addChatting() {
+    await updateDoc(chatRef, {
+      text: arrayUnion(p.textContent)
+    });
+  }
+
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  let recognition = new SpeechRecognition();
+  recognition.interimResults = true;
+  recognition.lang = 'ko-KR';
+
+
+  let makeNewTextContent = function () {
+    p = document.createElement('p');
+    document.querySelector('.chatLog').appendChild(p);
+  };
+
+  let p = null;
+
+  recognition.start();
+  recognition.onstart = function () {
+    makeNewTextContent(); // 음성 인식 시작시마다 새로운 문단을 추가한다.
+  };
+
+  recognition.onend = async function () {
+    await addChatting();
+    recognition.start();
+  };
+
+  recognition.onresult = function (e) {
+    let texts = Array.from(e.results)
+      .map(results => results[0].transcript).join("");
+
+    texts.replace(/느낌표|강조|뿅/gi, '❗️');
+
+    p.textContent = texts;
+  };
 }
 
 async function openUserMedia(e) {
