@@ -124,74 +124,7 @@ async function createRoom() {
 
 
   //-------------------------STT-------------------------------------
-
-  const chatRef = await doc(collection(db, 'chats'), `${roomRef.id}`);
-  const callerCollection = collection(chatRef, 'callerChat');
-
-  async function addChatting() {
-    if (p.textContent != "") {
-      await addDoc(callerCollection, {
-        text: p.textContent
-      });
-    }
-  }
-
-  onSnapshot(collection(chatRef, 'callerChat'), snapshot => {
-    snapshot.docChanges().forEach(async change => {
-      if (change.type === 'added') {
-        let data = change.doc.data();
-        console.log(`added data: ${JSON.parse(JSON.stringify(data)).text}`);
-        //p = document.createElement('p');
-        document.querySelector('.chatLog').appendChild(p);
-      }
-    });
-  });
-
-  onSnapshot(collection(chatRef, 'calleeChat'), snapshot => {
-    snapshot.docChanges().forEach(async change => {
-      if (change.type === 'added') {
-        let data = change.doc.data();
-        console.log(`added data: ${JSON.parse(JSON.stringify(data)).text}`);
-        //p = document.createElement('p');
-        document.querySelector('.chatLog').appendChild(p);
-      }
-    });
-  });
-
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  let recognition = new SpeechRecognition();
-  recognition.interimResults = true;
-  recognition.lang = 'ko-KR';
-
-
-  let makeNewTextContent = function () {
-    p = document.createElement('p');
-    document.querySelector('.chatLog').appendChild(p);
-  };
-
-  let p = null;
-
-  recognition.start();
-  recognition.onstart = function () {
-    p = document.createElement('p');
-    // makeNewTextContent(); // 음성 인식 시작시마다 새로운 문단을 추가한다.
-  };
-
-  recognition.onend = async function () {
-    await addChatting();
-    recognition.start();
-  };
-
-  recognition.onresult = function (e) {
-    let texts = Array.from(e.results)
-      .map(results => results[0].transcript).join("");
-
-    texts.replace(/느낌표|강조|뿅/gi, '❗️');
-
-    p.textContent = texts;
-  };
-
+  STT(roomRef.id, 'callerChat');
 }
 
 function joinRoom() {
@@ -293,73 +226,7 @@ async function joinRoomById(roomId) {
 
 
   // joinRoom STT------------------------------------------------------------------------
-
-  const chatRef = await doc(collection(db, 'chats'), `${roomRef.id}`);
-  const calleeCollection = collection(chatRef, 'calleeChat');
-
-  async function addChatting() {
-    if (p.textContent != "") {
-      await addDoc(calleeCollection, {
-        text: p.textContent
-      });
-    }
-  }
-
-  onSnapshot(collection(chatRef, 'callerChat'), snapshot => {
-    snapshot.docChanges().forEach(async change => {
-      if (change.type === 'added') {
-        let data = change.doc.data();
-        console.log(`added data: ${JSON.parse(JSON.stringify(data)).text}`);
-        //p = document.createElement('p');
-        document.querySelector('.chatLog').appendChild(p);
-      }
-    });
-  });
-
-  onSnapshot(collection(chatRef, 'calleeChat'), snapshot => {
-    snapshot.docChanges().forEach(async change => {
-      if (change.type === 'added') {
-        let data = change.doc.data();
-        console.log(`added data: ${JSON.parse(JSON.stringify(data)).text}`);
-        //p = document.createElement('p');
-        document.querySelector('.chatLog').appendChild(p);
-      }
-    });
-  });
-
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  let recognition = new SpeechRecognition();
-  recognition.interimResults = true;
-  recognition.lang = 'ko-KR';
-
-
-  let makeNewTextContent = function () {
-    p = document.createElement('p');
-    document.querySelector('.chatLog').appendChild(p);
-  };
-
-  let p = null;
-
-  recognition.start();
-  recognition.onstart = function () {
-    p = document.createElement('p');
-    // makeNewTextContent(); // 음성 인식 시작시마다 새로운 문단을 추가한다.
-  };
-
-  recognition.onend = async function () {
-    await addChatting();
-    recognition.start();
-  };
-
-  recognition.onresult = function (e) {
-    let texts = Array.from(e.results)
-      .map(results => results[0].transcript).join("");
-
-    texts.replace(/느낌표|강조|뿅/gi, '❗️');
-
-    p.textContent = texts;
-  };
+  STT(roomRef.id, 'calleeChat');
 }
 
 async function openUserMedia(e) {
@@ -436,6 +303,69 @@ function registerPeerConnectionListeners() {
   peerConnection.addEventListener('iceconnectionstatechange ', () => {
     console.log(
       `ICE connection state change: ${peerConnection.iceConnectionState}`);
+  });
+}
+
+async function STT(roomId, chatName) {
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  const db = getFirestore();
+  const chatRef = await doc(collection(db, 'chats'), `${roomId}`);
+  const chatCollection = collection(chatRef, chatName);
+
+  let recognition = new SpeechRecognition();
+  let finalText = null;
+  recognition.lang = 'ko-KR';
+
+  async function addChatting() {
+    if (finalText != null) {
+      await addDoc(chatCollection, {
+        text: finalText
+      });
+    }
+    finalText = null;
+  }
+
+  recognition.start();
+
+  recognition.onresult = function (e) {
+    let texts = Array.from(e.results).map(results => results[0].transcript).join("");
+    finalText = texts;
+  };
+
+  recognition.onend = async function () {
+    await addChatting();
+    recognition.start();
+  };
+
+  onSnapshot(collection(chatRef, 'callerChat'), snapshot => {
+    snapshot.docChanges().forEach(async change => {
+      if (change.type === 'added') {
+        let data = change.doc.data();
+        let callerTextp = document.createElement('p');
+
+        callerTextp.setAttribute("id", "callerText");
+        callerTextp.textContent = JSON.parse(JSON.stringify(data)).text;
+
+        console.log("caller text: ", callerTextp.textContent);
+        document.querySelector('.chatLog').appendChild(callerTextp);
+      }
+    });
+  });
+
+  onSnapshot(collection(chatRef, 'calleeChat'), snapshot => {
+    snapshot.docChanges().forEach(async change => {
+      if (change.type === 'added') {
+        let data = change.doc.data();
+        let calleeTextp = document.createElement('p');
+
+        calleeTextp.setAttribute("id", "calleeText");
+        calleeTextp.textContent = JSON.parse(JSON.stringify(data)).text;
+
+        console.log("callee text: ", calleeTextp.textContent);
+        document.querySelector('.chatLog').appendChild(calleeTextp);
+      }
+    });
   });
 }
 
