@@ -22,6 +22,11 @@ let remoteStream = null;
 let roomDialog = null;
 let roomId = null;
 
+faceapi.nets.tinyFaceDetector.loadFromUri('/models')
+faceapi.nets.faceLandmark68Net.loadFromUri('/models')
+faceapi.nets.faceRecognitionNet.loadFromUri('/models')
+faceapi.nets.faceExpressionNet.loadFromUri('/models')
+
 function init() {
   // 자동으로 카메라, 마이크 켜지게 구현, 버튼 클릭 대신 window.onload 사용
   // document.querySelector('#cameraBtn').addEventListener('click', openUserMedia);
@@ -245,6 +250,23 @@ async function openUserMedia(e) {
   document.querySelector('#createBtn').disabled = false;
   // document.querySelector('#hangupBtn').disabled = false;
 }
+
+const localVideo = document.getElementById('localVideo')
+
+localVideo.addEventListener('play', () => {
+  const canvas = faceapi.createCanvasFromMedia(localVideo)
+  document.body.append(canvas)
+  const displaySize = { width: localVideo.width, height: localVideo.height }
+  faceapi.matchDimensions(canvas, displaySize)
+  setInterval(async () => {
+    const detections = await faceapi.detectAllFaces(localVideo, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+    const resizedDetections = faceapi.resizeResults(detections, displaySize)
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+    faceapi.draw.drawDetections(canvas, resizedDetections)
+    faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
+    faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
+  }, 100)
+})
 
 async function hangUp(e) {
   const tracks = document.querySelector('#localVideo').srcObject.getTracks();
