@@ -1,107 +1,3 @@
-/* body {
-  background: #eceff1;
-  color: rgba(0, 0, 0, 0.87);
-  font-family: Roboto, Helvetica, Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-#message {
-  background: white;
-  max-width: 360px;
-  margin: 100px auto 16px;
-  padding: 32px 24px;
-  border-radius: 3px;
-}
-
-#message h2 {
-  color: #ffa100;
-  font-weight: bold;
-  font-size: 16px;
-  margin: 0 0 8px;
-}
-
-#message h1 {
-  font-size: 22px;
-  font-weight: 300;
-  color: rgba(0, 0, 0, 0.6);
-  margin: 0 0 16px;
-}
-
-#message p {
-  line-height: 140%;
-  margin: 16px 0 24px;
-  font-size: 14px;
-}
-
-#message a {
-  display: block;
-  text-align: center;
-  background: #039be5;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: white;
-  padding: 16px;
-  border-radius: 4px;
-}
-
-#message,
-#message a {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-}
-
-#load {
-  color: rgba(0, 0, 0, 0.4);
-  text-align: center;
-  font-size: 13px;
-}
-
-@media (max-width: 600px) {
-  body,
-  #message {
-    margin-top: 0;
-    background: white;
-    box-shadow: none;
-  }
-
-  body {
-    border-top: 16px solid #ffa100;
-  }
-}
-
-body {
-  margin: 1em;
-}
-
-button {
-  margin: 0.2em 0.1em;
-}
-
-div#videos {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-div#videos > video {
-  background: black;
-  width: 640px;
-  height: 100%;
-  display: block;
-  margin: 1em;
-} */
-
-/*
- * Globals
- */
-
-
-/* Custom default button */
-/*
- * Globals
- */
-
-
 /* Custom default button */
 .btn-secondary,
 .btn-secondary:hover,
@@ -111,9 +7,7 @@ div#videos > video {
 }
 
 
-/*
- * Base structure
- */
+/* Base structure */ 
 
 body {
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
@@ -126,9 +20,6 @@ body {
   text-align: center;
   justify-content: center;
 }
-/* .card{
-  max-width: 15em;
-} */
 
 
 
@@ -153,10 +44,9 @@ canvas {
   left:0;
   
   width: 100%;
-  /* height: 45vh; */
-  /* padding:1.5rem; */
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
+  
   /* Safari and Chrome */
   -moz-transform: rotateY(180deg);
   /* Firefox */
@@ -169,12 +59,6 @@ video{
   left:0;
   width: 100%;
   height: 100%;
-
-  
-  /* width: 100vw;
-  height: 56.25vw;
-  max-height: 100wh;
-  max-width: 177.78vh; */
   
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
@@ -189,10 +73,6 @@ video{
   justify-content: center;
   height : 10wh;
 }
-
-/* .container{
-  height: 100vh;
-} */
 
 #createBtn, #joinBtn , #hangupBtn, 
 #confirmJoinBtn , #cancelBtn, #roomnumBtn{
@@ -298,24 +178,6 @@ video{
   background-color: #D3D3D3;
   border : 2px solid #D3D3D3;
 }
-/* .chatLog > #calleeText{
-  
-  text-align: left;
-  position: relative;
-
-  border-radius: .75rem;
-  border:2px solid #d8d5ec;
-  
-} */
-/* .min-content>p{
-    position:absolute;
-    width: 100%;
-    height: 100%;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    font-size:small;
-} */
 
 .recommended-question{
   border-collapse:separate;
@@ -339,23 +201,12 @@ video{
   font-size:1.5rem;
   
  }
-/* .keyword-question-title > p{
-  position:absolute;
-  width: 100%;
-  height: 100%;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  font-size:small;
-  
-} */
 
 .rq-content{
   position:relative;
   height:24%;
 }
 .rq-content>p{
-  /* position:absolute; */
   width: 100%;
   height: 100%;
   left:50%;
@@ -377,25 +228,6 @@ video{
   font-size:1.5rem;
 }
 
-/* .random-question-title>p{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  font-size:large;
-  color: aliceblue;
-} */
-/* .conversation-atmosphere{
-  height:9%;
-  width:100%;
-  position:relative;
-  margin: 1rem 0 1rem;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  position:relative;
-  font-size:1.5rem;
-} */
 .conversation-atmosphere-title{
   height:6%;
   width:100%;
