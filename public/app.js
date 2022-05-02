@@ -22,10 +22,10 @@ let remoteStream = null;
 let roomDialog = null;
 let roomId = null;
 
-// faceapi.nets.tinyFaceDetector.loadFromUri('/models')
-// faceapi.nets.faceLandmark68Net.loadFromUri('/models')
-// faceapi.nets.faceRecognitionNet.loadFromUri('/models')
-// faceapi.nets.faceExpressionNet.loadFromUri('/models')
+faceapi.nets.tinyFaceDetector.loadFromUri('/models')
+faceapi.nets.faceLandmark68Net.loadFromUri('/models')
+faceapi.nets.faceRecognitionNet.loadFromUri('/models')
+faceapi.nets.faceExpressionNet.loadFromUri('/models')
 
 function init() {
   // 자동으로 카메라, 마이크 켜지게 구현, 버튼 클릭 대신 window.onload 사용
@@ -251,21 +251,28 @@ async function openUserMedia(e) {
   // document.querySelector('#hangupBtn').disabled = false;
 }
 
-// const localVideo = document.getElementById('localVideo')
+// const remoteVideo = document.getElementById('remoteVideo');
 
-// localVideo.addEventListener('play', () => {
-//   const canvas = faceapi.createCanvasFromMedia(localVideo)
+// remoteVideo.addEventListener('playing', () => {
+//   function getKeyByValue(object, value) {
+//     return Object.keys(object).find(key => object[key] === value);
+//   }
+//   const canvas = faceapi.createCanvasFromMedia(video)
 //   document.body.append(canvas)
-//   const displaySize = { width: localVideo.width, height: localVideo.height }
+//   const displaySize = { width: video.width, height: video.height }
 //   faceapi.matchDimensions(canvas, displaySize)
 //   setInterval(async () => {
-//     const detections = await faceapi.detectAllFaces(localVideo, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+//     const detections = await faceapi.detectAllFaces(remoteVideo, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
 //     const resizedDetections = faceapi.resizeResults(detections, displaySize)
 //     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
 //     faceapi.draw.drawDetections(canvas, resizedDetections)
 //     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
 //     faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
-//   }, 100)
+
+//     var emotions = Object.keys(detections[0].expressions).map(function (key) { return detections[0].expressions[key]; });
+//     var max = Math.max.apply(null, emotions);
+//     console.log(getKeyByValue(detections[0].expressions,max))
+//   }, 3000);
 // })
 
 async function hangUp(e) {
@@ -356,6 +363,17 @@ async function STT(roomId, chatName) {
   };
 
   recognition.onend = async function () {
+
+    //화상 감정 분석 부분 <지우지 말아주세요>
+    // function getKeyByValue(object, value) {
+    //   return Object.keys(object).find(key => object[key] === value);
+    // }
+
+    // const detections = await faceapi.detectAllFaces(remoteVideo, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+    // var emotions = Object.keys(detections[0].expressions).map(function (key) { return detections[0].expressions[key]; });
+    // var max = Math.max.apply(null, emotions);
+    // console.log(getKeyByValue(detections[0].expressions,max))
+
     await addChatting();
     recognition.start();
   };
