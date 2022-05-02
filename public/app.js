@@ -363,14 +363,19 @@ async function STT(roomId, chatName) {
   onSnapshot(collection(chatRef, 'callerChat'), snapshot => {
     snapshot.docChanges().forEach(async change => {
       if (change.type === 'added') {
+        let callerBox = document.createElement('div');
+        callerBox.setAttribute("class", "callerBox");
+
         let data = change.doc.data();
-        let callerTextp = document.createElement('p');
+        let callerTextp = document.createElement('div');
 
         callerTextp.setAttribute("id", "callerText");
         callerTextp.textContent = JSON.parse(JSON.stringify(data)).text;
 
         console.log("caller text: ", callerTextp.textContent);
-        document.querySelector('.chatLog').appendChild(callerTextp);
+        
+        callerBox.append(callerTextp);
+        document.querySelector('.chatLog').append(callerBox);
       }
     });
   });
@@ -378,14 +383,20 @@ async function STT(roomId, chatName) {
   onSnapshot(collection(chatRef, 'calleeChat'), snapshot => {
     snapshot.docChanges().forEach(async change => {
       if (change.type === 'added') {
+        let calleeBox = document.createElement('div');
+        calleeBox.setAttribute("class", "calleeBox");
+
+
         let data = change.doc.data();
-        let calleeTextp = document.createElement('p');
+        let calleeTextp = document.createElement('div');
 
         calleeTextp.setAttribute("id", "calleeText");
         calleeTextp.textContent = JSON.parse(JSON.stringify(data)).text;
 
         console.log("callee text: ", calleeTextp.textContent);
-        document.querySelector('.chatLog').appendChild(calleeTextp);
+
+        calleeBox.append(calleeTextp);
+        document.querySelector('.chatLog').append(calleeBox);
       }
     });
   });

@@ -151,6 +151,7 @@ canvas {
   /* border-radius: 7px; */
   top:0;
   left:0;
+  
   width: 100%;
   /* height: 45vh; */
   /* padding:1.5rem; */
@@ -168,6 +169,13 @@ video{
   left:0;
   width: 100%;
   height: 100%;
+
+  
+  /* width: 100vw;
+  height: 56.25vw;
+  max-height: 100wh;
+  max-width: 177.78vh; */
+  
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
@@ -182,9 +190,9 @@ video{
   height : 10wh;
 }
 
-.container{
+/* .container{
   height: 100vh;
-}
+} */
 
 #createBtn, #joinBtn , #hangupBtn, 
 #confirmJoinBtn , #cancelBtn, #roomnumBtn{
@@ -214,7 +222,7 @@ video{
   border-radius: 5px;
   border: 1px solid rgb(216, 216, 216);
     margin-top :.5rem;
-    padding: 1rem;
+    padding: .5rem;
 }
 .opponent-cam{
   border:3px solid rgb(104, 162, 236);
@@ -247,12 +255,59 @@ video{
 }
 
 
+
 .min-content{
     position:relative;
     height:35%;
-    margin: 1rem;
+    /* margin: 1rem; */
 }
-.min-content>p{
+.chatLog > .callerBox , 
+.chatLog > .calleeBox {
+  margin : 4px;
+  
+}
+
+.callerBox{
+  text-align: right;
+  padding-left: 20%;
+  position: relative;
+}
+
+.calleeBox{
+  text-align: left;
+  padding-right: 20%;
+  position: relative;
+}
+
+
+.callerBox > #callerText ,
+.calleeBox > #calleeText {
+
+  padding : 5px;
+  display: inline-block; 
+  border-radius: 10px;
+}
+
+#callerText{
+  background-color: rgb(104, 162, 236);
+  color: white;
+  border : 2px solid rgb(104, 162, 236);
+}
+
+#calleeText{
+  background-color: #D3D3D3;
+  border : 2px solid #D3D3D3;
+}
+/* .chatLog > #calleeText{
+  
+  text-align: left;
+  position: relative;
+
+  border-radius: .75rem;
+  border:2px solid #d8d5ec;
+  
+} */
+/* .min-content>p{
     position:absolute;
     width: 100%;
     height: 100%;
@@ -260,7 +315,7 @@ video{
     top:50%;
     transform:translate(-50%,-50%);
     font-size:small;
-}
+} */
 
 .recommended-question{
   border-collapse:separate;
@@ -369,3 +424,4 @@ video{
   
   
 }
+
