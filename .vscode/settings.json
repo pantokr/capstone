@@ -1,0 +1,7 @@
+{
+    "html.format.endWithNewline": true,
+    "html.format.indentInnerHtml": true,
+    "html.format.indentHandlebars": true,
+    "html.format.wrapAttributesIndentSize": 1,
+    "html.format.maxPreserveNewLines": 1
+}
