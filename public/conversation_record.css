@@ -1,0 +1,81 @@
+
+/* .contianer{
+  max-width: 80em;
+  padding-left: 8%;
+  padding-right: 8%;
+} */
+/* .note-container{
+  max-width: 80em;
+  text-align: left;
+  justify-content: center;
+} */
+
+#title{
+  border-bottom: 1px solid rgb(216, 216, 216);
+  margin: 1px 0 2px 0 px;
+  width:100%;
+  height: 2.5rem;
+  padding: .3rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  position:relative;
+  font-size:1.2rem;
+
+}
+.title_area , .sub_area {
+  justify-content: left;
+  margin: .5rem;
+  text-align: left;
+  box-sizing: content-box;
+  vertical-align: middle;
+}
+.title_area{
+  font-size: 2rem; 
+  
+}
+.sub_area{
+  width:40%;
+  font-size: 1rem; 
+}
+.sub_area > span{
+  float: left;
+  margin-right: .8em;
+}
+
+.search{
+  width: 10rem;
+  box-sizing:  content-box;
+  text-align: center;
+  justify-content: center;
+  margin: .5rem;
+
+}
+
+.node_view{
+  text-align: right;
+  /* padding-bottom: 1rem;
+  border-bottom: 1px solid #efefef; */
+}
+
+.conversation_area{
+  padding: 1rem;
+}
+
+#min, #rq{
+
+  font-family: 'Jua', sans-serif;
+  border-radius: 5px;
+  border: 1px solid rgb(216, 216, 216);
+  margin-top :.5rem;
+  padding: 0 .5rem .5rem .5rem .5rem;
+  margin: 1rem;
+}
+
+
+.min-content{
+  position:relative;
+  padding: .3rem;
+  overflow-y: auto;
+  
+}
