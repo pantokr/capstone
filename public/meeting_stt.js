@@ -145,7 +145,9 @@ async function startSTT(roomId, isCaller) {
 
     async function addChatting(finalText) {
         if (finalText != null) {
-            await setDoc(speechRef, {
+            await setDoc(doc(speechCol, getTimestamp())
+                // speechRef
+                , {
                 speecher: name,
                 isCaller: (
                     isCaller == true

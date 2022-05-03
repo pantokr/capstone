@@ -44,12 +44,9 @@ canvas {
   left:0;
   
   width: 100%;
-<<<<<<< HEAD
   
   /* height: 45vh; */
   /* padding:1.5rem; */
-=======
->>>>>>> parent of f3b2ab9 (0502_Jeong_scrollAdd)
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
   
