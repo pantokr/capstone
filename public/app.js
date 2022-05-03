@@ -394,10 +394,6 @@ async function STT(roomId, chatName) {
         
         callerBox.append(callerTextp);
         document.querySelector('.chatLog').append(callerBox);
-
-        let minbox = document.querySelector('.min-content');
-        minbox.scrollTop = minbox.scrollHeight;
-        
       }
     });
   });
@@ -419,9 +415,6 @@ async function STT(roomId, chatName) {
 
         calleeBox.append(calleeTextp);
         document.querySelector('.chatLog').append(calleeBox);
-
-        let minbox = document.querySelector('.min-content');
-        minbox.scrollTop = minbox.scrollHeight;
       }
     });
   });
