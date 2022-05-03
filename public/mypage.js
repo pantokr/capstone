@@ -1,5 +1,6 @@
-import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import {getDatabase, ref, get, set, child} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import { getDatabase, ref, get, set, child } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 import './auth_google_signout.js'
 
@@ -28,129 +29,17 @@ floating_name.addEventListener("invalid", () => {
         .add("was-validated")
 })
 
-
+settleBirthForm();
 // 여기부터 99줄까지 날짜박스 코드
-let today = new Date();
-
-//year
-var year = today.getFullYear();
-for (var y = year - 10; y > year - 100; y--) {
-    var newOpt = document.createElement('option');
-    newOpt.innerText = y.toString();
-    newOpt.setAttribute('value', y.toString());
-
-    floating_birth_year.appendChild(newOpt);
-}
-
-// month
-for (var m = 1; m<= 12; m++) {
-    var newOpt = document.createElement('option');
-    newOpt.innerText = m.toString();
-    newOpt.setAttribute('value', m.toString());
-
-    floating_birth_month.appendChild(newOpt);
-}
-
-var by = floating_birth_year.value;
-var bm = floating_birth_month.value;
-var month_31 = [1,3,5,7,8,10,12];
-
-//date
-if (month_31.indexOf(Number(bm)) > -1) {
-    for (var d = 1; d <= 31; d++) {
-
-        var newOpt = document.createElement('option');
-        newOpt.innerText = d;
-        newOpt.setAttribute('value', d);
-
-        floating_birth_date.appendChild(newOpt);
-    }
-} else {
-    if (bm == 2) {
-        if (by % 4 == 0 && by % 100 != 0 || by % 400 == 0) {
-            for (var d = 1; d <= 29; d++) {
-
-                var newOpt = document.createElement('option');
-                newOpt.innerText = d;
-                newOpt.setAttribute('value', d);
-
-                floating_birth_date.appendChild(newOpt);
-            }
-        } else {
-            for (var d = 1; d <= 28; d++) {
-
-                var newOpt = document.createElement('option');
-                newOpt.innerText = d;
-                newOpt.setAttribute('value', d);
-
-                floating_birth_date.appendChild(newOpt);
-            }
-        }
-    } else {
-        for (var d = 1; d <= 30; d++) {
-
-            var newOpt = document.createElement('option');
-            newOpt.innerText = d;
-            newOpt.setAttribute('value', d);
-
-            floating_birth_date.appendChild(newOpt);
-        }
-    }
-}
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
         var uid = user.uid;
 
-        const db = getDatabase();
-        const dbRef = ref(db);
-        
-        var val = null;
-
-        get(child(dbRef, `users/${uid}`))
-            .then((snapshot) => {
-                if (snapshot.exists()) {
-                    val = snapshot.val();
-
-                    const profile = val.profile_picture;
-                    const name = val.username;
-                    const email = val.email;
-                    const birth = val.birth;
-                    const birth_y = val.birth.birth_year;
-                    const birth_m = val.birth.birth_month;
-                    const birth_d = val.birth.birth_date;
-                    const gender = val.gender;
-
-                    // console.log(profile);
-                    // console.log(email);
-                    // console.log(name);
-                    // console.log(birth);
-                    // console.log(gender);
-                    // console.log(birth_y);
-                    // console.log(birth_m);
-                    // console.log(birth_d);
-
-                    profile_img.setAttribute('src', profile);
-
-                    uid_span.innerText = uid;
-                    email_span.innerText = email;
-                    name_span.innerText = name;
-                    age_span.innerText = `${birth_y} . ${birth_m} . ${birth_d}`;
-                    gender_span.innerText = gender === "male" ? "남자" : "여자";
-
-                } else {
-                    console.log('Not in database');
-                }
-
-                
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        getUserData(uid);
 
     } else {
-        console.log("No logged in user.");
-        // User is signed out ...
+        console.log("No User.");
     }
 });
 
@@ -180,7 +69,89 @@ document
 
 updateBtn.addEventListener("click", handleUpdateonClick);
 
-// 달이 바뀌면 날짜가 바뀌는 함수
+// 달이 바뀌면 날짜가 바뀌는 함수 달이 바뀌면 그 달의 날짜도 바뀜 (31일 or 30일 or 29/28일 ...)
+if (floating_birth_date) {
+    floating_birth_month.addEventListener('change', reloadDate);
+}
+
+function settleBirthForm() {
+    let today = new Date();
+
+    //year
+    var year = today.getFullYear();
+    for (var y = year - 10; y > year - 100; y--) {
+        var newOpt = document.createElement('option');
+        newOpt.innerText = y.toString();
+        newOpt.setAttribute('value', y.toString());
+
+        floating_birth_year.appendChild(newOpt);
+    }
+
+    // month
+    for (var m = 1; m <= 12; m++) {
+        var newOpt = document.createElement('option');
+        newOpt.innerText = m.toString();
+        newOpt.setAttribute('value', m.toString());
+
+        floating_birth_month.appendChild(newOpt);
+    }
+
+    var by = floating_birth_year.value;
+    var bm = floating_birth_month.value;
+    var month_31 = [
+        1,
+        3,
+        5,
+        7,
+        8,
+        10,
+        12
+    ];
+
+    //date
+    if (month_31.indexOf(Number(bm)) > -1) {
+        for (var d = 1; d <= 31; d++) {
+
+            var newOpt = document.createElement('option');
+            newOpt.innerText = d;
+            newOpt.setAttribute('value', d);
+
+            floating_birth_date.appendChild(newOpt);
+        }
+    } else {
+        if (bm == 2) {
+            if (by % 4 == 0 && by % 100 != 0 || by % 400 == 0) {
+                for (var d = 1; d <= 29; d++) {
+
+                    var newOpt = document.createElement('option');
+                    newOpt.innerText = d;
+                    newOpt.setAttribute('value', d);
+
+                    floating_birth_date.appendChild(newOpt);
+                }
+            } else {
+                for (var d = 1; d <= 28; d++) {
+
+                    var newOpt = document.createElement('option');
+                    newOpt.innerText = d;
+                    newOpt.setAttribute('value', d);
+
+                    floating_birth_date.appendChild(newOpt);
+                }
+            }
+        } else {
+            for (var d = 1; d <= 30; d++) {
+
+                var newOpt = document.createElement('option');
+                newOpt.innerText = d;
+                newOpt.setAttribute('value', d);
+
+                floating_birth_date.appendChild(newOpt);
+            }
+        }
+    }
+}
+
 function reloadDate() {
 
     while (floating_birth_date.hasChildNodes()) {
@@ -189,6 +160,15 @@ function reloadDate() {
 
     var by = floating_birth_year.value;
     var bm = floating_birth_month.value;
+    var month_31 = [
+        1,
+        3,
+        5,
+        7,
+        8,
+        10,
+        12
+    ];
 
     if (month_31.indexOf(Number(bm)) > -1) {
         for (var d = 1; d <= 31; d++) {
@@ -233,28 +213,59 @@ function reloadDate() {
     }
 }
 
-// 달이 바뀌면 그 달의 날짜도 바뀜 (31일 or 30일 or 29/28일 ...)
-if (floating_birth_date) {
-    floating_birth_month.addEventListener('change', reloadDate);
-}
+function handleUpdateonClick() {
 
+    document
+        .querySelector(".modal")
+        .classList
+        .add("hidden");
 
-function handleUpdateonClick(){
-    
-    document.querySelector(".modal").classList.add("hidden");
-
-    
     name_span.innerText = floating_name.value;
     age_span.innerText = `${floating_birth_year.value} . ${floating_birth_month.value} . ${floating_birth_date.value}`;
-    gender_span.innerText = floating_gender.value === "male" ? "남자" : "여자";
+    gender_span.innerText = floating_gender.value === "male"
+        ? "남자"
+        : "여자";
 
-    writeUserData();
-    
+    setUserData();
+
 }
 
-function writeUserData() {
+function getUserData(uid) {
+    const db = getFirestore();
+    getDoc(doc(db, 'users', uid))
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                var val = snapshot.data();
 
-    const db = getDatabase();
+                const profile = val.profile_picture;
+                const name = val.username;
+                const email = val.email;
+                const birth = val.birth;
+                const birth_y = val.birth.birth_year;
+                const birth_m = val.birth.birth_month;
+                const birth_d = val.birth.birth_date;
+                const gender = val.gender;
+
+                profile_img.setAttribute('src', profile);
+
+                uid_span.innerText = uid;
+                email_span.innerText = email;
+                name_span.innerText = name;
+                age_span.innerText = `${birth_y} . ${birth_m} . ${birth_d}`;
+                gender_span.innerText = gender === "male"
+                    ? "남자"
+                    : "여자";
+
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}
+
+function setUserData() {
+
+    const db = getFirestore();
     const user = auth.currentUser;
 
     const uid = user.uid;
@@ -267,7 +278,7 @@ function writeUserData() {
     const birth_date = floating_birth_date.value;
     const gender = floating_gender.value;
 
-    set(ref(db, 'users/' + uid), {
+    setDoc(doc(db, 'users', uid), {
         username: name,
         email: email,
         profile_picture: profile,
@@ -278,11 +289,10 @@ function writeUserData() {
         },
         gender: gender
     })
-        .then((success) => {
-            console.log('Changed User Data.');
+        .then(() => {
+            console.log('Modified.');
         })
         .catch((error) => {
             console.error(error);
         });
 }
-

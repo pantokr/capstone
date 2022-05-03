@@ -1,5 +1,5 @@
-import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import {getDatabase, ref, set} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 import './firebase_initialization.js';
 
 const auth = getAuth();
@@ -33,7 +33,7 @@ for (var y = year - 10; y > year - 100; y--) {
 }
 
 // month
-for (var m = 1; m<= 12; m++) {
+for (var m = 1; m <= 12; m++) {
     var newOpt = document.createElement('option');
     newOpt.innerText = m.toString();
     newOpt.setAttribute('value', m.toString());
@@ -44,7 +44,15 @@ for (var m = 1; m<= 12; m++) {
 var by = floating_birth_year.value;
 var bm = floating_birth_month.value;
 
-var month_31 = [1,3,5,7,8,10,12];
+var month_31 = [
+    1,
+    3,
+    5,
+    7,
+    8,
+    10,
+    12
+];
 
 if (month_31.indexOf(Number(bm)) > -1) {
     for (var d = 1; d <= 31; d++) {
@@ -91,23 +99,20 @@ if (month_31.indexOf(Number(bm)) > -1) {
 onAuthStateChanged(auth, (user) => {
     if (user) {
 
-        const uid = user.uid;
         const name = user.displayName;
         const email = user.email;
-        const profile = user.photoURL;
 
         floating_email.setAttribute('value', email);
         floating_name.setAttribute('value', name);
 
     } else {
-        console.log("No logged in user.");
-        // User is signed out ...
+        console.log("No User.");
     }
 });
 
 function writeUserData() {
 
-    const db = getDatabase();
+    const db = getFirestore();
     const user = auth.currentUser;
 
     const uid = user.uid;
@@ -120,7 +125,7 @@ function writeUserData() {
     const birth_date = floating_birth_date.value;
     const gender = floating_gender.value;
 
-    set(ref(db, 'users/' + uid), {
+    setDoc(doc(db, "users", uid), {
         username: name,
         email: email,
         profile_picture: profile,
@@ -131,7 +136,7 @@ function writeUserData() {
         },
         gender: gender
     })
-        .then((success) => {
+        .then(() => {
             window.location.href = "./cover.html";
         })
         .catch((error) => {
