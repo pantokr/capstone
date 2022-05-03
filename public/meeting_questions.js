@@ -1,5 +1,4 @@
 import "./firebase_initialization.js";
-import { startSTT } from "./meeting_stt.js"
 import { getFirestore, collection, doc, getDoc, setDoc, addDoc, updateDoc, onSnapshot, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
@@ -23,10 +22,10 @@ let remoteStream = null;
 let roomDialog = null;
 let roomId = null;
 
-// faceapi.nets.tinyFaceDetector.loadFromUri('/models')
-// faceapi.nets.faceLandmark68Net.loadFromUri('/models')
-// faceapi.nets.faceRecognitionNet.loadFromUri('/models')
-// faceapi.nets.faceExpressionNet.loadFromUri('/models')
+faceapi.nets.tinyFaceDetector.loadFromUri('/models')
+faceapi.nets.faceLandmark68Net.loadFromUri('/models')
+faceapi.nets.faceRecognitionNet.loadFromUri('/models')
+faceapi.nets.faceExpressionNet.loadFromUri('/models')
 
 function init() {
   // 자동으로 카메라, 마이크 켜지게 구현, 버튼 클릭 대신 window.onload 사용
@@ -130,7 +129,7 @@ async function createRoom() {
 
 
   //-------------------------STT-------------------------------------
-  startSTT(roomRef.id, true);
+  STT(roomRef.id, 'callerChat');
 }
 
 function joinRoom() {
@@ -232,7 +231,7 @@ async function joinRoomById(roomId) {
 
 
   // joinRoom STT------------------------------------------------------------------------
-  startSTT(roomRef.id, false);
+  STT(roomRef.id, 'calleeChat');
 }
 
 async function openUserMedia(e) {
@@ -333,6 +332,98 @@ function registerPeerConnectionListeners() {
   peerConnection.addEventListener('iceconnectionstatechange ', () => {
     console.log(
       `ICE connection state change: ${peerConnection.iceConnectionState}`);
+  });
+}
+
+async function STT(roomId, chatName) {
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  const db = getFirestore();
+  const chatRef = await doc(collection(db, 'chats'), `${roomId}`);
+  const chatCollection = collection(chatRef, chatName);
+
+  let recognition = new SpeechRecognition();
+  let finalText = null;
+  recognition.lang = 'ko-KR';
+
+  async function addChatting() {
+    if (finalText != null) {
+      await addDoc(chatCollection, {
+        text: finalText
+      });
+    }
+    finalText = null;
+  }
+
+  recognition.start();
+
+  recognition.onresult = function (e) {
+    let texts = Array.from(e.results).map(results => results[0].transcript).join("");
+    finalText = texts;
+  };
+
+  recognition.onend = async function () {
+
+    //화상 감정 분석 부분 <지우지 말아주세요>
+    // function getKeyByValue(object, value) {
+    //   return Object.keys(object).find(key => object[key] === value);
+    // }
+
+    // const detections = await faceapi.detectAllFaces(remoteVideo, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+    // var emotions = Object.keys(detections[0].expressions).map(function (key) { return detections[0].expressions[key]; });
+    // var max = Math.max.apply(null, emotions);
+    // console.log(getKeyByValue(detections[0].expressions,max))
+
+    await addChatting();
+    recognition.start();
+  };
+
+  onSnapshot(collection(chatRef, 'callerChat'), snapshot => {
+    snapshot.docChanges().forEach(async change => {
+      if (change.type === 'added') {
+        let callerBox = document.createElement('div');
+        callerBox.setAttribute("class", "callerBox");
+
+        let data = change.doc.data();
+        let callerTextp = document.createElement('div');
+
+        callerTextp.setAttribute("id", "callerText");
+        callerTextp.textContent = JSON.parse(JSON.stringify(data)).text;
+
+        console.log("caller text: ", callerTextp.textContent);
+        
+        callerBox.append(callerTextp);
+        document.querySelector('.chatLog').append(callerBox);
+
+        let minbox = document.querySelector('.min-content');
+        minbox.scrollTop = minbox.scrollHeight;
+        
+      }
+    });
+  });
+
+  onSnapshot(collection(chatRef, 'calleeChat'), snapshot => {
+    snapshot.docChanges().forEach(async change => {
+      if (change.type === 'added') {
+        let calleeBox = document.createElement('div');
+        calleeBox.setAttribute("class", "calleeBox");
+
+
+        let data = change.doc.data();
+        let calleeTextp = document.createElement('div');
+
+        calleeTextp.setAttribute("id", "calleeText");
+        calleeTextp.textContent = JSON.parse(JSON.stringify(data)).text;
+
+        console.log("callee text: ", calleeTextp.textContent);
+
+        calleeBox.append(calleeTextp);
+        document.querySelector('.chatLog').append(calleeBox);
+
+        let minbox = document.querySelector('.min-content');
+        minbox.scrollTop = minbox.scrollHeight;
+      }
+    });
   });
 }
 

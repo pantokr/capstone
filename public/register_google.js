@@ -126,7 +126,7 @@ function writeUserData() {
     const gender = floating_gender.value;
 
     setDoc(doc(db, "users", uid), {
-        username: name,
+        name: name,
         email: email,
         profile_picture: profile,
         birth: {

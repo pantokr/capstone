@@ -238,7 +238,7 @@ function getUserData(uid) {
                 var val = snapshot.data();
 
                 const profile = val.profile_picture;
-                const name = val.username;
+                const name = val.name;
                 const email = val.email;
                 const birth = val.birth;
                 const birth_y = val.birth.birth_year;
@@ -279,7 +279,7 @@ function setUserData() {
     const gender = floating_gender.value;
 
     setDoc(doc(db, 'users', uid), {
-        username: name,
+        name: name,
         email: email,
         profile_picture: profile,
         birth: {
