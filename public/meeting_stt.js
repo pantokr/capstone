@@ -4,9 +4,8 @@ import {
     getFirestore,
     collection,
     doc,
-    getDoc,
-    updateDoc,
     setDoc,
+    updateDoc,
     onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
@@ -15,13 +14,12 @@ async function startSTT(roomId, isCaller) {
 
     const auth = getAuth();
     const db = getFirestore();
-    const chatCol = collection(db, 'chats');
+    const chatCol = collection(db, "chats");
     const chatRef = doc(chatCol, roomId);
 
-    var name = null;
+    let name = null;
     onAuthStateChanged(auth, (user) => {
         if (user) {
-
             name = user.displayName;
             if (isCaller == true) {
                 setDoc(chatRef, {caller: name});
@@ -32,64 +30,53 @@ async function startSTT(roomId, isCaller) {
                 });
             }
         } else {
-
             console.log("No User.");
         }
     });
 
-    const speechCol = collection(doc(chatCol, roomId), 'speechs');
-    const speechRef = doc(speechCol, getTimestamp());
+    const speechCol = collection(chatRef, 'speeches');
 
     recognizeChat();
 
-    onSnapshot(speechCol, snapshot => {
+    onSnapshot(speechCol, (snapshot) => {
         snapshot
             .docChanges()
-            .forEach(async change => {
-                if (change.type === 'added') {
+            .forEach(async (change) => {
+                if (change.type === "added") {
                     let data = change
                         .doc
                         .data();
-                    let parsed_data = JSON.parse(JSON.stringify(data));
-
-                    let speecher = parsed_data.speecher;
+                    let parsed_data = JSON.parse(JSON.stringify(data))
                     let isCaller = parsed_data.isCaller;
+                    let speecher = parsed_data.speecher;
                     let text = parsed_data.text;
 
                     if (isCaller == "Caller") {
-                        let callerBox = document.createElement('div');
+                        let callerBox = document.createElement("div");
                         callerBox.setAttribute("class", "callerBox");
 
-                        let callerTextp = document.createElement('div');
+                        let callerTextp = document.createElement("div");
 
                         callerTextp.setAttribute("id", "callerText");
-                        callerTextp.textContent = JSON
-                            .parse(JSON.stringify(data))
-                            .text;
+                        callerTextp.textContent = text;
 
-                        console.log("caller text : ", callerTextp.textContent);
+                        console.log("caller text: ", callerTextp.textContent);
 
                         callerBox.append(callerTextp);
                         document
-                            .querySelector('.chatLog')
+                            .querySelector(".chatLog")
                             .append(callerBox);
 
-                        let minbox = document.querySelector('.min-content');
+                        let minbox = document.querySelector(".min-content");
                         minbox.scrollTop = minbox.scrollHeight;
-
                     } else {
                         let calleeBox = document.createElement('div');
                         calleeBox.setAttribute("class", "calleeBox");
 
                         let calleeTextp = document.createElement('div');
-
                         calleeTextp.setAttribute("id", "calleeText");
-                        calleeTextp.textContent = JSON
-                            .parse(JSON.stringify(data))
-                            .text;
-
+                        calleeTextp.textContent = text;
                         console.log("callee text : ", calleeTextp.textContent);
-
                         calleeBox.append(calleeTextp);
                         document
                             .querySelector('.chatLog')
@@ -102,35 +89,24 @@ async function startSTT(roomId, isCaller) {
             });
     });
 
-    // onSnapshot(collection(chatRef, 'calleeChat'), snapshot => {   snapshot
-    // .docChanges()     .forEach(async change => {       if (change.type ===
-    // 'added') {         let calleeBox = document.createElement('div');
-    // calleeBox.setAttribute("class", "calleeBox");         let data = change .doc
-    // .data();         let calleeTextp = document.createElement('div');
-    // calleeTextp.setAttribute("id", "calleeText");         calleeTextp.textContent
-    // = JSON .parse(JSON.stringify(data))           .text; console.log("callee
-    // text: ", calleeTextp.textContent); calleeBox.append(calleeTextp); document
-    // .querySelector('.chatLog') .append(calleeBox); let minbox =
-    // document.querySelector('.min-content'); minbox.scrollTop
-    // = minbox.scrollHeight;       }     }); });
     function recognizeChat() {
         let recognition = new SpeechRecognition();
         let finalText = null;
-        recognition.lang = 'ko-KR';
+        recognition.lang = "ko-KR";
 
         recognition.start();
 
         recognition.onresult = function (e) {
             let texts = Array
                 .from(e.results)
-                .map(results => results[0].transcript)
+                .map((results) => results[0].transcript)
                 .join("");
             finalText = texts;
+            console.log("result");
         };
 
         recognition.onend = async function () {
-
-            // 화상 감정 분석 부분 <지우지 말아주세요> function getKeyByValue(object, value) {   return
+            // 화상 감정 분석 부분<지우지 말아주세요> function getKeyByValue(object, value) {   return
             // Object.keys(object).find(key => object[key] === value); } const detections =
             // await faceapi.detectAllFaces(remoteVideo, new
             // faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
@@ -138,27 +114,22 @@ async function startSTT(roomId, isCaller) {
             // return detections[0].expressions[key]; }); var max = Math.max.apply(null,
             // emotions); console.log(getKeyByValue(detections[0].expressions,max))
 
-            await addChatting(finalText);
+            await addChatting();
             recognition.start();
         };
-    }
-
-    async function addChatting(finalText) {
-        if (finalText != null) {
-            await setDoc(doc(speechCol, getTimestamp())
-                // speechRef
-                , {
-                speecher: name,
-                isCaller: (
-                    isCaller == true
+        async function addChatting() {
+            if (finalText != null) {
+                setDoc(doc(speechCol, getTimestamp()), {
+                    speecher: name,
+                    isCaller: isCaller == true
                         ? "Caller"
-                        : "Callee"
-                ),
-                text: finalText
-            });
-            updateDoc(chatRef, {end: getTimestamp()});
+                        : "Callee",
+                    text: finalText
+                });
+                finalText = null;
+                updateDoc(chatRef, {end: getTimestamp()});
+            }
         }
-        finalText = null;
     }
 
     function getTimestamp() {
@@ -200,12 +171,10 @@ async function startSTT(roomId, isCaller) {
                 : "0"
         ) + seconds.toString();
 
-        //timestamp += (isCaller == true ? "Caller" : "Callee");
-
-        return timestamp
+        return timestamp;
     }
 }
 
 export {
     startSTT
-}
+};
