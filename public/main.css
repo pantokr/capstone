@@ -26,27 +26,37 @@ body {
 
 
 /* meeting_start 속성 */
-canvas {
-  
+.my-cam {
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+.my-cam > video {
   top:0;
   left:0;
-  padding:1.5rem;
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-  -moz-transform: rotateY(180deg);
-  object-fit: cover;
+  display: block;
+  height: 100%;
+  width: 100%;
   position: absolute;
+  
+}
+.opponent-cam {
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
 }
 .opponent-cam > video {
-
   /* border-radius: 7px; */
   top:0;
   left:0;
-  
+  display: block;
+  height: 100%;
   width: 100%;
+  position: absolute;
   
-  /* height: 45vh; */
-  /* padding:1.5rem; */
+  /* width: 100%; */
+  
+  
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
   
