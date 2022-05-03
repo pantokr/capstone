@@ -132,20 +132,34 @@ async function createRoom() {
   //-------------------------STT-------------------------------------
   startSTT(roomRef.id, true);
 }
-
-function joinRoom() {
-  // createRoom, joinRoom 발생 시 disabled 속성이 아닌 display none 속성으로 아예 버튼이 안보이게 구현
-  // document.querySelector('#createBtn').disabled = true;
-  // document.querySelector('#joinBtn').disabled = true;
+function btndisappear() {
   document.querySelector('#createBtn').style.display = "none";
   document.querySelector('#joinBtn').style.display = "none";
 
   document.querySelector('#roomNum').style.display = "block";
+}
+function joinRoom() {
+  // createRoom, joinRoom 발생 시 disabled 속성이 아닌 display none 속성으로 아예 버튼이 안보이게 구현
+  // document.querySelector('#createBtn').disabled = true;
+  // document.querySelector('#joinBtn').disabled = true;
+  console.log('joinroom btn has cliked!');
+  
+  // document.querySelector('#createBtn').style.display = "none";
+  // document.querySelector('#joinBtn').style.display = "none";
 
+  // document.querySelector('#roomNum').style.display = "block";
+
+  
+  document.querySelector('#confirmJoinBtn').addEventListener('click', btndisappear);
+  
   document.querySelector('#confirmJoinBtn').
     addEventListener('click', async () => {
+
+      
+      
       roomId = document.querySelector('#room-id').value;
       console.log('Join room: ', roomId);
+      
       document.querySelector(
         '#currentRoom').innerText =
         // `Current room is ${roomId} - You are the callee!`;
