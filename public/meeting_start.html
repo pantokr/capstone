@@ -117,9 +117,10 @@
 
                 <div class="col-md-8">
                     <!-- 상대방카메라 -->
-                    <div class="opponent-cam">
+                    <div class="opponent-cam" >
                         <!-- <canvas id="canvas"></canvas> -->
-                        <video id="remoteVideo" autoplay="autoplay" playsinline="playsinline"></video>
+                        <video class="ratio ratio-9x16" id="remoteVideo" autoplay="autoplay" playsinline="playsinline"></video>
+                        <div id="emotion" style="position: absolute">감정 분석</div>
                     </div>
                     <!-- 키워드 -->
                     <div class="recommended-question" id="rq">
@@ -135,6 +136,7 @@
                     <!-- 나의 카메라 -->
                     <div class="my-cam">
                         <video
+                            class="ratio ratio-9x16"
                             id="localVideo"
                             autoplay="autoplay"
                             muted="muted"

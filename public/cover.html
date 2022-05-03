@@ -41,7 +41,6 @@
                      height="48">
                     <nav class="nav justify-content-center float-md-end">
                         <a class="nav-link feature active" onclick="location.href='cover.html'">홈</a>
-                        <a class="nav-link feature" onclick="location.href='conversation_list.html'">대화목록</a>
                         <a class="nav-link feature" onclick="location.href='mypage.html'">마이페이지</a>
                         <a class="nav-link feature" onclick="location.href='introduction.html'">소개</a>
                         <a class="nav-link feature" onclick="location.href='index.html'">로그아웃</a>
@@ -70,23 +69,9 @@
                         <img src="images/participate.png" class="card-img-top feature animate__animated animate__zoomIn"
                          alt="...">
                         <div class="card-body">
-                            <button class="bg_btn_style openBtn">소개팅 참여하기</button>
-                            <div class="modal hidden">
-                                <div class="bg"></div>
-                                <div class="modalBox animate__animated animate__fadeIn">
-                                    <!-- <div class="close">X</div> -->
-                                    <span class="close">X</span>
-                                    <div class="modal_content">
-                                        <div class="modal_title">참여코드를 입력하세요.</div>
-                                        <input type="text" class="form-control" id="floatingInput"
-                                         placeholder="참여코드를 입력하세요">
-                                        <button class="confimBtn btn-primary" style="margin-top:1rem"
-                                         onclick="window.open('about::blank').location.href='meeting_start.html'">확인</button>
-                                    </div>
-
-                                </div>
-                            </div>
-
+                            <button class="bg_btn_style"
+                            onclick="location.href='conversation_list.html'">지난 대화목록 보기</button>
+                            
                         </div>
                     </div>
                 </div>

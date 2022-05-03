@@ -52,7 +52,6 @@ body {
 }
 
 .search_area{
-  
   position:relative;
   display:flex;
   width: 100%;
@@ -64,6 +63,7 @@ body {
   box-sizing: border-box;
 }
 .search_inner{
+  float: left;
   display: block;
   line-height: 1.8rem;
   
@@ -71,12 +71,13 @@ body {
 }
 .serach_icon{
   display:block;
-  position:absolute;
+  /* position:absolute; */
+  float: right;
   
 }
-*, *::before, *::after{
+/* *, *::before, *::after{
   box-sizing: content-box;
-}
+} */
 .blind{
   overflow: hidden;
     position: absolute;

@@ -29,15 +29,14 @@
             </style>
     </head>
 
-    <body>
+    <body style="width: 100%;">
 
         <nav class="navbar">
             <div class="cover-container  d-flex w-100 h-100 p- mx-auto flex-column">
                 <div>
                     <img class="float-md-start mb-0" src="images/meecord-logo.png" alt="" width="132" height="48">
                     <nav class="nav justify-content-center float-md-end">
-                        <a class="nav-link feature" onclick="location.href='cover.html'">홈</a>
-                        <a class="nav-link feature active" onclick="location.href='conversation_list.html'">대화목록</a>
+                        <a class="nav-link feature active" onclick="location.href='cover.html'">홈</a>
                         <a class="nav-link feature" onclick="location.href='mypage.html'">마이페이지</a>
                         <a class="nav-link feature" onclick="location.href='introduction.html'">소개</a>
                         <a class="nav-link feature" onclick="location.href='index.html'">로그아웃</a>
@@ -49,92 +48,62 @@
             
         <div class="gray-sector">
             <div class="table-container">
-              <div class="big_title">대화 목록</div>
+                <div class="big_title">대화 목록</div>
                 <div class="small_title">미팅 후의 기록을 찾아보세요</div>
-              </div>
             </div>
+        </div>
 
-         <!-- <div class="white-sector"> -->
-             <div class="note-container d-flex flex-column w-100 h-100 p- mx-auto " >
-                <!-- <div class="note_header" style="padding: 1rem 0 1rem 0; border-bottom: 1px solid #efefef;"> -->
-                    <div class="title_area">현빈과의 미팅</div>
-                    <div class="sub_area">
-                        <span class="sub_date">3.23 수</span>
-                        <span class="sub_length">7분</span>
-                    </div>
-                    <div class="note_view"  style="text-align: right; ">
-                        <select class="select" style="font-size:1rem;">
-                            <option value="title" selected>미팅 기록 + 감정분석 보기</option>
-                            <option value="date">미팅기록만 보기</option>
-                            <option value="length">감정분석만 보기</option>
-                          </select>
-                    </div>
-                    
-                <!-- </div> -->
-             </div>
-             <div class="note-container w-100 h-100 p- mx-auto d-flex flex-row" >
+        <div class="container" style="width: 80%;">
             
-                <!-- <div class="note_main"> -->
-                    <!-- <div class="conversation_record"> -->
-                        <!-- <div class="conversation_area  "> -->
-                            <div class="conv_left col-md-6  col-xs-10">
-                                <div class="conv_title title" style="padding:1rem;">음성기록</div>
-                                <div class="conv_r" style="padding:1rem;">
-                                    <div class="search_area col justify-content-start" style="width: 60%;">
-                                        <div class="serach_inner">
-                                          <label for="input_serach_text" class="blind">검색</label>
-                                          <input type="text" class="input_text" id="input_serach_text" placeholder="검색" value >
-                                        </div>
-                                        <div class="search_icon">
-                                          <img src="images/search.png" class="icon_search" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="chat" style="margin-top:1rem;">
-                                        <div class="my_box d-flex mb-3"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="conv_right col-md-6 col-xs-10">
-                                <div class="analysis_area d-flex flex-column" style="padding:1rem;">
-                                    <div class="conv_title" style="margin-bottom:1rem;">분석</div>
-                                    <!-- <div class="keyword_area row"> -->
-                                        <!-- <div class="my_box_wrap"> -->
-                                            <div class="my_box d-flex mb-3">
-                                                <div class="keyword_title title">주요키워드</div>
-                                            </div>
-                                        <!-- </div> -->
-                                    <!-- </div> -->
-                                    <!-- <div class="emotion_area row"> -->
-                                        <!-- <div class="my_box_wrap"> -->
-                                            <div class="my_box d-flex">
-                                                <div class="emotion_title title">감정분석</div>
-                                            </div>
-                                        <!-- </div> -->
-                                        
+            <!-- 헤더부분 : 제목, 날짜, 시간 -->
+            <div id="header">
+                <div class="title_area">미팅 제목 부분</div>
+                <div class="sub_area d-flex flex-row">
+                    <span class="sub_stTime col">22.05.02 11:00 ~ </span>
+                    <span class="sub_finTime col">22.05.02 12:30 </span>
+                    <span class="sub_length col">7분</span>
+                </div>
+            </div>
+                
+            <!-- 검색기능 -->
+            <div class="search">
+                <div class="search_area">
+                    <div class="serach_inner" >
+                        <label for="input_serach_text" class="blind">검색</label>
+                        <input type="text" class="input_text" id="input_serach_text" placeholder="검색" value >
+                    </div>
+                    <div class="search_icon">
+                        <img src="images/search.png" class="icon_search" alt="">
+                    </div>
+                </div>
+            </div> 
 
-                                    <!-- </div> -->
-                                    <!-- <div class="my_box_wrap">
-                                        <div class="my_box">
-                                            <div class="keyword_title" style="padding:1rem;">주요키워드</div>
-                                        </div>
-                                    </div>
-                                    <div class="my_box_wrap">
-                                        <div class="my_box">
-                                            <div class="emotion_title" style="padding:1rem;">감정분석</div>
-                                        </div>
-                                    </div> -->
 
-                                </div>
-                               
-                            </div>
-                         <!-- </div> -->
-                    <!-- </div> -->
-                    
-                <!-- </div> -->
-              
-                    
-             </div>
-         <!-- </div> -->
+            <div class="row" id="main">
+
+                <!-- 대화록 -->
+                <div class="col minute box_part" id="min" style="overflow-y:hidden; height: 40vh;">
+                    <div class="minute-title" id="title">대화록</div>
+
+                    <div class="min-content">
+                        <div class="chatLog " contenteditable="contenteditable">
+                            <p>대화 내용</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 주요키워드 -->
+                <div class="col keyword" id="rq">
+                    <div class="keyword-title" id="title">주요 키워드</div>
+                    <div class="rq-content" style="padding: .3rem;">
+                        <p>내용</p>
+                    </div>
+                </div>
+
+
+
+            </div>
+                 
 
             <footer class="mt-auto text-white-50"></footer>
         </div>

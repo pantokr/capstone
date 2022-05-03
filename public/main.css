@@ -153,6 +153,7 @@ canvas {
   left:0;
   
   width: 100%;
+  
   /* height: 45vh; */
   /* padding:1.5rem; */
   transform: rotateY(180deg);
@@ -162,6 +163,15 @@ canvas {
   /* Firefox */
   object-fit: cover;
   /* position: absolute; */
+}
+#emotion{
+  top : 0;
+  left: 0;
+  width : 8rem;
+  height: 2rem;
+  background-color: blue; 
+  text-align :center;
+  justify-content: center;
 }
 
 video{
@@ -238,15 +248,16 @@ video{
 
 }
 .opponent-cam{
-  border:3px solid rgb(104, 162, 236);
+  border:3px solid rgb(216, 216, 216);
   border-collapse:separate;
+  position: relative;
   /* height:40rem; */
   font-family: 'Jua', sans-serif;
   /* margin:5px; */
 }
 
 .my-cam{
-  border:3px solid rgb(104, 162, 236);
+  border: transparent;
   border-collapse:separate;
   font-family: 'Jua', sans-serif;
 }
