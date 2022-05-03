@@ -1,14 +1,4 @@
 
-/* .contianer{
-  max-width: 80em;
-  padding-left: 8%;
-  padding-right: 8%;
-} */
-/* .note-container{
-  max-width: 80em;
-  text-align: left;
-  justify-content: center;
-} */
 
 #title{
   border-bottom: 1px solid rgb(216, 216, 216);
@@ -44,8 +34,8 @@
 }
 
 .search{
-  width: 10rem;
-  box-sizing:  content-box;
+  width: 15rem;
+  box-sizing:border-box;
   text-align: center;
   justify-content: center;
   margin: .5rem;
