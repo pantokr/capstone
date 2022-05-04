@@ -37,6 +37,7 @@ function init() {
   document.querySelector('#joinBtn').addEventListener('click', joinRoom);
 
   document.querySelector('#roomNum').style.display = "none";
+  document.querySelector('#hangupBtn').style.display = "none";
 
   roomDialog = new mdc.dialog.MDCDialog(document.querySelector('#room-dialog'));
 
@@ -49,7 +50,10 @@ async function createRoom() {
   document.querySelector('#createBtn').style.display = "none";
   document.querySelector('#joinBtn').style.display = "none";
 
+  document.querySelector('#hangupBtn').style.display = "block";
   document.querySelector('#roomNum').style.display = "block";
+  
+  document.querySelector('#hangupBtn').addEventListener('click', hangUp);
 
   console.log('createBtn has clicked!');
   const db = getFirestore();
@@ -133,9 +137,12 @@ async function createRoom() {
   startSTT(roomRef.id, true);
 }
 function btndisappear() {
+  console.log('btndisppear !!')
   document.querySelector('#createBtn').style.display = "none";
   document.querySelector('#joinBtn').style.display = "none";
 
+
+  document.querySelector('#hangupBtn').style.display = "block";
   document.querySelector('#roomNum').style.display = "block";
 }
 function joinRoom() {
@@ -155,8 +162,8 @@ function joinRoom() {
   document.querySelector('#confirmJoinBtn').
     addEventListener('click', async () => {
 
-
-
+      document.querySelector('#hangupBtn').addEventListener('click', hangUp);
+      
       roomId = document.querySelector('#room-id').value;
       console.log('Join room: ', roomId);
 

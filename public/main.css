@@ -66,14 +66,18 @@ body {
   object-fit: cover;
   /* position: absolute; */
 }
+
 #emotion{
-  top : 0;
-  left: 0;
+  top : 5px;
+  left: 5px;
   width : 8rem;
-  height: 2rem;
-  background-color: blue; 
+  height: 3rem;
+  border-radius: 5px;
+  background-color: #B4D8E7; 
+  opacity : 0.7;
   text-align :center;
   justify-content: center;
+  
 }
 
 video{
