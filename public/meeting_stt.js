@@ -8,38 +8,9 @@ import {
     updateDoc,
     onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import {startRecord, stopRecord, faceExpressionsRecognition} from "./meeting_emotions.js";
 
-
-//얼굴 인식 모델 load
-faceapi.nets.tinyFaceDetector.loadFromUri('/models');
-faceapi.nets.faceLandmark68Net.loadFromUri('/models');
-faceapi.nets.faceRecognitionNet.loadFromUri('/models');
-faceapi.nets.faceExpressionNet.loadFromUri('/models');
-
-//상대방 video
-const remoteVideo = document.getElementById('remoteVideo');
-
-//얼굴 인식 감정 분석 함수
-function faceExpressionsRecognition(){
-    //인식된 감정 중에 max 값 return 해주는 함수
-    function getKeyByValue(object, value) {   
-        return Object.keys(object).find(key => object[key] === value); 
-    } 
-
-    // 3초마다 얼굴 감정 분석
-    setInterval(async () => {
-        const detections = await faceapi.detectAllFaces(remoteVideo, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
-
-        var emotions = Object.keys(detections[0].expressions).map(function (key) {
-            return detections[0].expressions[key]; 
-        }); 
-        var max = Math.max.apply(null,emotions); 
-        // 객체 배열 속 key 값을 console로 찍기
-        console.log(getKeyByValue(detections[0].expressions,max));
-        // console.log(detections);
-
-    }, 3000);
-}
+faceExpressionsRecognition();
 
 async function startSTT(roomId, isCaller) {
     const muteBtn = document.getElementById("muteBtn");
