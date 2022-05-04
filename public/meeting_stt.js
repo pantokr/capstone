@@ -9,10 +9,31 @@ import {
     onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
-faceapi.nets.tinyFaceDetector.loadFromUri('/models')
-faceapi.nets.faceLandmark68Net.loadFromUri('/models')
-faceapi.nets.faceRecognitionNet.loadFromUri('/models')
-faceapi.nets.faceExpressionNet.loadFromUri('/models')
+
+
+faceapi.nets.tinyFaceDetector.loadFromUri('/models');
+faceapi.nets.faceLandmark68Net.loadFromUri('/models');
+faceapi.nets.faceRecognitionNet.loadFromUri('/models');
+faceapi.nets.faceExpressionNet.loadFromUri('/models');
+
+
+const remoteVideo = document.getElementById('remoteVideo');
+
+function getKeyByValue(object, value) {   
+    return Object.keys(object).find(key => object[key] === value); 
+} 
+
+setInterval(async () => {
+    const detections = await faceapi.detectAllFaces(remoteVideo, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+
+    var emotions = Object.keys(detections[0].expressions).map(function (key) {
+        return detections[0].expressions[key]; 
+    }); 
+    var max = Math.max.apply(null,emotions); 
+    console.log(getKeyByValue(detections[0].expressions,max));
+    // console.log(detections);
+
+}, 3000);
 
 async function startSTT(roomId, isCaller) {
     const muteBtn = document.getElementById("muteBtn");
@@ -121,23 +142,32 @@ async function startSTT(roomId, isCaller) {
             }
         };
 
+        function getKeyByValue(object, value) {   
+            return Object.keys(object).find(key => object[key] === value); 
+        } 
+
         recognition.onend = async function () {
             // 화상 감정 분석 부분<지우지 말아주세요>
-            const remoteVideo = document.getElementById('remoteVideo');
+        //     try{
+        //         const detections = await faceapi.detectAllFaces(remoteVideo, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+                
+        //         if(detections == null)
+        //         var emotions = Object.keys(detections[0].expressions).map(function (key) {
+        //             return detections[0].expressions[key]; 
+        //         }); 
+        //         var max = Math.max.apply(null,emotions); 
+        //         console.log(getKeyByValue(detections[0].expressions,max));
 
-            function getKeyByValue(object, value) {   
-                return Object.keys(object).find(key => object[key] === value); 
-            } 
-            const detections = await faceapi.detectAllFaces(remoteVideo, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
-            
-            var emotions = Object.keys(detections[0].expressions).map(function (key) {
-                return detections[0].expressions[key]; 
-            }); 
-            var max = Math.max.apply(null,emotions); 
-            console.log(getKeyByValue(detections[0].expressions,max));
-
-            await addChatting();
-            recognition.start();
+        //         await addChatting();
+        //         recognition.start();
+        //     }
+        //     catch(e){
+        //         console.log("얼굴 인식 실패")
+                // await addChatting();
+                // recognition.start();
+        //     }
+                await addChatting();
+                recognition.start();
         };
         async function addChatting() {
             if (finalText != null) {
