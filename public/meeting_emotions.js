@@ -1,4 +1,3 @@
-let isRecording = false; // MediaRecorder 변수 생성
 var leftchannel = [];
 var rightchannel = [];
 var recorder = null;
@@ -9,64 +8,60 @@ var context = null;
 var blob = null;
 
 
-async function startRecord(event) {
-  if (!isRecording) {
-    console.log('Start Recording.');
-    isRecording = true;
+async function startRecord() {
+  console.log('Start Recording.');
 
-    // Initialize recorder
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-    navigator.getUserMedia({
-      audio: true
-    }, function (e) {
-      console.log("Got Media.");
+  // Initialize recorder
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getUserMedia({
+    audio: true
+  }, function (e) {
+    console.log("Got Media.");
 
-      // creates the audio context
-      window.AudioContext = window.AudioContext || window.webkitAudioContext;
-      context = new AudioContext();
+    // creates the audio context
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    context = new AudioContext();
 
-      // creates an audio node from the microphone incoming stream
-      mediaStream = context.createMediaStreamSource(e);
+    // creates an audio node from the microphone incoming stream
+    mediaStream = context.createMediaStreamSource(e);
 
-      // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createScriptProcessor
-      // bufferSize: the onaudioprocess event is called when the buffer is full
-      var bufferSize = 2048;
-      var numberOfInputChannels = 2;
-      var numberOfOutputChannels = 2;
-      if (context.createScriptProcessor) {
-        recorder = context.createScriptProcessor(
-          bufferSize,
-          numberOfInputChannels,
-          numberOfOutputChannels
-        );
-      } else {
-        recorder = context.createJavaScriptNode(
-          bufferSize,
-          numberOfInputChannels,
-          numberOfOutputChannels
-        );
-      }
+    // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createScriptProcessor
+    // bufferSize: the onaudioprocess event is called when the buffer is full
+    var bufferSize = 2048;
+    var numberOfInputChannels = 2;
+    var numberOfOutputChannels = 2;
+    if (context.createScriptProcessor) {
+      recorder = context.createScriptProcessor(
+        bufferSize,
+        numberOfInputChannels,
+        numberOfOutputChannels
+      );
+    } else {
+      recorder = context.createJavaScriptNode(
+        bufferSize,
+        numberOfInputChannels,
+        numberOfOutputChannels
+      );
+    }
 
-      recorder.onaudioprocess = function (e) {
-        leftchannel.push(new Float32Array(e.inputBuffer.getChannelData(0)));
-        rightchannel.push(new Float32Array(e.inputBuffer.getChannelData(1)));
-        recordingLength += bufferSize;
-      }
+    recorder.onaudioprocess = function (e) {
+      leftchannel.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+      rightchannel.push(new Float32Array(e.inputBuffer.getChannelData(1)));
+      recordingLength += bufferSize;
+    }
 
-      // we connect the recorder
-      mediaStream.connect(recorder);
-      recorder.connect(context.destination);
-    }, function (e) {
-      console.error(e);
-    });
-  }
+    // we connect the recorder
+    mediaStream.connect(recorder);
+    recorder.connect(context.destination);
+  }, function (e) {
+    console.error(e);
+  });
 }
-async function stopRecord() {
+async function stopRecord(status = false) {
   console.log('Stop Recording.');
-  isRecording = false;
 
-  // recorder.disconnect(context.destination);
-  // mediaStream.disconnect(recorder);
+  recorder.disconnect(context.destination);
+  mediaStream.disconnect(recorder);
 
   // we flat the left and right channels down Float32Array[] => Float32Array
   var leftBuffer = flattenArray(leftchannel, recordingLength);
@@ -101,6 +96,10 @@ async function stopRecord() {
   for (var i = 0; i < interleaved.length; i++) {
     view.setInt16(index, interleaved[i] * (0x7FFF * volume), true);
     index += 2;
+  }
+
+  if (status == false) {
+    return null;
   }
 
   // our final blob
