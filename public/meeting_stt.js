@@ -117,7 +117,9 @@ async function startSTT(roomId, isCaller) {
         };
 
         recognition.onend = async function () {
-            // 화상 감정 분석 부분<지우지 말아주세요> 
+            // 화상 감정 분석 부분<지우지 말아주세요>
+            const remoteVideo = document.getElementById('remoteVideo');
+             
             function getKeyByValue(object, value) {   
                 return Object.keys(object).find(key => object[key] === value); 
             } 
