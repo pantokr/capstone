@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,41 +9,45 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/">
 
-  
+
 
   <!-- Bootstrap core CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 
 
-  
+
   <!-- Custom styles for this template -->
   <link href="conversation_list.css" rel="stylesheet">
   <link href="nav.css" rel="stylesheet">
   <link href="grey_menu.css" rel="stylesheet">
+
+  <script type="module" src="./conversation_list.js"></script>
 </head>
 
 <body>
-  
-  
-<nav class="navbar">
-  <div class="cover-container d-flex w-100 h-100 p- mx-auto flex-column">
-        <div>
-          <img class="float-md-start mb-0 feature" src="images/meecord-logo.png" onclick = "location.href='cover.html'" alt="" width="132" height="48">
-          <nav class="nav justify-content-center float-md-end">
-            <a class="nav-link feature active" onclick = "location.href='cover.html'">홈</a>
-            <a class="nav-link feature" onclick = "location.href='mypage.html'">마이페이지</a>
-            <a class="nav-link feature" onclick = "location.href='introduction.html'">소개</a>
-            <a class="nav-link feature" onclick="location.href='index.html'">로그아웃</a>
-          </nav>
-        </div>
-      
-      
-</nav>
 
-<div class="gray-sector">
-  <div class="table-container">
-    <div class="big_title">대화 목록</div>
+
+  <nav class="navbar">
+    <div class="cover-container d-flex w-100 h-100 p- mx-auto flex-column">
+      <div>
+        <img class="float-md-start mb-0 feature" src="images/meecord-logo.png" onclick="location.href='cover.html'"
+          alt="" width="132" height="48">
+        <nav class="nav justify-content-center float-md-end">
+          <a class="nav-link feature active" onclick="location.href='cover.html'">홈</a>
+          <a class="nav-link feature" onclick="location.href='mypage.html'">마이페이지</a>
+          <a class="nav-link feature" onclick="location.href='introduction.html'">소개</a>
+          <a class="nav-link feature" onclick="location.href='index.html'">로그아웃</a>
+        </nav>
+      </div>
+
+
+  </nav>
+
+  <div class="gray-sector">
+    <div class="table-container">
+      <div class="big_title">대화 목록</div>
       <div class="small_title">미팅 후의 기록을 찾아보세요</div>
     </div>
   </div>
@@ -60,85 +65,48 @@
         <div class="search_area col">
           <div class="serach_inner">
             <label for="input_serach_text" class="blind">검색</label>
-            <input type="text" class="input_text" id="input_serach_text" placeholder="검색" value >
+            <input type="text" class="input_text" id="input_serach_text" placeholder="검색" value>
           </div>
           <div class="search_icon">
             <img src="images/search.png" class="icon_search" alt="">
           </div>
-         </div>
-      </div> 
-    </div>  
-    
-    
-    
-      
+        </div>
+      </div>
+    </div>
+
+
+
+
     <!-- <div class="table_update"> -->
-      
+
     <div class="table-container d-flex w-100 h-100 p- mx-auto">
       <!-- <div class="table-container"> -->
-        <div class="listview_area">
-          <div class="listview_header">
-            <div class="cell_order false " style="width:25%;">
-              <button type="button" class="btn1">번호</button>
-            </div>
-            <div class="cell_name" style="width:25%;">
-              <button type="button" class="btn1">제목</button>
-            </div>
-            <div class="cell_date" style="width:25%;">
-              <button type="button" class="btn1">날짜</button>
-            </div>
-            <div class="cell_length" style="width:25%;">
-              <button type="button" class="btn1">길이</button>
-            </div>
+      <div class="listview_area">
+        <div class="listview_header">
+          <div class="cell_order false " style="width:25%;">
+            <button type="button" class="btn1">번호</button>
           </div>
-          
-          <ul class="listview_list" id="infinity-scroll">
-            <div class="list_componentouter">
-              <div class="list_component">
-                <li class="list_item " >
-                  <a class="list_item_1 row"   href="conversation_record.html">
-                    <div class="cell_order false col" style="width:10%;">
-                      <button type="button" class="btn1">1</button>
-                    </div>
-                    <div class="cell_name col" style="width:40%;">
-                      <button type="button"  class="btn1">현빈과의 미팅</button>
-                    </div>
-                    <div class="cell_date col" style="width:25%;">
-                      <button type="button" class="btn1">3.23 수</button>
-                    </div>
-                    <div class="cell_length col" style="width:25%;">
-                      <button type="button" class="btn1">7분</button>
-                    </div>
-                  </a>
-                </li>
-                
-                <br>
-                </div>
-                <li class="list_item">
-                  <a class="list_item_2 row">
-                    <div class="cell_order false col" style="width:10%;">
-                      <button type="button" class="btn1">2</button>
-                    </div>
-                    <div class="cell_name col" style="width:40%;">
-                      <button type="button col" class="btn1">문상훈과의 미팅</button>
-                    </div>
-                    <div class="cell_date col " style="width:25%;">
-                      <button type="button" class="btn1">3.12 토</button>
-                    </div>
-                    <div class="cell_length col " style="width:25%;">
-                      <button type="button" class="btn1">3분</button>
-                    </div>
-                  </a>
-                </li>
-              </div>
-            </div>
-          </ul>
-           
+          <div class="cell_name" style="width:25%;">
+            <button type="button" class="btn1">방 코드</button>
+          </div>
+          <div class="cell_date" style="width:25%;">
+            <button type="button" class="btn1">날짜</button>
+          </div>
+          <div class="cell_length" style="width:25%;">
+            <button type="button" class="btn1">길이</button>
+          </div>
+        </div>
+
+        <ul class="listview_list" id="infinity-scroll">
+          <div class="list_componentouter">
+          </div>
+        </ul>
+
         <!-- </div> -->
 
       </div>
 
-        <!-- <table class="conversation_table table-bordered" stype="margin-top:0">
+      <!-- <table class="conversation_table table-bordered" stype="margin-top:0">
           <thead>
             <tr>
               <th class="coversation_table_th" style="width:12%">번호</th>
@@ -167,12 +135,13 @@
                 </tr>
             </tbody>
         </table> -->
-        
-        
 
-    <footer class="mt-auto text-white-50">
-    </footer>
- 
-    
+
+
+      <footer class="mt-auto text-white-50">
+      </footer>
+
+
 </body>
+
 </html>
