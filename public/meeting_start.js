@@ -143,23 +143,23 @@ function joinRoom() {
   // document.querySelector('#createBtn').disabled = true;
   // document.querySelector('#joinBtn').disabled = true;
   console.log('joinroom btn has cliked!');
-  
+
   // document.querySelector('#createBtn').style.display = "none";
   // document.querySelector('#joinBtn').style.display = "none";
 
   // document.querySelector('#roomNum').style.display = "block";
 
-  
+
   document.querySelector('#confirmJoinBtn').addEventListener('click', btndisappear);
-  
+
   document.querySelector('#confirmJoinBtn').
     addEventListener('click', async () => {
 
-      
-      
+
+
       roomId = document.querySelector('#room-id').value;
       console.log('Join room: ', roomId);
-      
+
       document.querySelector(
         '#currentRoom').innerText =
         // `Current room is ${roomId} - You are the callee!`;

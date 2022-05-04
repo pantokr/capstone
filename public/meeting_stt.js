@@ -1,5 +1,5 @@
 import "./firebase_initialization.js";
-import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import {
     getFirestore,
     collection,
@@ -10,6 +10,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 async function startSTT(roomId, isCaller) {
+    const muteBtn = document.getElementById("muteBtn");
+
     window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     const auth = getAuth();
@@ -18,11 +20,12 @@ async function startSTT(roomId, isCaller) {
     const chatRef = doc(chatCol, roomId);
 
     let name = null;
+    
     onAuthStateChanged(auth, (user) => {
         if (user) {
             name = user.displayName;
             if (isCaller == true) {
-                setDoc(chatRef, {caller: name});
+                setDoc(chatRef, { caller: name });
             } else {
                 updateDoc(chatRef, {
                     callee: name,
@@ -92,17 +95,25 @@ async function startSTT(roomId, isCaller) {
     function recognizeChat() {
         let recognition = new SpeechRecognition();
         let finalText = null;
+        let isMuted = false;
         recognition.lang = "ko-KR";
 
         recognition.start();
 
+        muteBtn.onclick = function() {
+            isMuted = isMuted ? false : true;
+        }
+
         recognition.onresult = function (e) {
-            let texts = Array
-                .from(e.results)
-                .map((results) => results[0].transcript)
-                .join("");
-            finalText = texts;
-            console.log("result");
+            console.log("isMuted: ", isMuted);
+            if (!isMuted) {
+                let texts = Array
+                    .from(e.results)
+                    .map((results) => results[0].transcript)
+                    .join("");
+                finalText = texts;
+                console.log("result");
+            }
         };
 
         recognition.onend = async function () {
@@ -127,7 +138,7 @@ async function startSTT(roomId, isCaller) {
                     text: finalText
                 });
                 finalText = null;
-                updateDoc(chatRef, {end: getTimestamp()});
+                updateDoc(chatRef, { end: getTimestamp() });
             }
         }
     }

@@ -1,213 +1,179 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>meeting-room</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>meeting-room</title>
 
-        <link
-            href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
-            rel="stylesheet">
-        <script
-            src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
-        <!-- 삭제 시 오류뜸, 대체 요망 -->
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- 삭제 시 오류뜸, 대체 요망 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-        <!-- <link rel="stylesheet" href="https://unpkg.com/mvp.css"> -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/mvp.css"> -->
 
-        <link href="images/logo.ico" rel="shortcut icon" type="image/x-icon">
-        <link
-            rel="canonical"
-            href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+    <link href="images/logo.ico" rel="shortcut icon" type="image/x-icon">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 
-        <!-- Bootstrap core CSS -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-            crossorigin="anonymous">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-        <!-- custom CSS -->
-        <link href="main.css" rel="stylesheet" type="text/css">
-        <link href="nav.css" rel="stylesheet">
+    <!-- custom CSS -->
+    <link href="main.css" rel="stylesheet" type="text/css">
+    <link href="nav.css" rel="stylesheet">
 
-        <!-- animate CSS -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-        <!-- webrtc -->
-        <!-- <link
+    <!-- webrtc -->
+    <!-- <link
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.9.1/css/bootstrap.min.css"
         rel="stylesheet"> -->
-        <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> <meta
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> <meta
         name="apple-mobile-web-app-capable" content="yes"> -->
 
-        <!-- <script type="module" src="home.js"></script> -->
-        <!-- <script defer="defer" src="face-api.min.js"></script> -->
-        <script type="module" src="./meeting_start.js"></script>
-    </head>
+    <!-- <script type="module" src="home.js"></script> -->
+    <!-- <script defer="defer" src="face-api.min.js"></script> -->
+    <script type="module" src="./meeting_start.js"></script>
+    <script type="module" src="./meeting_stt.js"></script>
+</head>
 
-    <body style="width: 100%; height : 100%;">
+<body style="width: 100%; height : 100%;">
 
-        <!-- navbar -->
-        <nav class="navbar" style="border-bottom: 0.001px solid rgb(216, 216, 216);">
-            <div class="cover-container  d-flex w-100 h-100 p- mx-auto flex-column">
-                <div>
-                    <img
-                        class="float-md-start mb-0 feature"
-                        src="images/meecord-logo.png"
-                        onclick="location.href=''"
-                        alt=""
-                        width="132"
-                        height="48">
-                    <nav class="nav justify-content-center float-md-end">
-                        <a class="nav-link feature active" onclick="location.href='cover.html'">홈</a>
-                        <a class="nav-link feature" onclick="location.href='conversation_list.html'">대화목록</a>
-                        <a class="nav-link feature" onclick="location.href='mypage.html'">마이페이지</a>
-                        <a class="nav-link feature" onclick="location.href='introduction.html'">소개</a>
-                        <a class="nav-link feature" onclick="location.href='index.html'">로그아웃</a>
-                    </nav>
-                </div>
+    <!-- navbar -->
+    <nav class="navbar" style="border-bottom: 0.001px solid rgb(216, 216, 216);">
+        <div class="cover-container  d-flex w-100 h-100 p- mx-auto flex-column">
+            <div>
+                <img class="float-md-start mb-0 feature" src="images/meecord-logo.png" onclick="location.href=''" alt=""
+                    width="132" height="48">
+                <nav class="nav justify-content-center float-md-end">
+                    <a class="nav-link feature active" onclick="location.href='cover.html'">홈</a>
+                    <a class="nav-link feature" onclick="location.href='conversation_list.html'">대화목록</a>
+                    <a class="nav-link feature" onclick="location.href='mypage.html'">마이페이지</a>
+                    <a class="nav-link feature" onclick="location.href='introduction.html'">소개</a>
+                    <a class="nav-link feature" onclick="location.href='index.html'">로그아웃</a>
+                </nav>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <!-- 자동으로 카메라, 마이크 켜지게 구현, 이 부분은 삭제 -->
+    <!-- 자동으로 카메라, 마이크 켜지게 구현, 이 부분은 삭제 -->
 
-        <div class="container" id="myStream">
-            <div class="row justify-content-center" id="buttons">
-                <!-- <button class="mdc-button mdc-button--raised" id="cameraBtn"> <i
+    <div class="container" id="myStream">
+        <div class="row justify-content-center" id="buttons">
+            <!-- <button class="mdc-button mdc-button--raised" id="cameraBtn"> <i
                 class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
                 <span class="mdc-button__label">Open camera & microphone</span> </button> -->
 
-                <!-- 클릭 시 룸 번호 생성 -->
-                <button class="mdc-button mdc-button--raised col-md-2" id="createBtn">
-                    <!--disabled 삭제-->
-                    <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
-                    <span class="mdc-button__label">Create room</span>
-                </button>
+            <!-- 클릭 시 룸 번호 생성 -->
+            <button class="mdc-button mdc-button--raised col-md-2" id="createBtn">
+                <!--disabled 삭제-->
+                <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
+                <span class="mdc-button__label">Create room</span>
+            </button>
 
-                <!-- 클릭 시 룸 조인 모달 생성 -->
-                <button class="mdc-button mdc-button--raised col-md-2" id="joinBtn">
-                    <!--disabled 삭제-->
-                    <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
-                    <span class="mdc-button__label">Join room</span>
-                </button>
+            <!-- 클릭 시 룸 조인 모달 생성 -->
+            <button class="mdc-button mdc-button--raised col-md-2" id="joinBtn">
+                <!--disabled 삭제-->
+                <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
+                <span class="mdc-button__label">Join room</span>
+            </button>
 
-                <!-- 클릭 시 룸 연결 끊기 -->
-                <!-- <button class="mdc-button mdc-button--raised col-md-2" id="hangupBtn"> <i
+            <!-- 클릭 시 룸 연결 끊기 -->
+            <!-- <button class="mdc-button mdc-button--raised col-md-2" id="hangupBtn"> <i
                 class="material-icons mdc-button__icon" aria-hidden="true">close</i> <span
                 class="mdc-button__label">Hangup</span> </button> -->
 
-                <!-- 룸 번호 뜨는 곳 -->
-                <div
-                    id="roomNum"
-                    class="justify-content-center col-md-2"
-                    style="width : 20rem;">
-                    <span id="currentRoom"></span>
-                </div>
+            <!-- 룸 번호 뜨는 곳 -->
+            <div id="roomNum" class="justify-content-center col-md-2" style="width : 20rem;">
+                <span id="currentRoom"></span>
             </div>
-            <!-- container -->
-            <!-- row -->
-            <div class="row">
+        </div>
+        <!-- container -->
+        <!-- row -->
+        <div class="row">
 
-                <div class="col-md-8">
-                    <!-- 상대방카메라 -->
-                    <div class="opponent-cam" >
-                        <!-- <canvas id="canvas"></canvas> -->
-                        <video id="remoteVideo" autoplay="autoplay" playsinline="playsinline"></video>
-                        <div id="emotion" style="position: absolute">감정 분석</div>
+            <div class="col-md-8">
+                <!-- 상대방카메라 -->
+                <div class="opponent-cam">
+                    <!-- <canvas id="canvas"></canvas> -->
+                    <video id="remoteVideo" autoplay="autoplay" playsinline="playsinline"></video>
+                    <div id="emotion" style="position: absolute">감정 분석</div>
+                </div>
+                <!-- 키워드 -->
+                <div class="recommended-question" id="rq">
+                    <div class="keyword-question-title" id="title">키워드 질문</div>
+                    <div class="rq-content">
+                        <p>내용</p>
                     </div>
-                    <!-- 키워드 -->
-                    <div class="recommended-question" id="rq">
-                        <div class="keyword-question-title" id="title">키워드 질문</div>
-                        <div class="rq-content">
-                            <p>내용</p>
-                        </div>
-                    </div>
-
                 </div>
 
-                <div class="col-md-4 ">
-                    <!-- 나의 카메라 -->
-                    <div class="my-cam">
-                        <video
-                            id="localVideo"
-                            autoplay="autoplay"
-                            muted="muted"
-                            playsinline="playsinline"></video>
-                    </div>
+            </div>
 
-                    <!-- 오디오, 카메라 설정 -->
-                    <div class="row " id="setting">
-                        <div class="col">
-                            <img src="images/unmute.png" alt="" id="muteBtn">
-                        </div>
-                        <div class="col">
-                            <img src="images/cameraon.png" alt="" id="cameraBtn">
-                        </div>
-                    </div>
+            <div class="col-md-4 ">
+                <!-- 나의 카메라 -->
+                <div class="my-cam">
+                    <video id="localVideo" autoplay="autoplay" muted="muted" playsinline="playsinline"></video>
+                </div>
 
-                    <!-- 감정인식 -->
-                    <!-- <div class="emotion_part" id="ep"> <div id="title">감정인식</div> <div
+                <!-- 오디오, 카메라 설정 -->
+                <div class="row " id="setting">
+                    <div class="col">
+                        <img src="images/unmute.png" alt="" id="muteBtn">
+                    </div>
+                    <div class="col">
+                        <img src="images/cameraon.png" alt="" id="cameraBtn">
+                    </div>
+                </div>
+
+                <!-- 감정인식 -->
+                <!-- <div class="emotion_part" id="ep"> <div id="title">감정인식</div> <div
                     class="content"> <span id="ep-content">감정인식중.</span> </div> </div> -->
 
-                    <!-- 대화록 -->
-                    <div class="minute box_part" id="min" style="overflow-y:scroll; height: 40vh;">
-                        <div class="minute-title" id="title">대화록</div>
+                <!-- 대화록 -->
+                <div class="minute box_part" id="min" style="overflow-y:scroll; height: 40vh;">
+                    <div class="minute-title" id="title">대화록</div>
 
-                        <div class="min-content">
-                            <div class="chatLog " contenteditable="contenteditable">
-                                <p>대화 내용</p>
-                            </div>
+                    <div class="min-content">
+                        <div class="chatLog " contenteditable="contenteditable">
+                            <p>대화 내용</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div
-            class="mdc-dialog"
-            id="room-dialog"
-            role="alertdialog"
-            aria-modal="true"
-            aria-labelledby="my-dialog-title"
-            aria-describedby="my-dialog-content">
-            <div class="mdc-dialog__container">
-                <div class="mdc-dialog__surface">
-                    <h2 class="mdc-dialog__title" id="my-dialog-title">Join room</h2>
-                    <div class="mdc-dialog__content" id="my-dialog-content">
-                        Enter ID for room to join:
-                        <div class="mdc-text-field">
-                            <input type="text" id="room-id" class="mdc-text-field__input">
-                            <!-- <label class="mdc-floating-label" for="my-text-field">Room ID</label> -->
-                            <div class="mdc-line-ripple"></div>
-                        </div>
+    <div class="mdc-dialog" id="room-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
+        aria-describedby="my-dialog-content">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface">
+                <h2 class="mdc-dialog__title" id="my-dialog-title">Join room</h2>
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                    Enter ID for room to join:
+                    <div class="mdc-text-field">
+                        <input type="text" id="room-id" class="mdc-text-field__input">
+                        <!-- <label class="mdc-floating-label" for="my-text-field">Room ID</label> -->
+                        <div class="mdc-line-ripple"></div>
                     </div>
-                    <footer class="mdc-dialog__actions justify-content-center">
-                        <button
-                            id="confirmJoinBtn"
-                            type="button"
-                            class="mdc-button mdc-dialog__button"
-                            data-mdc-dialog-action="yes">
-                            <span class="mdc-button__label">Join</span>
-                        </button>
-                        <button
-                            id="cancelBtn"
-                            type="button"
-                            class="mdc-button mdc-dialog__button"
-                            data-mdc-dialog-action="no">
-                            <span class="mdc-button__label">Cancel</span>
-                        </button>
-                    </footer>
                 </div>
+                <footer class="mdc-dialog__actions justify-content-center">
+                    <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button"
+                        data-mdc-dialog-action="yes">
+                        <span class="mdc-button__label">Join</span>
+                    </button>
+                    <button id="cancelBtn" type="button" class="mdc-button mdc-dialog__button"
+                        data-mdc-dialog-action="no">
+                        <span class="mdc-button__label">Cancel</span>
+                    </button>
+                </footer>
             </div>
-            <div class="mdc-dialog__scrim"></div>
         </div>
-    </body>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+</body>
 
 </html>
