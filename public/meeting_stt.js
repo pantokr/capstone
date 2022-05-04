@@ -6,8 +6,7 @@ import {
     doc,
     setDoc,
     updateDoc,
-    onSnapshot,
-    getDoc
+    onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 import {startRecord, stopRecord, faceExpressionsRecognition} from "./meeting_emotions.js";
 
@@ -23,16 +22,11 @@ async function startSTT(roomId, isCaller) {
     const chatCol = collection(db, "chats");
     const chatRef = doc(chatCol, roomId);
 
-    let startTime = null;
-    let chatLogCol = null;
     let name = null;
-    let uid = null;
-    let isOpponent = false;
     
     onAuthStateChanged(auth, (user) => {
         if (user) {
             name = user.displayName;
-            uid = user.uid;
             if (isCaller == true) {
                 setDoc(chatRef, { caller: name });
             } else {
@@ -41,7 +35,6 @@ async function startSTT(roomId, isCaller) {
                     start: getTimestamp()
                 });
             }
-            addUserLog();
         } else {
             console.log("No User.");
         }
@@ -60,6 +53,7 @@ async function startSTT(roomId, isCaller) {
                         .doc
                         .data();
                     let parsed_data = JSON.parse(JSON.stringify(data))
+                    let isCaller = parsed_data.isCaller;
                     let speecher = parsed_data.speecher;
                     let text = parsed_data.text;
 
@@ -81,6 +75,7 @@ async function startSTT(roomId, isCaller) {
 
                         let minbox = document.querySelector(".min-content");
                         minbox.scrollTop = minbox.scrollHeight;
+                        
                     } else {
                         let oppBox = document.createElement('div');
                         oppBox.setAttribute("class", "oppBox");
@@ -96,35 +91,10 @@ async function startSTT(roomId, isCaller) {
 
                         let minbox = document.querySelector('.min-content');
                         minbox.scrollTop = minbox.scrollHeight;
-
-                        if(!isOpponent){
-                            updateDoc(doc(chatLogCol, startTime), { opponent: speecher});
-                            isOpponent = true;
-                        }
                     }
                 }
             });
     });
-
-    async function addUserLog() {
-      
-        const userCol = collection(db, "users");
-        const userRef = doc(userCol, uid);
-        chatLogCol = collection(userRef, "chat_logs");
-        startTime = getTimestamp();
-        // const chatDoc = await getDoc(chatRef);
-        // let data = chatDoc.data();
-        // let parsed_data = JSON.parse(JSON.stringify(data));
-        
-        // console.log("data : ", parsed_data);
-        // let opponentName = name == parsed_data.caller ? parsed_data.callee : parsed_data.caller;
-        // console.log("opName : ", opponentName);
-        
-        setDoc(doc(chatLogCol, startTime), {
-          roomID : roomId,
-          opponent : ""
-        });
-      }
 
     function recognizeChat() {
         let recognition = new SpeechRecognition();

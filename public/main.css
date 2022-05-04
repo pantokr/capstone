@@ -165,6 +165,7 @@ video{
 
 .min-content{
     position:relative;
+    overflow-y :scroll;
     height:35%;
     /* margin: 1rem; */
 }
