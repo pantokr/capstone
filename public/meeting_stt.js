@@ -9,6 +9,11 @@ import {
     onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
+faceapi.nets.tinyFaceDetector.loadFromUri('/models')
+faceapi.nets.faceLandmark68Net.loadFromUri('/models')
+faceapi.nets.faceRecognitionNet.loadFromUri('/models')
+faceapi.nets.faceExpressionNet.loadFromUri('/models')
+
 async function startSTT(roomId, isCaller) {
     const muteBtn = document.getElementById("muteBtn");
 
@@ -119,7 +124,7 @@ async function startSTT(roomId, isCaller) {
         recognition.onend = async function () {
             // 화상 감정 분석 부분<지우지 말아주세요>
             const remoteVideo = document.getElementById('remoteVideo');
-             
+
             function getKeyByValue(object, value) {   
                 return Object.keys(object).find(key => object[key] === value); 
             } 
