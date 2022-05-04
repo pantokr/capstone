@@ -164,40 +164,40 @@ video{
     height:35%;
     /* margin: 1rem; */
 }
-.chatLog > .callerBox , 
-.chatLog > .calleeBox {
+.chatLog > .myBox , 
+.chatLog > .oppBox {
   margin : 4px;
   
 }
 
-.callerBox{
+.myBox{
   text-align: right;
   padding-left: 20%;
   position: relative;
 }
 
-.calleeBox{
+.oppBox{
   text-align: left;
   padding-right: 20%;
   position: relative;
 }
 
 
-.callerBox > #callerText ,
-.calleeBox > #calleeText {
+.myBox > #myText ,
+.oppBox > #oppText {
 
   padding : 5px;
   display: inline-block; 
   border-radius: 10px;
 }
 
-#callerText{
+#myText{
   background-color: rgb(104, 162, 236);
   color: white;
   border : 2px solid rgb(104, 162, 236);
 }
 
-#calleeText{
+#oppText{
   background-color: #D3D3D3;
   border : 2px solid #D3D3D3;
 }

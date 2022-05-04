@@ -54,36 +54,36 @@ async function startSTT(roomId, isCaller) {
                     let speecher = parsed_data.speecher;
                     let text = parsed_data.text;
 
-                    if (isCaller == "Caller") {
-                        let callerBox = document.createElement("div");
-                        callerBox.setAttribute("class", "callerBox");
+                    if (speecher == name) {
+                        let myBox = document.createElement("div");
+                        myBox.setAttribute("class", "myBox");
 
-                        let callerTextp = document.createElement("div");
+                        let myText = document.createElement("div");
 
-                        callerTextp.setAttribute("id", "callerText");
-                        callerTextp.textContent = text;
+                        myText.setAttribute("id", "myText");
+                        myText.textContent = text;
 
-                        console.log("caller text: ", callerTextp.textContent);
+                        console.log("my text: ", myText.textContent);
 
-                        callerBox.append(callerTextp);
+                        myBox.append(myText);
                         document
                             .querySelector(".chatLog")
-                            .append(callerBox);
+                            .append(myBox);
 
                         let minbox = document.querySelector(".min-content");
                         minbox.scrollTop = minbox.scrollHeight;
                     } else {
-                        let calleeBox = document.createElement('div');
-                        calleeBox.setAttribute("class", "calleeBox");
+                        let oppBox = document.createElement('div');
+                        oppBox.setAttribute("class", "oppBox");
 
-                        let calleeTextp = document.createElement('div');
-                        calleeTextp.setAttribute("id", "calleeText");
-                        calleeTextp.textContent = text;
-                        console.log("callee text : ", calleeTextp.textContent);
-                        calleeBox.append(calleeTextp);
+                        let oppText = document.createElement('div');
+                        oppText.setAttribute("id", "oppText");
+                        oppText.textContent = text;
+                        console.log("opponent text : ", oppText.textContent);
+                        oppBox.append(oppText);
                         document
                             .querySelector('.chatLog')
-                            .append(calleeBox);
+                            .append(oppBox);
 
                         let minbox = document.querySelector('.min-content');
                         minbox.scrollTop = minbox.scrollHeight;
