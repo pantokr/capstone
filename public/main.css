@@ -127,8 +127,8 @@ video{
   font-family: 'Jua', sans-serif;
   border-radius: 5px;
   border: 1px solid rgb(216, 216, 216);
-    margin-top :.5rem;
-    padding: .5rem;
+  margin-top :.5rem;
+    
 }
 .opponent-cam{
   border:3px solid rgb(216, 216, 216);
@@ -150,7 +150,19 @@ video{
   border: 1px solid rgb(216, 216, 216);
  
 }
-.minute-title  {
+#title{
+  border-bottom: 1px solid rgb(216, 216, 216);
+  margin: 1px 0 2px 0 px;
+  width:100%;
+  height: 2.5rem;
+  padding: .3rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  position:relative;
+  font-size:1.2rem;
+}
+/* .minute-title  {
     height:6%;
     width:100%;
     margin: 1rem 0 1rem;
@@ -159,15 +171,15 @@ video{
     justify-content: center;
     position:relative;
     font-size:1.5rem;
-}
+} */
 
 
 
 .min-content{
     position:relative;
     overflow-y :scroll;
-    height:35%;
-    /* margin: 1rem; */
+    padding :.3rem;
+    height : 15.5rem;
 }
 .chatLog > .myBox , 
 .chatLog > .oppBox {
@@ -217,18 +229,7 @@ video{
   
 }
 
-.keyword-question-title{
-  height:6%;
-  width:100%;
-  position:relative;
-  margin: 1rem 0 1rem;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  position:relative;
-  font-size:1.5rem;
-  
- }
+
 
 .rq-content{
   position:relative;

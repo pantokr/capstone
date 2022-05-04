@@ -73,9 +73,8 @@ async function startSTT(roomId, isCaller) {
                             .querySelector(".chatLog")
                             .append(myBox);
 
-                        let minbox = document.querySelector(".min-content");
-                        minbox.scrollTop = minbox.scrollHeight;
                         
+
                     } else {
                         let oppBox = document.createElement('div');
                         oppBox.setAttribute("class", "oppBox");
@@ -89,9 +88,9 @@ async function startSTT(roomId, isCaller) {
                             .querySelector('.chatLog')
                             .append(oppBox);
 
-                        let minbox = document.querySelector('.min-content');
-                        minbox.scrollTop = minbox.scrollHeight;
                     }
+                    let minbox = document.querySelector(".min-content");
+                    minbox.scrollTop = minbox.scrollHeight;
                 }
             });
     });
