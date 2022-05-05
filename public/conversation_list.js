@@ -26,39 +26,48 @@ onAuthStateChanged(auth, (user) => {
 });
 
 async function printDocData() {
+    let cnt = 1;
+
     const userCol = collection(db, "users");
     const userRef = doc(userCol, uid);
-    // const chatLogCol = collection(userRef, "chat_logs");
     const querySnapshot = await getDocs(collection(userRef, "chat_logs"));
+    
     querySnapshot.forEach((doc) => {
         let parsed_data = JSON.parse(JSON.stringify(doc.data()));
 
         const list_componentouter = document.querySelector('.list_componentouter');
         let li = document.createElement('li');
         let a = document.createElement('a');
-        let num = document.createElement('div');
-        let roomCode = document.createElement('div');
-        let date = document.createElement('div');
-        let length = document.createElement('div');
+        let num = document.createElement('button');
+        let roomCode = document.createElement('button');
+        let date = document.createElement('button');
+        let opponent = document.createElement('button');
 
         li.setAttribute("class", "list_item");
         a.setAttribute("class", "list_row");
-        num.setAttribute("class", "num");
-        roomCode.setAttribute("class", "roomCode");
-        date.setAttribute("class", "date");
-        length.setAttribute("class", "length");
+        num.setAttribute("class", "con_list");
+        num.setAttribute("style", "width:10%;");
+        roomCode.setAttribute("class", "con_list");
+        roomCode.setAttribute("style", "width:40%;");
+        date.setAttribute("class", "con_list");
+        date.setAttribute("style", "width:30%;");
+        opponent.setAttribute("class", "con_list");
+        opponent.setAttribute("style", "width:20%;");
 
-        console.log(parsed_data.roomID);
+        num.innerText += cnt;
+        cnt += 1;
+        roomCode.innerText += parsed_data.roomID;
+        date.innerText += doc.id;
+        opponent.innerText += parsed_data.opponent;
 
+        a.href = "./conversation_record.html?roomCode="+parsed_data.roomID;
+        console.log(a.herf);
         a.append(num);
         a.append(roomCode);
         a.append(date);
-        a.append(length);
+        a.append(opponent);
         li.append(a);
-        console.log("OK");
         list_componentouter.appendChild(li);
-
-        roomCode.innerText += parsed_data.roomID;
         
 
         // // doc.data() is never undefined for query doc snapshots
