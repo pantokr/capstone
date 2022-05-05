@@ -1,19 +1,34 @@
 import "./firebase_initialization.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import {
     getFirestore,
     collection,
     doc,
     setDoc,
     updateDoc,
-    onSnapshot,
-    getDoc
+    onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-import { startRecord, stopRecord, faceExpressionsRecognition } from "./meeting_emotions.js";
-
-faceExpressionsRecognition();
+import {startRecord, stopRecord, recognizeFaceEmotion} from "./meeting_emotions.js";
 
 async function startSTT(roomId, isCaller) {
+
+    faceapi
+        .nets
+        .tinyFaceDetector
+        .loadFromUri('/models');
+    faceapi
+        .nets
+        .faceLandmark68Net
+        .loadFromUri('/models');
+    faceapi
+        .nets
+        .faceRecognitionNet
+        .loadFromUri('/models');
+    faceapi
+        .nets
+        .faceExpressionNet
+        .loadFromUri('/models');
+
     const muteBtn = document.getElementById("muteBtn");
 
     window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -34,7 +49,7 @@ async function startSTT(roomId, isCaller) {
             name = user.displayName;
             uid = user.uid;
             if (isCaller == true) {
-                setDoc(chatRef, { caller: name });
+                setDoc(chatRef, {caller: name});
             } else {
                 updateDoc(chatRef, {
                     callee: name,
@@ -79,7 +94,6 @@ async function startSTT(roomId, isCaller) {
                             .querySelector(".chatLog")
                             .append(myBox);
 
-
                     } else {
                         let oppBox = document.createElement('div');
                         oppBox.setAttribute("class", "oppBox");
@@ -94,7 +108,7 @@ async function startSTT(roomId, isCaller) {
                             .append(oppBox);
 
                         if (!isOpponent) {
-                            updateDoc(doc(chatLogCol, startTime), { opponent: speecher });
+                            updateDoc(doc(chatLogCol, startTime), {opponent: speecher});
                             isOpponent = true;
                         }
                     }
@@ -111,13 +125,11 @@ async function startSTT(roomId, isCaller) {
         const userRef = doc(userCol, uid);
         chatLogCol = collection(userRef, "chat_logs");
         startTime = getTimestamp();
-        // const chatDoc = await getDoc(chatRef);
-        // let data = chatDoc.data();
-        // let parsed_data = JSON.parse(JSON.stringify(data));
-
-        // console.log("data : ", parsed_data);
-        // let opponentName = name == parsed_data.caller ? parsed_data.callee : parsed_data.caller;
-        // console.log("opName : ", opponentName);
+        // const chatDoc = await getDoc(chatRef); let data = chatDoc.data(); let
+        // parsed_data = JSON.parse(JSON.stringify(data)); console.log("data : ",
+        // parsed_data); let opponentName = name == parsed_data.caller ?
+        // parsed_data.callee : parsed_data.caller; console.log("opName : ",
+        // opponentName);
 
         setDoc(doc(chatLogCol, startTime), {
             roomID: roomId,
@@ -130,11 +142,15 @@ async function startSTT(roomId, isCaller) {
         let finalText = null;
         let isMuted = false;
         recognition.lang = "ko-KR";
-
+        recognition.maxAlternatives = 10000;
+        
         recognition.start();
+        startRecord();
 
         muteBtn.onclick = function () {
-            isMuted = isMuted ? false : true;
+            isMuted = isMuted
+                ? false
+                : true;
         }
 
         recognition.onresult = function (e) {
@@ -145,40 +161,37 @@ async function startSTT(roomId, isCaller) {
                     .map((results) => results[0].transcript)
                     .join("");
                 finalText = texts;
-                console.log("result");
             }
         };
 
-        function getKeyByValue(object, value) {
-            return Object.keys(object).find(key => object[key] === value);
-        }
+        // function getKeyByValue(object, value) {     return Object
+        // .keys(object)         .find(key => object[key] === value); }
 
         recognition.onend = async function () {
-            // 화상 감정 분석 부분<지우지 말아주세요>
-            //     try{
-            //         const detections = await faceapi.detectAllFaces(remoteVideo, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+            // 화상 감정 분석 부분<지우지 말아주세요>     try{         const detections = await
+            // faceapi.detectAllFaces(remoteVideo, new
+            // faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+            // if(detections == null)         var emotions =
+            // Object.keys(detections[0].expressions).map(function (key) { return
+            // detections[0].expressions[key];         });         var max =
+            // Math.max.apply(null,emotions);
+            // console.log(getKeyByValue(detections[0].expressions,max));         await
+            // addChatting();         recognition.start();     }     catch(e){
+            // console.log("얼굴 인식 실패") await addChatting(); recognition.start();     }
 
-            //         if(detections == null)
-            //         var emotions = Object.keys(detections[0].expressions).map(function (key) {
-            //             return detections[0].expressions[key]; 
-            //         }); 
-            //         var max = Math.max.apply(null,emotions); 
-            //         console.log(getKeyByValue(detections[0].expressions,max));
-
-            //         await addChatting();
-            //         recognition.start();
-            //     }
-            //     catch(e){
-            //         console.log("얼굴 인식 실패")
-            // await addChatting();
-            // recognition.start();
-            //     }
             await addChatting();
+
             recognition.start();
+            startRecord();
         };
         async function addChatting() {
             if (finalText != null) {
-                setDoc(doc(speechCol, getTimestamp()), {
+
+                var speechRef = doc(speechCol, getTimestamp());
+                stopRecord(speechRef).then(() => {
+                    recognizeFaceEmotion();
+                })
+                setDoc((speechRef), {
                     speecher: name,
                     isCaller: isCaller == true
                         ? "Caller"
@@ -186,7 +199,9 @@ async function startSTT(roomId, isCaller) {
                     text: finalText
                 });
                 finalText = null;
-                updateDoc(chatRef, { end: getTimestamp() });
+                updateDoc(chatRef, {end: getTimestamp()});
+            } else {
+                stopRecord();
             }
         }
     }
