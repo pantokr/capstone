@@ -15,10 +15,11 @@ const roomId = urlParams.get("roomCode");
 const auth = getAuth();
 const db = getFirestore();
 
-let name = null;
+let myName = null;
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        name = user.name;
+        myName = user.displayName;
+        console.log("1", user.name);
         showChats();
     } else {
         console.log("No User.");
@@ -35,8 +36,8 @@ async function showChats() {
         let parsed_data = JSON.parse(JSON.stringify(doc.data()));
         let speecher = parsed_data.speecher;
         let text = parsed_data.text;
-
-        if (speecher == name) {
+        console.log(myName);
+        if (speecher == myName) {
             let myBox = document.createElement("div");
             myBox.setAttribute("class", "myBox");
 

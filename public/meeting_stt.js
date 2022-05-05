@@ -93,8 +93,6 @@ async function startSTT(roomId, isCaller) {
                             .querySelector('.chatLog')
                             .append(oppBox);
 
-
-
                         if (!isOpponent) {
                             updateDoc(doc(chatLogCol, startTime), { opponent: speecher });
                             isOpponent = true;
