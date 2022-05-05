@@ -153,19 +153,19 @@ async function stopRecord(ref = null) {
     // our final blob
     blob = new Blob([view], {type: 'audio/wav'});
 
-    var url = URL.createObjectURL(blob);
+    // var url = URL.createObjectURL(blob);
 
-    var a = document.createElement("a");
-    document
-        .body
-        .appendChild(a);
-    a.style = "display: none";
-    a.href = url;
-    a.download = "sample.wav";
-    a.click();
-    window
-        .URL
-        .revokeObjectURL(url);
+    // var a = document.createElement("a");
+    // document
+    //     .body
+    //     .appendChild(a);
+    // a.style = "display: none";
+    // a.href = url;
+    // a.download = "sample.wav";
+    // a.click();
+    // window
+    //     .URL
+    //     .revokeObjectURL(url);
 
     var reader = new FileReader();
 
