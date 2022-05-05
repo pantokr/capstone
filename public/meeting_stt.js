@@ -6,9 +6,10 @@ import {
     doc,
     setDoc,
     updateDoc,
-    onSnapshot
+    onSnapshot,
+    getDoc
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-import {startRecord, stopRecord, faceExpressionsRecognition} from "./meeting_emotions.js";
+import { startRecord, stopRecord, faceExpressionsRecognition } from "./meeting_emotions.js";
 
 faceExpressionsRecognition();
 
@@ -22,11 +23,16 @@ async function startSTT(roomId, isCaller) {
     const chatCol = collection(db, "chats");
     const chatRef = doc(chatCol, roomId);
 
+    let startTime = null;
+    let chatLogCol = null;
     let name = null;
-    
+    let uid = null;
+    let isOpponent = false;
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
             name = user.displayName;
+            uid = user.uid;
             if (isCaller == true) {
                 setDoc(chatRef, { caller: name });
             } else {
@@ -35,6 +41,7 @@ async function startSTT(roomId, isCaller) {
                     start: getTimestamp()
                 });
             }
+            addUserLog();
         } else {
             console.log("No User.");
         }
@@ -53,7 +60,6 @@ async function startSTT(roomId, isCaller) {
                         .doc
                         .data();
                     let parsed_data = JSON.parse(JSON.stringify(data))
-                    let isCaller = parsed_data.isCaller;
                     let speecher = parsed_data.speecher;
                     let text = parsed_data.text;
 
@@ -73,7 +79,6 @@ async function startSTT(roomId, isCaller) {
                             .querySelector(".chatLog")
                             .append(myBox);
 
-                        
 
                     } else {
                         let oppBox = document.createElement('div');
@@ -88,12 +93,39 @@ async function startSTT(roomId, isCaller) {
                             .querySelector('.chatLog')
                             .append(oppBox);
 
+
+
+                        if (!isOpponent) {
+                            updateDoc(doc(chatLogCol, startTime), { opponent: speecher });
+                            isOpponent = true;
+                        }
                     }
-                    let minbox = document.querySelector(".min-content");
+                    let minbox = document.querySelector('.min-content');
                     minbox.scrollTop = minbox.scrollHeight;
+
                 }
             });
     });
+
+    async function addUserLog() {
+
+        const userCol = collection(db, "users");
+        const userRef = doc(userCol, uid);
+        chatLogCol = collection(userRef, "chat_logs");
+        startTime = getTimestamp();
+        // const chatDoc = await getDoc(chatRef);
+        // let data = chatDoc.data();
+        // let parsed_data = JSON.parse(JSON.stringify(data));
+
+        // console.log("data : ", parsed_data);
+        // let opponentName = name == parsed_data.caller ? parsed_data.callee : parsed_data.caller;
+        // console.log("opName : ", opponentName);
+
+        setDoc(doc(chatLogCol, startTime), {
+            roomID: roomId,
+            opponent: ""
+        });
+    }
 
     function recognizeChat() {
         let recognition = new SpeechRecognition();
@@ -103,7 +135,7 @@ async function startSTT(roomId, isCaller) {
 
         recognition.start();
 
-        muteBtn.onclick = function() {
+        muteBtn.onclick = function () {
             isMuted = isMuted ? false : true;
         }
 
@@ -119,32 +151,32 @@ async function startSTT(roomId, isCaller) {
             }
         };
 
-        function getKeyByValue(object, value) {   
-            return Object.keys(object).find(key => object[key] === value); 
-        } 
+        function getKeyByValue(object, value) {
+            return Object.keys(object).find(key => object[key] === value);
+        }
 
         recognition.onend = async function () {
             // 화상 감정 분석 부분<지우지 말아주세요>
-        //     try{
-        //         const detections = await faceapi.detectAllFaces(remoteVideo, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
-                
-        //         if(detections == null)
-        //         var emotions = Object.keys(detections[0].expressions).map(function (key) {
-        //             return detections[0].expressions[key]; 
-        //         }); 
-        //         var max = Math.max.apply(null,emotions); 
-        //         console.log(getKeyByValue(detections[0].expressions,max));
+            //     try{
+            //         const detections = await faceapi.detectAllFaces(remoteVideo, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
 
-        //         await addChatting();
-        //         recognition.start();
-        //     }
-        //     catch(e){
-        //         console.log("얼굴 인식 실패")
-                // await addChatting();
-                // recognition.start();
-        //     }
-                await addChatting();
-                recognition.start();
+            //         if(detections == null)
+            //         var emotions = Object.keys(detections[0].expressions).map(function (key) {
+            //             return detections[0].expressions[key]; 
+            //         }); 
+            //         var max = Math.max.apply(null,emotions); 
+            //         console.log(getKeyByValue(detections[0].expressions,max));
+
+            //         await addChatting();
+            //         recognition.start();
+            //     }
+            //     catch(e){
+            //         console.log("얼굴 인식 실패")
+            // await addChatting();
+            // recognition.start();
+            //     }
+            await addChatting();
+            recognition.start();
         };
         async function addChatting() {
             if (finalText != null) {
