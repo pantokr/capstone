@@ -314,3 +314,12 @@ export {
     stopRecord,
     recognizeFaceEmotion
 };
+
+function setEmotion(result){
+    const emotion = document.querySelector('#emotion');
+  
+    if(result == 1) emotion.innerHTML = "😡";
+    else if(result == 2) emotion.innerHTML = "😊";
+    else if(result == 3) emotion.innerHTML = "😭";
+    else if(result == 4) emotion.innerHTML = "😐";
+  }
