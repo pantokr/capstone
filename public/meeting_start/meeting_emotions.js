@@ -1,5 +1,6 @@
-import "./firebase_initialization.js";
+import "../firebase_initialization.js";
 import {updateDoc} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 
 var leftchannel = [];
 var rightchannel = [];
@@ -37,7 +38,7 @@ async function recognizeFaceEmotion() {
     // 객체 배열 속 key 값을 console로 찍기
 
     var emt = transformEmotion(getKeyByValue(detections[0].expressions, max));
-    //console.log("Face : " + emt);
+    // console.log("Face :"+ getKeyByValue(detections[0].expressions, max));
     return emt;
     // console.log(detections);
 
@@ -144,7 +145,7 @@ async function stopRecord(ref = null) {
     // write the PCM samples
     var index = 44;
     var volume = 1;
-    for (var i = 0; i< interleaved.length; i++) {
+    for (var i = 0; i < interleaved.length; i++) {
         view.setInt16(index, interleaved[i] * (0x7FFF * volume), true);
         index += 2;
     }
@@ -152,19 +153,10 @@ async function stopRecord(ref = null) {
     // our final blob
     blob = new Blob([view], {type: 'audio/wav'});
 
-    // var url = URL.createObjectURL(blob);
-
-    // var a = document.createElement("a");
-    // document
-    //     .body
-    //     .appendChild(a);
-    // a.style = "display: none";
-    // a.href = url;
-    // a.download = "sample.wav";
-    // a.click();
-    // window
-    //     .URL
-    //     .revokeObjectURL(url);
+    // var url = URL.createObjectURL(blob); var a = document.createElement("a");
+    // document     .body     .appendChild(a); a.style = "display: none"; a.href =
+    // url; a.download = "sample.wav"; a.click(); window     .URL
+    // .revokeObjectURL(url);
 
     var reader = new FileReader();
 
@@ -184,13 +176,16 @@ async function stopRecord(ref = null) {
             .then(res => res.json())
             .then(res => {
                 var v_emt = transformEmotion(res.emotion);
-                // var v_emt = res.emotion;
-                // var f_emt = recognizeFaceEmotion();
+                // var v_emt = res.emotion; var f_emt = recognizeFaceEmotion();
 
                 console.log("Voice : " + v_emt + " Face : " + f_emt);
 
                 var emt = uniteEmmtion(v_emt, f_emt);
                 console.log("Emotion : " + emt);
+
+                // if(emt == 'Bad'){     setEmotion(1); } else if(emt == 'Good'){ setEmotion(2);
+                // } else if(emt == 'Sad'){     setEmotion(3); } else{ setEmotion(4); }
+
                 updateDoc((ref), {emotion: emt});
             });
     }
@@ -231,11 +226,23 @@ function writeUTFBytes(view, offset, string) {
 }
 
 function transformEmotion(emt) {
-    if (emt == 'happiness' || emt == 'surprised') {
+    let r_emt = null;
+
+    if (emt == 'happiness') {
+        r_emt = 'happy';
+    } else if (emt == 'fear') {
+        r_emt = 'fearful';
+    } else if (emt == 'disgust') {
+        r_emt = 'disgusted';
+    } else {
+        r_emt = emt;
+    }
+
+    if (r_emt == 'happy' || r_emt == 'surprised') {
         return 'Good';
-    } else if (emt == 'sadness' || emt == 'fear') {
+    } else if (r_emt == 'sad' || r_emt == 'fearful') {
         return 'Sad'
-    } else if (emt == 'disgust' || emt == 'angry') {
+    } else if (r_emt == 'disgusted' || r_emt == 'angry') {
         return 'Bad';
     } else {
         return 'Normal';
@@ -243,19 +250,19 @@ function transformEmotion(emt) {
 }
 
 function uniteEmmtion(v, f) {
-    if (v == 'Good') {
+    if (v == 'Good' || f == 'Good') {
         return 'Good';
-    } else if (v == 'Sad') {
+    } else if (v == 'Sad' || f == 'Sad') {
         return 'Sad';
-    } else if (f == 'Bad') {
+    } else if (v == 'Bad' || f == 'Bad') {
         return 'Bad';
     } else {
         return 'Normal';
     }
 }
 
-function getEmotion(){
-onSnapshot(speechCol, (snapshot) => {
+function getEmotion(name) {
+    onSnapshot(speechCol, (snapshot) => {
         snapshot
             .docChanges()
             .forEach(async (change) => {
@@ -266,60 +273,41 @@ onSnapshot(speechCol, (snapshot) => {
                     let parsed_data = JSON.parse(JSON.stringify(data))
                     let speecher = parsed_data.speecher;
                     let text = parsed_data.text;
+                    let emotion = parsed_data.emotion;
 
-                    if (speecher == name) {
-                        let myBox = document.createElement("div");
-                        myBox.setAttribute("class", "myBox");
+                    if (speecher != name) {
 
-                        let myText = document.createElement("div");
-
-                        myText.setAttribute("id", "myText");
-                        myText.textContent = text;
-
-                        console.log("my text: ", myText.textContent);
-
-                        myBox.append(myText);
-                        document
-                            .querySelector(".chatLog")
-                            .append(myBox);
-
-                    } else {
-                        let oppBox = document.createElement('div');
-                        oppBox.setAttribute("class", "oppBox");
-
-                        let oppText = document.createElement('div');
-                        oppText.setAttribute("id", "oppText");
-                        oppText.textContent = text;
-                        console.log("opponent text : ", oppText.textContent);
-                        oppBox.append(oppText);
-                        document
-                            .querySelector('.chatLog')
-                            .append(oppBox);
-
-                        if (!isOpponent) {
-                            updateDoc(doc(chatLogCol, startTime), {opponent: speecher});
-                            isOpponent = true;
+                        if (emt == 'Bad') {
+                            setEmotion(1);
+                        } else if (emt == 'Good') {
+                            setEmotion(2);
+                        } else if (emt == 'Sad') {
+                            setEmotion(3);
+                        } else {
+                            setEmotion(4);
                         }
-                    }
-                    let minbox = document.querySelector('.min-content');
-                    minbox.scrollTop = minbox.scrollHeight;
 
+                    }
                 }
             });
     });
 }
 
+function setEmotion(result) {
+    const emotion = document.querySelector('#emotion');
+
+    if (result == 1) 
+        emotion.innerHTML = "😡";
+    else if (result == 2) 
+        emotion.innerHTML = "😊";
+    else if (result == 3) 
+        emotion.innerHTML = "😭";
+    else if (result == 4) 
+        emotion.innerHTML = "😐";
+    }
+
 export {
     startRecord,
     stopRecord,
-    recognizeFaceEmotion
+    getEmotion
 };
-
-function setEmotion(result){
-    const emotion = document.querySelector('#emotion');
-  
-    if(result == 1) emotion.innerHTML = "😡";
-    else if(result == 2) emotion.innerHTML = "😊";
-    else if(result == 3) emotion.innerHTML = "😭";
-    else if(result == 4) emotion.innerHTML = "😐";
-  }

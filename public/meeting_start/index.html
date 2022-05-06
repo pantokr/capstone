@@ -14,7 +14,7 @@
 
     <!-- <link rel="stylesheet" href="https://unpkg.com/mvp.css"> -->
 
-    <link href="images/logo.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="../images/logo.ico" rel="shortcut icon" type="image/x-icon">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 
     <!-- Bootstrap core CSS -->
@@ -22,8 +22,8 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- custom CSS -->
-    <link href="main.css" rel="stylesheet" type="text/css">
-    <link href="nav.css" rel="stylesheet">
+    <link href="../main.css" rel="stylesheet" type="text/css">
+    <link href="../nav.css" rel="stylesheet">
 
     <!-- animate CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -36,9 +36,9 @@
         name="apple-mobile-web-app-capable" content="yes"> -->
 
     <!-- <script type="module" src="home.js"></script> -->
-    <script defer="defer" src="face-api.min.js"></script>
+    <script defer="defer" src="./face-api.min.js"></script>
     <script type="module" src="./meeting_start.js"></script>
-    <script type="module" src="./meeting_stt.js"></script>
+    <!-- <script type="module" src="./meeting_stt.js"></script> -->
 </head>
 
 <body style="width: 100%; height : 100%;">
@@ -47,13 +47,13 @@
     <nav class="navbar" style="border-bottom: 0.001px solid rgb(216, 216, 216);">
         <div class="cover-container  d-flex w-100 h-100 p- mx-auto flex-column">
             <div>
-                <img class="float-md-start mb-0 feature" src="images/meecord-logo.png" onclick="location.href=''" alt=""
+                <img class="float-md-start mb-0 feature" src="../images/meecord-logo.png" onclick="location.href=''" alt=""
                     width="132" height="48">
                 <nav class="nav justify-content-center float-md-end">
-                    <a class="nav-link feature active" onclick="location.href='cover.html'">홈</a>
-                    <a class="nav-link feature" onclick="location.href='mypage.html'">마이페이지</a>
-                    <a class="nav-link feature" onclick="location.href='introduction.html'">소개</a>
-                    <a class="nav-link feature" onclick="location.href='index.html'">로그아웃</a>
+                    <a class="nav-link feature active" onclick="location.href='../cover'">홈</a>
+                    <a class="nav-link feature" onclick="location.href='../mypage'">마이페이지</a>
+                    <a class="nav-link feature" onclick="location.href='../introduction'">소개</a>
+                    <a class="nav-link feature" onclick="location.href='../'">로그아웃</a>
                 </nav>
             </div>
         </div>
@@ -122,10 +122,10 @@
                 <!-- 오디오, 카메라 설정 -->
                 <div class="row " id="setting">
                     <div class="col">
-                        <img src="images/unmute.png" alt="" id="muteBtn">
+                        <img src="../images/unmute.png" alt="" id="muteBtn">
                     </div>
                     <div class="col">
-                        <img src="images/cameraon.png" alt="" id="cameraBtn">
+                        <img src="../images/cameraon.png" alt="" id="cameraBtn">
                     </div>
                 </div>
 

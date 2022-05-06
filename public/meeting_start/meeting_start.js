@@ -1,4 +1,4 @@
-import "./firebase_initialization.js";
+import "../firebase_initialization.js";
 import {startSTT} from "./meeting_stt.js"
 import {
     getFirestore,

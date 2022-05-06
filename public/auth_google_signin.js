@@ -32,9 +32,9 @@ async function registerUserData(uid) {
 
     if (userSnap.exists()) {
         console.log(userSnap.data());
-        window.location.href = "./cover.html";
+        window.location.href = "./cover";
     } else {
         console.log('No User.');
-        window.location.href = "./register_google.html";
+        window.location.href = "./register_google/register_google.html";
     }
 }

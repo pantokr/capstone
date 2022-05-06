@@ -1,12 +1,9 @@
-import "./firebase_initialization.js";
+import "../firebase_initialization.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import {
     getFirestore,
     collection,
     doc,
-    setDoc,
-    updateDoc,
-    onSnapshot,
     getDocs
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
@@ -60,7 +57,7 @@ async function printDocData() {
         date.innerText += doc.id;
         opponent.innerText += parsed_data.opponent;
 
-        a.href = "./conversation_record.html?roomCode=" 
+        a.href = "../conversation_record/?roomCode=" 
             + parsed_data.roomID 
             + "&date=" + doc.id
             + "&opponent=" + parsed_data.opponent;

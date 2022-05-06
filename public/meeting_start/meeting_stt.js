@@ -1,4 +1,4 @@
-import "./firebase_initialization.js";
+import "../firebase_initialization.js";
 import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import {
     getFirestore,
@@ -8,26 +8,27 @@ import {
     updateDoc,
     onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-import {startRecord, stopRecord, recognizeFaceEmotion} from "./meeting_emotions.js";
+import {startRecord, stopRecord, getEmotion} from "./meeting_emotions.js";
 
 async function startSTT(roomId, isCaller) {
+
 
     faceapi
         .nets
         .tinyFaceDetector
-        .loadFromUri('/models');
+        .loadFromUri('./models');
     faceapi
         .nets
         .faceLandmark68Net
-        .loadFromUri('/models');
+        .loadFromUri('./models');
     faceapi
         .nets
         .faceRecognitionNet
-        .loadFromUri('/models');
+        .loadFromUri('./models');
     faceapi
         .nets
         .faceExpressionNet
-        .loadFromUri('/models');
+        .loadFromUri('./models');
 
     const muteBtn = document.getElementById("muteBtn");
 
@@ -57,6 +58,8 @@ async function startSTT(roomId, isCaller) {
                 });
             }
             addUserLog();
+            getEmotion(name);
+
         } else {
             console.log("No User.");
         }
@@ -170,9 +173,7 @@ async function startSTT(roomId, isCaller) {
             if (finalText != null) {
 
                 var speechRef = doc(speechCol, getTimestamp());
-                stopRecord(speechRef).then(() => {
-                    recognizeFaceEmotion();
-                })
+                stopRecord(speechRef);
                 setDoc((speechRef), {
                     speecher: name,
                     isCaller: isCaller == true
@@ -200,17 +201,17 @@ async function startSTT(roomId, isCaller) {
         let seconds = now.getSeconds(); // 초
 
         var timestamp = "";
-        timestamp += (year % 2000).toString() + "/";
+        timestamp += (year % 2000).toString() + "-";
         timestamp += (
             month > 9
                 ? ""
                 : "0"
-        ) + month.toString() + "/";
+        ) + month.toString() + "-";
         timestamp += (
             date > 9
                 ? ""
                 : "0"
-        ) + date.toString() + "/";
+        ) + date.toString() + "-";
         timestamp += (
             hours > 9
                 ? ""

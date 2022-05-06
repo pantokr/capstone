@@ -1,5 +1,5 @@
-import "./firebase_initialization.js";
-import { getFirestore, collection, doc, getDoc, setDoc, addDoc, updateDoc, onSnapshot, deleteDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import "../firebase_initialization.js";
+import { getFirestore, collection, doc, getDoc, setDoc, addDoc, updateDoc, onSnapshot, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
 
@@ -394,6 +394,10 @@ async function STT(roomId, chatName) {
         
         callerBox.append(callerTextp);
         document.querySelector('.chatLog').append(callerBox);
+
+        let minbox = document.querySelector('.min-content');
+        minbox.scrollTop = minbox.scrollHeight;
+        
       }
     });
   });
@@ -415,6 +419,9 @@ async function STT(roomId, chatName) {
 
         calleeBox.append(calleeTextp);
         document.querySelector('.chatLog').append(calleeBox);
+
+        let minbox = document.querySelector('.min-content');
+        minbox.scrollTop = minbox.scrollHeight;
       }
     });
   });
