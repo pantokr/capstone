@@ -4,6 +4,7 @@ import {
     getFirestore,
     collection,
     doc,
+    getDoc,
     getDocs
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
@@ -12,6 +13,8 @@ import {
 const url = new URL(window.location.href);
 const urlParams = url.searchParams;
 const roomId = urlParams.get("roomCode");
+const date = urlParams.get("date");
+const opponent = urlParams.get("opponent");
 const auth = getAuth();
 const db = getFirestore();
 
@@ -19,7 +22,6 @@ let myName = null;
 onAuthStateChanged(auth, (user) => {
     if (user) {
         myName = user.displayName;
-        console.log("1", user.name);
         showChats();
     } else {
         console.log("No User.");
@@ -31,6 +33,12 @@ async function showChats() {
     const chatCol = collection(db, "chats");
     const chatRef = doc(chatCol, roomId);
     const querySnapshot = await getDocs(collection(chatRef, "speeches"));
+
+    let sub_stTime = document.querySelector(".sub_stTime");
+    sub_stTime.textContent += date;
+
+    let title_area = document.querySelector(".title_area");
+    title_area.textContent = opponent + "님과의 대화";
 
     querySnapshot.forEach((doc) => {
         let parsed_data = JSON.parse(JSON.stringify(doc.data()));

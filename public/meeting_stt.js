@@ -218,17 +218,17 @@ async function startSTT(roomId, isCaller) {
         let seconds = now.getSeconds(); // 초
 
         var timestamp = "";
-        timestamp += (year % 2000).toString() + ":";
+        timestamp += (year % 2000).toString() + "/";
         timestamp += (
             month > 9
                 ? ""
                 : "0"
-        ) + month.toString() + ":";
+        ) + month.toString() + "/";
         timestamp += (
             date > 9
                 ? ""
                 : "0"
-        ) + date.toString() + ":";
+        ) + date.toString() + "/";
         timestamp += (
             hours > 9
                 ? ""

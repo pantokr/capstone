@@ -31,7 +31,7 @@ async function printDocData() {
     const userCol = collection(db, "users");
     const userRef = doc(userCol, uid);
     const querySnapshot = await getDocs(collection(userRef, "chat_logs"));
-    
+
     querySnapshot.forEach((doc) => {
         let parsed_data = JSON.parse(JSON.stringify(doc.data()));
 
@@ -60,7 +60,11 @@ async function printDocData() {
         date.innerText += doc.id;
         opponent.innerText += parsed_data.opponent;
 
-        a.href = "./conversation_record.html?roomCode="+parsed_data.roomID;
+        a.href = "./conversation_record.html?roomCode=" 
+            + parsed_data.roomID 
+            + "&date=" + doc.id
+            + "&opponent=" + parsed_data.opponent;
+
         console.log(a.herf);
         a.append(num);
         a.append(roomCode);
@@ -68,7 +72,7 @@ async function printDocData() {
         a.append(opponent);
         li.append(a);
         list_componentouter.appendChild(li);
-        
+
 
         // // doc.data() is never undefined for query doc snapshots
         // console.log(doc.id, " => ", doc.data());
