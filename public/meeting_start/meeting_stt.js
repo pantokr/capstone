@@ -8,7 +8,7 @@ import {
     updateDoc,
     onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-import {startRecord, stopRecord, getEmotion} from "./meeting_emotions.js";
+import {startRecord, stopRecord, setEmotion} from "./meeting_emotions.js";
 
 async function startSTT(roomId, isCaller) {
 
@@ -77,9 +77,9 @@ async function startSTT(roomId, isCaller) {
                     let parsed_data = JSON.parse(JSON.stringify(data))
                     let speecher = parsed_data.speecher;
                     let text = parsed_data.text;
-                    let emotion = parsed_data.emotion;
 
                     if (speecher == name) {
+
                         let myBox = document.createElement("div");
                         myBox.setAttribute("class", "myBox");
 
@@ -88,7 +88,7 @@ async function startSTT(roomId, isCaller) {
                         myText.setAttribute("id", "myText");
                         myText.textContent = text;
 
-                        console.log("my text: ", myText.textContent);
+                        console.log("My Text : ", myText.textContent);
 
                         myBox.append(myText);
                         document
@@ -96,26 +96,14 @@ async function startSTT(roomId, isCaller) {
                             .append(myBox);
 
                     } else {
-                        if (speecher != name) {
 
-                            if (emt == 'Bad') {
-                                setEmotion(1);
-                            } else if (emt == 'Good') {
-                                setEmotion(2);
-                            } else if (emt == 'Sad') {
-                                setEmotion(3);
-                            } else {
-                                setEmotion(4);
-                            }
-
-                        }
                         let oppBox = document.createElement('div');
                         oppBox.setAttribute("class", "oppBox");
 
                         let oppText = document.createElement('div');
                         oppText.setAttribute("id", "oppText");
                         oppText.textContent = text;
-                        console.log("opponent text : ", oppText.textContent);
+                        console.log("Opponent ext : ", oppText.textContent);
                         oppBox.append(oppText);
                         document
                             .querySelector('.chatLog')
@@ -129,6 +117,27 @@ async function startSTT(roomId, isCaller) {
                     let minbox = document.querySelector('.min-content');
                     minbox.scrollTop = minbox.scrollHeight;
 
+                } else if (change.type === "modified") {
+                    let data = change
+                        .doc
+                        .data();
+                    let parsed_data = JSON.parse(JSON.stringify(data))
+                    let speecher = parsed_data.speecher;
+
+                    let emotion = parsed_data.emotion;
+                    if (speecher != name) {
+
+                        console.log("Opponent Emotion : " + emotion);
+                        if (emotion == 'Bad') {
+                            setEmotion(1);
+                        } else if (emotion == 'Good') {
+                            setEmotion(2);
+                        } else if (emotion == 'Sad') {
+                            setEmotion(3);
+                        } else {
+                            setEmotion(4);
+                        }
+                    }
                 }
             });
     });
@@ -163,7 +172,7 @@ async function startSTT(roomId, isCaller) {
         }
 
         recognition.onresult = function (e) {
-            console.log("isMuted: ", isMuted);
+            //console.log("isMuted: ", isMuted);
             if (!isMuted) {
                 let texts = Array
                     .from(e.results)
@@ -222,7 +231,7 @@ async function startSTT(roomId, isCaller) {
             date > 9
                 ? ""
                 : "0"
-        ) + date.toString() + "-";
+        ) + date.toString() + " ";
         timestamp += (
             hours > 9
                 ? ""

@@ -148,7 +148,7 @@ async function stopRecord(ref = null) {
     // write the PCM samples
     var index = 44;
     var volume = 1;
-    for (var i = 0; i < interleaved.length; i++) {
+    for (var i = 0; i< interleaved.length; i++) {
         view.setInt16(index, interleaved[i] * (0x7FFF * volume), true);
         index += 2;
     }
@@ -178,13 +178,14 @@ async function stopRecord(ref = null) {
         })
             .then(res => res.json())
             .then(res => {
+
                 var v_emt = transformEmotion(res.emotion);
                 // var v_emt = res.emotion; var f_emt = recognizeFaceEmotion();
 
                 console.log("Voice : " + v_emt + " Face : " + f_emt);
 
-                var emt = uniteEmmtion(v_emt, f_emt);
-                console.log("Emotion : " + emt);
+                var emt = uniteEmotion(v_emt, f_emt);
+                //console.log("Emotion : " + emt);
 
                 // if(emt == 'Bad'){     setEmotion(1); } else if(emt == 'Good'){ setEmotion(2);
                 // } else if(emt == 'Sad'){     setEmotion(3); } else{ setEmotion(4); }
@@ -237,7 +238,12 @@ function transformEmotion(emt) {
         r_emt = 'fearful';
     } else if (emt == 'disgust') {
         r_emt = 'disgusted';
-    } else {
+    } else if(emt =='sadness'){
+        r_emt = 'sad';
+    } else if(emt == 'surprise'){
+        r_emt = 'surprised';
+    }
+    else {
         r_emt = emt;
     }
 
@@ -252,7 +258,7 @@ function transformEmotion(emt) {
     }
 }
 
-function uniteEmmtion(v, f) {
+function uniteEmotion(v, f) {
     if (v == 'Good' || f == 'Good') {
         return 'Good';
     } else if (v == 'Sad' || f == 'Sad') {
@@ -262,38 +268,6 @@ function uniteEmmtion(v, f) {
     } else {
         return 'Normal';
     }
-}
-
-function getEmotion(speechCol, name) {
-    onSnapshot(speechCol, (snapshot) => {
-        snapshot
-            .docChanges()
-            .forEach(async (change) => {
-                if (change.type === "added") {
-                    let data = change
-                        .doc
-                        .data();
-                    let parsed_data = JSON.parse(JSON.stringify(data))
-                    let speecher = parsed_data.speecher;
-                    let text = parsed_data.text;
-                    let emotion = parsed_data.emotion;
-
-                    if (speecher != name) {
-
-                        if (emt == 'Bad') {
-                            setEmotion(1);
-                        } else if (emt == 'Good') {
-                            setEmotion(2);
-                        } else if (emt == 'Sad') {
-                            setEmotion(3);
-                        } else {
-                            setEmotion(4);
-                        }
-
-                    }
-                }
-            });
-    });
 }
 
 function setEmotion(result) {
@@ -312,5 +286,5 @@ function setEmotion(result) {
 export {
     startRecord,
     stopRecord,
-    getEmotion
+    setEmotion
 };
