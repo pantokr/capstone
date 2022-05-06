@@ -1,18 +1,4 @@
-
-
-#title{
-  border-bottom: 1px solid rgb(216, 216, 216);
-  margin: 1px 0 2px 0 px;
-  width:100%;
-  height: 2.5rem;
-  padding: .3rem;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  position:relative;
-  font-size:1.2rem;
-
-}
+/* 제목부분 */
 .title_area , .sub_area {
   justify-content: left;
   margin: .5rem;
@@ -42,30 +28,76 @@
 
 }
 
-.node_view{
-  text-align: right;
-  /* padding-bottom: 1rem;
-  border-bottom: 1px solid #efefef; */
-}
 
-.conversation_area{
-  padding: 1rem;
+/* body */
+#title{
+  border-bottom: 1px solid rgb(216, 216, 216);
+  width:100%;
+  height: 2.5rem;
+  padding: .3rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  position:relative;
+  font-size:1.2rem;
 }
 
 #min, #rq{
-
   font-family: 'Jua', sans-serif;
   border-radius: 5px;
   border: 1px solid rgb(216, 216, 216);
   margin-top :.5rem;
-  padding: 0 .5rem .5rem .5rem .5rem;
   margin: 1rem;
+  padding :0;
+}
+
+/* 대화록 */
+.min-content{
+    position:relative;
+    overflow-y :scroll;
+    padding :.3rem;
+    height : 18.8rem;
+}
+.chatLog > .myBox , 
+.chatLog > .oppBox {
+  margin : 4px;
+  
+}
+
+.myBox{
+  text-align: right;
+  padding-left: 20%;
+  position: relative;
+}
+
+.oppBox{
+  text-align: left;
+  padding-right: 20%;
+  position: relative;
 }
 
 
-.min-content{
+.myBox > #myText ,
+.oppBox > #oppText {
+
+  padding : 5px;
+  display: inline-block; 
+  border-radius: 10px;
+}
+
+#myText{
+  background-color: rgb(104, 162, 236);
+  color: white;
+  border : 2px solid rgb(104, 162, 236);
+}
+
+#oppText{
+  background-color: #D3D3D3;
+  border : 2px solid #D3D3D3;
+}
+
+
+.rq-content{
   position:relative;
-  padding: .3rem;
-  overflow-y: auto;
-  height: 19rem;
+  height:24%;
 }
