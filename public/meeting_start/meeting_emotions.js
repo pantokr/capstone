@@ -1,6 +1,5 @@
 import "../firebase_initialization.js";
-import {updateDoc} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import {updateDoc, onSnapshot} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 var leftchannel = [];
 var rightchannel = [];
@@ -107,9 +106,13 @@ async function startRecord() {
 }
 async function stopRecord(ref = null) {
     // console.log('Stop Recording.');
-
-    recorder.disconnect(context.destination);
-    mediaStream.disconnect(recorder);
+    try {
+        recorder.disconnect(context.destination);
+        mediaStream.disconnect(recorder);
+    } catch (error) {
+        return;
+    }
+    
 
     if (ref == null) {
         return;
@@ -261,7 +264,7 @@ function uniteEmmtion(v, f) {
     }
 }
 
-function getEmotion(name) {
+function getEmotion(speechCol, name) {
     onSnapshot(speechCol, (snapshot) => {
         snapshot
             .docChanges()

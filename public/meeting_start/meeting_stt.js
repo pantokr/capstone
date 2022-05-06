@@ -12,7 +12,6 @@ import {startRecord, stopRecord, getEmotion} from "./meeting_emotions.js";
 
 async function startSTT(roomId, isCaller) {
 
-
     faceapi
         .nets
         .tinyFaceDetector
@@ -38,6 +37,7 @@ async function startSTT(roomId, isCaller) {
     const db = getFirestore();
     const chatCol = collection(db, "chats");
     const chatRef = doc(chatCol, roomId);
+    const speechCol = collection(chatRef, 'speeches');
 
     let startTime = null;
     let chatLogCol = null;
@@ -58,14 +58,11 @@ async function startSTT(roomId, isCaller) {
                 });
             }
             addUserLog();
-            getEmotion(name);
 
         } else {
             console.log("No User.");
         }
     });
-
-    const speechCol = collection(chatRef, 'speeches');
 
     recognizeChat();
 
@@ -80,6 +77,7 @@ async function startSTT(roomId, isCaller) {
                     let parsed_data = JSON.parse(JSON.stringify(data))
                     let speecher = parsed_data.speecher;
                     let text = parsed_data.text;
+                    let emotion = parsed_data.emotion;
 
                     if (speecher == name) {
                         let myBox = document.createElement("div");
@@ -98,6 +96,19 @@ async function startSTT(roomId, isCaller) {
                             .append(myBox);
 
                     } else {
+                        if (speecher != name) {
+
+                            if (emt == 'Bad') {
+                                setEmotion(1);
+                            } else if (emt == 'Good') {
+                                setEmotion(2);
+                            } else if (emt == 'Sad') {
+                                setEmotion(3);
+                            } else {
+                                setEmotion(4);
+                            }
+
+                        }
                         let oppBox = document.createElement('div');
                         oppBox.setAttribute("class", "oppBox");
 
@@ -141,7 +152,7 @@ async function startSTT(roomId, isCaller) {
         let isMuted = false;
         recognition.lang = "ko-KR";
         recognition.maxAlternatives = 10000;
-        
+
         recognition.start();
         startRecord();
 
