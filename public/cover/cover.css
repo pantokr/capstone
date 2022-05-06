@@ -64,26 +64,27 @@ button {
   font-weight: bold;
   font-size: 1rem;
 }
-.modal {
-  
-  position: fixed;
-  
-  width: 25rem;
-  height: 10rem;
-  padding : 2rem;
-  
-  background-color: #fff;
- 
-  border: 0.05rem solid;
-  border-color: #aaa;
-  
-  /* justify-content: center;
-  align-items: center; */
-  
-  
+
+.card-img-top{
+  text-align: center;
+  justify-content: center;
+  width: 15rem;
 }
-
-
+/* #main{ 
+  max-width: 80em;
+} */
+.span{
+  text-align: center;
+  /* width: 30rem; */
+  justify-content: center;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 5px;
+  box-sizing: content-box;
+  margin: 2rem;
+  justify-content: center;
+  align-items: center;
+  padding : 1rem;
+}
 
 .modal_content .modal_title{
   margin-top:2rem;

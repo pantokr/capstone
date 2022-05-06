@@ -383,9 +383,11 @@ async function hangUp(e) {
         await deleteDoc(roomRef);
     }
 
+    // 초기화
     document
         .location
         .reload(true);
+         
 }
 
 function registerPeerConnectionListeners() {
