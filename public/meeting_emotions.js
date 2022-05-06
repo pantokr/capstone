@@ -9,7 +9,6 @@ var mediaStream = null;
 var sampleRate = 44100;
 var context = null;
 var blob = null;
-// async function getEmotion(ref) {     f_emt = await recognizeFaceEmotion();
 // stopRecord(ref); } 얼굴 인식 감정 분석 함수
 async function recognizeFaceEmotion() {
     // 3초마다 얼굴 감정 분석 faceExpressionsRecognition();
@@ -145,7 +144,7 @@ async function stopRecord(ref = null) {
     // write the PCM samples
     var index = 44;
     var volume = 1;
-    for (var i = 0; i < interleaved.length; i++) {
+    for (var i = 0; i< interleaved.length; i++) {
         view.setInt16(index, interleaved[i] * (0x7FFF * volume), true);
         index += 2;
     }
@@ -253,6 +252,61 @@ function uniteEmmtion(v, f) {
     } else {
         return 'Normal';
     }
+}
+
+function getEmotion(){
+onSnapshot(speechCol, (snapshot) => {
+        snapshot
+            .docChanges()
+            .forEach(async (change) => {
+                if (change.type === "added") {
+                    let data = change
+                        .doc
+                        .data();
+                    let parsed_data = JSON.parse(JSON.stringify(data))
+                    let speecher = parsed_data.speecher;
+                    let text = parsed_data.text;
+
+                    if (speecher == name) {
+                        let myBox = document.createElement("div");
+                        myBox.setAttribute("class", "myBox");
+
+                        let myText = document.createElement("div");
+
+                        myText.setAttribute("id", "myText");
+                        myText.textContent = text;
+
+                        console.log("my text: ", myText.textContent);
+
+                        myBox.append(myText);
+                        document
+                            .querySelector(".chatLog")
+                            .append(myBox);
+
+                    } else {
+                        let oppBox = document.createElement('div');
+                        oppBox.setAttribute("class", "oppBox");
+
+                        let oppText = document.createElement('div');
+                        oppText.setAttribute("id", "oppText");
+                        oppText.textContent = text;
+                        console.log("opponent text : ", oppText.textContent);
+                        oppBox.append(oppText);
+                        document
+                            .querySelector('.chatLog')
+                            .append(oppBox);
+
+                        if (!isOpponent) {
+                            updateDoc(doc(chatLogCol, startTime), {opponent: speecher});
+                            isOpponent = true;
+                        }
+                    }
+                    let minbox = document.querySelector('.min-content');
+                    minbox.scrollTop = minbox.scrollHeight;
+
+                }
+            });
+    });
 }
 
 export {

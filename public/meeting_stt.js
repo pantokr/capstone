@@ -125,11 +125,6 @@ async function startSTT(roomId, isCaller) {
         const userRef = doc(userCol, uid);
         chatLogCol = collection(userRef, "chat_logs");
         startTime = getTimestamp();
-        // const chatDoc = await getDoc(chatRef); let data = chatDoc.data(); let
-        // parsed_data = JSON.parse(JSON.stringify(data)); console.log("data : ",
-        // parsed_data); let opponentName = name == parsed_data.caller ?
-        // parsed_data.callee : parsed_data.caller; console.log("opName : ",
-        // opponentName);
 
         setDoc(doc(chatLogCol, startTime), {
             roomID: roomId,
@@ -164,20 +159,7 @@ async function startSTT(roomId, isCaller) {
             }
         };
 
-        // function getKeyByValue(object, value) {     return Object
-        // .keys(object)         .find(key => object[key] === value); }
-
         recognition.onend = async function () {
-            // 화상 감정 분석 부분<지우지 말아주세요>     try{         const detections = await
-            // faceapi.detectAllFaces(remoteVideo, new
-            // faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
-            // if(detections == null)         var emotions =
-            // Object.keys(detections[0].expressions).map(function (key) { return
-            // detections[0].expressions[key];         });         var max =
-            // Math.max.apply(null,emotions);
-            // console.log(getKeyByValue(detections[0].expressions,max));         await
-            // addChatting();         recognition.start();     }     catch(e){
-            // console.log("얼굴 인식 실패") await addChatting(); recognition.start();     }
 
             await addChatting();
 
