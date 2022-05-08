@@ -99,6 +99,10 @@ async function createRoom() {
             peerConnection.addTrack(track, localStream);
         });
 
+    localStream
+        .getAudioTracks()
+        .forEach((track) => (track.enabled = !track.enabled));
+
     // Code for collecting ICE candidates below
     const callerCandidatesCollection = collection(roomRef, 'callerCandidates');
 
@@ -237,6 +241,10 @@ async function joinRoomById(roomId) {
             .forEach(track => {
                 peerConnection.addTrack(track, localStream);
             });
+            
+        localStream
+            .getAudioTracks()
+            .forEach((track) => (track.enabled = !track.enabled));
 
         // Code for collecting ICE candidates below
         const calleeCandidatesCollection = collection(roomRef, 'calleeCandidates');
@@ -415,7 +423,7 @@ init();
 const muteBtn = document.getElementById("muteBtn");
 const cameraBtn = document.getElementById("cameraBtn");
 
-let muted = false;
+let muted = true;
 let cameraOff = false;
 
 // 오디오처리
@@ -429,13 +437,13 @@ function handleMuteClick() {
         // muteBtn.innerText = "Unmute";
         document
             .getElementById("muteBtn")
-            .src = "images/mute.png";
+            .src = "../images/mute.png";
         muted = true;
     } else {
         // muteBtn.innerText = "Mute";
         document
             .getElementById("muteBtn")
-            .src = "images/unmute.png";
+            .src = "../images/unmute.png";
         muted = false;
     }
 }
@@ -451,13 +459,13 @@ function handleCameraClick() {
         // cameraBtn.innerText = "Turn Camera Off";
         document
             .getElementById("cameraBtn")
-            .src = "images/cameraon.png";
+            .src = "../images/cameraon.png";
         cameraOff = false;
     } else {
         // cameraBtn.innerText = "Turn Camera On";
         document
             .getElementById("cameraBtn")
-            .src = "images/cameraoff.png";
+            .src = "../images/cameraoff.png";
         cameraOff = true;
     }
 }

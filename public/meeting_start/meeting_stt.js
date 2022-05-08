@@ -57,15 +57,13 @@ async function startSTT(roomId, isCaller) {
                     start: getTimestamp()
                 });
             }
-            addUserLog();
-
         } else {
             console.log("No User.");
         }
     });
 
     recognizeChat();
-
+    
     onSnapshot(speechCol, (snapshot) => {
         snapshot
             .docChanges()
@@ -110,7 +108,7 @@ async function startSTT(roomId, isCaller) {
                             .append(oppBox);
 
                         if (!isOpponent) {
-                            updateDoc(doc(chatLogCol, startTime), {opponent: speecher});
+                            addUserLog(speecher);                    
                             isOpponent = true;
                         }
                     }
@@ -142,7 +140,7 @@ async function startSTT(roomId, isCaller) {
             });
     });
 
-    async function addUserLog() {
+    async function addUserLog(opponent) {
 
         const userCol = collection(db, "users");
         const userRef = doc(userCol, uid);
@@ -151,14 +149,14 @@ async function startSTT(roomId, isCaller) {
 
         setDoc(doc(chatLogCol, startTime), {
             roomID: roomId,
-            opponent: ""
+            opponent: opponent
         });
     }
 
     function recognizeChat() {
         let recognition = new SpeechRecognition();
         let finalText = null;
-        let isMuted = false;
+        let isMuted = true;
         recognition.lang = "ko-KR";
         recognition.maxAlternatives = 10000;
 
@@ -183,12 +181,12 @@ async function startSTT(roomId, isCaller) {
         };
 
         recognition.onend = async function () {
-
             await addChatting();
 
             recognition.start();
             startRecord();
         };
+
         async function addChatting() {
             if (finalText != null) {
 
