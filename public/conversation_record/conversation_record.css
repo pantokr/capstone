@@ -1,4 +1,7 @@
 /* 제목부분 */
+#header{
+  margin-bottom: 2rem;
+}
 .title_area , .sub_area {
   justify-content: left;
   margin: .5rem;
