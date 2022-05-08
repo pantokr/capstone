@@ -392,7 +392,7 @@ async function hangUp(e) {
     }
 
     // 초기화
-    document
+    windows
         .location
         .reload(true);
          

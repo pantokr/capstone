@@ -167,7 +167,7 @@ video{
     position:relative;
     overflow-y :scroll;
     padding :.3rem;
-    height : 15rem;
+    height : 16.5rem;
 }
 .chatLog > .myBox , 
 .chatLog > .oppBox {
