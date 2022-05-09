@@ -1,12 +1,5 @@
 
 
-/* Custom default button */
-.btn-secondary,
-.btn-secondary:hover,
-.btn-secondary:focus {
-  color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
-}
 
 
 /*
@@ -46,7 +39,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 35rem;
-  height: 33rem;
+  height: 30rem;
   padding: 2.5rem;
   margin: 1rem 1rem 1rem;
   border: 1px solid rgb(216, 216, 216);
@@ -160,7 +153,9 @@ body {
  
 }
 button {
-  background-color: rgb(104, 162, 236);
+  background-color: #333;
+  /* text-shadow : none; */
+  color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 4px;
   cursor: pointer;
@@ -254,6 +249,3 @@ button {
   border-top-right-radius: 0;
 }
 
-input:invalid {
-  border-color: red;
-}

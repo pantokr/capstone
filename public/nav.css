@@ -2,17 +2,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border-bottom:; */
-    background-color: white;
+    
     /* padding-bottom:1rem; */
     border-bottom: 0.001px solid rgb(216, 216, 216);
+    /* background-color: #b6d1d4 ; */
+    background-color: #1d6a96;
   }
   
   
   .nav-link {
     padding: .25rem ;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.034);
+    /* color: rgba(255, 255, 255, 0.034); */
+    color :white;
     background-color: transparent;
     border-bottom: .25rem solid transparent;
     vertical-align: middle;
@@ -29,7 +31,9 @@
     margin-left: 1rem;
   }
   .active {
-    color: rgb(104, 162, 236);
+    /* color: rgb(104, 162, 236); */
+    /* color : white; */
+    color : #ffc045;
     /* border-bottom-color: rgb(104, 162, 236); */
   }
   .navbar_menu {

@@ -88,6 +88,7 @@ async function createRoom() {
     const db = getFirestore();
     const roomRef = await doc(collection(db, 'rooms'));
 
+
     console.log('Create PeerConnection with configuration: ', configuration);
     peerConnection = new RTCPeerConnection(configuration);
 
@@ -380,21 +381,25 @@ async function hangUp(e) {
     if (roomId) {
         const db = getFirestore();
         const roomRef = getDoc(roomId, collection(db, 'rooms'));
+        // const roomRef = doc(collection(db, 'rooms'), `${roomId}`);
+        
         const calleeCandidates = await getDoc(collection(roomRef, 'calleeCandidates'));
+        // const calleeCandidates = collection(roomRef, 'calleeCandidates');
         calleeCandidates.forEach(async candidate => {
             await deleteDoc(candidate.ref);
         });
         const callerCandidates = await getDoc(collection(roomRef, 'calleeCandidates'));
+        // const callerCandidates = collection(roomRef, 'callerCandidates');
         callerCandidates.forEach(async candidate => {
             await deleteDoc(candidate.ref);
         });
+
         await deleteDoc(roomRef);
     }
 
     // 초기화
-    windows
-        .location
-        .reload(true);
+    window.location.reload();
+    console.log("초기화 됨");
          
 }
 
