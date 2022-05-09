@@ -51,7 +51,7 @@ async function showChats() {
 
             let myText = document.createElement("div");
 
-            myText.setAttribute("id", "myText");
+            myText.setAttribute("class", "myText");
             myText.textContent = text;
 
             console.log("my text: ", myText.textContent);
@@ -64,9 +64,9 @@ async function showChats() {
         } else {
             let oppBox = document.createElement('div');
             oppBox.setAttribute("class", "oppBox");
-
+ 
             let oppText = document.createElement('div');
-            oppText.setAttribute("id", "oppText");
+            oppText.setAttribute("class", "oppText");
             oppText.textContent = text;
             console.log("opponent text : ", oppText.textContent);
             oppBox.append(oppText);
@@ -82,3 +82,30 @@ async function showChats() {
         // console.log(doc.id, " => ", doc.data());
     });
 }
+
+
+document.querySelector('.icon_search').addEventListener("click", filter);
+
+function filter(){
+
+    var value, name, item, i;
+
+    value = document.getElementById("input_search_text").value.toUpperCase();
+    
+    item = document.getElementsByClassName("myBox");
+    
+    for(i=0;i<item.length;i++){
+      name = item[i].getElementsByClassName("myText");
+    
+      if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+        // item[i].style.display = "flex";
+        //색 입히기
+        
+      }else {
+        //   item[i].style.display = "none";
+      }
+    }
+
+    
+  }
+  

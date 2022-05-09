@@ -83,7 +83,7 @@ async function startSTT(roomId, isCaller) {
 
                         let myText = document.createElement("div");
 
-                        myText.setAttribute("id", "myText");
+                        myText.setAttribute("class", "myText");
                         myText.textContent = text;
 
                         console.log("My Text : ", myText.textContent);
@@ -99,7 +99,8 @@ async function startSTT(roomId, isCaller) {
                         oppBox.setAttribute("class", "oppBox");
 
                         let oppText = document.createElement('div');
-                        oppText.setAttribute("id", "oppText");
+                        oppText.setAttribute("class", "oppText");
+
                         oppText.textContent = text;
                         console.log("Opponent ext : ", oppText.textContent);
                         oppBox.append(oppText);

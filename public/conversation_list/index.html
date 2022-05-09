@@ -55,8 +55,8 @@
     <div class="table-container d-flex w-100 h-100 p- mx-auto">
       <div class="search row">
         <div class="search_filter col ">
-          <select class="select">
-            <option value="title" selected>제목</option>
+          <select class="standard" id="select">
+            <option value="opponent" selected>상대방</option>
             <option value="date">날짜</option>
             <option value="length">길이</option>
           </select>
@@ -64,7 +64,7 @@
         <div class="search_area col">
           <div class="serach_inner">
             <label for="input_serach_text" class="blind">검색</label>
-            <input type="text" class="input_text" id="input_serach_text" placeholder="검색" value>
+            <input type="text" class="input_text" id="input_search_text" placeholder="검색" value>
           </div>
           <div class="search_icon">
             <img src="../images/search.png" class="icon_search" alt="">

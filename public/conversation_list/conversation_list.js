@@ -62,7 +62,7 @@ async function printDocData() {
             + "&date=" + doc.id
             + "&opponent=" + parsed_data.opponent;
 
-        console.log(a.herf);
+        // console.log(a.herf);
         a.append(num);
         a.append(roomCode);
         a.append(date);
@@ -75,3 +75,48 @@ async function printDocData() {
         // console.log(doc.id, " => ", doc.data());
     });
 }
+
+
+document.querySelector('.icon_search').addEventListener("click", filter);
+
+function filter(){
+
+    console.log("click!");
+    var  value, name, item, i, s, option, idx;
+    
+    
+    value = document.getElementById("input_search_text").value.toUpperCase();
+    console.log("value : ",value);
+
+    
+    s = document.querySelector("select");
+    console.log(s);
+    option = s.options[s.selectedIndex].value;
+    console.log("option : ",option);
+
+
+    if(option == 'opponent'){
+        idx = 3;
+    }
+    else if(option == 'date'){
+        idx = 2;
+    }
+
+    item = document.getElementsByClassName("list_item");
+    
+    for(i=0;i<item.length;i++){
+      name = item[i].getElementsByClassName("con_list");
+        // console.log("name : ", name[3].innerHTML);
+
+      if(name[idx].innerHTML.toUpperCase().indexOf(value) > -1){
+        item[i].style.display = "block";
+        
+      }else {
+          item[i].style.display = "none";
+      }
+    }
+
+    
+  }
+
+  
