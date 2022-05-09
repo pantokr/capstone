@@ -272,16 +272,21 @@ function uniteEmotion(v, f) {
 
 function setEmotion(result) {
     const emotion = document.querySelector('#emotion');
+    const now_emotion = document.createElement("div");
+    now_emotion.setAttribute("class", "now_emotion");
 
-    if (result == 1) 
-        emotion.innerHTML = "😡";
-    else if (result == 2) 
-        emotion.innerHTML = "😊";
-    else if (result == 3) 
-        emotion.innerHTML = "😭";
-    else if (result == 4) 
-        emotion.innerHTML = "😐";
+    if (result == 1){
+        now_emotion.textContent = "😡";
+    }else if (result == 2){
+        now_emotion.textContent = "😊";
+    }else if (result == 3){
+        now_emotion.textContent = "😭";
+    }else if (result == 4){
+        now_emotion.textContent = "😐";
     }
+
+    emotion.append(now_emotion);
+}
 
 export {
     startRecord,

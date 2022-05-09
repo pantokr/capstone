@@ -88,24 +88,48 @@ document.querySelector('.icon_search').addEventListener("click", filter);
 
 function filter(){
 
-    var value, name, item, i;
+    var value, myBox, oppBox, myText, oppText, item, i,j, minbox;
 
     value = document.getElementById("input_search_text").value.toUpperCase();
     
-    item = document.getElementsByClassName("myBox");
+    myBox = document.getElementsByClassName("myBox");
+    oppBox = document.getElementsByClassName("oppBox");
     
-    for(i=0;i<item.length;i++){
-      name = item[i].getElementsByClassName("myText");
-    
-      if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
-        // item[i].style.display = "flex";
+    minbox = document.querySelector(".min-content");
+
+    for(i=0;i<myBox.length;i++){
+        myText = myBox[i].getElementsByClassName("myText");
+        
+      if(myText[0].innerHTML.toUpperCase().indexOf(value) > -1){
+        myBox[i].style.display = "block";
+        // console.log("i : ",i);
+        // minbox.scrollTop = item[i].scrollHeight;
+        // var regex = new RegExp(value,'gi');
+        // name.replace(regex, "<span class='txt-hlight'>"+search+"</span>") ;
+        
         //색 입히기
         
       }else {
-        //   item[i].style.display = "none";
+          myBox[i].style.display = "none";
       }
     }
 
+    for(j=0;j<oppBox.length;j++){
+        oppText = oppBox[j].getElementsByClassName("oppText");
+
+      if(oppText[0].innerHTML.toUpperCase().indexOf(value) > -1){
+        oppBox[j].style.display = "block";
+        // console.log("i : ",i);
+        // minbox.scrollTop = item[i].scrollHeight;
+        // var regex = new RegExp(value,'gi');
+        // name.replace(regex, "<span class='txt-hlight'>"+search+"</span>") ;
+        
+        //색 입히기
+        
+      }else {
+          oppBox[j].style.display = "none";
+      }
+    }
     
   }
   
