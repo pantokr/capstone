@@ -88,7 +88,9 @@ document.querySelector('.icon_search').addEventListener("click", filter);
 
 function filter(){
 
-    var value, myBox, oppBox, myText, oppText, item, i,j, minbox;
+    var value,  myBox, oppBox, myText, oppText, myidx, oppidx , i,j, minbox, regex1, regex2;
+    myidx = 0;
+    myidx = 0;
 
     value = document.getElementById("input_search_text").value.toUpperCase();
     
@@ -99,37 +101,32 @@ function filter(){
 
     for(i=0;i<myBox.length;i++){
         myText = myBox[i].getElementsByClassName("myText");
+        myidx = Math.min(myidx, i);
         
       if(myText[0].innerHTML.toUpperCase().indexOf(value) > -1){
-        myBox[i].style.display = "block";
-        // console.log("i : ",i);
-        // minbox.scrollTop = item[i].scrollHeight;
-        // var regex = new RegExp(value,'gi');
-        // name.replace(regex, "<span class='txt-hlight'>"+search+"</span>") ;
-        
-        //색 입히기
-        
+
+        regex1 = new RegExp(value,'gi');
+        myText[0].innerHTML = myText[0].innerHTML.replace(regex1, "<span class='highlight'>" + value + "</span>") ;
+        minbox.scrollTop = myBox[i].scrollHeight;
       }else {
-          myBox[i].style.display = "none";
+        //   myBox[i].style.display = "none";
       }
     }
-
     for(j=0;j<oppBox.length;j++){
         oppText = oppBox[j].getElementsByClassName("oppText");
-
+        oppidx = Math.min(oppidx, j);
       if(oppText[0].innerHTML.toUpperCase().indexOf(value) > -1){
-        oppBox[j].style.display = "block";
-        // console.log("i : ",i);
-        // minbox.scrollTop = item[i].scrollHeight;
-        // var regex = new RegExp(value,'gi');
-        // name.replace(regex, "<span class='txt-hlight'>"+search+"</span>") ;
-        
+        regex2 = new RegExp(value, 'gi');
+        oppText[0].innerHTML = oppText[0].innerHTML.replace(regex2, "<span class='highlight'>" + value + "</span>") ;
+       
+        minbox.scrollTop = oppBox[j].scrollHeight;
         //색 입히기
         
       }else {
-          oppBox[j].style.display = "none";
+        //   oppBox[j].style.display = "none";
       }
     }
+    
     
   }
   
