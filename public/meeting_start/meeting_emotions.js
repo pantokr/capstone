@@ -168,7 +168,7 @@ async function stopRecord(ref = null) {
             .result
             .split(",")[1];
 
-        fetch('https://voice-emotion.jp.ngrok.io', {
+        fetch('https://open-py.jp.ngrok.io/voice-emotion', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
