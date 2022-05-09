@@ -2,8 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    padding: 1rem;
     /* padding-bottom:1rem; */
+    
     border-bottom: 0.001px solid rgb(216, 216, 216);
     /* background-color: #b6d1d4 ; */
     background-color: #1d6a96;
@@ -21,11 +22,11 @@
     font-size: 1.3rem;
   }
   
-  /* .nav-link:hover,
+  .nav-link:hover,
   .nav-link:focus {
-    border-bottom-color: rgb(104, 162, 236);
-    
-  } */
+    /* border-bottom-color: rgb(104, 162, 236); */
+    color : #ffc045;
+  }
   
   .nav-link + .nav-link {
     margin-left: 1rem;
