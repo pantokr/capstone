@@ -157,7 +157,7 @@ async function startSTT(roomId, isCaller) {
     function recognizeChat() {
         let recognition = new SpeechRecognition();
         let finalText = null;
-        let isMuted = true;
+        let isMuted = false;
         recognition.lang = "ko-KR";
         recognition.maxAlternatives = 10000;
 
