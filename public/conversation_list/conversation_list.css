@@ -106,9 +106,20 @@ input{
   width: 100%; 
 }
 
-.delete{
+.manage{
   width: 85%;
   text-align: right;
+}
+.manage .edit,
+.manage .delete,
+.manage .cancel{
+  border-radius: 5px;
+  border : 1px solid #333;
+}
+
+.manage .delete,
+.manage .cancel{
+  display: none;
 }
 /* list */
 .listview_area{
@@ -132,7 +143,7 @@ input{
   line-height: 3rem;
   box-sizing: border-box;
   border-bottom: 1.5px solid #efefef;
-  
+  text-align: center;
   align-items: center;
 }
 

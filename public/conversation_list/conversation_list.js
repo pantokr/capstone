@@ -41,17 +41,23 @@ async function printDocData() {
         let roomCode = document.createElement('button');
         let date = document.createElement('button');
         let opponent = document.createElement('button');
+        let checkbox = document.createElement("input");
+
 
         li.setAttribute("class", "list_item");
         a.setAttribute("class", "list_row");
         num.setAttribute("class", "con_list");
-        num.setAttribute("style", "width:10%;");
+        num.setAttribute("style", "width:5%;");
         roomCode.setAttribute("class", "con_list");
-        roomCode.setAttribute("style", "width:40%;");
+        roomCode.setAttribute("style", "width:35%;");
         date.setAttribute("class", "con_list");
         date.setAttribute("style", "width:30%;");
         opponent.setAttribute("class", "con_list");
         opponent.setAttribute("style", "width:20%;");
+
+        checkbox.setAttribute("class", "check");
+        checkbox.setAttribute("type", "checkbox");
+        checkbox.setAttribute("style", "width:10%; position: absolute;  padding-left : 1rem;  margin-top: 0.48rem; display: none;");
 
         num.innerText += cnt;
         cnt += 1;
@@ -69,7 +75,9 @@ async function printDocData() {
         a.append(roomCode);
         a.append(date);
         a.append(opponent);
+        a.append(checkbox);
         li.append(a);
+
         list_componentouter.appendChild(li);
 
         let line = document.createElement("div");
@@ -80,6 +88,42 @@ async function printDocData() {
         // console.log(doc.id, " => ", doc.data());
     });
 }
+function showCheck(){
+    var check = document.getElementsByClassName("check");
+    for(var i = 0 ; i < check.length ; i++){
+         check[i].style.display = "inline-block";
+    
+    }
+}
+function hiddenCheck(){
+    var check = document.getElementsByClassName("check");
+    for(var i = 0 ; i < check.length ; i++){
+         check[i].style.display = "none";
+    
+    }
+}
+//편집 버튼
+document.querySelector('.edit').addEventListener("click", edit);
+async function edit(){
+    document.querySelector('.edit').style.display = "none";
+    document.querySelector('.delete').style.display = "inline-block";
+    document.querySelector('.cancel').style.display = "inline-block";
+    
+   showCheck();
+    
+}
+//취소 버튼
+document.querySelector('.cancel').addEventListener("click", handleCancelDeleteBtn);
+//삭제 버튼
+document.querySelector('.delete').addEventListener("click", handleCancelDeleteBtn);
+
+function handleCancelDeleteBtn(){
+    hiddenCheck();
+    document.querySelector('.edit').style.display = "inline-block";
+    document.querySelector('.delete').style.display = "none";
+    document.querySelector('.cancel').style.display = "none";
+}
+
 
 document.querySelector('.trashcan').addEventListener("click", deleteAll);
 
