@@ -4,7 +4,8 @@ import {
     getFirestore,
     collection,
     doc,
-    getDocs
+    getDocs,
+    deleteDoc
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 
@@ -17,6 +18,7 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         uid = user.uid;
         printDocData();
+        console.log(uid);
     } else {
         console.log("No User.");
     }
@@ -57,8 +59,8 @@ async function printDocData() {
         date.innerText += doc.id;
         opponent.innerText += parsed_data.opponent;
 
-        a.href = "../conversation_record/?roomCode=" 
-            + parsed_data.roomID 
+        a.href = "../conversation_record/?roomCode="
+            + parsed_data.roomID
             + "&date=" + doc.id
             + "&opponent=" + parsed_data.opponent;
 
@@ -79,47 +81,59 @@ async function printDocData() {
     });
 }
 
+document.querySelector('.trashcan').addEventListener("click", deleteAll);
+
+async function deleteAll() {
+    const userCol = collection(db, "users");
+    const userRef = doc(userCol, uid);
+    let logCol = collection(userRef, "chat_logs");
+    const querySnapshot = await getDocs(collection(userRef, "chat_logs"));
+
+
+    querySnapshot.forEach(async (docum) => {
+        await deleteDoc(doc(db, "users", uid, "chat_logs", docum.id));
+    });
+
+    // window.location.reload();
+}
 
 document.querySelector('.icon_search').addEventListener("click", filter);
 
-function filter(){
+function filter() {
 
     console.log("click!");
-    var  value, name, item, i, s, option, idx;
-    
-    
-    value = document.getElementById("input_search_text").value.toUpperCase();
-    console.log("value : ",value);
+    var value, name, item, i, s, option, idx;
 
-    
+
+    value = document.getElementById("input_search_text").value.toUpperCase();
+    console.log("value : ", value);
+
+
     s = document.querySelector("select");
     console.log(s);
     option = s.options[s.selectedIndex].value;
-    console.log("option : ",option);
+    console.log("option : ", option);
 
 
-    if(option == 'opponent'){
+    if (option == 'opponent') {
         idx = 3;
     }
-    else if(option == 'date'){
+    else if (option == 'date') {
         idx = 2;
     }
 
     item = document.getElementsByClassName("list_item");
-    
-    for(i=0;i<item.length;i++){
-      name = item[i].getElementsByClassName("con_list");
+
+    for (i = 0; i < item.length; i++) {
+        name = item[i].getElementsByClassName("con_list");
         // console.log("name : ", name[3].innerHTML);
 
-      if(name[idx].innerHTML.toUpperCase().indexOf(value) > -1){
-        item[i].style.display = "block";
-        
-      }else {
-          item[i].style.display = "none";
-      }
+        if (name[idx].innerHTML.toUpperCase().indexOf(value) > -1) {
+            item[i].style.display = "block";
+
+        } else {
+            item[i].style.display = "none";
+        }
     }
+}
 
-    
-  }
-
-  
