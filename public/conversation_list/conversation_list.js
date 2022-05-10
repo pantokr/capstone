@@ -70,6 +70,9 @@ async function printDocData() {
         li.append(a);
         list_componentouter.appendChild(li);
 
+        let line = document.createElement("div");
+        line.setAttribute("class", "line");
+        list_componentouter.appendChild(line);
 
         // // doc.data() is never undefined for query doc snapshots
         // console.log(doc.id, " => ", doc.data());

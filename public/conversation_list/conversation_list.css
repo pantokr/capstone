@@ -127,7 +127,7 @@ input{
   color: #666;
   line-height: 3rem;
   box-sizing: border-box;
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1.5px solid #efefef;
   
   align-items: center;
 }
@@ -136,6 +136,7 @@ input{
 ul, ol{
   list-style: none;
 }
+
 button{
   border: 0;
   background: none;
@@ -167,6 +168,7 @@ button{
 .list_item{
   display: block;
   width: 100%;
+  padding: .3rem;
   /* border-bottom: 1px solid #efefef; */
 }
 table {
@@ -207,4 +209,9 @@ th {
 }
 .form_select{
   width: 30rem;
+}
+
+.line{
+  border-bottom : 1px solid #efefef;;
+  padding-bottom: .25rem;
 }

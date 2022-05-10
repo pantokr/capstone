@@ -7,8 +7,10 @@ import {
     getDoc,
     getDocs
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { inherits } from "util";
 
 
+const cnt = 0;
 
 const url = new URL(window.location.href);
 const urlParams = url.searchParams;
@@ -82,13 +84,20 @@ async function showChats() {
         // console.log(doc.id, " => ", doc.data());
     });
 }
-
+// function enterkey(){
+//   if(window.event.keyCode == 13) filter();
+// }
 
 document.querySelector('.icon_search').addEventListener("click", filter);
 
 function filter(){
 
-    var value,  myBox, oppBox, myText, oppText, myidx, oppidx , i,j, minbox, regex1, regex2;
+  // cnt = cnt + 1;
+  // if(cnt > 1){
+  //   myText = orgmy;
+  //   oppText = orgopp;
+  // } 
+    var value,  myBox, oppBox, myText, oppText, myidx, oppidx , i,j, minbox, regex1, regex2, orgmy, orgopp;
     myidx = 0;
     myidx = 0;
 
@@ -99,8 +108,10 @@ function filter(){
     
     minbox = document.querySelector(".min-content");
 
+
     for(i=0;i<myBox.length;i++){
         myText = myBox[i].getElementsByClassName("myText");
+        orgmy = myText;
         myidx = Math.min(myidx, i);
         
       if(myText[0].innerHTML.toUpperCase().indexOf(value) > -1){
@@ -115,6 +126,8 @@ function filter(){
     for(j=0;j<oppBox.length;j++){
         oppText = oppBox[j].getElementsByClassName("oppText");
         oppidx = Math.min(oppidx, j);
+        orgopp = oppText;
+
       if(oppText[0].innerHTML.toUpperCase().indexOf(value) > -1){
         regex2 = new RegExp(value, 'gi');
         oppText[0].innerHTML = oppText[0].innerHTML.replace(regex2, "<span class='highlight'>" + value + "</span>") ;
@@ -127,6 +140,8 @@ function filter(){
       }
     }
     
+    showChats();
     
   }
+  
   
