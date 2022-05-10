@@ -106,6 +106,10 @@ input{
   width: 100%; 
 }
 
+.delete{
+  width: 85%;
+  text-align: right;
+}
 /* list */
 .listview_area{
   display: flex;
