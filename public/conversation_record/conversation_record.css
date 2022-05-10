@@ -67,7 +67,7 @@
   
 }
 
-.myBox{
+.myBox {
   text-align: right;
   padding-left: 20%;
   position: relative;
@@ -89,6 +89,7 @@
 }
 
 .myText{
+
   background-color: rgb(104, 162, 236);
   color: white;
   border : 2px solid rgb(104, 162, 236);
@@ -107,6 +108,11 @@
 
 .highlight{
   background-color: yellow;
+}
 
-
+.unhighlight-my{
+  background-color: rgb(104, 162, 236);
+}
+.unhighlight-opp{
+  background-color: #D3D3D3;
 }

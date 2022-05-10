@@ -1,5 +1,5 @@
 import "../firebase_initialization.js";
-import { startSTT } from "./meeting_stt.js"
+import {startSTT} from "./meeting_stt.js"
 import {
     getFirestore,
     collection,
@@ -100,6 +100,10 @@ async function createRoom() {
             peerConnection.addTrack(track, localStream);
         });
 
+    localStream
+        .getAudioTracks()
+        .forEach((track) => (track.enabled = !track.enabled));
+
     // Code for collecting ICE candidates below
     const callerCandidatesCollection = collection(roomRef, 'callerCandidates');
 
@@ -154,9 +158,6 @@ async function createRoom() {
     });
     // Listening for remote session description above Listen for remote ICE
     // candidates below
-
-    let isStarted = false;
-
     onSnapshot(collection(roomRef, 'calleeCandidates'), snapshot => {
         snapshot
             .docChanges()
@@ -167,16 +168,12 @@ async function createRoom() {
                         .data();
                     console.log(`Got new remote ICE candidate: ${JSON.stringify(data)}`);
                     await peerConnection.addIceCandidate(new RTCIceCandidate(data));
-
-                    if (!isStarted) {
-                        startSTT(roomRef.id, true);
-                        isStarted = true;
-                    }
                 }
             });
     });
     // Listen for remote ICE candidates above
     // -------------------------STT-------------------------------------
+    startSTT(roomRef.id, true);
 }
 function btndisappear() {
     console.log('btndisppear !!')
@@ -222,10 +219,10 @@ function joinRoom() {
             document
                 .querySelector('#currentRoom')
                 .innerText =
-                // `Current room is ${roomId} - You are the callee!`;
-                `현재 참여하신 룸은 ${roomId} 입니다`;
+            // `Current room is ${roomId} - You are the callee!`;
+            `현재 참여하신 룸은 ${roomId} 입니다`;
             await joinRoomById(roomId);
-        }, { once: true });
+        }, {once: true});
     roomDialog.open();
 
 }
@@ -245,6 +242,10 @@ async function joinRoomById(roomId) {
             .forEach(track => {
                 peerConnection.addTrack(track, localStream);
             });
+            
+        localStream
+            .getAudioTracks()
+            .forEach((track) => (track.enabled = !track.enabled));
 
         // Code for collecting ICE candidates below
         const calleeCandidatesCollection = collection(roomRef, 'calleeCandidates');
@@ -312,7 +313,7 @@ async function joinRoomById(roomId) {
 async function openUserMedia(e) {
     const stream = await navigator
         .mediaDevices
-        .getUserMedia({ video: true, audio: true });
+        .getUserMedia({video: true, audio: true});
 
     document
         .querySelector('#localVideo')
@@ -381,7 +382,7 @@ async function hangUp(e) {
         const db = getFirestore();
         const roomRef = getDoc(roomId, collection(db, 'rooms'));
         // const roomRef = doc(collection(db, 'rooms'), `${roomId}`);
-
+        
         const calleeCandidates = await getDoc(collection(roomRef, 'calleeCandidates'));
         // const calleeCandidates = collection(roomRef, 'calleeCandidates');
         calleeCandidates.forEach(async candidate => {
@@ -399,7 +400,7 @@ async function hangUp(e) {
     // 초기화
     window.location.reload();
     console.log("초기화 됨");
-
+         
 }
 
 function registerPeerConnectionListeners() {
@@ -427,7 +428,7 @@ init();
 const muteBtn = document.getElementById("muteBtn");
 const cameraBtn = document.getElementById("cameraBtn");
 
-let muted = false;
+let muted = true;
 let cameraOff = false;
 
 // 오디오처리
