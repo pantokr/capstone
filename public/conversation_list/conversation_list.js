@@ -56,6 +56,7 @@ async function printDocData() {
         opponent.setAttribute("style", "width:20%;");
 
         checkbox.setAttribute("class", "check");
+        checkbox.setAttribute("id", doc.id);
         checkbox.setAttribute("type", "checkbox");
         checkbox.setAttribute("style", "width:10%; position: absolute;  padding-left : 1rem;  margin-top: 0.48rem; display: none;");
 
@@ -84,50 +85,46 @@ async function printDocData() {
         line.setAttribute("class", "line");
         list_componentouter.appendChild(line);
 
-        // // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data());
     });
 }
-function showCheck(){
+function showCheck() {
     var check = document.getElementsByClassName("check");
-    for(var i = 0 ; i < check.length ; i++){
-         check[i].style.display = "inline-block";
-    
+    for (var i = 0; i < check.length; i++) {
+        check[i].style.display = "inline-block";
+
     }
 }
-function hiddenCheck(){
+function hiddenCheck() {
     var check = document.getElementsByClassName("check");
-    for(var i = 0 ; i < check.length ; i++){
-         check[i].style.display = "none";
-    
+    for (var i = 0; i < check.length; i++) {
+        check[i].style.display = "none";
+
     }
 }
 //편집 버튼
 document.querySelector('.edit').addEventListener("click", edit);
-async function edit(){
+
+async function edit() {
     document.querySelector('.edit').style.display = "none";
     document.querySelector('.delete').style.display = "inline-block";
     document.querySelector('.cancel').style.display = "inline-block";
-    
-   showCheck();
-    
+
+    showCheck();
+
 }
 //취소 버튼
 document.querySelector('.cancel').addEventListener("click", handleCancelDeleteBtn);
 //삭제 버튼
-document.querySelector('.delete').addEventListener("click", handleCancelDeleteBtn);
+document.querySelector('.delete').addEventListener("click", deleteList);
 
-function handleCancelDeleteBtn(){
+function handleCancelDeleteBtn() {
     hiddenCheck();
     document.querySelector('.edit').style.display = "inline-block";
     document.querySelector('.delete').style.display = "none";
     document.querySelector('.cancel').style.display = "none";
 }
 
-
-document.querySelector('.trashcan').addEventListener("click", deleteAll);
-
-async function deleteAll() {
+async function deleteList() {
     const userCol = collection(db, "users");
     const userRef = doc(userCol, uid);
     let logCol = collection(userRef, "chat_logs");
@@ -135,10 +132,12 @@ async function deleteAll() {
 
 
     querySnapshot.forEach(async (docum) => {
-        await deleteDoc(doc(db, "users", uid, "chat_logs", docum.id));
+        const checkbox = document.getElementById(docum.id);
+        if (checkbox.checked) {
+            await deleteDoc(doc(db, "users", uid, "chat_logs", docum.id));
+        }
     });
-
-    // window.location.reload();
+    setTimeout("window.location.reload()", 1000);
 }
 
 document.querySelector('.icon_search').addEventListener("click", filter);

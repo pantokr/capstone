@@ -1,5 +1,5 @@
 import "../firebase_initialization.js";
-import {updateDoc, onSnapshot} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 var leftchannel = [];
 var rightchannel = [];
@@ -112,7 +112,7 @@ async function stopRecord(ref = null) {
     } catch (error) {
         return;
     }
-    
+
 
     if (ref == null) {
         return;
@@ -148,13 +148,13 @@ async function stopRecord(ref = null) {
     // write the PCM samples
     var index = 44;
     var volume = 1;
-    for (var i = 0; i< interleaved.length; i++) {
+    for (var i = 0; i < interleaved.length; i++) {
         view.setInt16(index, interleaved[i] * (0x7FFF * volume), true);
         index += 2;
     }
 
     // our final blob
-    blob = new Blob([view], {type: 'audio/wav'});
+    blob = new Blob([view], { type: 'audio/wav' });
 
     // var url = URL.createObjectURL(blob); var a = document.createElement("a");
     // document     .body     .appendChild(a); a.style = "display: none"; a.href =
@@ -174,7 +174,7 @@ async function stopRecord(ref = null) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({wav_base64: base64})
+            body: JSON.stringify({ wav_base64: base64 })
         })
             .then(res => res.json())
             .then(res => {
@@ -190,7 +190,7 @@ async function stopRecord(ref = null) {
                 // if(emt == 'Bad'){     setEmotion(1); } else if(emt == 'Good'){ setEmotion(2);
                 // } else if(emt == 'Sad'){     setEmotion(3); } else{ setEmotion(4); }
 
-                updateDoc((ref), {emotion: emt});
+                updateDoc((ref), { emotion: emt });
             });
     }
     reader.readAsDataURL(blob);
@@ -238,9 +238,9 @@ function transformEmotion(emt) {
         r_emt = 'fearful';
     } else if (emt == 'disgust') {
         r_emt = 'disgusted';
-    } else if(emt =='sadness'){
+    } else if (emt == 'sadness') {
         r_emt = 'sad';
-    } else if(emt == 'surprise'){
+    } else if (emt == 'surprise') {
         r_emt = 'surprised';
     }
     else {
@@ -272,20 +272,19 @@ function uniteEmotion(v, f) {
 
 function setEmotion(result) {
     const emotion = document.querySelector('#emotion');
-    const now_emotion = document.createElement("div");
-    now_emotion.setAttribute("class", "now_emotion");
 
-    if (result == 1){
-        now_emotion.textContent = "😡";
-    }else if (result == 2){
-        now_emotion.textContent = "😊";
-    }else if (result == 3){
-        now_emotion.textContent = "😭";
-    }else if (result == 4){
-        now_emotion.textContent = "😐";
+
+    if (result == 1) {
+        emotion.innerHTML = "😡";
+    } else if (result == 2) {
+        emotion.innerHTML = "😊";
+    } else if (result == 3) {
+        emotion.innerHTML = "😭";
+    } else if (result == 4) {
+        emotion.innerHTML = "😐";
     }
 
-    emotion.append(now_emotion);
+
 }
 
 export {
