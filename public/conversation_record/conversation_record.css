@@ -61,9 +61,8 @@
     padding :.3rem;
     height : 18.8rem;
 }
-.chatLog > .myBox , 
-.chatLog > .oppBox {
-  margin : 4px;
+.myBox , .oppBox {
+  margin :4px;
   
 }
 
