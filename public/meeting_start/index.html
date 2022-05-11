@@ -47,8 +47,8 @@
     <nav class="navbar" style="border-bottom: 0.001px solid rgb(216, 216, 216);">
         <div class="cover-container  d-flex w-100 h-100 p- mx-auto flex-column">
             <div>
-                <img class="float-md-start mb-0 feature" src="../images/meecord-logo.png" onclick="location.href=''" alt=""
-                    width="132" height="48">
+                <img class="float-md-start mb-0 feature" src="../images/meecord-logo.png" onclick="location.href=''"
+                    alt="" width="132" height="48">
                 <nav class="nav justify-content-center float-md-end">
                     <a class="nav-link feature active" onclick="location.href='../cover'">홈</a>
                     <a class="nav-link feature" onclick="location.href='../mypage'">마이페이지</a>
@@ -82,9 +82,9 @@
             </button>
 
             <!-- 클릭 시 룸 연결 끊기 -->
-            <button class="mdc-button mdc-button--raised col-md-2" id="hangupBtn"> 
-                <i class="material-icons mdc-button__icon" aria-hidden="true">close</i> 
-                <span class="mdc-button__label">미팅 종료하기</span> 
+            <button class="mdc-button mdc-button--raised col-md-2" id="hangupBtn">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
+                <span class="mdc-button__label">미팅 종료하기</span>
             </button>
 
             <!-- 룸 번호 뜨는 곳 -->
@@ -112,6 +112,7 @@
                         </div>
                         <div class="random col-6">랜덤 질문
                             <button id="random_switch">🔄</button>
+                            <div id="randomQuestion"></div>
                         </div>
 
                     </div>
@@ -141,7 +142,7 @@
 
                     <div class="min-content">
                         <div class="chatLog " contenteditable="contenteditable" style="margin: 0.3rem">
-                            
+
                         </div>
                     </div>
                 </div>

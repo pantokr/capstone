@@ -427,6 +427,10 @@ init();
 const muteBtn = document.getElementById("muteBtn");
 const cameraBtn = document.getElementById("cameraBtn");
 
+// 카메라, 오디오 버튼 addEventListener
+muteBtn.addEventListener("click", handleMuteClick);
+cameraBtn.addEventListener("click", handleCameraClick);
+
 let muted = false;
 let cameraOff = false;
 
@@ -474,6 +478,16 @@ function handleCameraClick() {
     }
 }
 
-// 카메라, 오디오 버튼 addEventListener
-muteBtn.addEventListener("click", handleMuteClick);
-cameraBtn.addEventListener("click", handleCameraClick);
+// 랜덤 질문
+const randomSwitch = document.getElementById("random_switch");
+
+randomSwitch.addEventListener("click", async function () {
+    const randNum = Math.floor(Math.random() * 10 + 1);
+    const db = getFirestore();
+    const questionRef = doc(collection(db, 'randomQuestions'), `${randNum}`);
+    const docSnap = await getDoc(questionRef);
+    const parsed_data = JSON.parse(JSON.stringify(docSnap.data()));
+
+    let randomQuestion = document.getElementById("randomQuestion");
+    randomQuestion.textContent = parsed_data.question;
+});

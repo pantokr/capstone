@@ -1,5 +1,5 @@
 import "../firebase_initialization.js";
-import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import {
     getFirestore,
     collection,
@@ -8,7 +8,7 @@ import {
     updateDoc,
     onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-import {startRecord, stopRecord, setEmotion} from "./meeting_emotions.js";
+import { startRecord, stopRecord, setEmotion } from "./meeting_emotions.js";
 
 async function startSTT(roomId, isCaller) {
 
@@ -50,7 +50,7 @@ async function startSTT(roomId, isCaller) {
             name = user.displayName;
             uid = user.uid;
             if (isCaller == true) {
-                setDoc(chatRef, {caller: name});
+                setDoc(chatRef, { caller: name });
             } else {
                 updateDoc(chatRef, {
                     callee: name,
@@ -63,7 +63,7 @@ async function startSTT(roomId, isCaller) {
     });
 
     recognizeChat();
-    
+
     onSnapshot(speechCol, (snapshot) => {
         snapshot
             .docChanges()
@@ -109,7 +109,7 @@ async function startSTT(roomId, isCaller) {
                             .append(oppBox);
 
                         if (!isOpponent) {
-                            addUserLog(speecher);                    
+                            addUserLog(speecher);
                             isOpponent = true;
                         }
                     }
@@ -201,7 +201,7 @@ async function startSTT(roomId, isCaller) {
                     text: finalText
                 });
                 finalText = null;
-                updateDoc(chatRef, {end: getTimestamp()});
+                updateDoc(chatRef, { end: getTimestamp() });
             } else {
                 stopRecord();
             }
