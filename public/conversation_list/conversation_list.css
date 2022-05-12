@@ -6,7 +6,19 @@
   color: #333;
   text-shadow: none; /* Prevent inheritance from `body` */
 }
-
+.bg_btn_style {
+  font-weight: bold;
+  color: white;
+  font-size: 1rem;
+  border-radius: 3px;
+  
+  border: 0;
+  background-color: #313131;
+  /* width: 3rem; */
+  /* height: 3.5rem; */
+  cursor: pointer;
+  justify-content: center;
+}
 
 /*
  * Base structure
@@ -230,4 +242,8 @@ th {
 .line{
   border-bottom : 1px solid #efefef;;
   padding-bottom: .25rem;
+}
+
+.btn1{
+  margin-left : 2rem;
 }

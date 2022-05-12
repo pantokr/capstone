@@ -227,7 +227,8 @@ function joinRoom() {
                 .innerText =
                 // `Current room is ${roomId} - You are the callee!`;
                 `방 코드 : ${roomId} `;
-            document.querySelector(".copyBtn").setAttribute("id", roomRef.id);
+            document.querySelector(".copyBtn").setAttribute("id", roomId);
+
             await joinRoomById(roomId);
         }, { once: true });
     roomDialog.open();
@@ -508,7 +509,7 @@ function CopyByClipBoardAPI() {
 
     navigator.clipboard.writeText(`${copiedText}`)
         .then(() => {
-            alert(`방 코드 ${copiedText} 를 복사했습니다.`)
+            alert(`방 코드 ${copiedText}를 복사했습니다.`)
         })
         .catch(() => {
             alert(`복사 실패!`)
