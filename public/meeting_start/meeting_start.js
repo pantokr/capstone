@@ -341,65 +341,65 @@ async function openUserMedia(e) {
 }
 
 async function hangUp(e) {
-    const tracks = document
-        .querySelector('#localVideo')
-        .srcObject
-        .getTracks();
-    tracks.forEach(track => {
-        track.stop();
-    });
+    // const tracks = document
+    //     .querySelector('#localVideo')
+    //     .srcObject
+    //     .getTracks();
+    // tracks.forEach(track => {
+    //     track.stop();
+    // });
 
-    if (remoteStream) {
-        remoteStream
-            .getTracks()
-            .forEach(track => track.stop());
-    }
+    // if (remoteStream) {
+    //     remoteStream
+    //         .getTracks()
+    //         .forEach(track => track.stop());
+    // }
 
-    if (peerConnection) {
-        peerConnection.close();
-    }
+    // if (peerConnection) {
+    //     peerConnection.close();
+    // }
 
-    document
-        .querySelector('#localVideo')
-        .srcObject = null;
-    document
-        .querySelector('#remoteVideo')
-        .srcObject = null;
-    document
-        .querySelector('#cameraBtn')
-        .disabled = false;
-    document
-        .querySelector('#joinBtn')
-        .disabled = true;
-    document
-        .querySelector('#createBtn')
-        .disabled = true;
-    document
-        .querySelector('#hangupBtn')
-        .disabled = true;
-    document
-        .querySelector('#currentRoom')
-        .innerText = '';
+    // document
+    //     .querySelector('#localVideo')
+    //     .srcObject = null;
+    // document
+    //     .querySelector('#remoteVideo')
+    //     .srcObject = null;
+    // document
+    //     .querySelector('#cameraBtn')
+    //     .disabled = false;
+    // document
+    //     .querySelector('#joinBtn')
+    //     .disabled = true;
+    // document
+    //     .querySelector('#createBtn')
+    //     .disabled = true;
+    // document
+    //     .querySelector('#hangupBtn')
+    //     .disabled = true;
+    // document
+    //     .querySelector('#currentRoom')
+    //     .innerText = '';
 
-    // Delete room on hangup
-    if (roomId) {
-        const db = getFirestore();
-        const roomRef = getDoc(roomId, collection(db, 'rooms'));
-        // const roomRef = doc(collection(db, 'rooms'), `${roomId}`);
+    // // Delete room on hangup
+    // if (roomId) {
+    //     const db = getFirestore();
+    //     const roomRef = getDoc(roomId, collection(db, 'rooms'));
+    //     // const roomRef = doc(collection(db, 'rooms'), `${roomId}`);
 
-        const calleeCandidates = await getDoc(collection(roomRef, 'calleeCandidates'));
-        // const calleeCandidates = collection(roomRef, 'calleeCandidates');
-        calleeCandidates.forEach(async candidate => {
-            await deleteDoc(candidate.ref);
-        });
-        const callerCandidates = await getDoc(collection(roomRef, 'calleeCandidates'));
-        // const callerCandidates = collection(roomRef, 'callerCandidates');
-        callerCandidates.forEach(async candidate => {
-            await deleteDoc(candidate.ref);
-        });
+    //     const calleeCandidates = await getDoc(collection(roomRef, 'calleeCandidates'));
+    //     // const calleeCandidates = collection(roomRef, 'calleeCandidates');
+    //     calleeCandidates.forEach(async candidate => {
+    //         await deleteDoc(candidate.ref);
+    //     });
+    //     const callerCandidates = await getDoc(collection(roomRef, 'calleeCandidates'));
+    //     // const callerCandidates = collection(roomRef, 'callerCandidates');
+    //     callerCandidates.forEach(async candidate => {
+    //         await deleteDoc(candidate.ref);
+    //     });
 
-        await deleteDoc(roomRef);
-    }
+    //     await deleteDoc(roomRef);
+    // }
 
     // 초기화
     window.location.reload();

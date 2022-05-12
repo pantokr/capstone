@@ -196,16 +196,13 @@ function filter(){
        if(myText[0].innerHTML.toUpperCase().indexOf(value) > -1){
         
         myid = i
-        myidx = myidx > myid ? myid : myidx;
-        
+        myidx = Math.max(myidx , myid );
         var regex = new RegExp(value,'gi');
         myText[0].innerHTML = myText[0].innerHTML.replace(regex, "<span class='highlight'>" + value + "</span>") ;
 
-       if(flag == 0){
+       
         var offset = document.getElementById(i).offsetTop;
         minbox.scrollTo({top : offset, behavior : 'smooth'});
-       }
-        flag+=1;
         
        }
         
@@ -215,16 +212,15 @@ function filter(){
         
         if(oppText[0].innerHTML.toUpperCase().indexOf(value) > -1){
           oppid = i;
-          oppidx = oppidx > oppid ? oppid : oppidx;;
+          oppidx = Math.max(oppidx , oppid );
           var regex = new RegExp(value, 'gi');
           oppText[0].innerHTML = oppText[0].innerHTML.replace(regex, "<span class='highlight'>" + value + "</span>") ;
           
           // minbox.scrollTop = box[i].scrollHeight;
-          if(flag==0){
+         
             var offset = document.getElementById(i).offsetTop;
             minbox.scrollTo({top : offset, behavior : 'smooth'});
-          }
-          flag+=1;
+         
         }
       }
       // minbox.scrollTop =  box[i].scrollHeight;
