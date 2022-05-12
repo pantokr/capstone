@@ -56,62 +56,67 @@
         </div>
 
         <div class="container" style="width: 80%;">
-            
-            <!-- 헤더부분 : 제목, 날짜, 시간 -->
-            <div id="header">
-                <div class="title_area"></div>
-                <div class="sub_area d-flex flex-row">
-                    <span class="sub_stTime">시작시간 : </span>
-                    <!-- <span class="sub_finTime col">22.05.02 12:30 </span>
-                    <span class="sub_length col">7분</span> -->
-                </div>
-            
-            
-            </div>
-                
-            <!-- 검색기능 -->
-            <div class="search"  >
-                <div class="search_area">
-                    <div class="search_icon" style="float:left;">
-                        <img src="../images/search.png" class="icon_search" alt="">
-                    </div>
-                    <div class="serach_inner" >
-                        <label for="input_serach_text" class="blind">검색</label>
-                        <input type="text" class="input_text" id="input_search_text"  placeholder="검색" >
-                    </div>
-                    <div style="float:right;">
-                        <button id="icon_cancel">✕</button>
-                    </div>
-                    
-                </div>
-            </div> 
-            
-
-
-            <div class="row" id="main">
-
-                <!-- 대화록 -->
-                <div class="col minute" id="min" style=" padding : 0;">
-                    <div class="minute-title" id="title">대화록</div>
-
-                    <div class="min-content ">
-                        <div class="chatLog" id="chat" contenteditable="contenteditable">
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 주요키워드 -->
-                <div class="col keyword" id="rq">
-                    <div class="keyword-title" id="title">주요 키워드</div>
-                    <div class="rq-content" style="padding: .3rem;">
+            <div class="row">
+                <div class="col-6 d-flex flex-column">
+                    <!-- 헤더부분 : 제목, 날짜, 시간 -->
+                   <div id="header" class="row">
+                       <div class="title_area"></div>
+                       <div class="sub_area d-flex flex-row">
+                           <span class="sub_stTime">시작시간 : </span>
+                           <!-- <span class="sub_finTime col">22.05.02 12:30 </span>
+                           <span class="sub_length col">7분</span> -->
+                       </div>
+                   
+                   
+                   </div>
+   
+                    <!-- 주요키워드 -->
+                    <div class="row keyword" id="rq">
+                       <div class="keyword-title" id="title">주요 키워드</div>
+                       <div class="rq-content" style="padding: .3rem;">
+                          
+                       </div>
+                   </div>
+   
+               </div>
+              
+              
+               <div class="col-6  d-flex flex-column">
+                     
+                    <div class="search"  >
+                       <div class="search_area" style="width: 15rem; margin : 1rem;">
+                       <div class="search_icon" style="float:left;">
+                           <img src="../images/search.png" class="icon_search" alt="">
+                       </div>
+                       <div class="serach_inner" >
+                           <label for="input_serach_text" class="blind">검색</label>
+                           <input type="text" class="input_text" id="input_search_text"  placeholder="검색" >
+                       </div>
+                       <div style="float:right;">
+                           <button id="icon_cancel">✕</button>
+                       </div>
                        
-                    </div>
-                </div>
-
-
-
+                   </div>
+   
+                  
+                   <div class="minute" id="min" style=" padding : 0;">
+                       <div class="minute-title" id="title">대화록</div>
+   
+                       <div class="min-content ">
+                           <div class="chatLog" id="chat" contenteditable="contenteditable">
+                               
+                           </div>
+                       </div>
+                   </div>
+               </div> 
             </div>
+           
+            
+            
+          
+
+
+      
                  
 
             <footer class="mt-auto text-white-50"></footer>
