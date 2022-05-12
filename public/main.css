@@ -1,14 +1,13 @@
 /* font */
 
-/* @font-face {
+@font-face {
   font-family: "BMHANNAAir_ttf";
   src: url("./font/BMHANNAAir_ttf.woff") format("woff");
-  font-style : normal;
+  font-style: normal;
 }
-*{
+* {
   font-family: "BMHANNAAir_ttf";
-  
-} */
+}
 
 /* Custom default button */
 .btn-secondary,

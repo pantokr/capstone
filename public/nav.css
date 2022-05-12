@@ -1,13 +1,12 @@
-/* @font-face {
+@font-face {
   font-family: "BMHANNAPro";
   src: url("./font/BMHANNAPro.woff") format("woff");
-  font-style : normal;
+  font-style: normal;
 }
 
-*{
+* {
   font-family: "BMHANNAPro";
-  
-} */
+}
 
 .navbar {
   display: flex;
