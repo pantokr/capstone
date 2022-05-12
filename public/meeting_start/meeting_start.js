@@ -58,6 +58,8 @@ function init() {
         .dialog
         .MDCDialog(document.querySelector('#room-dialog'));
 
+    makeRandomQuestion();
+
 }
 
 async function createRoom() {
@@ -483,7 +485,9 @@ function handleCameraClick() {
 // 랜덤 질문
 const randomSwitch = document.getElementById("random_switch");
 
-randomSwitch.addEventListener("click", async function () {
+randomSwitch.addEventListener("click", makeRandomQuestion);
+
+async function makeRandomQuestion() {
     const randNum = Math.floor(Math.random() * 10 + 1);
     const db = getFirestore();
     const questionRef = doc(collection(db, 'randomQuestions'), `${randNum}`);
@@ -492,26 +496,25 @@ randomSwitch.addEventListener("click", async function () {
 
     let randomQuestion = document.getElementById("randomQuestion");
     randomQuestion.textContent = parsed_data.question;
-});
+}
 
 
 document.querySelector('.copyBtn').addEventListener("click", CopyByClipBoardAPI);
 
 function CopyByClipBoardAPI() {
-    
-  
-      const copiedText = document.querySelector('#currentRoom')
-      .innerText.substr(6);
 
-      navigator.clipboard.writeText(`${copiedText}`)
-      .then(()=>{
-          alert(`방 코드 ${copiedText} 를 복사했습니다.`)
-      })
-      .catch(()=> {
-          alert(`복사 실패!`)
-      })
-      
-    }
-   
-  
+    const copiedText = document.querySelector('#currentRoom')
+        .innerText.substr(6);
+
+    navigator.clipboard.writeText(`${copiedText}`)
+        .then(() => {
+            alert(`방 코드 ${copiedText} 를 복사했습니다.`)
+        })
+        .catch(() => {
+            alert(`복사 실패!`)
+        })
+
+}
+
+
 
