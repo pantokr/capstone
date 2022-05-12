@@ -128,7 +128,8 @@ async function createRoom() {
     console.log(`New room created with SDP offer. Room ID: ${roomRef.id}`);
     document
         .querySelector('#currentRoom')
-        .innerText = `현재 참여하신 룸은 ${roomRef.id} 입니다`;
+        .innerText = `방 코드 : ${roomRef.id} `;
+    document.querySelector(".copyBtn").setAttribute("id", roomRef.id);
     // `Current room is ${roomRef.id} - You are the caller!`; Code for creating a
     // room above
 
@@ -223,7 +224,8 @@ function joinRoom() {
                 .querySelector('#currentRoom')
                 .innerText =
                 // `Current room is ${roomId} - You are the callee!`;
-                `현재 참여하신 룸은 ${roomId} 입니다`;
+                `방 코드 : ${roomId} `;
+            document.querySelector(".copyBtn").setAttribute("id", roomRef.id);
             await joinRoomById(roomId);
         }, { once: true });
     roomDialog.open();
@@ -491,3 +493,25 @@ randomSwitch.addEventListener("click", async function () {
     let randomQuestion = document.getElementById("randomQuestion");
     randomQuestion.textContent = parsed_data.question;
 });
+
+
+document.querySelector('.copyBtn').addEventListener("click", CopyByClipBoardAPI);
+
+function CopyByClipBoardAPI() {
+    
+  
+      const copiedText = document.querySelector('#currentRoom')
+      .innerText.substr(6);
+
+      navigator.clipboard.writeText(`${copiedText}`)
+      .then(()=>{
+          alert(`방 코드 ${copiedText} 를 복사했습니다.`)
+      })
+      .catch(()=> {
+          alert(`복사 실패!`)
+      })
+      
+    }
+   
+  
+

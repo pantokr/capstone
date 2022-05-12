@@ -88,9 +88,15 @@
             </button>
 
             <!-- 룸 번호 뜨는 곳 -->
-            <div id="roomNum" class="justify-content-center col-md-2" style="width : 20rem;">
-                <span id="currentRoom"></span>
+            <div class="justify-content-center col-md-2" id="roomNum" >
+                <span class="mdc-button__label" id="currentRoom"></span>
+                <span style="margin-left:2rem;">
+                    <img src="../images/copy.png" alt="" class="copyBtn">
+                </span>
+               
             </div>
+
+          
         </div>
         <!-- container -->
         <!-- row -->
@@ -107,7 +113,7 @@
                 <div class="question" id="rq">
                     <div class="keyword-question" id="title">키워드 질문</div>
                     <div class="rq-content row">
-                        <div class="key col-6">키워드 질문
+                        <div class="key col-6" >키워드 질문
                             <button id="key_switch">🔄</button>
                         </div>
                         <div class="random col-6">랜덤 질문

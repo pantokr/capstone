@@ -111,12 +111,23 @@ video{
   color: white;
   cursor: pointer;
 }
+#roomNum{
+  width: 25rem;
+  height: 3rem;
+  background-color: transparent;
+  border-radius: 4px;
+  margin : 0.5rem;
+  text-align: center;
+  color: #313131;
+  padding: .9rem;
+  
+}
 
 #setting > .col {
   margin: .8rem;
   text-align: center;
 }
-#cameraBtn, #muteBtn {
+#cameraBtn, #muteBtn, .copyBtn {
   background: transparent;
   width :1.5rem;
   height: 1.5rem;
@@ -230,5 +241,6 @@ video{
   border:0;
   outline: 0;
   float: right;
+ 
 }
 
