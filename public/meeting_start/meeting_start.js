@@ -172,7 +172,7 @@ async function createRoom() {
                     await peerConnection.addIceCandidate(new RTCIceCandidate(data));
 
                     if (!isStarted) {
-                        // startSTT(roomRef.id, true);
+                        startSTT(roomRef.id, true);
                         isStarted = true;
                     }
                 }
@@ -180,7 +180,6 @@ async function createRoom() {
     });
     // Listen for remote ICE candidates above
     // -------------------------STT-------------------------------------
-    startSTT(roomRef.id, true);
 }
 function btndisappear() {
     console.log('btndisppear !!')
