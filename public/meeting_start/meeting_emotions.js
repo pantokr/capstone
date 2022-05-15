@@ -12,16 +12,19 @@ var blob = null;
 // stopRecord(ref); } 얼굴 인식 감정 분석 함수
 async function recognizeFaceEmotion() {
     // 3초마다 얼굴 감정 분석 faceExpressionsRecognition();
-    const localVideo = document.getElementById('localVideo');
+    const remoteVideo = document.getElementById('remoteVideo');
     //얼굴 인식 모델 load
 
     const detections = await faceapi
         .detectAllFaces(
-            localVideo,
+            remoteVideo,
             new faceapi.TinyFaceDetectorOptions()
         )
         .withFaceLandmarks()
         .withFaceExpressions()
+    // console.log(detections[0]);
+    // console.log(detections[0].expressions);
+    
 
     if (detections.length == 0) {
         return "Normal";
@@ -37,7 +40,9 @@ async function recognizeFaceEmotion() {
     // 객체 배열 속 key 값을 console로 찍기
 
     var emt = transformEmotion(getKeyByValue(detections[0].expressions, max));
-    // console.log("Face :"+ getKeyByValue(detections[0].expressions, max));
+    console.log("Face :"+ getKeyByValue(detections[0].expressions, max));
+    console.log(max);
+
     return emt;
     // console.log(detections);
 
@@ -46,6 +51,8 @@ async function recognizeFaceEmotion() {
             .keys(object)
             .find(key => object[key] === value);
     }
+
+    
 }
 
 async function startRecord() {
@@ -182,7 +189,7 @@ async function stopRecord(ref = null) {
                 var v_emt = transformEmotion(res.emotion);
                 // var v_emt = res.emotion; var f_emt = recognizeFaceEmotion();
 
-                console.log("Voice : " + v_emt + " Face : " + f_emt);
+                // console.log("Voice : " + v_emt + " Face : " + f_emt);
 
                 var emt = uniteEmotion(v_emt, f_emt);
                 //console.log("Emotion : " + emt);
