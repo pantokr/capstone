@@ -130,7 +130,7 @@ async function createRoom() {
     console.log(`New room created with SDP offer. Room ID: ${roomRef.id}`);
     document
         .querySelector('#currentRoom')
-        .innerText = `방 코드 : ${roomRef.id} `;
+        .innerText = `방 코드 : ${roomRef.id}`;
     document.querySelector(".copyBtn").setAttribute("id", roomRef.id);
     // `Current room is ${roomRef.id} - You are the caller!`; Code for creating a
     // room above
@@ -172,7 +172,7 @@ async function createRoom() {
                     await peerConnection.addIceCandidate(new RTCIceCandidate(data));
 
                     if (!isStarted) {
-                        startSTT(roomRef.id, true);
+                        // startSTT(roomRef.id, true);
                         isStarted = true;
                     }
                 }
@@ -180,6 +180,7 @@ async function createRoom() {
     });
     // Listen for remote ICE candidates above
     // -------------------------STT-------------------------------------
+    startSTT(roomRef.id, true);
 }
 function btndisappear() {
     console.log('btndisppear !!')
