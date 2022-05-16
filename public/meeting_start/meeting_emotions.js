@@ -9,6 +9,8 @@ var mediaStream = null;
 var sampleRate = 44100;
 var context = null;
 var blob = null;
+var faceMaxValue;
+var voiceMaxValue;
 // stopRecord(ref); } 얼굴 인식 감정 분석 함수
 async function recognizeFaceEmotion() {
     // 3초마다 얼굴 감정 분석 faceExpressionsRecognition();
@@ -190,6 +192,8 @@ async function stopRecord(ref = null) {
                 // var v_emt = res.emotion; var f_emt = recognizeFaceEmotion();
 
                 // console.log("Voice : " + v_emt + " Face : " + f_emt);
+                console.log("Voice emotion value :" + res.accuracy);
+                console.log("Face emotion value :" + max);
 
                 var emt = uniteEmotion(v_emt, f_emt);
                 //console.log("Emotion : " + emt);
