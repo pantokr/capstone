@@ -279,6 +279,15 @@ function uniteEmotion(v, f) {
     } else {
         return 'Normal';
     }
+    
+    // face, voice 감정 조합
+    // if((v == 'Good' && f == 'Bad') || (v == 'Good' && f == 'Sad') || (v == 'Sad' && f == 'Good') || (v == 'Sad' && f == 'Bad') || (v == 'Bad' && f == 'Good') || (v == 'Bad' && f == 'Sad')){
+    //     if(faceMaxValue == voiceMaxValue) {return v;}
+    //     return (faceMaxValue > voiceMaxValue) ? f : v;
+    // }
+    // else if(v == 'Normal' && f != 'Normal'){return f;}
+    // else if(v != 'Normal' && f == 'Normal'){return v;}
+    // else if(v == 'Normal' && f == 'Normal'){return 'Normal';}
 }
 
 function setEmotion(result) {
