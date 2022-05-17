@@ -34,7 +34,7 @@
     <!-- <script type="module" src="./meeting_stt.js"></script> -->
 </head>
 
-<body style="width: 100%; height : 100%;">
+<body style="width: 100%; height : 100%; background-color:#F0FAF9; ">
 
     <!-- navbar -->
     <nav class="navbar" style="border-bottom: 0.001px solid rgb(216, 216, 216);">
@@ -54,48 +54,67 @@
 
     <!-- 자동으로 카메라, 마이크 켜지게 구현, 이 부분은 삭제 -->
 
-    <div class="container" id="myStream">
-        <div class="row justify-content-center" id="buttons">
+    
+       
             <!-- <button class="mdc-button mdc-button--raised" id="cameraBtn"> <i
                 class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
                 <span class="mdc-button__label">Open camera & microphone</span> </button> -->
 
-            <!-- 클릭 시 룸 번호 생성 -->
-            <button class="mdc-button mdc-button--raised col-md-2" id="createBtn">
-                <!--disabled 삭제-->
-                <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
-                <span class="mdc-button__label">방 만들기</span>
-            </button>
+           
 
-            <!-- 클릭 시 룸 조인 모달 생성 -->
-            <button class="mdc-button mdc-button--raised col-md-2" id="joinBtn">
-                <!--disabled 삭제-->
-                <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
-                <span class="mdc-button__label">방 참가하기</span>
-            </button>
-
-            <!-- 클릭 시 룸 연결 끊기 -->
-            <button class="mdc-button mdc-button--raised col-md-2" id="hangupBtn">
-                <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
-                <span class="mdc-button__label">미팅 종료하기</span>
-            </button>
-
-            <!-- 룸 번호 뜨는 곳 -->
-            <div class="justify-content-center col-md-2" id="roomNum" >
-                <span class="mdc-button__label" id="currentRoom"></span>
-                <span style="margin-left:2rem;">
-                    <img src="../images/copy.png" alt="" class="copyBtn">
-                </span>
-               
-            </div>
+           
 
           
-        </div>
-        <!-- container -->
-        <!-- row -->
-        <div class="row">
+       
+        <div class="row" id="outer">
+            <div class="col-md-2">
+                <div class="container" id="myStream" style="margin: 0; padding:0;">
+                    <div class="justify-content-center" id="buttons">
+                    
+                         <!-- 클릭 시 룸 번호 생성 -->
+                        <button class="mdc-button mdc-button--raised" id="createBtn">
+                            <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
+                            <span class="mdc-button__label">방 만들기</span>
+                        </button>
+                        
+                         <!-- 클릭 시 룸 조인 모달 생성 -->
+                        <button class="mdc-button mdc-button--raised " id="joinBtn">
+                            <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
+                            <span class="mdc-button__label">방 참가하기</span>
+                        </button>
 
-            <div class="col-md-8">
+                        <!-- 클릭 시 룸 연결 끊기 -->
+                        <button class="mdc-button mdc-button--raised " id="hangupBtn">
+                            <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
+                            <span class="mdc-button__label">미팅 종료하기</span>
+                        </button>
+
+                        <!-- 룸 번호 뜨는 곳 -->
+                        <button class="mdc-button mdc-button--raised " id="copyBtn" >
+                            <i class="material-icons mdc-button__icon" aria-hidden="true">copy_all</i>
+                            <span class="mdc-button__label" id="currentRoom">코드 복사하기</span>
+                            
+                            
+                        </button>
+
+                        <div class="transparency" style="height:20rem; ">
+
+                        </div>
+
+                        <div class="emotionguide" style="float:left">
+                            <span id="emo" class="angry">😡</span>
+                            <br>
+                            <span id="emo" class="happy">😊</span>
+                            <br>
+                            <span id="emo" class="sad">😭</span>
+                            <br>
+                            <span id="emo" class="neutral">😐</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
                 <!-- 상대방카메라 -->
                 <div class="opponent-cam">
                     <!-- <canvas id="canvas"></canvas> -->
@@ -108,12 +127,14 @@
                     <div class="rq-content row">
                         <div class="key col-6" >키워드 질문
                             <button id="key_switch">
-                                <img src="../images/change.png" alt="" class="changeBtn">
+                                <!-- <img src="../images/change.png" alt="" class="changeBtn"> -->
+                                <i class="material-icons mdc-button__icon" class="changeBtn" aria-hidden="true">refresh</i>
                             </button>
                         </div>
-                        <div class="random col-6"> <b>TIP!</b>
+                        <div class="random col-6">  <b>TIP!</b>
                             <button id="random_switch">
-                                <img src="../images/change.png" alt="" class="changeBtn">
+                                <!-- <img src="../images/change.png" alt="" class="changeBtn"> -->
+                                <i class="material-icons mdc-button__icon" class="changeBtn" aria-hidden="true">refresh</i>
                             </button>
                             <div id="randomQuestion"></div>
                         </div>
@@ -140,7 +161,7 @@
                 </div>
 
                 <!-- 대화록 -->
-                <div class="minute box_part" id="min" style=" height: 19.1rem;">
+                <div class="minute box_part" id="min" style=" height: 20rem;">
                     <div class="minute-title" id="title">대화록</div>
 
                     <div class="min-content">

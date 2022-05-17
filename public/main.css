@@ -58,7 +58,7 @@ body {
   height: 100%;
   width: 100%;
   position: absolute;
-
+  background-color: #F0FAF9;
   /* width: 100%; */
 
   transform: rotateY(180deg);
@@ -96,12 +96,20 @@ video {
 
   object-fit: cover;
 }
+#outer{
+  margin: 2rem; 
+  padding :2rem 1rem 2rem 1rem; 
+  border: 2px solid #ABC5E3;
+  border-radius: 15px;
+  background-color: #DDEEF4;
+}
 
 #buttons {
-  margin: 1rem;
+  /* margin: 1rem; */
+  width: 90%;
   text-align: center;
   justify-content: center;
-  height: 10wh;
+  
 }
 
 #createBtn,
@@ -109,26 +117,26 @@ video {
 #hangupBtn,
 #confirmJoinBtn,
 #cancelBtn,
-#roomnumBtn {
-  width: 10rem;
+#copyBtn {
+  /* width: 10rem; */
+  /* height: 3rem; */
+  /* background-color: #313131; */
+  width: 100%;
   height: 3rem;
-  background-color: #313131;
+  font-size: 1.2rem;
+  background-color:#ABC5E3;
   border-radius: 4px;
-  margin: 0.5rem;
+  margin-bottom: 0.5rem;
   text-align: center;
   color: white;
   cursor: pointer;
 }
-#roomNum {
-  width: 25rem;
-  height: 3rem;
-  background-color: transparent;
-  border-radius: 4px;
-  margin: 0.5rem;
+#hangupBtn > i ,
+#copyBtn > i {
   text-align: center;
-  color: #313131;
-  padding: 0.9rem;
+  margin-top: 5px;
 }
+
 
 #setting > .col {
   margin: 0.8rem;
@@ -149,11 +157,11 @@ video {
 #min {
   font-family: "Jua", sans-serif;
   border-radius: 5px;
-  border: 1px solid rgb(216, 216, 216);
+  border: 1px solid #ABC5E3;
   margin-top: 0.5rem;
 }
 .opponent-cam {
-  border: 3px solid rgb(216, 216, 216);
+  border: 1px solid #ABC5E3;
   border-collapse: separate;
   position: relative;
   /* height:40rem; */
@@ -168,10 +176,10 @@ video {
 }
 
 .box_part {
-  border: 1px solid rgb(216, 216, 216);
+  border: 1px solid #ABC5E3;
 }
 #title {
-  border-bottom: 1px solid rgb(216, 216, 216);
+  border-bottom: 1px solid #ABC5E3;
   margin: 1px 0 2px 0 px;
   width: 100%;
   height: 2.5rem;
@@ -181,13 +189,25 @@ video {
   justify-content: center;
   position: relative;
   font-size: 1.2rem;
+  color: white;
+  background: #81A4D5;
 }
 
 .min-content {
   position: relative;
   overflow-y: scroll;
   padding: 0.3rem;
-  height: 15rem;
+  height: 17.4rem;
+  background-color: #F0FAF9;
+  border-radius: 5px;
+}
+.rq-content {
+  position: relative;
+  /* width: 100%;
+  height: 24%; */
+  padding: 0.3rem;
+  border-radius: 5px;
+  background-color: #F0FAF9;
 }
 .chatLog > .myBox,
 .chatLog > .oppBox {
@@ -214,14 +234,16 @@ video {
 }
 
 .myText {
-  background-color: rgb(104, 162, 236);
+  background-color: #ABC5E3;
   color: white;
-  border: 2px solid rgb(104, 162, 236);
+  border: 2px solid #ABC5E3;
 }
 
 .oppText {
-  background-color: #d3d3d3;
-  border: 2px solid #d3d3d3;
+  background-color: #DDEEF4;
+  border: 2px solid #DDEEF4;
+  color: #343d49;
+  
 }
 
 .recommended-question {
@@ -233,11 +255,7 @@ video {
   /* margin:5px; */
 }
 
-.rq-content {
-  position: relative;
-  height: 24%;
-  padding: 1rem;
-}
+
 
 #key_switch,
 #random_switch {
@@ -245,4 +263,8 @@ video {
   border: 0;
   outline: 0;
   float: right;
+}
+
+#emo{
+  font-size: 2rem;
 }
