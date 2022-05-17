@@ -25,7 +25,7 @@
   <script type="module" src="./conversation_list.js"></script>
 </head>
 
-<body>
+<body style="background-color:#F0FAF9;">
 
 
   <nav class="navbar">
@@ -44,18 +44,18 @@
 
   </nav>
 
-  <div class="gray-sector">
-    <div class="table-container">
+  <!-- <div class="gray-sector"> -->
+    <div class="table-container" style="margin:2rem 0 2rem 0;">
       <div class="big_title">대화 목록</div>
       <div class="small_title">미팅 후의 기록을 찾아보세요</div>
     </div>
-  </div>
+  <!-- </div> -->
 
   <div class="white-sector">
     <div class="table-container d-flex w-100 h-100 p- mx-auto">
       <div class="search row">
         <div class="search_filter col ">
-          <select class="standard" id="select">
+          <select class="standard" id="select" style="background-color:#F0FAF9;">
             <option value="opponent" selected>상대방</option>
             <option value="date">날짜</option>
             <option value="length">길이</option>
@@ -64,7 +64,7 @@
         <div class="search_area col">
           <div class="serach_inner">
             <label for="input_serach_text" class="blind">검색</label>
-            <input type="text" class="input_text" id="input_search_text" placeholder="검색" value>
+            <input type="text" class="input_text" id="input_search_text" placeholder="검색" value style="background-color:#F0FAF9;">
           </div>
           <div class="search_icon">
             <img src="../images/search.png" class="icon_search" alt="">

@@ -42,7 +42,7 @@ body {
   height: 30rem;
   padding: 2.5rem;
   margin: 1rem 1rem 1rem;
-  border: 1px solid rgb(216, 216, 216);
+  border: 2px solid #ABC5E3;
   background-color: white;
   font-size: 1rem;
 }
@@ -93,16 +93,7 @@ body {
   width: 100px;
   height: 100px;
 }
-.changePic{  
-  padding:5px;
-  color: #313131;
-  float:right;
-  font-weight: bold;
-  font-size: rem;
-  border: none;
-  background:none;
-  margin-bottom: 2rem;
-}
+
 
 
 .row{
@@ -153,15 +144,17 @@ body {
  
 }
 button {
-  background-color: #333;
+  background-color: #ABC5E3;
+  border : #ABC5E3;
   /* text-shadow : none; */
   color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 1.2rem;
 }
 .close{
-  color: #aaa;
+  color: #ABC5E3;
   float:right;
   cursor: pointer;
   font-size: 1rem;
@@ -187,6 +180,7 @@ button {
   position: absolute;
   background-color: #fff;
   width: 50%;
+  border: 1px solid #ABC5E3;
   /* height: 50%; */
   padding-top:3%;
   padding-right:3%;

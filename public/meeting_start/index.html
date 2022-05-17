@@ -67,9 +67,9 @@
           
        
         <div class="row" id="outer">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <div class="container" id="myStream" style="margin: 0; padding:0;">
-                    <div class="justify-content-center" id="buttons">
+                    <div class="justify-content-center n" id="buttons">
                     
                          <!-- 클릭 시 룸 번호 생성 -->
                         <button class="mdc-button mdc-button--raised" id="createBtn">
@@ -114,7 +114,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <!-- 상대방카메라 -->
                 <div class="opponent-cam">
                     <!-- <canvas id="canvas"></canvas> -->
@@ -122,24 +122,30 @@
                     <div id="emotion" style="position: absolute"></div>
                 </div>
                 <!-- 키워드 -->
-                <div class="question" id="rq">
-                    <div class="keyword-question" id="title">질문</div>
+                <div class="banner row" id="tip">
+                    <div class="title col-3" style="font-size:2rem;">
+                        TIP!
+                    </div>
+                    <div class="content col-9">
+                        배너내용
+                    </div>
+                    <!-- <div class="keyword-question" id="title">질문</div>
                     <div class="rq-content row">
                         <div class="key col-6" >키워드 질문
                             <button id="key_switch">
-                                <!-- <img src="../images/change.png" alt="" class="changeBtn"> -->
+                                <img src="../images/change.png" alt="" class="changeBtn">
                                 <i class="material-icons mdc-button__icon" class="changeBtn" aria-hidden="true">refresh</i>
                             </button>
                         </div>
                         <div class="random col-6">  <b>TIP!</b>
                             <button id="random_switch">
-                                <!-- <img src="../images/change.png" alt="" class="changeBtn"> -->
+                                <img src="../images/change.png" alt="" class="changeBtn">
                                 <i class="material-icons mdc-button__icon" class="changeBtn" aria-hidden="true">refresh</i>
                             </button>
                             <div id="randomQuestion"></div>
-                        </div>
+                        </div> -->
 
-                    </div>
+                    <!-- </div> -->
                 </div>
 
             </div>
@@ -188,12 +194,12 @@
                     </div>
                 </div>
                 <footer class="mdc-dialog__actions justify-content-center">
-                    <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button"
-                        data-mdc-dialog-action="yes">
+                    <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button justify-content-center"
+                        data-mdc-dialog-action="yes" style="width: 50%;">
                         <span class="mdc-button__label">확인</span>
                     </button>
-                    <button id="cancelBtn" type="button" class="mdc-button mdc-dialog__button"
-                        data-mdc-dialog-action="no">
+                    <button id="cancelBtn" type="button" class="mdc-button mdc-dialog__button justify-content-center"
+                        data-mdc-dialog-action="no" style="width: 50%;">
                         <span class="mdc-button__label">취소</span>
                     </button>
                 </footer>
