@@ -14,12 +14,12 @@ var voiceMaxValue;
 // stopRecord(ref); } 얼굴 인식 감정 분석 함수
 async function recognizeFaceEmotion() {
     // 3초마다 얼굴 감정 분석 faceExpressionsRecognition();
-    const remoteVideo = document.getElementById('remoteVideo');
+    const localVideo = document.getElementById('localVideo');
     //얼굴 인식 모델 load
 
     const detections = await faceapi
         .detectAllFaces(
-            remoteVideo,
+            localVideo,
             new faceapi.TinyFaceDetectorOptions()
         )
         .withFaceLandmarks()
@@ -39,14 +39,16 @@ async function recognizeFaceEmotion() {
     var max = Math
         .max
         .apply(null, emotions);
+    faceMaxValue = max;
     // 객체 배열 속 key 값을 console로 찍기
 
     var emt = transformEmotion(getKeyByValue(detections[0].expressions, max));
     console.log("Face :"+ getKeyByValue(detections[0].expressions, max));
-    console.log(max);
+    console.log("Face max Value : " + max);
+    console.log(detections[0].expressions);
 
     return emt;
-    // console.log(detections);
+    
 
     function getKeyByValue(object, value) {
         return Object
@@ -190,10 +192,11 @@ async function stopRecord(ref = null) {
 
                 var v_emt = transformEmotion(res.emotion);
                 // var v_emt = res.emotion; var f_emt = recognizeFaceEmotion();
+                voiceMaxValue = res.accuracy;
 
-                // console.log("Voice : " + v_emt + " Face : " + f_emt);
-                console.log("Voice emotion value :" + res.accuracy);
-                console.log("Face emotion value :" + max);
+                console.log("Voice : " + v_emt + " Face : " + f_emt);
+                console.log("Voice emotion value :" + voiceMaxValue);
+                console.log("Face emotion value :" + faceMaxValue);
 
                 var emt = uniteEmotion(v_emt, f_emt);
                 //console.log("Emotion : " + emt);
@@ -270,24 +273,37 @@ function transformEmotion(emt) {
 }
 
 function uniteEmotion(v, f) {
-    if (v == 'Good' || f == 'Good') {
-        return 'Good';
-    } else if (v == 'Sad' || f == 'Sad') {
-        return 'Sad';
-    } else if (v == 'Bad' || f == 'Bad') {
-        return 'Bad';
-    } else {
-        return 'Normal';
-    }
+    // if (v == 'Good' || f == 'Good') {
+    //     return 'Good';
+    // } else if (v == 'Sad' || f == 'Sad') {
+    //     return 'Sad';
+    // } else if (v == 'Bad' || f == 'Bad') {
+    //     return 'Bad';
+    // } else {
+    //     return 'Normal';
+    // }
     
     // face, voice 감정 조합
-    // if((v == 'Good' && f == 'Bad') || (v == 'Good' && f == 'Sad') || (v == 'Sad' && f == 'Good') || (v == 'Sad' && f == 'Bad') || (v == 'Bad' && f == 'Good') || (v == 'Bad' && f == 'Sad')){
-    //     if(faceMaxValue == voiceMaxValue) {return v;}
-    //     return (faceMaxValue > voiceMaxValue) ? f : v;
-    // }
-    // else if(v == 'Normal' && f != 'Normal'){return f;}
-    // else if(v != 'Normal' && f == 'Normal'){return v;}
-    // else if(v == 'Normal' && f == 'Normal'){return 'Normal';}
+    if((v == 'Good' && f == 'Bad') || (v == 'Good' && f == 'Sad') || (v == 'Sad' && f == 'Good') || (v == 'Sad' && f == 'Bad') || (v == 'Bad' && f == 'Good') || (v == 'Bad' && f == 'Sad')){
+        if(faceMaxValue == voiceMaxValue) {
+            console.log(v);
+            return v;
+        }
+        console.log((faceMaxValue > voiceMaxValue) ? f : v);
+        return (faceMaxValue > voiceMaxValue) ? f : v;
+    }
+    else if(v == 'Normal' && f != 'Normal'){
+        console.log(f);
+        return f;
+    }
+    else if(v != 'Normal' && f == 'Normal'){
+        console.log(v);
+        return v;
+    }
+    else if(v == 'Normal' && f == 'Normal'){
+        console.log("Normal");
+        return 'Normal';
+    }
 }
 
 function setEmotion(result) {
