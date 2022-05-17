@@ -18,12 +18,12 @@ var emotionCount = [0,0,0,0];
 // stopRecord(ref); } 얼굴 인식 감정 분석 함수
 async function recognizeFaceEmotion() {
     // 3초마다 얼굴 감정 분석 faceExpressionsRecognition();
-    const remoteVideo = document.getElementById('remoteVideo');
+    const localVideo = document.getElementById('localVideo');
     //얼굴 인식 모델 load
 
     const detections = await faceapi
         .detectAllFaces(
-            remoteVideo,
+            localVideo,
             new faceapi.TinyFaceDetectorOptions()
         )
         .withFaceLandmarks()
