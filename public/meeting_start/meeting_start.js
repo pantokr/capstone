@@ -1,5 +1,5 @@
 import "../firebase_initialization.js";
-import { startSTT } from "./meeting_stt.js"
+import {startSTT} from "./meeting_stt.js"
 import {
     getFirestore,
     collection,
@@ -11,6 +11,7 @@ import {
     onSnapshot,
     deleteDoc
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import "./meeting_tips.js";
 
 mdc
     .ripple
@@ -58,7 +59,7 @@ function init() {
         .dialog
         .MDCDialog(document.querySelector('#room-dialog'));
 
-    makeRandomQuestion();
+    //makeRandomQuestion();
 
 }
 
@@ -89,7 +90,6 @@ async function createRoom() {
     console.log('createBtn has clicked!');
     const db = getFirestore();
     const roomRef = await doc(collection(db, 'rooms'));
-
 
     console.log('Create PeerConnection with configuration: ', configuration);
     peerConnection = new RTCPeerConnection(configuration);
@@ -131,7 +131,9 @@ async function createRoom() {
     document
         .querySelector('#currentRoom')
         .innerText = `방 코드 : ${roomRef.id}`;
-    document.querySelector(".copyBtn").setAttribute("id", roomRef.id);
+    document
+        .querySelector(".copyBtn")
+        .setAttribute("id", roomRef.id);
     // `Current room is ${roomRef.id} - You are the caller!`; Code for creating a
     // room above
 
@@ -225,12 +227,14 @@ function joinRoom() {
             document
                 .querySelector('#currentRoom')
                 .innerText =
-                // `Current room is ${roomId} - You are the callee!`;
-                `방 코드 : ${roomId} `;
-            document.querySelector(".copyBtn").setAttribute("id", roomId);
+            // `Current room is ${roomId} - You are the callee!`;
+            `방 코드 : ${roomId} `;
+            document
+                .querySelector(".copyBtn")
+                .setAttribute("id", roomId);
 
             await joinRoomById(roomId);
-        }, { once: true });
+        }, {once: true});
     roomDialog.open();
 
 }
@@ -317,7 +321,7 @@ async function joinRoomById(roomId) {
 async function openUserMedia(e) {
     const stream = await navigator
         .mediaDevices
-        .getUserMedia({ video: true, audio: true });
+        .getUserMedia({video: true, audio: true});
 
     document
         .querySelector('#localVideo')
@@ -341,68 +345,30 @@ async function openUserMedia(e) {
 }
 
 async function hangUp(e) {
-    // const tracks = document
-    //     .querySelector('#localVideo')
-    //     .srcObject
-    //     .getTracks();
-    // tracks.forEach(track => {
-    //     track.stop();
-    // });
-
-    // if (remoteStream) {
-    //     remoteStream
-    //         .getTracks()
-    //         .forEach(track => track.stop());
-    // }
-
-    // if (peerConnection) {
-    //     peerConnection.close();
-    // }
-
-    // document
-    //     .querySelector('#localVideo')
-    //     .srcObject = null;
-    // document
-    //     .querySelector('#remoteVideo')
-    //     .srcObject = null;
-    // document
-    //     .querySelector('#cameraBtn')
-    //     .disabled = false;
-    // document
-    //     .querySelector('#joinBtn')
-    //     .disabled = true;
-    // document
-    //     .querySelector('#createBtn')
-    //     .disabled = true;
-    // document
-    //     .querySelector('#hangupBtn')
-    //     .disabled = true;
-    // document
-    //     .querySelector('#currentRoom')
-    //     .innerText = '';
-
-    // // Delete room on hangup
-    // if (roomId) {
-    //     const db = getFirestore();
-    //     const roomRef = getDoc(roomId, collection(db, 'rooms'));
-    //     // const roomRef = doc(collection(db, 'rooms'), `${roomId}`);
-
-    //     const calleeCandidates = await getDoc(collection(roomRef, 'calleeCandidates'));
-    //     // const calleeCandidates = collection(roomRef, 'calleeCandidates');
-    //     calleeCandidates.forEach(async candidate => {
-    //         await deleteDoc(candidate.ref);
-    //     });
-    //     const callerCandidates = await getDoc(collection(roomRef, 'calleeCandidates'));
-    //     // const callerCandidates = collection(roomRef, 'callerCandidates');
-    //     callerCandidates.forEach(async candidate => {
-    //         await deleteDoc(candidate.ref);
-    //     });
-
-    //     await deleteDoc(roomRef);
-    // }
-
-    // 초기화
-    window.location.reload();
+    // const tracks = document     .querySelector('#localVideo')     .srcObject
+    // .getTracks(); tracks.forEach(track => {     track.stop(); }); if
+    // (remoteStream) {     remoteStream         .getTracks()         .forEach(track
+    // => track.stop()); } if (peerConnection) {     peerConnection.close(); }
+    // document     .querySelector('#localVideo')     .srcObject = null; document
+    // .querySelector('#remoteVideo')     .srcObject = null; document
+    // .querySelector('#cameraBtn')     .disabled = false; document
+    // .querySelector('#joinBtn')     .disabled = true; document
+    // .querySelector('#createBtn')     .disabled = true; document
+    // .querySelector('#hangupBtn')     .disabled = true; document
+    // .querySelector('#currentRoom')     .innerText = '';  Delete room on hangup if
+    // (roomId) {     const db = getFirestore();     const roomRef = getDoc(roomId,
+    // collection(db, 'rooms'));      const roomRef = doc(collection(db, 'rooms'),
+    // `${roomId}`);     const calleeCandidates = await getDoc(collection(roomRef,
+    // 'calleeCandidates'));      const calleeCandidates = collection(roomRef,
+    // 'calleeCandidates');     calleeCandidates.forEach(async candidate => {
+    // await deleteDoc(candidate.ref);     });     const callerCandidates = await
+    // getDoc(collection(roomRef, 'calleeCandidates'));      const callerCandidates
+    // = collection(roomRef, 'callerCandidates');     callerCandidates.forEach(async
+    // candidate => {         await deleteDoc(candidate.ref);     });     await
+    // deleteDoc(roomRef); } 초기화
+    window
+        .location
+        .reload();
     console.log("초기화 됨");
 
 }
@@ -483,31 +449,20 @@ function handleCameraClick() {
     }
 }
 
-// 랜덤 질문
-const randomSwitch = document.getElementById("random_switch");
-
-randomSwitch.addEventListener("click", makeRandomQuestion);
-
-async function makeRandomQuestion() {
-    const randNum = Math.floor(Math.random() * 10 + 1);
-    const db = getFirestore();
-    const questionRef = doc(collection(db, 'randomQuestions'), `${randNum}`);
-    const docSnap = await getDoc(questionRef);
-    const parsed_data = JSON.parse(JSON.stringify(docSnap.data()));
-
-    let randomQuestion = document.getElementById("randomQuestion");
-    randomQuestion.textContent = parsed_data.question;
-}
-
-
-document.querySelector('.copyBtn').addEventListener("click", CopyByClipBoardAPI);
+document
+    .querySelector('.copyBtn')
+    .addEventListener("click", CopyByClipBoardAPI);
 
 function CopyByClipBoardAPI() {
 
-    const copiedText = document.querySelector('#currentRoom')
-        .innerText.substr(6);
+    const copiedText = document
+        .querySelector('#currentRoom')
+        .innerText
+        .substr(6);
 
-    navigator.clipboard.writeText(`${copiedText}`)
+    navigator
+        .clipboard
+        .writeText(`${copiedText}`)
         .then(() => {
             alert(`방 코드 ${copiedText}를 복사했습니다.`)
         })
@@ -515,7 +470,4 @@ function CopyByClipBoardAPI() {
             alert(`복사 실패!`)
         })
 
-}
-
-
-
+    }

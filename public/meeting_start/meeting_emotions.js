@@ -1,5 +1,5 @@
 import "../firebase_initialization.js";
-import { updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { updateDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 var leftchannel = [];
 var rightchannel = [];
