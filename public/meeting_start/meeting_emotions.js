@@ -11,6 +11,10 @@ var context = null;
 var blob = null;
 var faceMaxValue;
 var voiceMaxValue;
+
+//good, sad, bad, normal count
+var emotionCount = [0,0,0,0];
+
 // stopRecord(ref); } 얼굴 인식 감정 분석 함수
 async function recognizeFaceEmotion() {
     // 3초마다 얼굴 감정 분석 faceExpressionsRecognition();
@@ -31,6 +35,7 @@ async function recognizeFaceEmotion() {
     if (detections.length == 0) {
         return "Normal";
     }
+
     var emotions = Object
         .keys(detections[0].expressions)
         .map(function (key) {
@@ -173,6 +178,7 @@ async function stopRecord(ref = null) {
     // .revokeObjectURL(url);
 
     var reader = new FileReader();
+    // var f_emt = await recognizeFaceEmotion();
 
     reader.onloadend = function () {
         var base64 = reader
@@ -192,13 +198,21 @@ async function stopRecord(ref = null) {
 
                 var v_emt = transformEmotion(res.emotion);
                 // var v_emt = res.emotion; var f_emt = recognizeFaceEmotion();
+                // var f_emt = recognizeFaceEmotion();
                 voiceMaxValue = res.accuracy;
 
-                console.log("Voice : " + v_emt + " Face : " + f_emt);
+                console.log("Voice emotion : " + v_emt + " Face emotion : " + f_emt);
                 console.log("Voice emotion value :" + voiceMaxValue);
                 console.log("Face emotion value :" + faceMaxValue);
 
                 var emt = uniteEmotion(v_emt, f_emt);
+                
+                //emotion count
+                if (emt == 'Good'){emotionCount[0]++;}
+                else if (emt == 'Sad'){emotionCount[1]++;}
+                else if (emt == 'Bad'){emotionCount[2]++;}
+                else if (emt == 'Normal'){emotionCount[3]++;}
+                console.log("emotion Count : " + emotionCount);
                 //console.log("Emotion : " + emt);
 
                 // if(emt == 'Bad'){     setEmotion(1); } else if(emt == 'Good'){ setEmotion(2);
@@ -284,6 +298,11 @@ function uniteEmotion(v, f) {
     // }
     
     // face, voice 감정 조합
+    // face 인식 불가 typeerror 처리
+    if(f != 'Good' && f != 'Sad' && f != 'Bad' && f != 'Normal'){
+        console.log(v);
+        return v;
+    }
     if((v == 'Good' && f == 'Bad') || (v == 'Good' && f == 'Sad') || (v == 'Sad' && f == 'Good') || (v == 'Sad' && f == 'Bad') || (v == 'Bad' && f == 'Good') || (v == 'Bad' && f == 'Sad')){
         if(faceMaxValue == voiceMaxValue) {
             console.log(v);
