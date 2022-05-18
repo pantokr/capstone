@@ -58,7 +58,7 @@ async function startSTT(roomId, isCaller) {
                 });
             }
         } else {
-            console.log("No User.");
+            // console.log("No User.");
         }
     });
 
@@ -98,7 +98,7 @@ async function startSTT(roomId, isCaller) {
 
                     postData('https://open-py.jp.ngrok.io/google-nlp', parsed_data).then((data) => {
                         if (data) {
-                            console.log(Object.keys(data)[0]); // JSON 데이터가 `data.json()` 호출에 의해 파싱됨
+                            // console.log(Object.keys(data)[0]); // JSON 데이터가 `data.json()` 호출에 의해 파싱됨
                         }
                     });
 
@@ -128,7 +128,7 @@ async function startSTT(roomId, isCaller) {
                         oppText.setAttribute("class", "oppText");
 
                         oppText.textContent = text;
-                        console.log("Opponent ext : ", oppText.textContent);
+                        console.log("Opponent text : ", oppText.textContent);
                         oppBox.append(oppText);
                         document
                             .querySelector('.chatLog')
@@ -152,7 +152,7 @@ async function startSTT(roomId, isCaller) {
                     let emotion = parsed_data.emotion;
                     if (speecher != name) {
 
-                        console.log("Opponent Emotion : " + emotion);
+                        // console.log("Opponent Emotion : " + emotion);
                         if (emotion == 'Bad') {
                             setEmotion(1);
                         } else if (emotion == 'Good') {

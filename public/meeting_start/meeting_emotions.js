@@ -50,6 +50,7 @@ async function recognizeFaceEmotion() {
     var emt = transformEmotion(getKeyByValue(detections[0].expressions, max));
     // console.log("Face :"+ getKeyByValue(detections[0].expressions, max));
     // console.log("Face max Value : " + max);
+    console.log("--------------------------------------------------");
     console.log("trans 하기 전 Face emotion : " + detections[0].expressions);
 
     return emt;
