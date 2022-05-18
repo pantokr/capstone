@@ -136,7 +136,7 @@ function unfilter(){
       
       var regex = new RegExp(value,'gi');
       myText[0].innerHTML = myText[0].innerHTML.replace(regex, "<span class='unhighlight-my'>" + value + "</span>") ;
-      
+     
     }else {
       //   myBox[i].style.display = "none";
     }

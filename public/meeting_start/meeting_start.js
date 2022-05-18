@@ -58,7 +58,7 @@ function init() {
         .dialog
         .MDCDialog(document.querySelector('#room-dialog'));
 
-    makeRandomQuestion();
+    // makeRandomQuestion();
 
 }
 
@@ -131,7 +131,7 @@ async function createRoom() {
     // document
     //     .querySelector('#currentRoom')
     //     .innerText = `방 코드 : ${roomRef.id}`;
-    document.querySelector(".copyBtn").setAttribute("id", roomRef.id);
+    // document.querySelector(".copyBtn").setAttribute("id", roomRef.id);
     // `Current room is ${roomRef.id} - You are the caller!`; Code for creating a
     // room above
 
@@ -483,25 +483,25 @@ function handleCameraClick() {
 }
 
 // 랜덤 질문
-const randomSwitch = document.getElementById("random_switch");
+// const randomSwitch = document.getElementById("random_switch");
 
-randomSwitch.addEventListener("click", makeRandomQuestion);
+// randomSwitch.addEventListener("click", makeRandomQuestion);
 
-async function makeRandomQuestion() {
-    const randNum = Math.floor(Math.random() * 10 + 1);
-    const db = getFirestore();
-    const questionRef = doc(collection(db, 'randomQuestions'), `${randNum}`);
-    const docSnap = await getDoc(questionRef);
-    const parsed_data = JSON.parse(JSON.stringify(docSnap.data()));
+// async function makeRandomQuestion() {
+//     const randNum = Math.floor(Math.random() * 10 + 1);
+//     const db = getFirestore();
+//     const questionRef = doc(collection(db, 'randomQuestions'), `${randNum}`);
+//     const docSnap = await getDoc(questionRef);
+//     const parsed_data = JSON.parse(JSON.stringify(docSnap.data()));
 
-    let randomQuestion = document.getElementById("randomQuestion");
-    randomQuestion.textContent = parsed_data.question;
-}
+//     let randomQuestion = document.getElementById("randomQuestion");
+//     randomQuestion.textContent = parsed_data.question;
+// }
 
+const copyBtn = document.getElementById("copyBtn");
+copyBtn.addEventListener("click", CopyByClipBoardAPI);
 
-document.querySelector('#copyBtn').addEventListener("click", CopyByClipBoardAPI);
-
-function CopyByClipBoardAPI() {
+async function CopyByClipBoardAPI() {
     console.log("copyBtn has clicked!");
     console.log(roomId);
     

@@ -22,7 +22,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- custom CSS -->
-    <link href="../main.css" rel="stylesheet" type="text/css">
+    <link href="./meeting_start.css" rel="stylesheet" type="text/css">
     <link href="../nav.css" rel="stylesheet">
 
     <!-- animate CSS -->
@@ -67,47 +67,59 @@
           
        
         <div class="row" id="outer">
-            <div class="col-md-1" style="margin: 0; padding:0;">
-                <div class="container" id="myStream" style="margin: 0; padding:0;">
-                    <div class="justify-content-center n" id="buttons">
+            <div class="col-md-1" >
+                <div class="container justify-content-center" id="myStream" style="margin: 0; padding:0;">
+                    <div class="" id="buttons">
                     
                          <!-- 클릭 시 룸 번호 생성 -->
-                        <button class="mdc-button mdc-button--raised" id="createBtn">
-                            <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
-                            <span class="mdc-button__label">방 만들기</span>
+                        <button class="mdc-button mdc-button--raised" id="createBtn" >
+                            <div>
+                                <span class="material-icons mdc-button__icon create" aria-hidden="true">group_add</span>
+                                <!-- <span class="mdc-button__label">방 만들기</span> -->
+                                <p class="arrow">방 만들기</p>
+                                    
+                            </div>
                         </button>
                         
                          <!-- 클릭 시 룸 조인 모달 생성 -->
                         <button class="mdc-button mdc-button--raised " id="joinBtn">
-                            <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
-                            <span class="mdc-button__label">방 참가</span>
+                            <div>
+                                <span class="material-icons mdc-button__icon" aria-hidden="true">group</span>
+                                <!-- <span class="mdc-button__label">방 참가</span> -->
+                                <p class="arrow">방 참가하기</p>
+                            </div>
                         </button>
 
                         <!-- 클릭 시 룸 연결 끊기 -->
-                        <button class="mdc-button mdc-button--raised " id="hangupBtn">
-                            <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
-                            <span class="mdc-button__label">미팅 종료</span>
+                        <button class="mdc-button mdc-button--raised " id="hangupBtn" >
+                            <div>
+                                <span class="material-icons mdc-button__icon" aria-hidden="true">close</span>
+                                <!-- <span class="mdc-button__label">미팅 종료</span> -->
+                                <p class="arrow">미팅 종료하기</p>
+                            </div>
                         </button>
 
                         <!-- 룸 번호 뜨는 곳 -->
                         <button class="mdc-button mdc-button--raised " id="copyBtn" >
-                            <i class="material-icons mdc-button__icon" aria-hidden="true">copy_all</i>
-                            <span class="mdc-button__label" id="currentRoom">코드 복사</span>
+                            <div>
+                                <span class="material-icons mdc-button__icon" aria-hidden="true">copy_all</span>
+                                 <!-- <span class="mdc-button__label" id="currentRoom">코드 복사</span> -->
+                                <p class="arrow">코드 복사하기</p>
+                            
+                            </div>
                             
                             
                         </button>
 
-                        <div class="transparency" style="height:20rem; ">
+                        <div class="transparency" style="height:18rem; ">
 
                         </div>
 
                         <div class="emotionguide" style="float:left">
                             <span id="emo" class="angry">😡</span>
-                            <br>
+                            
                             <span id="emo" class="happy">😊</span>
-                            <br>
                             <span id="emo" class="sad">😭</span>
-                            <br>
                             <span id="emo" class="neutral">😐</span>
                         </div>
                     </div>
