@@ -23,56 +23,70 @@ let roomId = null;
 let opId = null;
 let opName = null;
 
-let opChatLogsRefs = null;
-// 
-//init_ff();
+// let opChatLogsRefs = null;
+// let opChatSpeechesRefs = null;
+
+let chatList = [];
+let speechList = {};
 
 onAuthStateChanged(auth, (user) => {
-    getCurrentRoomId();
+    init_ff();
+    // getChatLogs();
+    // setTimeout(() => {
+    //     console.log(getChatLogs());
+    // }, 10000);
 });
 
-function init_ff(roomId = 'fbkOvjH1uxIwvyzC2rwR') {
-    this.roomId = roomId;
+async function init_ff(rid = 'Wcvm5NFGsZ7g6fe56J0n') {
+    roomId = rid;
+
+    const user = auth.currentUser;
+    const uid = user.uid;
 
     const db = getFirestore();
     const chatCol = collection(db, "chats");
     const chatRef = doc(chatCol, roomId);
 
-    getDoc(chatRef)
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                const val = snapshot.data();
+    getDoc(chatRef).then(async (snapshot) => {
+        if (snapshot.exists()) {
+            const val = snapshot.data();
 
-                const caller = val.caller;
-                const callee = val.callee;
+            const caller = val.caller;
+            const callee = val.callee;
 
-                if (uid == caller){
-                    opId = callee;
-                }
-                else{
-                    opId = caller;
-                }
-
-
-
-                const opRef = doc(collection(db, "users"), opId);
-                opListRefs = getDocs(collection(opRef, "chat_logs"));
-
-                getDoc(opRef).
-                    then((snapshot_u)=>{
-                        if(snapshot_u.exists()){
-                            const val_u = snapshot_u.data();
-
-                            opName = val_u.name;
-                        }
-                    }).catch((error) => {
-                        console.error("User Error.");;
-                    });
+            if (uid == caller) {
+                opId = callee;
+            } else {
+                opId = caller;
             }
-        })
-        .catch((error) => {
-            console.error("Chat Error.");
-        });
+
+            const opRef = doc(collection(db, "users"), opId);
+            const opChatLogsRefs = await getDocs(collection(opRef, "chat_logs"));
+
+            opChatLogsRefs.forEach((doc) => {
+                chatList.push(doc.id);
+            });
+            console.log(chatList);
+            chatList.forEach(async r => {
+                const opChatRef = doc(chatCol, r);
+                const opSpeechesRefs = await getDocs(collection(opChatRef, "speeches"));
+
+                let t_list = [];
+                opSpeechesRefs.forEach((doc) => {
+                    t_list.push(doc.id);
+                });
+                speechList[r] = t_list;
+                console.log(speechList[0]);
+            });
+            getDoc(opRef).then((snapshot_u) => {
+                if (snapshot_u.exists()) {
+                    const val_u = snapshot_u.data();
+
+                    opName = val_u.name;
+                }
+            });
+        }
+    });
 
 }
 
@@ -80,14 +94,21 @@ function getCurrentRoomId() {
     return roomId;
 }
 
-function getOpponentId(){
+function getOpponentId() {
     return opId;
 }
 
-function getOpponentName(){
+function getOpponentName() {
     return opName;
 }
 
+function getChatLogs() {
+    let logs = []
+    opChatLogsRefs.forEach((doc) => {
+        logs.push(doc.id);
+    });
+    return logs;
+}
 export {
     init_ff
 }

@@ -53,31 +53,31 @@ function init() {
 // const db = getFirestore();
 // const roomRef = collection(db, 'rooms');
 // const roomSnapshot = await getDocs(roomRef);getDoc(doc(db, 'users', uid))
-.then((snapshot) => {
-    if (snapshot.exists()) {
-        var val = snapshot.data();
+// .then((snapshot) => {
+//     if (snapshot.exists()) {
+//         var val = snapshot.data();
 
-        const profile = val.profile_picture;
-        const name = val.name;
-        const email = val.email;
-        const birth = val.birth;
-        const birth_y = val.birth.birth_year;
-        const birth_m = val.birth.birth_month;
-        const birth_d = val.birth.birth_date;
-        const gender = val.gender;
+//         const profile = val.profile_picture;
+//         const name = val.name;
+//         const email = val.email;
+//         const birth = val.birth;
+//         const birth_y = val.birth.birth_year;
+//         const birth_m = val.birth.birth_month;
+//         const birth_d = val.birth.birth_date;
+//         const gender = val.gender;
 
-        profile_img.setAttribute('src', profile);
+//         profile_img.setAttribute('src', profile);
 
-        uid_span.innerText = uid;
-        email_span.innerText = email;
-        name_span.innerText = name;
-        age_span.innerText = `${birth_y} . ${birth_m} . ${birth_d}`;
-        gender_span.innerText = gender === "male"
-            ? "남자"
-            : "여자";
+//         uid_span.innerText = uid;
+//         email_span.innerText = email;
+//         name_span.innerText = name;
+//         age_span.innerText = `${birth_y} . ${birth_m} . ${birth_d}`;
+//         gender_span.innerText = gender === "male"
+//             ? "남자"
+//             : "여자";
 
-    }
-})
-.catch((error) => {
-    console.error(error);
-});
+//     }
+// })
+// .catch((error) => {
+//     console.error(error);
+// });
