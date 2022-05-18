@@ -103,7 +103,7 @@ async function startSTT(roomId, isCaller) {
                         }
                     });
 
-                    if (speecher == uid) {
+                    if (speecher == name) {
 
                         let myBox = document.createElement("div");
                         myBox.setAttribute("class", "myBox");
@@ -285,7 +285,5 @@ async function startSTT(roomId, isCaller) {
 }
 
 export {
-    startSTT,
-    startTime,
-    uid
+    startSTT
 };
