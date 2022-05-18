@@ -11,6 +11,7 @@ import {
     onSnapshot,
     deleteDoc
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import "./meeting_tips.js";
 
 mdc
     .ripple

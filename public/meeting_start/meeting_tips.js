@@ -7,9 +7,8 @@ function init() {
     let basicTipCount = 0;
     shuffle(basicTipList);
 
-    const randomSwitch = document.getElementById("random_switch");
-    randomSwitch.addEventListener("click", makeRandomQuestion);
-
+    makeRandomQuestion();
+    
     // 랜덤 질문
     async function makeRandomQuestion() {
         // const randNum = Math.floor(Math.random() * 10 + 1); const db =
