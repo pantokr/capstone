@@ -12,6 +12,7 @@ import {
     deleteDoc
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 import "./meeting_tips.js";
+import { init_ff } from "./firestore_functions.js"
 
 mdc
     .ripple
@@ -37,6 +38,7 @@ function init() {
     // 자동으로 카메라, 마이크 켜지게 구현, 버튼 클릭 대신 window.onload 사용
     // document.querySelector('#cameraBtn').addEventListener('click',
     // openUserMedia);
+
     window.onload = openUserMedia();
     // document.querySelector('#hangupBtn').addEventListener('click', hangUp);
     document
@@ -505,7 +507,7 @@ copyBtn.addEventListener("click", CopyByClipBoardAPI);
 async function CopyByClipBoardAPI() {
     console.log("copyBtn has clicked!");
     console.log(roomId);
-    
+
     const copiedText = roomId;
     // document.querySelector('#currentRoom')
     //     .innerText.substr(6);

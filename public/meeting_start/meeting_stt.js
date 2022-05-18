@@ -51,10 +51,10 @@ async function startSTT(roomId, isCaller) {
             name = user.displayName;
             uid = user.uid;
             if (isCaller == true) {
-                setDoc(chatRef, { caller: name });
+                setDoc(chatRef, { caller: uid });
             } else {
                 updateDoc(chatRef, {
-                    callee: name,
+                    callee: uid,
                     start: getTimestamp()
                 });
             }
@@ -103,7 +103,7 @@ async function startSTT(roomId, isCaller) {
                         }
                     });
 
-                    if (speecher == name) {
+                    if (speecher == uid) {
 
                         let myBox = document.createElement("div");
                         myBox.setAttribute("class", "myBox");
@@ -151,7 +151,7 @@ async function startSTT(roomId, isCaller) {
                     let speecher = parsed_data.speecher;
 
                     let emotion = parsed_data.emotion;
-                    if (speecher != name) {
+                    if (speecher != uid) {
 
                         // console.log("Opponent Emotion : " + emotion);
                         if (emotion == 'Bad') {
@@ -225,7 +225,7 @@ async function startSTT(roomId, isCaller) {
                 var speechRef = doc(speechCol, getTimestamp());
                 stopRecord(speechRef);
                 setDoc((speechRef), {
-                    speecher: name,
+                    speecher: uid,
                     isCaller: isCaller == true
                         ? "Caller"
                         : "Callee",

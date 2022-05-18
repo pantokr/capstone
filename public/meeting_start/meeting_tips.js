@@ -1,14 +1,25 @@
-import { getFirestore, collection, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import "../firebase_initialization.js"
+import {
+    getFirestore,
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    setDoc,
+    addDoc,
+    updateDoc,
+    onSnapshot,
+    deleteDoc
+} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 init();
 
 function init() {
     const basicTipList = ['누군가 입장했어요! 서로 웃으며 인사하세요!', '누군가 입장했어요! 서로의 MBTI를 물어보세요!'];
-    let basicTipCount = 0;
     shuffle(basicTipList);
 
     makeRandomQuestion();
-    
+
     // 랜덤 질문
     async function makeRandomQuestion() {
         // const randNum = Math.floor(Math.random() * 10 + 1); const db =
@@ -22,9 +33,10 @@ function init() {
     }
 
     function returnTip(currentProgress = 0) {
+        // cur
         if (currentProgress == 0) {
-            return basicTipList[(basicTipCount++) % basicTipList.length];
-        } else if (currentProgress == 1) { }
+            return basicTipList[0];
+        } else if (currentProgress == 1) {}
 
     }
 
@@ -38,6 +50,6 @@ function init() {
     }
 }
 
-
-
-
+const db = getFirestore();
+const roomRef = collection(db, 'rooms');
+const roomSnapshot = await getDocs(roomRef);
