@@ -33,7 +33,7 @@ body {
 
 /* meeting_start 속성 */
 .my-cam {
-  padding-bottom: 75%;
+  padding-bottom: 56.25%;
   position: relative;
   height: 0;
 }
@@ -46,7 +46,7 @@ body {
   position: absolute;
 }
 .opponent-cam {
-  padding-bottom: 75%;
+  padding-bottom: 56.25%;
   position: relative;
   height: 0;
 }
