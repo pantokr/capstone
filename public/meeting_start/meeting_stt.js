@@ -112,7 +112,7 @@ async function startSTT(roomId, isCaller) {
                         myText.setAttribute("class", "myText");
                         myText.textContent = text;
 
-                        console.log("My Text : ", myText.textContent);
+                        // console.log("My Text : ", myText.textContent);
 
                         myBox.append(myText);
                         document

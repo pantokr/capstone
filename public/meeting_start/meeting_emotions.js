@@ -48,9 +48,9 @@ async function recognizeFaceEmotion() {
     // 객체 배열 속 key 값을 console로 찍기
 
     var emt = transformEmotion(getKeyByValue(detections[0].expressions, max));
-    console.log("Face :"+ getKeyByValue(detections[0].expressions, max));
-    console.log("Face max Value : " + max);
-    console.log(detections[0].expressions);
+    // console.log("Face :"+ getKeyByValue(detections[0].expressions, max));
+    // console.log("Face max Value : " + max);
+    console.log("trans 하기 전 Face emotion : " + detections[0].expressions);
 
     return emt;
     
@@ -202,8 +202,7 @@ async function stopRecord(ref = null) {
                 voiceMaxValue = res.accuracy;
 
                 console.log("Voice emotion : " + v_emt + " Face emotion : " + f_emt);
-                console.log("Voice emotion value :" + voiceMaxValue);
-                console.log("Face emotion value :" + faceMaxValue);
+                console.log("Voice emotion value :" + voiceMaxValue + "Face emotion value :" + faceMaxValue);
 
                 var emt = uniteEmotion(v_emt, f_emt);
                 
@@ -300,27 +299,27 @@ function uniteEmotion(v, f) {
     // face, voice 감정 조합
     // face 인식 불가 typeerror 처리
     if(f != 'Good' && f != 'Sad' && f != 'Bad' && f != 'Normal'){
-        console.log(v);
+        console.log("emotion result : " + v);
         return v;
     }
     if((v == 'Good' && f == 'Bad') || (v == 'Good' && f == 'Sad') || (v == 'Sad' && f == 'Good') || (v == 'Sad' && f == 'Bad') || (v == 'Bad' && f == 'Good') || (v == 'Bad' && f == 'Sad')){
         if(faceMaxValue == voiceMaxValue) {
-            console.log(v);
+            console.log("emotion result : " + v);
             return v;
         }
-        console.log((faceMaxValue > voiceMaxValue) ? f : v);
+        console.log("emotion result : " + (faceMaxValue > voiceMaxValue) ? f : v);
         return (faceMaxValue > voiceMaxValue) ? f : v;
     }
     else if(v == 'Normal' && f != 'Normal'){
-        console.log(f);
+        console.log("emotion result : " + f);
         return f;
     }
     else if(v != 'Normal' && f == 'Normal'){
-        console.log(v);
+        console.log("emotion result : " + v);
         return v;
     }
     else if(v == 'Normal' && f == 'Normal'){
-        console.log("Normal");
+        console.log("emotion result : " + "Normal");
         return 'Normal';
     }
 }
