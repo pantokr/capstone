@@ -133,13 +133,10 @@ video {
   
 }
 
-#createBtn > i ,
-#joinBtn > i,
-#hangupBtn > i,
-#copyBtn > i{
-  font-size: 1.5rem;
-  margin-left: -4px;
-  margin-right: 6px;
+#icon{
+  font-size: 2rem;
+  margin-left: -18px;
+  margin-right: 9px;
   margin-top: -7px;
 
 }

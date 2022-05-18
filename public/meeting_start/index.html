@@ -74,7 +74,7 @@
                          <!-- 클릭 시 룸 번호 생성 -->
                         <button class="mdc-button mdc-button--raised" id="createBtn" >
                             <div>
-                                <span class="material-icons mdc-button__icon create" aria-hidden="true">group_add</span>
+                                <span id="icon" class="material-icons mdc-button__icon create" aria-hidden="true">group_add</span>
                                 <!-- <span class="mdc-button__label">방 만들기</span> -->
                                 <p class="arrow">방 만들기</p>
                                     
@@ -84,7 +84,7 @@
                          <!-- 클릭 시 룸 조인 모달 생성 -->
                         <button class="mdc-button mdc-button--raised " id="joinBtn">
                             <div>
-                                <span class="material-icons mdc-button__icon" aria-hidden="true">group</span>
+                                <span id="icon" class="material-icons mdc-button__icon" aria-hidden="true">group</span>
                                 <!-- <span class="mdc-button__label">방 참가</span> -->
                                 <p class="arrow">방 참가하기</p>
                             </div>
@@ -93,7 +93,7 @@
                         <!-- 클릭 시 룸 연결 끊기 -->
                         <button class="mdc-button mdc-button--raised " id="hangupBtn" >
                             <div>
-                                <span class="material-icons mdc-button__icon" aria-hidden="true">close</span>
+                                <span id="icon" class="material-icons mdc-button__icon" aria-hidden="true">close</span>
                                 <!-- <span class="mdc-button__label">미팅 종료</span> -->
                                 <p class="arrow">미팅 종료하기</p>
                             </div>
@@ -102,25 +102,33 @@
                         <!-- 룸 번호 뜨는 곳 -->
                         <button class="mdc-button mdc-button--raised " id="copyBtn" >
                             <div>
-                                <span class="material-icons mdc-button__icon" aria-hidden="true">copy_all</span>
+                                <span id="icon" class="material-icons mdc-button__icon" aria-hidden="true">copy_all</span>
                                  <!-- <span class="mdc-button__label" id="currentRoom">코드 복사</span> -->
                                 <p class="arrow">코드 복사하기</p>
-                            
                             </div>
-                            
-                            
                         </button>
 
                         <div class="transparency" style="height:18rem; ">
 
                         </div>
 
-                        <div class="emotionguide" style="float:left">
-                            <span id="emo" class="angry">😡</span>
-                            
-                            <span id="emo" class="happy">😊</span>
-                            <span id="emo" class="sad">😭</span>
-                            <span id="emo" class="neutral">😐</span>
+                        <div class="emotionguide d-flex flex-column" style="margin:0; padding:0;" >
+                            <div class="row justify-content-center" style="vertical-align: middle;">
+                                <span id="emo" class="angry col-4">😡</span>
+                                <span class="col-8 " id="key_angry">화남</span> 
+                            </div>
+                            <div class="row justify-content-center">
+                                <span id="emo" class="happy col-4">😊</span> 
+                                <span class="col-8" id="key_happy">행복</span> 
+                            </div>
+                            <div class="row justify-content-center">
+                                <span id="emo" class="sad col-4">😭</span> 
+                                <span class="col-8" id="key_sad">슬픔</span> 
+                            </div>
+                            <div class="row justify-content-center">
+                                <span id="emo" class="neutral col-4">😐</span> 
+                                <span class="col-8" id="key_neutral">중립</span> 
+                            </div>
                         </div>
                     </div>
                 </div>
