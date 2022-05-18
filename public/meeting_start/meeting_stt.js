@@ -285,5 +285,7 @@ async function startSTT(roomId, isCaller) {
 }
 
 export {
-    startSTT
+    startSTT,
+    startTime,
+    uid
 };

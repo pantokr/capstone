@@ -12,7 +12,7 @@ import {
     deleteDoc
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
-init();
+// init();
 
 function init() {
     const basicTipList = ['누군가 입장했어요! 서로 웃으며 인사하세요!', '누군가 입장했어요! 서로의 MBTI를 물어보세요!'];
@@ -50,9 +50,9 @@ function init() {
     }
 }
 
-const db = getFirestore();
-const roomRef = collection(db, 'rooms');
-const roomSnapshot = await getDocs(roomRef);getDoc(doc(db, 'users', uid))
+// const db = getFirestore();
+// const roomRef = collection(db, 'rooms');
+// const roomSnapshot = await getDocs(roomRef);getDoc(doc(db, 'users', uid))
 .then((snapshot) => {
     if (snapshot.exists()) {
         var val = snapshot.data();
