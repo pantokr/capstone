@@ -31,6 +31,28 @@ onAuthStateChanged(auth, (user) => {
 });
 
 
+
+google.charts.load("current", {packages:["corechart"]});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+    ['a', 'b'],
+    ['Good', 10],
+    ['Sad', 2],
+    ['Bad', 3],
+    ['Normal', 5],
+  ]);
+
+  var options = {
+    title: '감정 분포도',
+    is3D: true,
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+  chart.draw(data, options);
+}
+
 async function showChats() {
     const chatCol = collection(db, "chats");
     const chatRef = doc(chatCol, roomId);
