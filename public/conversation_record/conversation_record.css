@@ -1,7 +1,7 @@
 /* 제목부분 */
-#header {
+/* #header {
   margin-bottom: 2rem;
-}
+} */
 .title_area,
 .sub_area {
   justify-content: left;
@@ -23,6 +23,7 @@
 }
 
 .search {
+  
   /* width: 15rem; */
   box-sizing: border-box;
   text-align: center;
@@ -33,7 +34,7 @@
 /* body */
 #outer {
   /* margin: 2rem 2rem 0 2rem;  */
-  padding: 2rem 1rem 0.5rem 1rem;
+  padding: 1rem 1rem 0.5rem 1rem;
   border: 2px solid #abc5e3;
   border-radius: 15px;
   background-color: #ddeef4;
@@ -111,10 +112,14 @@
 
 .rq-content {
   position: relative;
-  height: 22.5rem;
+  height: 5rem;
   background-color: #f0faf9;
 }
-
+.emo-content {
+  position: relative;
+  height: 18rem;
+  background-color: #f0faf9;
+}
 .highlight {
   background-color: yellow;
 }

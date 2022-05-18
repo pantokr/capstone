@@ -54,6 +54,11 @@ function drawChart() {
 
   var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
   chart.draw(data, options);
+
+
+  var desc = documnet.getElementById("desc");
+  desc.textContent= "가장 많이 나온 감정은 " ;
+  
 }
 
 async function showChats() {
