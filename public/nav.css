@@ -7,7 +7,9 @@
 * {
   font-family: "BMHANNAPro";
 }
-
+.cover-container{
+  max-width: 95em;
+}
 .navbar {
   display: flex;
   justify-content: center;
