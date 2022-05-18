@@ -11,5 +11,4 @@ firebase-debug.*.log*
 # Dependency directories
 node_modules/
 
-# Firebase
-functions
+#
