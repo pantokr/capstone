@@ -45,7 +45,10 @@ function drawChart() {
   ]);
 
   var options = {
-    title: '감정 분포도',
+      backgroundColor: {
+          fill: '#f0faf9',
+      },
+    title: '',
     is3D: true,
   };
 
