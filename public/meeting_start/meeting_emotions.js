@@ -14,6 +14,7 @@ var voiceMaxValue;
 
 //good, sad, bad, normal count
 var emotionCount = [0,0,0,0];
+var emotionHistory = [];
 
 // stopRecord(ref); } 얼굴 인식 감정 분석 함수
 async function recognizeFaceEmotion() {
@@ -212,7 +213,11 @@ async function stopRecord(ref = null) {
                 else if (emt == 'Sad'){emotionCount[1]++;}
                 else if (emt == 'Bad'){emotionCount[2]++;}
                 else if (emt == 'Normal'){emotionCount[3]++;}
+
+                emotionHistory.push(emt);
+
                 console.log("emotion Count : " + emotionCount);
+                console.log("emotion History : " + emotionHistory);
                 //console.log("Emotion : " + emt);
 
                 // if(emt == 'Bad'){     setEmotion(1); } else if(emt == 'Good'){ setEmotion(2);
