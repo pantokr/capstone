@@ -19,9 +19,11 @@ import {
 const auth = getAuth();
 const db = getFirestore();
 
-const roomId = null;
-const opName = null;
-const 
+let roomId = null;
+let opId = null;
+let opName = null;
+
+let opChatLogsRefs = null;
 // 
 init_ff();
 
@@ -39,15 +41,39 @@ function init_ff(roomId = 'fbkOvjH1uxIwvyzC2rwR') {
     getDoc(chatRef)
         .then((snapshot) => {
             if (snapshot.exists()) {
-                var val = snapshot.data();
+                const val = snapshot.data();
 
+                const caller = val.caller;
+                const callee = val.callee;
+
+                if (uid == caller){
+                    opId = callee;
+                }
+                else{
+                    opId = caller;
+                }
+
+
+
+                const opRef = doc(collection(db, "users"), opId);
+                opListRefs = getDocs(collection(opRef, "chat_logs"));
+
+                getDoc(opRef).
+                    then((snapshot_u)=>{
+                        if(snapshot_u.exists()){
+                            const val_u = snapshot_u.data();
+
+                            opName = val_u.name;
+                        }
+                    }).catch((error) => {
+                        console.error("User Error.");;
+                    });
             }
         })
         .catch((error) => {
-            console.error(error);
+            console.error("Chat Error.");
         });
 
-    const speechCol = collection(chatRef, 'speeches');
 }
 
 function getCurrentRoomId() {
@@ -55,7 +81,11 @@ function getCurrentRoomId() {
 }
 
 function getOpponentId(){
+    return opId;
+}
 
+function getOpponentName(){
+    return opName;
 }
 
 export {
