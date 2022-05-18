@@ -25,7 +25,7 @@ let opName = null;
 
 let opChatLogsRefs = null;
 // 
-init_ff();
+//init_ff();
 
 onAuthStateChanged(auth, (user) => {
     getCurrentRoomId();

@@ -136,7 +136,7 @@ async function startSTT(roomId, isCaller) {
                             .append(oppBox);
 
                         if (!isOpponent) {
-                            addUserLog(speecher);
+                            addUserLog(speecher, uid);
                             isOpponent = true;
                         }
                     }
@@ -151,7 +151,7 @@ async function startSTT(roomId, isCaller) {
                     let speecher = parsed_data.speecher;
 
                     let emotion = parsed_data.emotion;
-                    if (speecher != uid) {
+                    if (speecher != name) {
 
                         // console.log("Opponent Emotion : " + emotion);
                         if (emotion == 'Bad') {
@@ -168,7 +168,7 @@ async function startSTT(roomId, isCaller) {
             });
     });
 
-    async function addUserLog(opponent) {
+    async function addUserLog(opponent, opponentId) {
 
         const userCol = collection(db, "users");
         const userRef = doc(userCol, uid);
@@ -178,6 +178,7 @@ async function startSTT(roomId, isCaller) {
         setDoc(doc(chatLogCol, startTime), {
             roomID: roomId,
             opponent: opponent,
+            opponentID: opponentId, 
             good : 0,
             sad : 0,
             bad : 0,
@@ -225,7 +226,8 @@ async function startSTT(roomId, isCaller) {
                 var speechRef = doc(speechCol, getTimestamp());
                 stopRecord(speechRef);
                 setDoc((speechRef), {
-                    speecher: uid,
+                    speecher: name,
+                    speecherID: uid,
                     isCaller: isCaller == true
                         ? "Caller"
                         : "Callee",
