@@ -10,6 +10,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 import { startRecord, stopRecord, setEmotion } from "./meeting_emotions.js";
 
+let startTime = null;
+let uid = null;
+
 async function startSTT(roomId, isCaller) {
 
     faceapi
@@ -39,10 +42,8 @@ async function startSTT(roomId, isCaller) {
     const chatRef = doc(chatCol, roomId);
     const speechCol = collection(chatRef, 'speeches');
 
-    let startTime = null;
     let chatLogCol = null;
     let name = null;
-    let uid = null;
     let isOpponent = false;
 
     onAuthStateChanged(auth, (user) => {
@@ -176,7 +177,11 @@ async function startSTT(roomId, isCaller) {
 
         setDoc(doc(chatLogCol, startTime), {
             roomID: roomId,
-            opponent: opponent
+            opponent: opponent,
+            good : 0,
+            sad : 0,
+            bad : 0,
+            normal : 0
         });
     }
 
@@ -278,5 +283,7 @@ async function startSTT(roomId, isCaller) {
 }
 
 export {
-    startSTT
+    startSTT,
+    startTime,
+    uid
 };

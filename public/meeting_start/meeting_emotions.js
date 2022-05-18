@@ -1,5 +1,16 @@
 import "../firebase_initialization.js";
-import { updateDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import {
+    getFirestore,
+    collection,
+    doc,
+    setDoc,
+    updateDoc,
+    onSnapshot
+} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import {
+    startTime,
+    uid
+} from "./meeting_stt.js";
 
 var leftchannel = [];
 var rightchannel = [];
@@ -13,7 +24,7 @@ var faceMaxValue;
 var voiceMaxValue;
 
 //good, sad, bad, normal count
-var emotionCount = [0,0,0,0];
+var emotionCount = [0, 0, 0, 0];
 var emotionHistory = [];
 
 // stopRecord(ref); } 얼굴 인식 감정 분석 함수
@@ -31,7 +42,7 @@ async function recognizeFaceEmotion() {
         .withFaceExpressions()
     // console.log(detections[0]);
     // console.log(detections[0].expressions);
-    
+
 
     if (detections.length == 0) {
         return "Normal";
@@ -55,7 +66,7 @@ async function recognizeFaceEmotion() {
     console.log("trans 하기 전 Face emotion : " + detections[0].expressions);
 
     return emt;
-    
+
 
     function getKeyByValue(object, value) {
         return Object
@@ -63,7 +74,7 @@ async function recognizeFaceEmotion() {
             .find(key => object[key] === value);
     }
 
-    
+
 }
 
 async function startRecord() {
@@ -207,13 +218,14 @@ async function stopRecord(ref = null) {
                 console.log("Voice emotion value :" + voiceMaxValue + "Face emotion value :" + faceMaxValue);
 
                 var emt = uniteEmotion(v_emt, f_emt);
-                
-                //emotion count
-                if (emt == 'Good'){emotionCount[0]++;}
-                else if (emt == 'Sad'){emotionCount[1]++;}
-                else if (emt == 'Bad'){emotionCount[2]++;}
-                else if (emt == 'Normal'){emotionCount[3]++;}
 
+                //emotion count
+                if (emt == 'Good') { emotionCount[0]++; }
+                else if (emt == 'Sad') { emotionCount[1]++; }
+                else if (emt == 'Bad') { emotionCount[2]++; }
+                else if (emt == 'Normal') { emotionCount[3]++; }
+
+                updateEmotion();
                 emotionHistory.push(emt);
 
                 console.log("emotion Count : " + emotionCount);
@@ -301,30 +313,30 @@ function uniteEmotion(v, f) {
     // } else {
     //     return 'Normal';
     // }
-    
+
     // face, voice 감정 조합
     // face 인식 불가 typeerror 처리
-    if(f != 'Good' && f != 'Sad' && f != 'Bad' && f != 'Normal'){
+    if (f != 'Good' && f != 'Sad' && f != 'Bad' && f != 'Normal') {
         console.log("emotion result : " + v);
         return v;
     }
-    if((v == 'Good' && f == 'Bad') || (v == 'Good' && f == 'Sad') || (v == 'Sad' && f == 'Good') || (v == 'Sad' && f == 'Bad') || (v == 'Bad' && f == 'Good') || (v == 'Bad' && f == 'Sad')){
-        if(faceMaxValue == voiceMaxValue) {
+    if ((v == 'Good' && f == 'Bad') || (v == 'Good' && f == 'Sad') || (v == 'Sad' && f == 'Good') || (v == 'Sad' && f == 'Bad') || (v == 'Bad' && f == 'Good') || (v == 'Bad' && f == 'Sad')) {
+        if (faceMaxValue == voiceMaxValue) {
             console.log("emotion result : " + v);
             return v;
         }
         console.log("emotion result : " + (faceMaxValue > voiceMaxValue) ? f : v);
         return (faceMaxValue > voiceMaxValue) ? f : v;
     }
-    else if(v == 'Normal' && f != 'Normal'){
+    else if (v == 'Normal' && f != 'Normal') {
         console.log("emotion result : " + f);
         return f;
     }
-    else if(v != 'Normal' && f == 'Normal'){
+    else if (v != 'Normal' && f == 'Normal') {
         console.log("emotion result : " + v);
         return v;
     }
-    else if(v == 'Normal' && f == 'Normal'){
+    else if (v == 'Normal' && f == 'Normal') {
         console.log("emotion result : " + "Normal");
         return 'Normal';
     }
@@ -345,6 +357,21 @@ function setEmotion(result) {
     }
 
 
+}
+
+function updateEmotion() {
+    const db = getFirestore();
+    const userCol = collection(db, "users");
+    const userRef = doc(userCol, uid);
+    const chatLogCol = collection(userRef, "chat_logs");
+    console.log("startTime:", startTime);
+
+    updateDoc(doc(chatLogCol, startTime), {
+        good: emotionCount[0],
+        sad: emotionCount[1],
+        bad: emotionCount[2],
+        normal: emotionCount[3]
+    });
 }
 
 export {
