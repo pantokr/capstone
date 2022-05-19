@@ -39,6 +39,8 @@ function init() {
     // document.querySelector('#cameraBtn').addEventListener('click',
     // openUserMedia);
 
+    init_ff();
+    
     window.onload = openUserMedia();
     // document.querySelector('#hangupBtn').addEventListener('click', hangUp);
     document
