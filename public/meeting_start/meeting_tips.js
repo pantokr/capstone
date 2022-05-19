@@ -11,11 +11,39 @@ import {
     onSnapshot,
     deleteDoc
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-
+import { emotionHistory } from "./meeting_emotions.js"
 // init();
 
+
+// const basicTipList = ['누군가 입장했어요! 서로 웃으며 인사하세요!', '누군가 입장했어요! 서로의 MBTI를 물어보세요!', 'hi','hello'];
+//슬라이드 배너 상태 변수
+// let index = 1;
+// let isMoved = true;
+// const speed = 1000;
+
+// 속도
+// const transform = "transform " + speed / 1000 + "s";
+
+// 방향
+// let translate = (i) => "translateX(-" + 100 * i + "%)";
+// if (type === "V") {
+//   translate = (i) => "translateY(-" + 100 * i + "%)";
+// }
+
+// 슬라이더
+// const slider = document.getElementById("tip");
+// const sliderRects = slider.getClientRects()[0];
+// slider.style["overflow"] = "hidden";
+
+// const container = document.createElement("div");
+// container.style["display"] = "flex";
+// container.style["flex-direction"] = type === "V" ? "column" : "row";
+// container.style["width"] = sliderRects.width + "px";
+// container.style["height"] = sliderRects.height + "px";
+// container.style["transform"] = translate(index);
+
 function init() {
-    const basicTipList = ['누군가 입장했어요! 서로 웃으며 인사하세요!', '누군가 입장했어요! 서로의 MBTI를 물어보세요!'];
+    
     shuffle(basicTipList);
 
     makeRandomQuestion();
