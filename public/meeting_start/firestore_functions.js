@@ -52,7 +52,7 @@ async function init_ff(rid = 'Wcvm5NFGsZ7g6fe56J0n') {
                     chatList[doc.id] = val_chatLogs.roomID;
 
                     // emotion rate of the room
-                    emotions = {};
+                    let emotions = {};
                     emotions['bad'] = val_chatLogs.bad;
                     emotions['good'] = val_chatLogs.good;
                     emotions['normal'] = val_chatLogs.normal;
@@ -108,6 +108,15 @@ function getSpeechesByRoomId(rid) {
     return speechList[rid];
 }
 
+// RoomID의 감정 스택
+function getEmotionStackByRoomId(rid){
+
+    for(var key in speechList){
+
+    }
+}
+
+// 감정 비율 (그 대화에서 있었던 감정의 개수)
 function getEmotionRateByRoomId(rid){
     return emotionRateList[rid];
 }
