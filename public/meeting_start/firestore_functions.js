@@ -1,6 +1,6 @@
 import "../firebase_initialization.js"
-import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import {getFirestore, collection, doc, getDoc, getDocs} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import { getFirestore, collection, doc, getDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"
 
 const auth = getAuth();
 const db = getFirestore();
@@ -11,6 +11,7 @@ let opName = null;
 
 let chatList = {};
 let speechList = {};
+let emotionRateList = {};
 
 async function init_ff(rid = 'Wcvm5NFGsZ7g6fe56J0n') {
     onAuthStateChanged(auth, (user) => {
@@ -49,6 +50,14 @@ async function init_ff(rid = 'Wcvm5NFGsZ7g6fe56J0n') {
                 opChatLogsRefs.forEach((doc) => {
                     const val_chatLogs = doc.data();
                     chatList[doc.id] = val_chatLogs.roomID;
+
+                    // emotion rate of the room
+                    emotions = {};
+                    emotions['bad'] = val_chatLogs.bad;
+                    emotions['good'] = val_chatLogs.good;
+                    emotions['normal'] = val_chatLogs.normal;
+                    emotions['sad'] = val_chatLogs.sad;
+                    emotionRateList[val_chatLogs.roomID] = emotions;
                 });
                 // console.log(chatList);
 
@@ -85,7 +94,7 @@ function getOpponentName() {
     return opName;
 }
 
-// 채팅 기록 가져오기
+// 상대방 채팅 기록 가져오기
 function getChatLogs() {
     let logs = []
     opChatLogsRefs.forEach((doc) => {
@@ -97,6 +106,10 @@ function getChatLogs() {
 // 넘겨 받은 RoomID의 모든 대화목록
 function getSpeechesByRoomId(rid) {
     return speechList[rid];
+}
+
+function getEmotionRateByRoomId(rid){
+    return emotionRateList[rid];
 }
 
 export {
