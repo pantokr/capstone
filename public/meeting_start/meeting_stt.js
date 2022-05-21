@@ -46,6 +46,9 @@ async function startSTT(roomId, isCaller) {
     let name = null;
     let isOpponent = false;
 
+    // 키워드 배열을 담을 해시맵
+    const keyMap = new Map();
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
             name = user.displayName;
@@ -97,12 +100,27 @@ async function startSTT(roomId, isCaller) {
                         return response.json(); // JSON 응답을 네이티브 JavaScript 객체로 파싱
                     }
 
-                    postData('https://open-py.jp.ngrok.io/google-nlp', parsed_data).then((data) => {
+                    postData('https://open-py.jp.ngrok.io/etri', parsed_data).then((data) => {
                         if (data) {
-                            // console.log(Object.keys(data)[0]); // JSON 데이터가 `data.json()` 호출에 의해 파싱됨
+                            for (var i = 0; i < Object.keys(data).length; i++) {
+                                const keyName = Object.keys(data)[i];
+                                if (!keyMap.get(keyName)) {
+                                    keyMap.set(keyName, 1);
+                                }
+                                else {
+                                    var cnt = keyMap.get(keyName);
+                                    keyMap.set(keyName, cnt + 1);
+                                }
+                                console.log("keyName: ", Object.keys(data)[i], "count: ", keyMap.get(keyName));
+                            }
+                            // const keyName = Object.keys(data)[0];
+                            // console.log("size : ",Object.keys(data).length);
+                            // console.log("data : ", data);
+                            // console.log("키워드:", data[keyName].text);
+                            // console.log("키워드 종류: ", data[keyName].type);
                         }
                     });
-
+                    // STT 박스
                     if (speecher == name) {
 
                         let myBox = document.createElement("div");
@@ -149,8 +167,8 @@ async function startSTT(roomId, isCaller) {
                         .data();
                     let parsed_data = JSON.parse(JSON.stringify(data))
                     let speecher = parsed_data.speecher;
-
                     let emotion = parsed_data.emotion;
+
                     if (speecher != name) {
 
                         // console.log("Opponent Emotion : " + emotion);
@@ -178,11 +196,11 @@ async function startSTT(roomId, isCaller) {
         setDoc(doc(chatLogCol, startTime), {
             roomID: roomId,
             opponent: opponent,
-            opponentID: opponentId, 
-            good : 0,
-            sad : 0,
-            bad : 0,
-            normal : 0
+            opponentID: opponentId,
+            good: 0,
+            sad: 0,
+            bad: 0,
+            normal: 0
         });
     }
 

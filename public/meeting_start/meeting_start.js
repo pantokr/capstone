@@ -183,6 +183,7 @@ async function createRoom() {
                 }
             });
     });
+    //startSTT(roomRef.id, true);
     // Listen for remote ICE candidates above
     // -------------------------STT-------------------------------------
 }
