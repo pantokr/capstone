@@ -53,17 +53,17 @@ const goodToNormalTips = [
     '상대방의 기쁜 마음이 지루해지려고 해요!',
     '지금까지 재밌었던 분위기를 계속 이어나가요!',
     '조금 더 적극적일 필요가 있어요!'];
-const badToNormalTips = ['좋지 않았던 분위기가 나아지고 있어요!','상대방이 기분 나빴었다가 나아지고 있어요!'];
+const badToNormalTips = ['좋지 않았던 분위기가 나아지고 있어요!', '상대방이 기분 나빴었다가 나아지고 있어요!'];
 
 const sadToBadTips = ['상대방의 우울함이 더 나빠지고 있어요', '위로의 말이 잘 통하지 않았나봐요', '상대방을 더 공감해주는 말은 어떨까요?'];
-const goodToBadTips = ['상대방의 감정이 슬픔으로 바뀌었어요', '방금 발언에 상대방이 기분나빠했어요','방금 했던 말보다 다른 좋은 말은 없을까요?', '상대방에겐 민감한 주제일 수도 있어요!'];
-const normalToBadTips = ['방금 발언에 상대방이 기분나빠했어요','방금 했던 말보다 다른 좋은 말은 없을까요?', '상대방에겐 민감한 주제일 수도 있어요!'];
+const goodToBadTips = ['상대방의 감정이 슬픔으로 바뀌었어요', '방금 발언에 상대방이 기분나빠했어요', '방금 했던 말보다 다른 좋은 말은 없을까요?', '상대방에겐 민감한 주제일 수도 있어요!'];
+const normalToBadTips = ['방금 발언에 상대방이 기분나빠했어요', '방금 했던 말보다 다른 좋은 말은 없을까요?', '상대방에겐 민감한 주제일 수도 있어요!'];
 
 const normalToSadTips = ['상대방의 감정이 슬픔으로 바뀌었어요', '지금 말한 주제는 상대방에겐 슬픈 주제인가봐요', '상대방과 공감하는 위로의 말을 건네보세요'];
 const goodToSadTips = ['상대방의 감정이 슬픔으로 바뀌었어요', '지금 말한 주제는 상대방에겐 슬픈 주제인가봐요', '상대방과 공감하는 위로의 말을 건네보세요'];
 const badToSadTips = ['분위기가 좋지 않네요, 즐거운 주제로 화제변환 해봐요!'];
 
-const normalToGoodTips = ['상대방이 좋아하는 주제인가봐요', '방금 말한 주제로 대화를 계속 이어나가봐요!','조금은 다운된 분위기가 살아나고 있어요!',];
+const normalToGoodTips = ['상대방이 좋아하는 주제인가봐요', '방금 말한 주제로 대화를 계속 이어나가봐요!', '조금은 다운된 분위기가 살아나고 있어요!',];
 const sadToGoodTips = ['우울한 분위기가 즐거움으로 바뀌었어요!', '방금 말한 주제를 상대방이 좋아합니다!', '이 주제로 대화를 계속 이어나가봐요!'];
 const badToGoodTips = ['안좋았던 분위기가 즐거움으로 바뀌었어요!', '전보다 이런 주제를 상대방이 좋아합니다!', '이 주제로 대화를 계속 이어나가봐요!'];
 
@@ -149,10 +149,10 @@ const randomQuestions = [
     '게임 좋아하세요?',
     '가장 재밌게 본 영화나 드라마 있으세요?'
 ];
-// showTips();
+showTips();
 
 function init() {
-    
+
     shuffle(randomTips);
 
     makeRandomQuestion();
@@ -173,7 +173,7 @@ function init() {
         // cur
         if (currentProgress == 0) {
             return randomTips[0];
-        } else if (currentProgress == 1) {}
+        } else if (currentProgress == 1) { }
 
     }
 
@@ -187,20 +187,44 @@ function init() {
     }
 }
 
-// function showTips(){
-//     let randomQuestion = document.getElementById("randomQuestion");
-//     const tip = document.getElementById("tip");
-//     var i = 0;
-//     setInterval(function(){
-        
-//         const newDiv = document.createElement('div');
-//         newDiv.innerHtml = randomTips[i++];
-//         tip.appendChild(newDiv);
-//         randomQuestion.innerHTML = randomTips[i++];
-//     }, 1000);
+function showTips(){
+    const randomQuestion = document.querySelector("#randomQuestion");
+    const innerList = document.querySelector('.inner-list');
+   
+    var i = 0;
     
+    setInterval(function(){
 
-// }
+        
+        const inner = document.createElement('div');
+        inner.setAttribute('class', 'inner');
+        
+
+        const inners = document.querySelectorAll('.inner');
+        inners.forEach((inner) => {
+            inner.style.heigth = `${randomQuestion.clientHeight}px`;
+            
+        })
+        const tips = document.createElement('div');
+        tips.setAttribute('style', 'height: 50px');
+        tips.textContent = randomQuestions[i++];
+
+        inner.appendChild(tips);
+        innerList.appendChild(inner);
+        
+
+        innerList.style.heigth = `${randomQuestion.clientHeight * (inners.length)}px`;
+        
+        
+        console.log("height ",  innerList.style.heigth);
+        
+        innerList.style.marginTop =  `-${randomQuestion.clientHeight * (inners.length)}px`; 
+        console.log("inner ", innerList.style.marginTop );
+        
+    }, 2000);
+
+
+}
 
 // const db = getFirestore();
 // const roomRef = collection(db, 'rooms');
@@ -233,3 +257,45 @@ function init() {
 // .catch((error) => {
 //     console.error(error);
 // });
+
+// const inners = document.querySelectorAll('.inner');
+
+
+// inners.forEach((inner) => {
+//     inner.style.heigth = `${outer.clientHeight}px`;
+//     console.log("inner ", inner.style.heigth );
+// })
+
+// innerList.style.heigth = `${outer.clientHeight * inners.length}px`;
+// console.log("innerList ", innerList.style.heigth);
+
+// const buttonLeft = document.querySelector('.button-left');
+// const buttonRight = document.querySelector('.button-right');
+
+
+// buttonLeft.addEventListener('click', () => {
+//   currentIndex--;
+//   currentIndex = currentIndex < 0 ? 0 : currentIndex; // index값이 0보다 작아질 경우 0으로 변경
+//   innerList.style.marginTop = `-${outer.clientHeight * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
+// });
+
+// buttonRight.addEventListener('click', () => {
+//     currentIndex++;
+//     currentIndex = currentIndex >= inners.length ? inners.length - 1 : currentIndex; // index값이 inner의 총 개수보다 많아질 경우 마지막 인덱스값으로 변경
+    
+//     innerList.style.marginTop = `-${outer.clientHeight * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
+//     console.log("marginTop " , innerList.style.marginTop);
+//     clearInterval(interval); // 기존 동작되던 interval 제거
+//     interval = getInterval();
+// });
+
+// const getInterval = () => {
+//     return setInterval(() => {
+//         currentIndex++;
+//         currentIndex = currentIndex >= inners.length ? 0 : currentIndex;
+//         innerList.style.marginTop= `-${outer.clientHeight * currentIndex}px`;
+//     }, 2000);
+// }
+
+// let interval = getInterval(); 
+
