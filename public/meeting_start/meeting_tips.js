@@ -236,28 +236,27 @@ function trigger(emotionHistory) {
     return res;
   }
   //최근 감정 3개가 같을 때 (장시간)
-  // if (emotionHistory[emotionHistory.length - 3] == emotionHistory[emotionHistory.length - 2] && emotionHistory[emotionHistory.length - 2] == emotionHistory[emotionHistory.length - 1]) {
-    
-  if (emotionHistory[emotionHistory.length - 1] == "Good") {
-      console.log(goodTips[getRandomIndex(goodTips.length)]);
-      return goodTips[getRandomIndex(goodTips.length)];
-    } else if (emotionHistory[emotionHistory.length - 1] == "Sad") {
-      console.log(sadTips[getRandomIndex(sadTips.length)]);
-      return goodTips[getRandomIndex(sadTips.length)];
-    } else if (emotionHistory[emotionHistory.length - 1] == "Bad") {
-      console.log(badTips[getRandomIndex(badTips.length)]);
-      return goodTips[getRandomIndex(badTips.length)];
-    } else if (emotionHistory[emotionHistory.length - 1] == "Normal") {
-      console.log(normalTips[getRandomIndex(normalTips.length)]);
-      return goodTips[getRandomIndex(normalTips.length)];
-    }
-  // }
+  if (emotionHistory.length >= 3 && emotionHistory[emotionHistory.length - 3] == emotionHistory[emotionHistory.length - 2] && emotionHistory[emotionHistory.length - 2] == emotionHistory[emotionHistory.length - 1]) {
+    if (emotionHistory[emotionHistory.length - 1] == "Good") {
+        console.log(goodTips[getRandomIndex(goodTips.length)]);
+        return goodTips[getRandomIndex(goodTips.length)];
+      } else if (emotionHistory[emotionHistory.length - 1] == "Sad") {
+        console.log(sadTips[getRandomIndex(sadTips.length)]);
+        return sadTips[getRandomIndex(sadTips.length)];
+      } else if (emotionHistory[emotionHistory.length - 1] == "Bad") {
+        console.log(badTips[getRandomIndex(badTips.length)]);
+        return badTips[getRandomIndex(badTips.length)];
+      } else if (emotionHistory[emotionHistory.length - 1] == "Normal") {
+        console.log(normalTips[getRandomIndex(normalTips.length)]);
+        return normalTips[getRandomIndex(normalTips.length)];
+      }
+  }
 }
 
 function showTips(emotionHistory) {
   const randomQuestion = document.querySelector("#randomQuestion");
   const innerList = document.querySelector(".inner-list");
-  var tipString = trigger(emotionHistory);
+  
 
   // var i = 0;
 
@@ -272,7 +271,7 @@ function showTips(emotionHistory) {
   });
   const tips = document.createElement("div");
   tips.setAttribute("style", "height: 50px");
-  tips.textContent = tipString;
+  tips.textContent = trigger(emotionHistory);
 
   inner.appendChild(tips);
   innerList.appendChild(inner);
