@@ -251,6 +251,47 @@ function trigger(emotionHistory) {
         return normalTips[getRandomIndex(normalTips.length)];
       }
   }
+
+  //감정 변화가 일어날 때 (특정 감정 2개 -> 다른 특정 감정 2개)
+  else if (emotionHistory.length >= 4 && emotionHistory[emotionHistory.length - 4] == emotionHistory[emotionHistory.length - 3] && emotionHistory[emotionHistory.length - 2] == emotionHistory[emotionHistory.length - 1] && emotionHistory[emotionHistory.length - 2] != emotionHistory[emotionHistory.length - 3]){
+    if (emotionHistory[emotionHistory.length - 3] == 'Good' && emotionHistory[emotionHistory.length - 2] == 'Bad'){
+      console.log(goodToBadTips[getRandomIndex(goodToBadTips.length)]);
+      return goodToBadTips[getRandomIndex(goodToBadTips.length)];}
+    else if (emotionHistory[emotionHistory.length - 3] == 'Good' && emotionHistory[emotionHistory.length - 2] == 'Sad'){
+      console.log(goodToSadTips[getRandomIndex(goodToSadTips.length)]);
+      return goodToSadTips[getRandomIndex(goodToSadTips.length)];}
+    else if (emotionHistory[emotionHistory.length - 3] == 'Good' && emotionHistory[emotionHistory.length - 2] == 'Normal'){
+      console.log(goodToNormalTips[getRandomIndex(goodToNormalTips.length)]);
+      return goodToNormalTips[getRandomIndex(goodToNormalTips.length)];}
+    else if (emotionHistory[emotionHistory.length - 3] == 'Bad' && emotionHistory[emotionHistory.length - 2] == 'Good'){
+      console.log(badToGoodTips[getRandomIndex(badToGoodTips.length)]);
+      return badToGoodTips[getRandomIndex(badToGoodTips.length)];}
+    else if (emotionHistory[emotionHistory.length - 3] == 'Bad' && emotionHistory[emotionHistory.length - 2] == 'Sad'){
+      console.log(badToSadTips[getRandomIndex(badToSadTips.length)]);
+      return badToSadTips[getRandomIndex(badToSadTips.length)];}
+    else if (emotionHistory[emotionHistory.length - 3] == 'Bad' && emotionHistory[emotionHistory.length - 2] == 'Normal'){
+      console.log(badToNormalTips[getRandomIndex(badToNormalTips.length)]);
+      return badToNormalTips[getRandomIndex(badToNormalTips.length)];}
+    else if (emotionHistory[emotionHistory.length - 3] == 'Sad' && emotionHistory[emotionHistory.length - 2] == 'Good'){
+      console.log(sadToGoodTips[getRandomIndex(sadToGoodTips.length)]);
+      return sadToGoodTips[getRandomIndex(sadToGoodTips.length)];}
+    else if (emotionHistory[emotionHistory.length - 3] == 'Sad' && emotionHistory[emotionHistory.length - 2] == 'Bad'){
+      console.log(sadToBadTips[getRandomIndex(sadToBadTips.length)]);
+      return sadToBadTips[getRandomIndex(sadToBadTips.length)];}
+    else if (emotionHistory[emotionHistory.length - 3] == 'Sad' && emotionHistory[emotionHistory.length - 2] == 'Normal'){
+      console.log(sadToNormalTips[getRandomIndex(sadToNormalTips.length)]);
+      return sadToNormalTips[getRandomIndex(sadToNormalTips.length)];}
+    else if (emotionHistory[emotionHistory.length - 3] == 'Normal' && emotionHistory[emotionHistory.length - 2] == 'Good'){
+      console.log(normalToGoodTips[getRandomIndex(normalToGoodTips.length)]);
+      return normalToGoodTips[getRandomIndex(normalToGoodTips.length)];}
+    else if (emotionHistory[emotionHistory.length - 3] == 'Normal' && emotionHistory[emotionHistory.length - 2] == 'Bad'){
+      console.log(normalToBadTips[getRandomIndex(normalToBadTips.length)]);
+      return normalToBadTips[getRandomIndex(normalToBadTips.length)];}
+    else if (emotionHistory[emotionHistory.length - 3] == 'Normal' && emotionHistory[emotionHistory.length - 2] == 'Sad'){
+      console.log(normalToSadTips[getRandomIndex(normalToSadTips.length)]);
+      return normalToSadTips[getRandomIndex(normalToSadTips.length)];}
+  }
+  
 }
 
 function showTips(emotionHistory) {
