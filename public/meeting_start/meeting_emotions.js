@@ -8,7 +8,7 @@ import {
   onSnapshot,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 import { startTime, uid } from "./meeting_stt.js";
-import { trigger } from "./meeting_tips.js";
+import { showTips, trigger } from "./meeting_tips.js";
 
 var leftchannel = [];
 var rightchannel = [];
@@ -227,7 +227,8 @@ async function stopRecord(ref = null) {
         emotionHistory.push(emt);
 
         //meeting_tips's function
-        trigger(emotionHistory);
+        // trigger(emotionHistory);
+        showTips(emotionHistory);
 
         console.log("emotion Count : " + emotionCount);
         console.log("emotion History : " + emotionHistory);
