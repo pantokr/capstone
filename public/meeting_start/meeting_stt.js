@@ -47,7 +47,10 @@ async function startSTT(roomId, isCaller) {
     let isOpponent = false;
 
     // 키워드 배열을 담을 해시맵
-    const keyMap = new Map();
+    const keyMap = [];
+    for (var i = 0; i < 4; i++) {
+        keyMap[i] = new Map();
+    }
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -80,46 +83,6 @@ async function startSTT(roomId, isCaller) {
                     let speecher = parsed_data.speecher;
                     let text = parsed_data.text;
 
-                    // 키워드 추출
-                    async function postData(url = '', data = {}) {
-                        // 옵션 기본 값은 *로 강조
-                        const response = await fetch(url, {
-                            method: 'POST', // *GET, POST, PUT, DELETE 등
-                            // mode: 'cors', // no-cors, *cors, same-origin
-                            // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                            // credentials: 'same-origin', // include, *same-origin, omit
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json',
-                                // 'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            // redirect: 'follow', // manual, *follow, error
-                            // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                            body: JSON.stringify(data), // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야 함
-                        });
-                        return response.json(); // JSON 응답을 네이티브 JavaScript 객체로 파싱
-                    }
-
-                    postData('https://open-py.jp.ngrok.io/etri', parsed_data).then((data) => {
-                        if (data) {
-                            for (var i = 0; i < Object.keys(data).length; i++) {
-                                const keyName = Object.keys(data)[i];
-                                if (!keyMap.get(keyName)) {
-                                    keyMap.set(keyName, 1);
-                                }
-                                else {
-                                    var cnt = keyMap.get(keyName);
-                                    keyMap.set(keyName, cnt + 1);
-                                }
-                                console.log("keyName: ", Object.keys(data)[i], "count: ", keyMap.get(keyName));
-                            }
-                            // const keyName = Object.keys(data)[0];
-                            // console.log("size : ",Object.keys(data).length);
-                            // console.log("data : ", data);
-                            // console.log("키워드:", data[keyName].text);
-                            // console.log("키워드 종류: ", data[keyName].type);
-                        }
-                    });
                     // STT 박스
                     if (speecher == name) {
 
@@ -174,17 +137,86 @@ async function startSTT(roomId, isCaller) {
                         // console.log("Opponent Emotion : " + emotion);
                         if (emotion == 'Bad') {
                             setEmotion(1);
+                            setKeyword(1, parsed_data);
                         } else if (emotion == 'Good') {
                             setEmotion(2);
+                            setKeyword(2, parsed_data);
                         } else if (emotion == 'Sad') {
                             setEmotion(3);
+                            setKeyword(3, parsed_data);
                         } else {
                             setEmotion(4);
+                            setKeyword(4, parsed_data);
                         }
                     }
                 }
             });
     });
+
+    // 키워드 추출
+    async function postData(url = '', data = {}) {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data), // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야 함
+        });
+        return response.json(); // JSON 응답을 네이티브 JavaScript 객체로 파싱
+    }
+
+    function setKeyword(idx, parsed_data) {
+        let emotion = null;
+        if (idx == 1) {
+            emotion = 'Bad';
+        }
+        if (idx == 2) {
+            emotion = 'Good';
+        }
+        if (idx == 3) {
+            emotion = 'Sad';
+        }
+        if (idx == 4) {
+            emotion = 'Normal';
+        }
+
+        const userCol = collection(db, "users");
+        const userRef = doc(userCol, uid);
+        const chatLogCol = collection(userRef, "chat_logs");
+        const chatLogRef = doc(chatLogCol, startTime);
+        const keywordCol = collection(chatLogRef, emotion);
+        // const keywordRef = doc(keywordCol, keyName);
+
+        postData('https://open-py.jp.ngrok.io/etri', parsed_data).then((data) => {
+            if (data) {
+                for (var i = 0; i < Object.keys(data).length; i++) {
+                    const keyName = Object.keys(data)[i];
+                    if (!keyMap[idx].get(keyName)) {
+                        keyMap[idx].set(keyName, 1);
+                        setDoc(doc(keywordCol, keyName), {
+                            text: data[keyName].text,
+                            type: data[keyName].type,
+                            count: 1
+                        });
+                    }
+                    else {
+                        var cnt = keyMap[idx].get(keyName);
+                        keyMap[idx].set(keyName, cnt + 1);
+                        updateDoc(doc(keywordCol, keyName), { count: cnt + 1 });
+
+                    }
+                    console.log("keyName: ", Object.keys(data)[i], "count: ", keyMap[idx].get(keyName));
+                }
+                // const keyName = Object.keys(data)[0];
+                // console.log("size : ",Object.keys(data).length);
+                // console.log("data : ", data);
+                // console.log("키워드:", data[keyName].text);
+                // console.log("키워드 종류: ", data[keyName].type);
+            }
+        });
+
+    }
 
     async function addUserLog(opponent, opponentId) {
 
