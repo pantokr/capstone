@@ -7,7 +7,7 @@ import {
   updateDoc,
   onSnapshot,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-import { startTime, uid } from "./meeting_stt.js";
+import { startTime, uid} from "./meeting_stt.js";
 import { showTips, trigger } from "./meeting_tips.js";
 
 var leftchannel = [];

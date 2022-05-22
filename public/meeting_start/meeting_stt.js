@@ -12,7 +12,6 @@ import { startRecord, stopRecord, setEmotion } from "./meeting_emotions.js";
 
 let startTime = null;
 let uid = null;
-let oppEmotion = null;
 
 async function startSTT(roomId, isCaller) {
 
@@ -134,7 +133,6 @@ async function startSTT(roomId, isCaller) {
                     let emotion = parsed_data.emotion;
 
                     if (speecher != name) {
-                        oppEmotion = parsed_data.emotion;
                         // console.log("Opponent Emotion : " + emotion);
                         if (emotion == 'Bad') {
                             setEmotion(1);
