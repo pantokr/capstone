@@ -49,13 +49,13 @@
     </nav>
 
 
-  
 
-    <div class="container" id="outer" style="width: 100%; margin-top:2rem;">
+
+    <div class="container" id="outer" style="max-width: 95rem; margin-top:2rem;">
         <div class="row">
-            <div class="col-6 d-flex flex-column">
+            <div class="col-7 d-flex flex-column">
                 <!-- 헤더부분 : 제목, 날짜, 시간 -->
-                <div id="header" class="row">
+                <div id="header" class="row ">
                     <div class="title_area"></div>
                     <div class="sub_area d-flex flex-row">
                         <span class="sub_stTime">시작시간 : </span>
@@ -67,26 +67,55 @@
                 </div>
 
                 <!-- 주요키워드 -->
-                <div class="row keyword" id="rq">
-                    <div class="keyword-title" id="title">주요 키워드</div>
+                <!-- <div class="row keyword" id="">
+                    <div class="keyword-title" id="">주요 키워드</div>
                     <div class="rq-content" style="padding: .3rem;">
-                        <!-- <div id="piechart_3d"></div> -->
-                    </div>
-                </div>
-
-                <!-- 감정 -->
-                <div class="row emotion" id="rq">
-                    <div class="emo-title" id="title">감정분석</div>
-                    <div class="emo-content" style="padding: .3rem;">
                         <div id="piechart_3d"></div>
-                        <span id="desc"></span>
+                    </div>
+                </div> -->
+
+                <!-- 감정 및 키워드-->
+                <div class="row emotion" id="rq">
+                    <div class="emo-title" id="">주요 키워드</div>
+                    <div>
+                        각 감정별로 많이 나타난 주요 키워드를 보여줍니다.
+                    </div>
+                    <div class="emo-content" style="padding: .3rem;">
+                        <div id="piechart_3d" ></div>
+                        <div id="desc" style="margin: 0 .5rem 0 .5rem;">
+                            <div class="row">
+                                <div class="d-flex col-6" id="happy">
+                                    <p style="color : cornflowerblue">😊 '행복' </p>
+                                    감정으로
+                                </div>
+                                <div class="d-flex col-6" id="neutral">
+                                    <p style="color : cornflowerblue">😐 '평온' </p>
+                                    감정으로
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-6 d-flex" id="sad">
+                                    <p style="color : cornflowerblue">😭 '슬픔' </p>
+                                    감정으로
+                                </div>
+
+                                <div class="d-flex col-6" id="angry">
+                                    <p style="color : cornflowerblue">😡 '화남' </p>
+                                    감정으로
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 
             </div>
 
 
-            <div class="col-6  d-flex flex-column">
+            <div class="col-5  d-flex flex-column">
 
                 <div class="search">
                     <div class="search_area"
