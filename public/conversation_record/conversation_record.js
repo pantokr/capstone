@@ -58,10 +58,10 @@ function drawChart() {
 
   var data = google.visualization.arrayToDataTable([
     ['a', 'b'],
-    ['Good', goodCnt],
-    ['Sad', sadCnt],
-    ['Bad', badCnt],
-    ['Normal', normalCnt],
+    ['행복', goodCnt],
+    ['슬픔', sadCnt],
+    ['화남', badCnt],
+    ['보통', normalCnt],
   ]);
 
   var options = {
@@ -72,7 +72,12 @@ function drawChart() {
     is3D: true,
     height: 280,
     
-    
+    legend : {
+      textStyle : {
+        fontSize : 18
+      },
+      alignment : 'center',
+    },
     
 
   };
