@@ -351,6 +351,10 @@ function trigger(emotionHistory) {
       return normalToSadTips[getRandomIndex(normalToSadTips.length)];
     }
   }
+
+  else{
+    return false;
+  }
 }
 
 function showTips(emotionHistory) {
