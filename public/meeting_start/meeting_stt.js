@@ -110,7 +110,7 @@ async function startSTT(roomId, isCaller) {
                         oppText.setAttribute("class", "oppText");
 
                         oppText.textContent = text;
-                        // console.log("Opponent text : ", oppText.textContent);
+                        console.log("Opponent text : ", oppText.textContent);
                         oppBox.append(oppText);
                         document
                             .querySelector('.chatLog')
@@ -131,9 +131,9 @@ async function startSTT(roomId, isCaller) {
                     let parsed_data = JSON.parse(JSON.stringify(data))
                     let speecher = parsed_data.speecher;
                     let emotion = parsed_data.emotion;
-
                     if (speecher != name) {
                         // console.log("Opponent Emotion : " + emotion);
+                        console.log("name" + name);
                         if (emotion == 'Bad') {
                             setEmotion(1);
                             setKeyword(0, parsed_data);
@@ -167,16 +167,16 @@ async function startSTT(roomId, isCaller) {
 
     function setKeyword(idx, parsed_data) {
         let emotion = null;
-        if (idx == 1) {
+        if (idx == 0) {
             emotion = 'Bad';
         }
-        if (idx == 2) {
+        if (idx == 1) {
             emotion = 'Good';
         }
-        if (idx == 3) {
+        if (idx == 2) {
             emotion = 'Sad';
         }
-        if (idx == 4) {
+        if (idx == 3) {
             emotion = 'Normal';
         }
 
@@ -188,6 +188,7 @@ async function startSTT(roomId, isCaller) {
         // const keywordRef = doc(keywordCol, keyName);
 
         postData('https://open-py.jp.ngrok.io/etri', parsed_data).then((data) => {
+            console.log("Data : " + data);
             if (data) {
                 for (var i = 0; i < Object.keys(data).length; i++) {
                     const keyName = Object.keys(data)[i];
