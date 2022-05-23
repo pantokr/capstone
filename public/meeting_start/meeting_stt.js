@@ -110,7 +110,7 @@ async function startSTT(roomId, isCaller) {
                         oppText.setAttribute("class", "oppText");
 
                         oppText.textContent = text;
-                        console.log("Opponent text : ", oppText.textContent);
+                        // console.log("Opponent text : ", oppText.textContent);
                         oppBox.append(oppText);
                         document
                             .querySelector('.chatLog')
@@ -136,16 +136,16 @@ async function startSTT(roomId, isCaller) {
                         // console.log("Opponent Emotion : " + emotion);
                         if (emotion == 'Bad') {
                             setEmotion(1);
-                            setKeyword(1, parsed_data);
+                            setKeyword(0, parsed_data);
                         } else if (emotion == 'Good') {
                             setEmotion(2);
-                            setKeyword(2, parsed_data);
+                            setKeyword(1, parsed_data);
                         } else if (emotion == 'Sad') {
                             setEmotion(3);
-                            setKeyword(3, parsed_data);
+                            setKeyword(2, parsed_data);
                         } else {
                             setEmotion(4);
-                            setKeyword(4, parsed_data);
+                            setKeyword(3, parsed_data);
                         }
                     }
                 }

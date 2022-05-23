@@ -52,8 +52,8 @@ async function recognizeFaceEmotion() {
   var emt = transformEmotion(getKeyByValue(detections[0].expressions, max));
   // console.log("Face :"+ getKeyByValue(detections[0].expressions, max));
   // console.log("Face max Value : " + max);
-  console.log("--------------------------------------------------");
-  console.log("trans 하기 전 Face emotion : " + detections[0].expressions);
+//   console.log("--------------------------------------------------");
+//   console.log("trans 하기 전 Face emotion : " + detections[0].expressions);
 
   return emt;
 
@@ -202,13 +202,13 @@ async function stopRecord(ref = null) {
         // var f_emt = recognizeFaceEmotion();
         voiceMaxValue = res.accuracy;
 
-        console.log("Voice emotion : " + v_emt + " Face emotion : " + f_emt);
-        console.log(
-          "Voice emotion value :" +
-            voiceMaxValue +
-            "Face emotion value :" +
-            faceMaxValue
-        );
+        // console.log("Voice emotion : " + v_emt + " Face emotion : " + f_emt);
+        // console.log(
+        //   "Voice emotion value :" +
+        //     voiceMaxValue +
+        //     "Face emotion value :" +
+        //     faceMaxValue
+        // );
 
         var emt = uniteEmotion(v_emt, f_emt);
 
@@ -230,8 +230,8 @@ async function stopRecord(ref = null) {
         // trigger(emotionHistory);
         showTips(emotionHistory);
 
-        console.log("emotion Count : " + emotionCount);
-        console.log("emotion History : " + emotionHistory);
+        // console.log("emotion Count : " + emotionCount);
+        // console.log("emotion History : " + emotionHistory);
         //console.log("Emotion : " + emt);
 
         // if(emt == 'Bad'){     setEmotion(1); } else if(emt == 'Good'){ setEmotion(2);
@@ -317,7 +317,7 @@ function uniteEmotion(v, f) {
   // face, voice 감정 조합
   // face 인식 불가 typeerror 처리
   if (f != "Good" && f != "Sad" && f != "Bad" && f != "Normal") {
-    console.log("emotion result : " + v);
+    // console.log("emotion result : " + v);
     return v;
   }
   if (
@@ -329,19 +329,19 @@ function uniteEmotion(v, f) {
     (v == "Bad" && f == "Sad")
   ) {
     if (faceMaxValue == voiceMaxValue) {
-      console.log("emotion result : " + v);
+    //   console.log("emotion result : " + v);
       return v;
     }
-    console.log("emotion result : " + (faceMaxValue > voiceMaxValue) ? f : v);
+    // console.log("emotion result : " + (faceMaxValue > voiceMaxValue) ? f : v);
     return faceMaxValue > voiceMaxValue ? f : v;
   } else if (v == "Normal" && f != "Normal") {
-    console.log("emotion result : " + f);
+    // console.log("emotion result : " + f);
     return f;
   } else if (v != "Normal" && f == "Normal") {
-    console.log("emotion result : " + v);
+    // console.log("emotion result : " + v);
     return v;
   } else if (v == "Normal" && f == "Normal") {
-    console.log("emotion result : " + "Normal");
+    // console.log("emotion result : " + "Normal");
     return "Normal";
   }
 }
@@ -365,7 +365,6 @@ function updateEmotion() {
   const userCol = collection(db, "users");
   const userRef = doc(userCol, uid);
   const chatLogCol = collection(userRef, "chat_logs");
-  console.log("startTime:", startTime);
 
   updateDoc(doc(chatLogCol, startTime), {
     good: emotionCount[0],
