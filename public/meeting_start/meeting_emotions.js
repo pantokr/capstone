@@ -7,7 +7,7 @@ import {
   updateDoc,
   onSnapshot,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-import { startTime, uid, emotionHistory } from "./meeting_stt.js";
+import { startTime, uid, emotionHistory, emotionCount } from "./meeting_stt.js";
 import { showTips, trigger } from "./meeting_tips.js";
 
 var leftchannel = [];
@@ -208,7 +208,7 @@ async function stopRecord(ref = null) {
 
         var emt = uniteEmotion(v_emt, f_emt);
 
-        // updateEmotion();
+        updateEmotion();
 
         //meeting_tips's function
         // trigger(emotionHistory);
@@ -346,18 +346,18 @@ function setEmotion(result) {
   }
 }
 
-// function updateEmotion() {
-//   const db = getFirestore();
-//   const userCol = collection(db, "users");
-//   const userRef = doc(userCol, uid);
-//   const chatLogCol = collection(userRef, "chat_logs");
+function updateEmotion() {
+  const db = getFirestore();
+  const userCol = collection(db, "users");
+  const userRef = doc(userCol, uid);
+  const chatLogCol = collection(userRef, "chat_logs");
 
-//   updateDoc(doc(chatLogCol, startTime), {
-//     good: emotionCount[0],
-//     sad: emotionCount[1],
-//     bad: emotionCount[2],
-//     normal: emotionCount[3],
-//   });
-// }
+  updateDoc(doc(chatLogCol, startTime), {
+    good: emotionCount[0],
+    sad: emotionCount[1],
+    bad: emotionCount[2],
+    normal: emotionCount[3],
+  });
+}
 
 export { startRecord, stopRecord, setEmotion };

@@ -267,7 +267,7 @@ async function startSTT(roomId, isCaller) {
                     speecherID: uid,
                     isCaller: isCaller == true ? "Caller" : "Callee",
                     text: finalText,
-                    emotion : "Normal"
+                    emotion: "Normal"
                 });
                 finalText = null;
                 updateDoc(chatRef, { end: getTimestamp() });
