@@ -110,7 +110,7 @@ async function startSTT(roomId, isCaller) {
                         oppText.setAttribute("class", "oppText");
 
                         oppText.textContent = text;
-                        console.log("Opponent text : ", oppText.textContent);
+                        // console.log("Opponent text : ", oppText.textContent);
                         oppBox.append(oppText);
                         document
                             .querySelector('.chatLog')
@@ -133,7 +133,7 @@ async function startSTT(roomId, isCaller) {
                     let emotion = parsed_data.emotion;
                     if (speecher != name) {
                         // console.log("Opponent Emotion : " + emotion);
-                        console.log("name" + name);
+                        console.log("speecher: ", speecher, "name: ", name);
                         if (emotion == 'Bad') {
                             setEmotion(1);
                             setKeyword(0, parsed_data);
