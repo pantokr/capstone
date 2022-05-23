@@ -230,7 +230,6 @@ function init() {
 }
 
 function trigger(emotionHistory) {
-  console.log("트리거 검사");
   function getRandomIndex(num) {
     var res = Math.floor(Math.random() * num);
     return res;
