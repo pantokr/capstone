@@ -7,6 +7,7 @@ import {
   getDoc,
   getDocs
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { getFrequentKeyword } from "../meeting_start/firestore_functions.js";
 
 const url = new URL(window.location.href);
 const urlParams = url.searchParams;
@@ -55,6 +56,15 @@ async function fetchEmotion() {
 google.charts.load("current", { packages: ["corechart"] });
 
 function drawChart() {
+  // const happy = document.getElementsByClassName("d-flex col-6");
+  // // const neutral = document.getElementsById("neutral");
+  // // const sad = document.getElementsById("sad");
+  // // const angry = document.getElementsById("angry");
+
+  // let p = document.createElement('p');
+  // p.innerText = getFrequentKeyword();
+  // console.log(p.innerText);
+  // happy.append(p);
 
   var data = google.visualization.arrayToDataTable([
     ['a', 'b'],
@@ -71,21 +81,22 @@ function drawChart() {
     title: '',
     is3D: true,
     height: 280,
-    
-    legend : {
-      textStyle : {
-        fontSize : 18
+
+    legend: {
+      textStyle: {
+        fontSize: 18
       },
-      alignment : 'center',
+      alignment: 'center',
     },
-    
+
+
 
   };
 
   var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
   chart.draw(data, options);
 
-  
+
 }
 
 async function showChats() {
@@ -108,7 +119,7 @@ async function showChats() {
     box.setAttribute("class", "box");
     box.setAttribute("id", cnt);
 
-    console.log(myName);
+    // console.log(myName);
 
     if (speecher == myName) {
 
@@ -123,7 +134,7 @@ async function showChats() {
 
 
 
-      console.log("my text: ", myText.textContent);
+      // console.log("my text: ", myText.textContent);
 
       myBox.append(myText);
       box.append(myBox);
@@ -142,7 +153,7 @@ async function showChats() {
       oppText.setAttribute("class", "oppText");
 
       oppText.textContent = text;
-      console.log("opponent text : ", oppText.textContent);
+      // console.log("opponent text : ", oppText.textContent);
 
 
       oppBox.append(oppText);
@@ -163,10 +174,11 @@ async function showChats() {
 
 document.querySelector("#input_search_text").addEventListener('keyup', (e) => {
   if (e.keyCode === 27) {
-    console.log("esc 누름");
+    // console.log("esc 누름");
     unfilter();
   }
 });
+
 document.querySelector("#icon_cancel").addEventListener("click", unfilter);
 
 function unfilter() {
@@ -216,7 +228,7 @@ function unfilter() {
 // 검색기능
 document.querySelector("#input_search_text").addEventListener('keyup', (e) => {
   if (e.keyCode === 13) {
-    console.log("enterkey 누름");
+    // console.log("enterkey 누름");
     filter();
   }
 });

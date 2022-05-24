@@ -115,8 +115,8 @@ async function startSTT(roomId, isCaller) {
                 let emotion = parsed_data.emotion;
                 if (speecher != name) {
                     // console.log("Opponent Emotion : " + emotion);
-                    console.log("parsed data: ", parsed_data);
                     // console.log("speecher: ", speecher, "name: ", name);
+                    console.log("상대방 stt : ", parsed_data.text);
                     if (emotion == "Bad") {
                         setEmotion(1);
                         setKeyword(0, parsed_data);
@@ -188,6 +188,16 @@ async function startSTT(roomId, isCaller) {
             if (data) {
                 for (var i = 0; i < Object.keys(data).length; i++) {
                     const keyName = Object.keys(data)[i];
+                    const keyType = data[keyName].type;
+
+                    if (keyType != 'PS_NAME' &&
+                        keyType != 'CV_SPORTS' &&
+                        keyType != 'CV_FOOD' &&
+                        keyType.substr(0, 2) != 'LC' &&
+                        keyType.substr(0, 2) != 'AM') {
+                        continue;
+                    }
+
                     if (!keyMap[idx].get(keyName)) {
                         keyMap[idx].set(keyName, 1);
                         setDoc(doc(keywordCol, keyName), {
