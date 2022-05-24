@@ -334,7 +334,7 @@ async function openUserMedia(e) {
         .querySelector('#remoteVideo')
         .srcObject = remoteStream;
 
-    console.log('Stream:', document.querySelector('#localVideo').srcObject);
+    // console.log('Stream:', document.querySelector('#localVideo').srcObject);
     // document.querySelector('#cameraBtn').disabled = true;
     document
         .querySelector('#joinBtn')
@@ -414,20 +414,20 @@ async function hangUp(e) {
 
 function registerPeerConnectionListeners() {
     peerConnection.addEventListener('icegatheringstatechange', () => {
-        console.log(`ICE gathering state changed: ${peerConnection.iceGatheringState}`);
+        // console.log(`ICE gathering state changed: ${peerConnection.iceGatheringState}`);
     });
 
     peerConnection.addEventListener('connectionstatechange', () => {
-        console.log(`Connection state change: ${peerConnection.connectionState}`);
+        // console.log(`Connection state change: ${peerConnection.connectionState}`);
     });
 
     peerConnection.addEventListener('signalingstatechange', () => {
-        console.log(`Signaling state change: ${peerConnection.signalingState}`);
+        // console.log(`Signaling state change: ${peerConnection.signalingState}`);
     });
 
     peerConnection.addEventListener('iceconnectionstatechange ', () => {
         console.log(
-            `ICE connection state change: ${peerConnection.iceConnectionState}`
+            // `ICE connection state change: ${peerConnection.iceConnectionState}`
         );
     });
 }
@@ -488,21 +488,6 @@ function handleCameraClick() {
     }
 }
 
-// 랜덤 질문
-// const randomSwitch = document.getElementById("random_switch");
-
-// randomSwitch.addEventListener("click", makeRandomQuestion);
-
-// async function makeRandomQuestion() {
-//     const randNum = Math.floor(Math.random() * 10 + 1);
-//     const db = getFirestore();
-//     const questionRef = doc(collection(db, 'randomQuestions'), `${randNum}`);
-//     const docSnap = await getDoc(questionRef);
-//     const parsed_data = JSON.parse(JSON.stringify(docSnap.data()));
-
-//     let randomQuestion = document.getElementById("randomQuestion");
-//     randomQuestion.textContent = parsed_data.question;
-// }
 
 const copyBtn = document.getElementById("copyBtn");
 copyBtn.addEventListener("click", CopyByClipBoardAPI);

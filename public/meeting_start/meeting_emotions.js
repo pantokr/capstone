@@ -212,8 +212,17 @@ async function stopRecord(ref = null) {
 
         //meeting_tips's function
         // trigger(emotionHistory);
+        var itv = setInterval(() => {
+          showTips(emotionHistory, 1);
+        }, 4000);
+
         if(trigger(emotionHistory)!=false){
+          clearInterval(itv);
           showTips(emotionHistory);
+
+          itv = setInterval(() => {
+            showTips(emotionCount, 1);
+          }, 4000);
         }
 
         // console.log("emotion Count : " + emotionCount);

@@ -72,6 +72,7 @@ async function startSTT(roomId, isCaller) {
                 let data = change.doc.data();
                 let parsed_data = JSON.parse(JSON.stringify(data));
                 let speecher = parsed_data.speecher;
+                let speecherId = parsed_data.speecherID;
                 let text = parsed_data.text;
 
                 // STT 박스
@@ -101,7 +102,7 @@ async function startSTT(roomId, isCaller) {
                     document.querySelector(".chatLog").append(oppBox);
 
                     if (!isOpponent) {
-                        addUserLog(speecher, uid);
+                        addUserLog(speecher, speecherId);
                         isOpponent = true;
                     }
                 }
@@ -220,6 +221,7 @@ async function startSTT(roomId, isCaller) {
             roomID: roomId,
             opponent: opponent,
             opponentID: opponentId,
+            timestamp: startTime,
             good: 0,
             sad: 0,
             bad: 0,

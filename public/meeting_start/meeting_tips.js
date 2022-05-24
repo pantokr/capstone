@@ -11,6 +11,7 @@ import {
   onSnapshot,
   deleteDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { getKeywordHistory, getFrequentKeyword } from "./firestore_functions.js";
 // import { emotionHistory } from "./meeting_emotions.js"
 // init();
 
@@ -194,40 +195,40 @@ const randomQuestions = [
 ];
 // showTips();
 
-function init() {
-  shuffle(randomTips);
+// function init() {
+//   shuffle(randomTips);
 
-  makeRandomQuestion();
+//   makeRandomQuestion();
 
-  // 랜덤 질문
-  async function makeRandomQuestion() {
-    // const randNum = Math.floor(Math.random() * 10 + 1); const db =
-    // getFirestore(); const questionRef = doc(collection(db, 'randomQuestions'),
-    // `${randNum}`); const docSnap = await getDoc(questionRef); const parsed_data =
-    // JSON.parse(JSON.stringify(docSnap.data()));
+//   // 랜덤 질문
+//   async function makeRandomQuestion() {
+//     // const randNum = Math.floor(Math.random() * 10 + 1); const db =
+//     // getFirestore(); const questionRef = doc(collection(db, 'randomQuestions'),
+//     // `${randNum}`); const docSnap = await getDoc(questionRef); const parsed_data =
+//     // JSON.parse(JSON.stringify(docSnap.data()));
 
-    let randomQuestion = document.getElementById("randomQuestion");
-    // randomQuestion.textContent = parsed_data.question;
-    randomQuestion.textContent = returnTip(0);
-  }
+//     let randomQuestion = document.getElementById("randomQuestion");
+//     // randomQuestion.textContent = parsed_data.question;
+//     randomQuestion.textContent = returnTip(0);
+//   }
 
-  function returnTip(currentProgress = 0) {
-    // cur
-    if (currentProgress == 0) {
-      return randomTips[0];
-    } else if (currentProgress == 1) {
-    }
-  }
+//   function returnTip(currentProgress = 0) {
+//     // cur
+//     if (currentProgress == 0) {
+//       return randomTips[0];
+//     } else if (currentProgress == 1) {
+//     }
+//   }
 
-  function shuffle(array) {
-    array.sort(() => Math.random() - 0.5);
-  }
+//   function shuffle(array) {
+//     array.sort(() => Math.random() - 0.5);
+//   }
 
-  async function analyzeUser() {
-    var tipList = [];
-    return tipList;
-  }
-}
+//   async function analyzeUser() {
+//     var tipList = [];
+//     return tipList;
+//   }
+// }
 
 function trigger(emotionHistory) {
   function getRandomIndex(num) {
@@ -357,7 +358,7 @@ function trigger(emotionHistory) {
   }
 }
 
-function showTips(emotionHistory) {
+function showTips(emotionHistory, isTriggered = 0) {
   const randomQuestion = document.querySelector("#randomQuestion");
   const innerList = document.querySelector(".inner-list");
 
@@ -374,7 +375,13 @@ function showTips(emotionHistory) {
   });
   const tips = document.createElement("div");
   tips.setAttribute("style", "height: 50px");
-  tips.textContent = trigger(emotionHistory);
+
+  if (isTriggered == 0){
+    tips.textContent = trigger(emotionHistory);
+  }
+  else{
+    tips.textContent = analyzeUser();
+  }
 
   inner.appendChild(tips);
   innerList.appendChild(inner);
@@ -391,75 +398,9 @@ function showTips(emotionHistory) {
   // }, 2000);
 }
 
-// const db = getFirestore();
-// const roomRef = collection(db, 'rooms');
-// const roomSnapshot = await getDocs(roomRef);getDoc(doc(db, 'users', uid))
-// .then((snapshot) => {
-//     if (snapshot.exists()) {
-//         var val = snapshot.data();
-
-//         const profile = val.profile_picture;
-//         const name = val.name;
-//         const email = val.email;
-//         const birth = val.birth;
-//         const birth_y = val.birth.birth_year;
-//         const birth_m = val.birth.birth_month;
-//         const birth_d = val.birth.birth_date;
-//         const gender = val.gender;
-
-//         profile_img.setAttribute('src', profile);
-
-//         uid_span.innerText = uid;
-//         email_span.innerText = email;
-//         name_span.innerText = name;
-//         age_span.innerText = `${birth_y} . ${birth_m} . ${birth_d}`;
-//         gender_span.innerText = gender === "male"
-//             ? "남자"
-//             : "여자";
-
-//     }
-// })
-// .catch((error) => {
-//     console.error(error);
-// });
-
-// const inners = document.querySelectorAll('.inner');
-
-// inners.forEach((inner) => {
-//     inner.style.heigth = `${outer.clientHeight}px`;
-//     console.log("inner ", inner.style.heigth );
-// })
-
-// innerList.style.heigth = `${outer.clientHeight * inners.length}px`;
-// console.log("innerList ", innerList.style.heigth);
-
-// const buttonLeft = document.querySelector('.button-left');
-// const buttonRight = document.querySelector('.button-right');
-
-// buttonLeft.addEventListener('click', () => {
-//   currentIndex--;
-//   currentIndex = currentIndex < 0 ? 0 : currentIndex; // index값이 0보다 작아질 경우 0으로 변경
-//   innerList.style.marginTop = `-${outer.clientHeight * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
-// });
-
-// buttonRight.addEventListener('click', () => {
-//     currentIndex++;
-//     currentIndex = currentIndex >= inners.length ? inners.length - 1 : currentIndex; // index값이 inner의 총 개수보다 많아질 경우 마지막 인덱스값으로 변경
-
-//     innerList.style.marginTop = `-${outer.clientHeight * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
-//     console.log("marginTop " , innerList.style.marginTop);
-//     clearInterval(interval); // 기존 동작되던 interval 제거
-//     interval = getInterval();
-// });
-
-// const getInterval = () => {
-//     return setInterval(() => {
-//         currentIndex++;
-//         currentIndex = currentIndex >= inners.length ? 0 : currentIndex;
-//         innerList.style.marginTop= `-${outer.clientHeight * currentIndex}px`;
-//     }, 2000);
-// }
-
-// let interval = getInterval();
+function analyzeUser(){
+  var str = getFrequentKeyword();
+  return str;
+}
 
 export { showTips, trigger };
