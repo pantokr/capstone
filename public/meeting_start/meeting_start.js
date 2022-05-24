@@ -178,6 +178,7 @@ async function createRoom() {
 
                     if (!isStarted) {
                         startSTT(roomRef.id, true);
+                        init_ff(roomRef.id);
                         isStarted = true;
                     }
                 }
@@ -317,6 +318,7 @@ async function joinRoomById(roomId) {
     // joinRoom
     // STT------------------------------------------------------------------------
     startSTT(roomRef.id, false);
+    init_ff(roomRef.id);
 }
 
 async function openUserMedia(e) {

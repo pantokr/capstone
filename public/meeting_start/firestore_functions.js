@@ -15,12 +15,13 @@ let speechList = {};
 let emotionRateList = {};
 
 async function init_ff(rid = null) {
-    rid = 'YSGZ755uzuoVICc74tEd'; //
+    // rid = 'YSGZ755uzuoVICc74tEd'; //
     if (rid == null) {
         return;
     }
     onAuthStateChanged(auth, (user) => {
         roomId = rid;
+        console.log("roomId : " + roomId);
         //const user = auth.currentUser;
         const uid = user.uid;
 
@@ -40,11 +41,11 @@ async function init_ff(rid = null) {
                     opId = caller;
                 }
 
-                opId = '3jSfETcMRWRfiB4TPa732qn01BT2'; //
+                // opId = '3jSfETcMRWRfiB4TPa732qn01BT2'; //
                 // get name of opponent
                 const userCol = collection(db, "users");
                 const opRef = doc(userCol, opId);
-
+                console.log("opid : " + opId);
                 getDoc(opRef).then((snapshot_userInfo) => {
                     if (snapshot_userInfo.exists()) {
                         const val_userInfo = snapshot_userInfo.data();
@@ -174,13 +175,13 @@ function getFrequentKeyword() {
                     var txt = keywordList[key][key_e].text;
                     if (t_list[txt] == null) {
                         t_list[txt] = Number(keywordList[key][key_e].count);
-                        if( t_list[txt] > max){
+                        if (t_list[txt] > max) {
                             max = t_list[txt];
                         }
                     }
                     else {
                         t_list[txt] += Number(keywordList[key][key_e].count);
-                        if( t_list[txt] > max){
+                        if (t_list[txt] > max) {
                             max = t_list[txt];
                         }
                     }

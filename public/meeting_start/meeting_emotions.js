@@ -20,6 +20,7 @@ var context = null;
 var blob = null;
 var faceMaxValue;
 var voiceMaxValue;
+var itv = null;
 
 // stopRecord(ref); } 얼굴 인식 감정 분석 함수
 async function recognizeFaceEmotion() {
@@ -210,18 +211,22 @@ async function stopRecord(ref = null) {
 
         updateEmotion();
 
+        if(itv == null){
+          showTips(emotionHistory, 2);
+          itv = setInterval(() => {
+            showTips(emotionHistory, 1);
+          }, 4000);
+        }
         //meeting_tips's function
         // trigger(emotionHistory);
-        var itv = setInterval(() => {
-          showTips(emotionHistory, 1);
-        }, 4000);
 
-        if(trigger(emotionHistory)!=false){
+
+        if (trigger(emotionHistory) != false) {
           clearInterval(itv);
           showTips(emotionHistory);
 
           itv = setInterval(() => {
-            showTips(emotionCount, 1);
+            showTips(emotionHistory, 1);
           }, 4000);
         }
 
@@ -256,7 +261,7 @@ function interleave(leftChannel, rightChannel) {
 
   var inputIndex = 0;
 
-  for (var index = 0; index < length; ) {
+  for (var index = 0; index < length;) {
     result[index++] = leftChannel[inputIndex];
     result[index++] = rightChannel[inputIndex];
     inputIndex++;

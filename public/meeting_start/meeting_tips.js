@@ -243,15 +243,15 @@ function trigger(emotionHistory) {
   // else{
   //   return "다른 감정이에용";
   // }
-  
-  
+
+
   //최근 감정 3개가 같을 때 (장시간)
   if (
     emotionHistory.length >= 3 &&
     emotionHistory[emotionHistory.length - 3] ==
-      emotionHistory[emotionHistory.length - 2] &&
+    emotionHistory[emotionHistory.length - 2] &&
     emotionHistory[emotionHistory.length - 2] ==
-      emotionHistory[emotionHistory.length - 1]
+    emotionHistory[emotionHistory.length - 1]
   ) {
     if (emotionHistory[emotionHistory.length - 1] == "Good") {
       console.log(goodTips[getRandomIndex(goodTips.length)]);
@@ -272,11 +272,11 @@ function trigger(emotionHistory) {
   else if (
     emotionHistory.length >= 4 &&
     emotionHistory[emotionHistory.length - 4] ==
-      emotionHistory[emotionHistory.length - 3] &&
+    emotionHistory[emotionHistory.length - 3] &&
     emotionHistory[emotionHistory.length - 2] ==
-      emotionHistory[emotionHistory.length - 1] &&
+    emotionHistory[emotionHistory.length - 1] &&
     emotionHistory[emotionHistory.length - 2] !=
-      emotionHistory[emotionHistory.length - 3]
+    emotionHistory[emotionHistory.length - 3]
   ) {
     if (
       emotionHistory[emotionHistory.length - 3] == "Good" &&
@@ -353,7 +353,7 @@ function trigger(emotionHistory) {
     }
   }
 
-  else{
+  else {
     return false;
   }
 }
@@ -376,11 +376,14 @@ function showTips(emotionHistory, isTriggered = 0) {
   const tips = document.createElement("div");
   tips.setAttribute("style", "height: 50px");
 
-  if (isTriggered == 0){
+  if (isTriggered == 0) {
     tips.textContent = trigger(emotionHistory);
   }
-  else{
+  else if (isTriggered == 1) {
     tips.textContent = analyzeUser();
+  }
+  else {
+    tips.textContent = randomTips[Math.floor(Math.random() * randomTips.length)];
   }
 
   inner.appendChild(tips);
@@ -390,15 +393,14 @@ function showTips(emotionHistory, isTriggered = 0) {
 
   // console.log("height ",  innerList.style.heigth);
 
-  innerList.style.marginTop = `-${
-    randomQuestion.clientHeight * inners.length
-  }px`;
+  innerList.style.marginTop = `-${randomQuestion.clientHeight * inners.length
+    }px`;
   // console.log("inner ", innerList.style.marginTop );
 
   // }, 2000);
 }
 
-function analyzeUser(){
+function analyzeUser() {
   var str = getFrequentKeyword();
   str = "상대방이 최근 가장 많이 언급한 키워드는 \"" + str + "\"입니다.";
   console.log(str);
