@@ -38,8 +38,6 @@ function init() {
     // 자동으로 카메라, 마이크 켜지게 구현, 버튼 클릭 대신 window.onload 사용
     // document.querySelector('#cameraBtn').addEventListener('click',
     // openUserMedia);
-
-    init_ff();
     
     window.onload = openUserMedia();
     // document.querySelector('#hangupBtn').addEventListener('click', hangUp);

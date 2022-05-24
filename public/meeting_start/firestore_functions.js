@@ -16,12 +16,12 @@ let emotionRateList = {};
 
 async function init_ff(rid = null) {
     // rid = 'YSGZ755uzuoVICc74tEd'; //
+    console.log("roomId : " + rid);
     if (rid == null) {
         return;
     }
     onAuthStateChanged(auth, (user) => {
         roomId = rid;
-        console.log("roomId : " + roomId);
         //const user = auth.currentUser;
         const uid = user.uid;
 
