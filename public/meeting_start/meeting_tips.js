@@ -400,6 +400,8 @@ function showTips(emotionHistory, isTriggered = 0) {
 
 function analyzeUser(){
   var str = getFrequentKeyword();
+  str = "상대방이 최근 가장 많이 언급한 키워드는 \"" + str + "\"입니다.";
+  console.log(str);
   return str;
 }
 

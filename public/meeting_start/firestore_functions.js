@@ -101,9 +101,6 @@ async function init_ff(rid = null) {
                     // });
                     return dt;
                 }
-
-                var t = getFrequentKeyword();
-                console.log(t);
                 // var count = 0;
                 // opChatLogsRefs.forEach((doc) => {
                 //     count++;
