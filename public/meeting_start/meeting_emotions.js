@@ -197,36 +197,22 @@ async function stopRecord(ref = null) {
             .then((res) => res.json())
             .then((res) => {
                 var v_emt = transformEmotion(res.emotion);
-                // var v_emt = res.emotion; var f_emt = recognizeFaceEmotion(); var f_emt =
-                // recognizeFaceEmotion();
                 voiceMaxValue = res.accuracy;
-
-                // console.log("Voice emotion : " + v_emt + " Face emotion : " + f_emt);
-                // console.log(   "Voice emotion value :" +     voiceMaxValue +     "Face
-                // emotion value :" +     faceMaxValue );
 
                 var emt = uniteEmotion(v_emt, f_emt);
 
                 updateEmotion();
-
-                //meeting_tips's function trigger(emotionHistory);
-
+                
                 if (trigger(emotionHistory) != false) {
-                    if (itv != null) {
-                        clearInterval(itv);
-                    }
-                    showTips(emotionHistory);
+                  if (itv != null) {
+                      clearInterval(itv);
+                  }
+                  showTips(emotionHistory);
 
-                    itv = setInterval(() => {
-                        showTips(emotionHistory, 1);
-                    }, 8000);
-                }
-
-                // console.log("emotion Count : " + emotionCount); console.log("emotion History
-                // : " + emotionHistory); console.log("Emotion : " + emt); if(emt == 'Bad'){
-                // setEmotion(1); } else if(emt == 'Good'){ setEmotion(2); } else if(emt ==
-                // 'Sad'){     setEmotion(3); } else{ setEmotion(4); }
-
+                  itv = setInterval(() => {
+                      showTips(emotionHistory, 1);
+                  }, 4000);
+              }
                 updateDoc(ref, {emotion: emt});
             })
             .catch((e) => {

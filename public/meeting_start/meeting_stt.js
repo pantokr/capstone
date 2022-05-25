@@ -12,6 +12,7 @@ import {
     onSnapshot,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 import { startRecord, stopRecord, setEmotion } from "./meeting_emotions.js";
+import { showTips, trigger } from "./meeting_tips.js";
 
 let startTime = null;
 let uid = null;
@@ -19,8 +20,11 @@ let uid = null;
 //good, sad, bad, normal count
 var emotionCount = [0, 0, 0, 0];
 var emotionHistory = [];
+var itv = null;
 
 async function startSTT(roomId, isCaller) {
+    showTips(emotionHistory, 2);
+
     faceapi.nets.tinyFaceDetector.loadFromUri("./models");
     faceapi.nets.faceLandmark68Net.loadFromUri("./models");
     faceapi.nets.faceRecognitionNet.loadFromUri("./models");
@@ -139,16 +143,16 @@ async function startSTT(roomId, isCaller) {
                     console.log("상대방 stt : ", parsed_data.text)
                     if (emotion == "Good") {
                         setEmotion(0);
-                        
+
                     } else if (emotion == "Sad") {
                         setEmotion(1);
-                        
+
                     } else if (emotion == "Bad") {
                         setEmotion(2);
-                        
+
                     } else {
                         setEmotion(3);
-                        
+
                     }
                     emotionHistory.push(emotion);
                     // console.log(emotionHistory);
@@ -282,6 +286,7 @@ async function startSTT(roomId, isCaller) {
             if (finalText != null) {
                 var speechRef = doc(speechCol, getTimestamp());
                 stopRecord(speechRef);
+
                 setDoc(speechRef, {
                     speecher: name,
                     speecherID: uid,

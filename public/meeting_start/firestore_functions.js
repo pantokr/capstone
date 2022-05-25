@@ -162,11 +162,12 @@ function getFrequentKeyword() {
 
     var max_list = {};
     for (var key in t_list) {
-        if (t_list[key] >= 2 && t_list[key] == max) {
-            max_list[key] = max;
+        if (t_list[key] >= 2) {
+            max_list[key] = t_list[key];
         }
     }
-    return Object.keys(max_list)[Math.floor(Math.random() * Object.keys(max_list).length)];
+    var t = Object.keys(max_list)[Math.floor(Math.random() * Object.keys(max_list).length)];
+    return t;
 }
 // 넘겨 받은 RoomID의 모든 대화목록
 // function getSpeechesByRoomId(rid) {
