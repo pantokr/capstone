@@ -349,13 +349,13 @@ function uniteEmotion(v, f) {
 function setEmotion(result) {
   const emotion = document.querySelector("#emotion");
 
-  if (result == 1) {
-    emotion.innerHTML = "😡";
-  } else if (result == 2) {
+  if (result == 0) {
     emotion.innerHTML = "😊";
-  } else if (result == 3) {
+  } else if (result == 1) {
     emotion.innerHTML = "😭";
-  } else if (result == 4) {
+  } else if (result == 2) {
+    emotion.innerHTML = "😡";
+  } else {
     emotion.innerHTML = "😐";
   }
 }
