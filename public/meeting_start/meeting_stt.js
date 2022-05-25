@@ -113,37 +113,44 @@ async function startSTT(roomId, isCaller) {
                 let parsed_data = JSON.parse(JSON.stringify(data));
                 let speecher = parsed_data.speecher;
                 let emotion = parsed_data.emotion;
-                if (speecher != name) {
-                    // console.log("Opponent Emotion : " + emotion);
-                    // console.log("speecher: ", speecher, "name: ", name);
-                    console.log("상대방 stt : ", parsed_data.text);
-                    if (emotion == "Bad") {
-                        setEmotion(1);
-                        setKeyword(0, parsed_data);
-                    } else if (emotion == "Good") {
-                        setEmotion(2);
-                        setKeyword(1, parsed_data);
-                    } else if (emotion == "Sad") {
-                        setEmotion(3);
-                        setKeyword(2, parsed_data);
-                    } else {
-                        setEmotion(4);
-                        setKeyword(3, parsed_data);
-                    }
-                    emotionHistory.push(emotion);
-                    // console.log(emotionHistory);
 
+                if (speecher == name) {
                     //emotion count
                     if (emotion == "Good") {
                         emotionCount[0]++;
+                        setKeyword(0, parsed_data);
                     } else if (emotion == "Sad") {
                         emotionCount[1]++;
+                        setKeyword(1, parsed_data);
                     } else if (emotion == "Bad") {
                         emotionCount[2]++;
+                        setKeyword(2, parsed_data);
                     } else {
                         //Normal
                         emotionCount[3]++;
+                        setKeyword(3, parsed_data);
                     }
+                }
+
+                if (speecher != name) {
+                    // console.log("Opponent Emotion : " + emotion);
+                    // console.log("speecher: ", speecher, "name: ", name);
+                    console.log("상대방 stt : ", parsed_data.text)
+                    if (emotion == "Bad") {
+                        setEmotion(1);
+                        
+                    } else if (emotion == "Good") {
+                        setEmotion(2);
+                        
+                    } else if (emotion == "Sad") {
+                        setEmotion(3);
+                        
+                    } else {
+                        setEmotion(4);
+                        
+                    }
+                    emotionHistory.push(emotion);
+                    // console.log(emotionHistory);
                 }
             }
         });
