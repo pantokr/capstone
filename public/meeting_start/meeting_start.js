@@ -157,9 +157,7 @@ async function createRoom() {
             const rtcSessionDescription = new RTCSessionDescription(data.answer);
             await peerConnection.setRemoteDescription(rtcSessionDescription);
         }
-    }).catch(
-        
-    );
+    });
     // Listening for remote session description above Listen for remote ICE
     // candidates below
 

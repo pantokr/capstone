@@ -193,42 +193,6 @@ const randomQuestions = [
   "게임 좋아하세요?",
   "가장 재밌게 본 영화나 드라마 있으세요?",
 ];
-// showTips();
-
-// function init() {
-//   shuffle(randomTips);
-
-//   makeRandomQuestion();
-
-//   // 랜덤 질문
-//   async function makeRandomQuestion() {
-//     // const randNum = Math.floor(Math.random() * 10 + 1); const db =
-//     // getFirestore(); const questionRef = doc(collection(db, 'randomQuestions'),
-//     // `${randNum}`); const docSnap = await getDoc(questionRef); const parsed_data =
-//     // JSON.parse(JSON.stringify(docSnap.data()));
-
-//     let randomQuestion = document.getElementById("randomQuestion");
-//     // randomQuestion.textContent = parsed_data.question;
-//     randomQuestion.textContent = returnTip(0);
-//   }
-
-//   function returnTip(currentProgress = 0) {
-//     // cur
-//     if (currentProgress == 0) {
-//       return randomTips[0];
-//     } else if (currentProgress == 1) {
-//     }
-//   }
-
-//   function shuffle(array) {
-//     array.sort(() => Math.random() - 0.5);
-//   }
-
-//   async function analyzeUser() {
-//     var tipList = [];
-//     return tipList;
-//   }
-// }
 
 function trigger(emotionHistory) {
   function getRandomIndex(num) {

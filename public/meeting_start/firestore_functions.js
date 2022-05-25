@@ -21,120 +21,90 @@ async function init_ff(rid = null) {
         return;
     }
     onAuthStateChanged(auth, (user) => {
-        roomId = rid;
-        //const user = auth.currentUser;
-        const uid = user.uid;
+        console.log("auth");
+        setTimeout(() => {
+            roomId = rid;
+            //const user = auth.currentUser;
+            const uid = user.uid;
 
-        const chatCol = collection(db, "chats");
-        const chatRef = doc(chatCol, roomId);
+            const chatCol = collection(db, "chats");
+            const chatRef = doc(chatCol, roomId);
 
-        getDoc(chatRef).then(async (snapshot) => {
-            if (snapshot.exists()) {
-                const val = snapshot.data();
+            getDoc(chatRef).then(async (snapshot) => {
+                if (snapshot.exists()) {
+                    const val = snapshot.data();
 
-                const caller = val.caller;
-                const callee = val.callee;
+                    const caller = val.caller;
+                    const callee = val.callee;
 
-                if (uid == caller) {
-                    opId = callee;
-                } else {
-                    opId = caller;
+                    if (uid == caller) {
+                        opId = callee;
+                    } else {
+                        opId = caller;
+                    }
+
+                    // opId = '3jSfETcMRWRfiB4TPa732qn01BT2'; //
+                    // get name of opponent
+                    const userCol = collection(db, "users");
+                    const opRef = doc(userCol, opId);
+                    console.log("opId : " + opId);
+                    getDoc(opRef).then((snapshot_userInfo) => {
+                        if (snapshot_userInfo.exists()) {
+                            const val_userInfo = snapshot_userInfo.data();
+                            opName = val_userInfo.name;
+                        }
+                    });
+
+                    // get chat_logs list of opponent
+                    const opChatLogsCol = collection(opRef, "chat_logs")
+                    const opChatLogsRefs = await getDocs(opChatLogsCol);
+                    var size = opChatLogsRefs.size;
+
+                    for (var r = size - 4; r < size - 1; r++) {
+                        var d = opChatLogsRefs.docs[r];
+                        const val_chatLogs = d.data();
+                        chatList[d.id] = val_chatLogs.roomID;
+
+                        let t_list = {};
+                        // var k = await getKeyword(doc(opChatLogsCol, d.id), "Normal");
+                        // console.log(k);
+                        t_list["Bad"] = await getKeyword(doc(opChatLogsCol, d.id), "Bad");
+                        t_list["Sad"] = await getKeyword(doc(opChatLogsCol, d.id), "Sad");
+                        t_list["Good"] = await getKeyword(doc(opChatLogsCol, d.id), "Good");
+                        t_list["Normal"] = await getKeyword(doc(opChatLogsCol, d.id), "Normal");
+
+                        keywordList[d.id] = t_list;
+                    }
+                    //console.log(keywordList);
+
+                    async function getKeyword(d, emt) {
+                        let col = null;
+                        if (emt == "Bad") {
+                            col = collection(d, "Bad");
+                        }
+                        else if (emt == "Sad") {
+                            col = collection(d, "Sad");
+                        }
+                        else if (emt == "Good") {
+                            col = collection(d, "Good");
+                        }
+                        else {
+                            col = collection(d, "Normal");
+                        }
+                        const q = query(col, orderBy("count", "desc"), limit(1));
+                        const querySnapshot = await getDocs(q);
+                        if (querySnapshot.size == 0) {
+                            return null;
+                        }
+
+                        var dt = querySnapshot.docs[0].data();
+                        return dt;
+                    }
+
                 }
-
-                // opId = '3jSfETcMRWRfiB4TPa732qn01BT2'; //
-                // get name of opponent
-                const userCol = collection(db, "users");
-                const opRef = doc(userCol, opId);
-                console.log("opid : " + opId);
-                getDoc(opRef).then((snapshot_userInfo) => {
-                    if (snapshot_userInfo.exists()) {
-                        const val_userInfo = snapshot_userInfo.data();
-                        opName = val_userInfo.name;
-                    }
-                });
-
-                // get chat_logs list of opponent
-                const opChatLogsCol = collection(opRef, "chat_logs")
-                const opChatLogsRefs = await getDocs(opChatLogsCol);
-                var size = opChatLogsRefs.size;
-
-                for (var r = size - 4; r < size - 1; r++) {
-                    var d = opChatLogsRefs.docs[r];
-                    const val_chatLogs = d.data();
-                    chatList[d.id] = val_chatLogs.roomID;
-
-                    let t_list = {};
-                    // var k = await getKeyword(doc(opChatLogsCol, d.id), "Normal");
-                    // console.log(k);
-                    t_list["Bad"] = await getKeyword(doc(opChatLogsCol, d.id), "Bad");
-                    t_list["Sad"] = await getKeyword(doc(opChatLogsCol, d.id), "Sad");
-                    t_list["Good"] = await getKeyword(doc(opChatLogsCol, d.id), "Good");
-                    t_list["Normal"] = await getKeyword(doc(opChatLogsCol, d.id), "Normal");
-
-                    keywordList[d.id] = t_list;
-                }
-                //console.log(keywordList);
-
-                async function getKeyword(d, emt) {
-                    let col = null;
-                    if (emt == "Bad") {
-                        col = collection(d, "Bad");
-                    }
-                    else if (emt == "Sad") {
-                        col = collection(d, "Sad");
-                    }
-                    else if (emt == "Good") {
-                        col = collection(d, "Good");
-                    }
-                    else {
-                        col = collection(d, "Normal");
-                    }
-                    const q = query(col, orderBy("count", "desc"), limit(1));
-                    const querySnapshot = await getDocs(q);
-                    if (querySnapshot.size == 0) {
-                        return null;
-                    }
-
-                    var dt = querySnapshot.docs[0].data();
-                    // querySnapshot.forEach((doc) => {
-                    //     console.log(kwd);
-                    //     // doc.data() is never undefined for query doc snapshots
-                    // });
-                    return dt;
-                }
-                // var count = 0;
-                // opChatLogsRefs.forEach((doc) => {
-                //     count++;
-                //     if (count > size - 4 && count <= size - 1) {
-                //         const val_chatLogs = doc.data();
-                //         chatList[doc.id] = val_chatLogs.roomID;
-                //     }
-                // });
-
-                // for (var r = size - 4; r < size - 1; r++) {     var d =
-                // opChatLogsRefs.docs[0];     console.log(d);      emotion rate of the room
-                // let emotions = {};     emotions['bad'] = val_chatLogs.bad;
-                // emotions['good'] = val_chatLogs.good;     emotions['normal'] =
-                // val_chatLogs.normal;     emotions['sad'] = val_chatLogs.sad;
-                // emotionRateList[val_chatLogs.roomID] = emotions; }
-
-
-                // get speeches list of each chat_logs
-                // for (var key in chatList) {
-                //     const opChatRef = doc(chatCol, chatList[key]);
-                //     const opSpeechesRefs = await getDocs(collection(opChatRef, "speeches"));
-
-                //     let t_list = {};
-                //     opSpeechesRefs.forEach((doc) => {
-                //         t_list[doc.id] = doc.data();
-                //     });
-                //     speechList[chatList[key]] = t_list;
-                // }
-
-            }
-        });
+            });
+        }, 4000);
     });
-
 }
 
 // 현재 룸 ID
