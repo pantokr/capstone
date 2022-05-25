@@ -25,6 +25,10 @@ var itv = null;
 async function startSTT(roomId, isCaller) {
     showTips(emotionHistory, 2);
 
+    itv = setInterval(() => {
+        showTips(emotionCount, 1);
+    }, 4000);
+
     faceapi.nets.tinyFaceDetector.loadFromUri("./models");
     faceapi.nets.faceLandmark68Net.loadFromUri("./models");
     faceapi.nets.faceRecognitionNet.loadFromUri("./models");
@@ -324,4 +328,4 @@ async function startSTT(roomId, isCaller) {
     }
 }
 
-export { startSTT, startTime, uid, emotionHistory, emotionCount };
+export { startSTT, startTime, uid, emotionHistory, emotionCount, itv };
