@@ -108,6 +108,7 @@ async function startSTT(roomId, isCaller) {
                 }
                 let minbox = document.querySelector(".min-content");
                 minbox.scrollTop = minbox.scrollHeight;
+
             } else if (change.type === "modified") {
                 let data = change.doc.data();
                 let parsed_data = JSON.parse(JSON.stringify(data));
@@ -136,17 +137,17 @@ async function startSTT(roomId, isCaller) {
                     // console.log("Opponent Emotion : " + emotion);
                     // console.log("speecher: ", speecher, "name: ", name);
                     console.log("상대방 stt : ", parsed_data.text)
-                    if (emotion == "Bad") {
-                        setEmotion(1);
-                        
-                    } else if (emotion == "Good") {
-                        setEmotion(2);
+                    if (emotion == "Good") {
+                        setEmotion(0);
                         
                     } else if (emotion == "Sad") {
-                        setEmotion(3);
+                        setEmotion(1);
+                        
+                    } else if (emotion == "Bad") {
+                        setEmotion(2);
                         
                     } else {
-                        setEmotion(4);
+                        setEmotion(3);
                         
                     }
                     emotionHistory.push(emotion);
@@ -172,13 +173,13 @@ async function startSTT(roomId, isCaller) {
     function setKeyword(idx, parsed_data) {
         let emotion = null;
         if (idx == 0) {
-            emotion = "Bad";
-        }
-        if (idx == 1) {
             emotion = "Good";
         }
-        if (idx == 2) {
+        if (idx == 1) {
             emotion = "Sad";
+        }
+        if (idx == 2) {
+            emotion = "Bad";
         }
         if (idx == 3) {
             emotion = "Normal";
@@ -217,7 +218,7 @@ async function startSTT(roomId, isCaller) {
                         keyMap[idx].set(keyName, cnt + 1);
                         updateDoc(doc(keywordCol, keyName), { count: cnt + 1 });
                     }
-                    console.log("keyName: ", Object.keys(data)[i], "count: ", keyMap[idx].get(keyName));
+                    console.log("keyName: ", Object.keys(data)[i], "count: ", keyMap[idx].get(keyName), "emotion: ", emotion);
                 }
                 // const keyName = Object.keys(data)[0];
                 // console.log("size : ",Object.keys(data).length);
@@ -285,8 +286,7 @@ async function startSTT(roomId, isCaller) {
                     speecher: name,
                     speecherID: uid,
                     isCaller: isCaller == true ? "Caller" : "Callee",
-                    text: finalText,
-                    emotion: "Normal"
+                    text: finalText
                 });
                 finalText = null;
                 updateDoc(chatRef, { end: getTimestamp() });
