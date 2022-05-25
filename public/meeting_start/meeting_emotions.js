@@ -199,7 +199,8 @@ async function stopRecord(ref = null) {
         voiceMaxValue = res.accuracy;
 
         var emt = uniteEmotion(v_emt, f_emt);
-
+        updateEmotion();
+        
         if (trigger(emotionHistory) != false) {
           if (itv != null) {
             clearInterval(itv);

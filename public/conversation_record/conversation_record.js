@@ -17,6 +17,7 @@ const urlParams = url.searchParams;
 const roomId = urlParams.get("roomCode");
 const date = urlParams.get("date");
 const opponent = urlParams.get("opponent");
+const opponentId = urlParams.get("opponentId");
 const auth = getAuth();
 const db = getFirestore();
 
@@ -42,11 +43,12 @@ onAuthStateChanged(auth, async (user) => {
 
 async function fetchEmotion() {
   const userCol = collection(db, "users");
-  const userRef = doc(userCol, uid);
+  const userRef = doc(userCol, opponentId);
   const chatLogCol = collection(userRef, "chat_logs");
   const docRef = doc(chatLogCol, date);
 
   const docum = await getDoc(docRef);
+  console.log(date);
   const parsed_data = JSON.parse(JSON.stringify(docum.data()));
 
   goodCnt = parsed_data.good;

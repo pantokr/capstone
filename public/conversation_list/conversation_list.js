@@ -69,7 +69,8 @@ async function printDocData() {
         a.href = "../conversation_record/?roomCode="
             + parsed_data.roomID
             + "&date=" + doc.id
-            + "&opponent=" + parsed_data.opponent;
+            + "&opponent=" + parsed_data.opponent
+            + "&opponentId=" + parsed_data.opponentID;
 
         // console.log(a.herf);
         a.append(num);

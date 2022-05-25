@@ -59,12 +59,17 @@ async function startSTT(roomId, isCaller) {
         if (user) {
             name = user.displayName;
             uid = user.uid;
+            startTime = getTimestamp();
             if (isCaller == true) {
-                setDoc(chatRef, { caller: uid });
+                setDoc(chatRef, {
+                    caller: uid,
+                    start: startTime
+                });
             } else {
+                console.log(startTime);
                 updateDoc(chatRef, {
                     callee: uid,
-                    start: getTimestamp(),
+                    start: startTime
                 });
             }
         } else {
@@ -144,7 +149,7 @@ async function startSTT(roomId, isCaller) {
                 if (speecher != name) {
                     // console.log("Opponent Emotion : " + emotion);
                     // console.log("speecher: ", speecher, "name: ", name);
-                    console.log("상대방 stt : ", parsed_data.text)
+                    console.log("상대방 stt : ", parsed_data.text, "상대방 감정: ", emotion);
                     if (emotion == "Good") {
                         setEmotion(0);
 
@@ -241,7 +246,6 @@ async function startSTT(roomId, isCaller) {
         const userCol = collection(db, "users");
         const userRef = doc(userCol, uid);
         chatLogCol = collection(userRef, "chat_logs");
-        startTime = getTimestamp();
 
         setDoc(doc(chatLogCol, startTime), {
             roomID: roomId,
