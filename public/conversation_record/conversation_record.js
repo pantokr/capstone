@@ -1,11 +1,14 @@
 import "../firebase_initialization.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import {
   getFirestore,
   collection,
   doc,
   getDoc,
-  getDocs
+  getDocs,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 import { getFrequentKeyword } from "../meeting_start/firestore_functions.js";
 
@@ -32,7 +35,6 @@ onAuthStateChanged(auth, async (user) => {
     showChats();
     await fetchEmotion();
     drawChart();
-
   } else {
     console.log("No User.");
   }
@@ -67,36 +69,37 @@ function drawChart() {
   // happy.append(p);
 
   var data = google.visualization.arrayToDataTable([
-    ['a', 'b'],
-    ['행복', goodCnt],
-    ['슬픔', sadCnt],
-    ['화남', badCnt],
-    ['보통', normalCnt],
+    ["a", "b"],
+    ["행복", goodCnt],
+    ["슬픔", sadCnt],
+    ["화남", badCnt],
+    ["보통", normalCnt],
   ]);
 
   var options = {
     backgroundColor: {
-      fill: '#f0faf9',
+      fill: "#f0faf9",
     },
-    title: '',
+    title: "감정 분석 결과",
+    colors: ["#E7B6B6", "#1D4458", "#fa5757", "#109618"],
     is3D: true,
     height: 280,
-
+    titleTextStyle: {
+      fontSize: 18,
+      bold: Boolean,
+    },
     legend: {
       textStyle: {
-        fontSize: 18
+        fontSize: 18,
       },
-      alignment: 'center',
+      alignment: "center",
     },
-
-
-
   };
 
-  var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+  var chart = new google.visualization.PieChart(
+    document.getElementById("piechart_3d")
+  );
   chart.draw(data, options);
-
-
 }
 
 async function showChats() {
@@ -122,7 +125,6 @@ async function showChats() {
     // console.log(myName);
 
     if (speecher == myName) {
-
       let myBox = document.createElement("div");
       myBox.setAttribute("class", "myBox");
       myBox.setAttribute("id", cnt);
@@ -132,37 +134,25 @@ async function showChats() {
       myText.setAttribute("class", "myText");
       myText.textContent = text;
 
-
-
       // console.log("my text: ", myText.textContent);
 
       myBox.append(myText);
       box.append(myBox);
-      document
-        .querySelector(".chatLog")
-        .append(box);
-
-
-
+      document.querySelector(".chatLog").append(box);
     } else {
-      let oppBox = document.createElement('div');
+      let oppBox = document.createElement("div");
       oppBox.setAttribute("class", "oppBox");
       oppBox.setAttribute("id", cnt);
 
-      let oppText = document.createElement('div');
+      let oppText = document.createElement("div");
       oppText.setAttribute("class", "oppText");
 
       oppText.textContent = text;
       // console.log("opponent text : ", oppText.textContent);
 
-
       oppBox.append(oppText);
       box.append(oppBox);
-      document
-        .querySelector('.chatLog')
-        .append(box);
-
-
+      document.querySelector(".chatLog").append(box);
     }
 
     cnt += 1;
@@ -171,8 +161,7 @@ async function showChats() {
   });
 }
 
-
-document.querySelector("#input_search_text").addEventListener('keyup', (e) => {
+document.querySelector("#input_search_text").addEventListener("keyup", (e) => {
   if (e.keyCode === 27) {
     // console.log("esc 누름");
     unfilter();
@@ -182,7 +171,20 @@ document.querySelector("#input_search_text").addEventListener('keyup', (e) => {
 document.querySelector("#icon_cancel").addEventListener("click", unfilter);
 
 function unfilter() {
-  var value, myBox, oppBox, myText, oppText, myidx, oppidx, i, j, minbox, regex2, orgmy, orgopp, box;
+  var value,
+    myBox,
+    oppBox,
+    myText,
+    oppText,
+    myidx,
+    oppidx,
+    i,
+    j,
+    minbox,
+    regex2,
+    orgmy,
+    orgopp,
+    box;
   myidx = 0;
   myidx = 0;
 
@@ -194,15 +196,15 @@ function unfilter() {
 
   minbox = document.querySelector(".min-content");
 
-
   for (i = 0; i < myBox.length; i++) {
     myText = myBox[i].getElementsByClassName("myText");
 
     if (myText[0].innerHTML.toUpperCase().indexOf(value) > -1) {
-
-      var regex = new RegExp(value, 'gi');
-      myText[0].innerHTML = myText[0].innerHTML.replace(regex, "<span class='unhighlight-my'>" + value + "</span>");
-
+      var regex = new RegExp(value, "gi");
+      myText[0].innerHTML = myText[0].innerHTML.replace(
+        regex,
+        "<span class='unhighlight-my'>" + value + "</span>"
+      );
     } else {
       //   myBox[i].style.display = "none";
     }
@@ -211,12 +213,14 @@ function unfilter() {
     oppText = oppBox[j].getElementsByClassName("oppText");
 
     if (oppText[0].innerHTML.toUpperCase().indexOf(value) > -1) {
-      var regex = new RegExp(value, 'gi');
-      oppText[0].innerHTML = oppText[0].innerHTML.replace(regex, "<span class='unhighlight-opp'>" + value + "</span>");
+      var regex = new RegExp(value, "gi");
+      oppText[0].innerHTML = oppText[0].innerHTML.replace(
+        regex,
+        "<span class='unhighlight-opp'>" + value + "</span>"
+      );
     } else {
       //   oppBox[j].style.display = "none";
     }
-
   }
   document.getElementById("input_search_text").value = "";
 
@@ -224,30 +228,40 @@ function unfilter() {
   // setTimeout("window.location.reload()", 1000);
 }
 
-
 // 검색기능
-document.querySelector("#input_search_text").addEventListener('keyup', (e) => {
+document.querySelector("#input_search_text").addEventListener("keyup", (e) => {
   if (e.keyCode === 13) {
     // console.log("enterkey 누름");
     filter();
   }
 });
 
-
-document.querySelector('.icon_search').addEventListener("click", filter);
+document.querySelector(".icon_search").addEventListener("click", filter);
 
 var flag;
 function filter() {
-
-  var value, myBox, oppBox, myText, oppText, myidx, oppidx, i, j, minbox, myid, oppid, min, box, idx;
+  var value,
+    myBox,
+    oppBox,
+    myText,
+    oppText,
+    myidx,
+    oppidx,
+    i,
+    j,
+    minbox,
+    myid,
+    oppid,
+    min,
+    box,
+    idx;
   var flag = 0;
   myidx = 1000000;
   myidx = 1000000;
   idx = 100000;
   value = document.getElementById("input_search_text").value.toUpperCase();
 
-
-  box = document.getElementsByClassName('box');
+  box = document.getElementsByClassName("box");
   myBox = document.getElementsByClassName("myBox");
   oppBox = document.getElementsByClassName("oppBox");
 
@@ -260,18 +274,17 @@ function filter() {
     for (j = 0; j < myBox.length; j++) {
       myText = myBox[j].getElementsByClassName("myText");
       if (myText[0].innerHTML.toUpperCase().indexOf(value) > -1) {
-
-        myid = i
+        myid = i;
         myidx = Math.max(myidx, myid);
-        var regex = new RegExp(value, 'gi');
-        myText[0].innerHTML = myText[0].innerHTML.replace(regex, "<span class='highlight'>" + value + "</span>");
-
+        var regex = new RegExp(value, "gi");
+        myText[0].innerHTML = myText[0].innerHTML.replace(
+          regex,
+          "<span class='highlight'>" + value + "</span>"
+        );
 
         var offset = document.getElementById(i).offsetTop;
-        minbox.scrollTo({ top: offset, behavior: 'smooth' });
-
+        minbox.scrollTo({ top: offset, behavior: "smooth" });
       }
-
     }
     for (j = 0; j < oppBox.length; j++) {
       oppText = oppBox[j].getElementsByClassName("oppText");
@@ -279,21 +292,18 @@ function filter() {
       if (oppText[0].innerHTML.toUpperCase().indexOf(value) > -1) {
         oppid = i;
         oppidx = Math.max(oppidx, oppid);
-        var regex = new RegExp(value, 'gi');
-        oppText[0].innerHTML = oppText[0].innerHTML.replace(regex, "<span class='highlight'>" + value + "</span>");
+        var regex = new RegExp(value, "gi");
+        oppText[0].innerHTML = oppText[0].innerHTML.replace(
+          regex,
+          "<span class='highlight'>" + value + "</span>"
+        );
 
         // minbox.scrollTop = box[i].scrollHeight;
 
         var offset = document.getElementById(i).offsetTop;
-        minbox.scrollTo({ top: offset, behavior: 'smooth' });
-
+        minbox.scrollTo({ top: offset, behavior: "smooth" });
       }
     }
     // minbox.scrollTop =  box[i].scrollHeight;
-
-
   }
-
-
 }
-
