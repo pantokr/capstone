@@ -9,17 +9,30 @@ import {
   doc,
   getDoc,
   getDocs,
+  query,
+  where
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-import { getFrequentKeyword } from "../meeting_start/firestore_functions.js";
 
 const url = new URL(window.location.href);
 const urlParams = url.searchParams;
 const roomId = urlParams.get("roomCode");
-const date = urlParams.get("date");
+// const date = urlParams.get("date");
 const opponent = urlParams.get("opponent");
 const opponentId = urlParams.get("opponentId");
+let date = null;
+
 const auth = getAuth();
 const db = getFirestore();
+const userCol = collection(db, "users");
+const userRef = doc(userCol, opponentId);
+const chatLogCol = collection(userRef, "chat_logs");
+const q = query(chatLogCol, where("roomID", "==", roomId));
+const querySnapshot = await getDocs(q);
+querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+  date = doc.id;
+});
+const docRef = doc(chatLogCol, date);
 
 let goodCnt = 0;
 let sadCnt = 0;
@@ -42,13 +55,8 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 async function fetchEmotion() {
-  const userCol = collection(db, "users");
-  const userRef = doc(userCol, opponentId);
-  const chatLogCol = collection(userRef, "chat_logs");
-  const docRef = doc(chatLogCol, date);
 
   const docum = await getDoc(docRef);
-  console.log(date);
   const parsed_data = JSON.parse(JSON.stringify(docum.data()));
 
   goodCnt = parsed_data.good;
@@ -59,16 +67,28 @@ async function fetchEmotion() {
 
 google.charts.load("current", { packages: ["corechart"] });
 
-function drawChart() {
+async function drawChart() {
   // const happy = document.getElementsByClassName("d-flex col-6");
-  // // const neutral = document.getElementsById("neutral");
-  // // const sad = document.getElementsById("sad");
-  // // const angry = document.getElementsById("angry");
+  const happy = document.getElementById('happy');
+  const neutral = document.getElementById('neutral');
+  const sad = document.getElementById('sad');
+  const angry = document.getElementById('angry');
 
-  // let p = document.createElement('p');
-  // p.innerText = getFrequentKeyword();
-  // console.log(p.innerText);
-  // happy.append(p);
+  let ph = document.createElement('p');
+  ph.textContent = await getFrequentKeyword("Good");
+  happy.appendChild(ph);
+
+  let pb = document.createElement('p');
+  pb.textContent = await getFrequentKeyword("Bad");
+  angry.appendChild(pb);
+
+  let ps = document.createElement('p');
+  ps.textContent = await getFrequentKeyword("Sad");
+  sad.appendChild(ps);
+
+  let pn = document.createElement('p');
+  pn.textContent = await getFrequentKeyword("Normal");
+  neutral.appendChild(pn);
 
   var data = google.visualization.arrayToDataTable([
     ["a", "b"],
@@ -102,6 +122,23 @@ function drawChart() {
     document.getElementById("piechart_3d")
   );
   chart.draw(data, options);
+}
+
+async function getFrequentKeyword(emotion) {
+  const querySnapshot = await getDocs(collection(docRef, emotion));
+  let maxCount = 0;
+  let str = '없음';
+
+  querySnapshot.forEach((doc) => {
+    let parsed_data = JSON.parse(JSON.stringify(doc.data()));
+
+    if (parsed_data.count > maxCount) {
+      str = parsed_data.text;
+      maxCount = parsed_data.count;
+    }
+  });
+
+  return str;
 }
 
 async function showChats() {
