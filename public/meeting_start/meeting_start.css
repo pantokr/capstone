@@ -336,17 +336,14 @@ span:hover + p.arrow {
   display: block;
 }
 
-
-
-
-
-
 #randomQuestion {
   /* border: 6px solid royalblue; */
   width: 100%;
   height: 50px;
   margin: 0 auto;
   overflow-y: hidden;
+  font-size: 30px;
+  text-align: center;
 }
 
 .inner-list {

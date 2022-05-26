@@ -48,7 +48,7 @@
                     <a class="nav-link feature active" onclick="location.href='../cover'">홈</a>
                     <a class="nav-link feature" onclick="location.href='../mypage'">마이페이지</a>
                     <a class="nav-link feature" onclick="location.href='../introduction'">소개</a>
-                    <a class="nav-link feature" id = "signout_btn" onclick="location.href='../'">로그아웃</a>
+                    <a class="nav-link feature" id="signout_btn" onclick="location.href='../'">로그아웃</a>
                 </nav>
             </div>
         </div>
@@ -56,103 +56,104 @@
 
     <!-- 자동으로 카메라, 마이크 켜지게 구현, 이 부분은 삭제 -->
 
-    
-       
-            <!-- <button class="mdc-button mdc-button--raised" id="cameraBtn"> <i
+
+
+    <!-- <button class="mdc-button mdc-button--raised" id="cameraBtn"> <i
                 class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
                 <span class="mdc-button__label">Open camera & microphone</span> </button> -->
 
-           
 
-           
 
-          
-       
-        <div class="row" id="outer">
-            <div class="col-md-1" >
-                <div class="container justify-content-center" id="myStream" style="margin: 0; padding:0;">
-                    <div class="" id="buttons">
-                    
-                         <!-- 클릭 시 룸 번호 생성 -->
-                        <button class="mdc-button mdc-button--raised" id="createBtn" >
-                            <div>
-                                <span id="icon" class="material-icons mdc-button__icon create" aria-hidden="true">group_add</span>
-                                <!-- <span class="mdc-button__label">방 만들기</span> -->
-                                <p class="arrow">방 만들기</p>
-                                    
-                            </div>
-                        </button>
-                        
-                         <!-- 클릭 시 룸 조인 모달 생성 -->
-                        <button class="mdc-button mdc-button--raised " id="joinBtn">
-                            <div>
-                                <span id="icon" class="material-icons mdc-button__icon" aria-hidden="true">group</span>
-                                <!-- <span class="mdc-button__label">방 참가</span> -->
-                                <p class="arrow">방 참가하기</p>
-                            </div>
-                        </button>
 
-                        <!-- 클릭 시 룸 연결 끊기 -->
-                        <button class="mdc-button mdc-button--raised " id="hangupBtn" >
-                            <div>
-                                <span id="icon" class="material-icons mdc-button__icon" aria-hidden="true">close</span>
-                                <!-- <span class="mdc-button__label">미팅 종료</span> -->
-                                <p class="arrow">미팅 종료하기</p>
-                            </div>
-                        </button>
 
-                        <!-- 룸 번호 뜨는 곳 -->
-                        <button class="mdc-button mdc-button--raised " id="copyBtn" >
-                            <div>
-                                <span id="icon" class="material-icons mdc-button__icon" aria-hidden="true">copy_all</span>
-                                 <!-- <span class="mdc-button__label" id="currentRoom">코드 복사</span> -->
-                                <p class="arrow">코드 복사하기</p>
-                            </div>
-                        </button>
 
-                        <div class="transparency" style="height:18rem; ">
+
+    <div class="row" id="outer">
+        <div class="col-md-1">
+            <div class="container justify-content-center" id="myStream" style="margin: 0; padding:0;">
+                <div class="" id="buttons">
+
+                    <!-- 클릭 시 룸 번호 생성 -->
+                    <button class="mdc-button mdc-button--raised" id="createBtn">
+                        <div>
+                            <span id="icon" class="material-icons mdc-button__icon create"
+                                aria-hidden="true">group_add</span>
+                            <!-- <span class="mdc-button__label">방 만들기</span> -->
+                            <p class="arrow">방 만들기</p>
 
                         </div>
+                    </button>
 
-                        <div class="emotionguide d-flex flex-column" style="margin:0; padding:0;" >
-                            <div class="row justify-content-center" style="vertical-align: middle;">
-                                <span id="emo" class="angry col-4">😡</span>
-                                <span class="col-8 " id="key_angry">화남</span> 
-                            </div>
-                            <div class="row justify-content-center">
-                                <span id="emo" class="happy col-4">😊</span> 
-                                <span class="col-8" id="key_happy">행복</span> 
-                            </div>
-                            <div class="row justify-content-center">
-                                <span id="emo" class="sad col-4">😭</span> 
-                                <span class="col-8" id="key_sad">슬픔</span> 
-                            </div>
-                            <div class="row justify-content-center">
-                                <span id="emo" class="neutral col-4">😐</span> 
-                                <span class="col-8" id="key_neutral">중립</span> 
-                            </div>
+                    <!-- 클릭 시 룸 조인 모달 생성 -->
+                    <button class="mdc-button mdc-button--raised " id="joinBtn">
+                        <div>
+                            <span id="icon" class="material-icons mdc-button__icon" aria-hidden="true">group</span>
+                            <!-- <span class="mdc-button__label">방 참가</span> -->
+                            <p class="arrow">방 참가하기</p>
+                        </div>
+                    </button>
+
+                    <!-- 클릭 시 룸 연결 끊기 -->
+                    <button class="mdc-button mdc-button--raised " id="hangupBtn">
+                        <div>
+                            <span id="icon" class="material-icons mdc-button__icon" aria-hidden="true">close</span>
+                            <!-- <span class="mdc-button__label">미팅 종료</span> -->
+                            <p class="arrow">미팅 종료하기</p>
+                        </div>
+                    </button>
+
+                    <!-- 룸 번호 뜨는 곳 -->
+                    <button class="mdc-button mdc-button--raised " id="copyBtn">
+                        <div>
+                            <span id="icon" class="material-icons mdc-button__icon" aria-hidden="true">copy_all</span>
+                            <!-- <span class="mdc-button__label" id="currentRoom">코드 복사</span> -->
+                            <p class="arrow">코드 복사하기</p>
+                        </div>
+                    </button>
+
+                    <div class="transparency" style="height:18rem; ">
+
+                    </div>
+
+                    <div class="emotionguide d-flex flex-column" style="margin:0; padding:0;">
+                        <div class="row justify-content-center" style="vertical-align: middle;">
+                            <span id="emo" class="angry col-4">😡</span>
+                            <span class="col-8 " id="key_angry" style="margin-top:7px; font-size:20px;">화남</span>
+                        </div>
+                        <div class="row justify-content-center">
+                            <span id="emo" class="happy col-4">😊</span>
+                            <span class="col-8" id="key_happy" style="margin-top:7px; font-size:20px;">행복</span>
+                        </div>
+                        <div class="row justify-content-center">
+                            <span id="emo" class="sad col-4">😭</span>
+                            <span class="col-8" id="key_sad" style="margin-top:7px; font-size:20px;">슬픔</span>
+                        </div>
+                        <div class="row justify-content-center">
+                            <span id="emo" class="neutral col-4">😐</span>
+                            <span class="col-8" id="key_neutral" style="margin-top:7px; font-size:20px;">중립</span>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="col-md-7">
-                <!-- 상대방카메라 -->
-                <div class="opponent-cam">
-                    <!-- <canvas id="canvas"></canvas> -->
-                    <video id="remoteVideo" autoplay="autoplay" playsinline="playsinline"></video>
-                    <div id="emotion" style="position: absolute"></div>
+        <div class="col-md-7">
+            <!-- 상대방카메라 -->
+            <div class="opponent-cam">
+                <!-- <canvas id="canvas"></canvas> -->
+                <video id="remoteVideo" autoplay="autoplay" playsinline="playsinline"></video>
+                <div id="emotion" style="position: absolute"></div>
+            </div>
+            <!-- 키워드 -->
+            <div class="banner row" id="tip">
+                <div class="title col-md-2" style="font-size:2rem; text-align: center;">
+                    <b>TIP!</b>
                 </div>
-                <!-- 키워드 -->
-                <div class="banner row" id="tip" >
-                    <div class="title col-3" style="font-size:2rem;">
-                        <b>TIP!</b>
-                    </div>
-                    <div class="content col-9">
-                        <div id="randomQuestion">
-                            
-                            <div class="inner-list">
-                                <!-- <div class="inner">
+                <div class="content col-10">
+                    <div id="randomQuestion">
+
+                        <div class="inner-list">
+                            <!-- <div class="inner">
                                     <h2>1</h2>
                                 </div>
                                 <div class="inner">
@@ -161,11 +162,11 @@
                                 <div class="inner">
                                     <h2>3</h2>
                                 </div> -->
-                            </div>
                         </div>
-                        
                     </div>
-                    <!-- <div class="keyword-question" id="title">질문</div>
+
+                </div>
+                <!-- <div class="keyword-question" id="title">질문</div>
                     <div class="rq-content row">
                         <div class="key col-6" >키워드 질문
                             <button id="key_switch">
@@ -180,46 +181,47 @@
                             </button>
                         </div> -->
 
-                    <!-- </div> -->
-                </div>
-
+                <!-- </div> -->
             </div>
 
-            <div class="col-md-4 ">
-                <!-- 나의 카메라 -->
-                <div class="my-cam">
-                    <video id="localVideo" autoplay="autoplay" muted="muted" playsinline="playsinline"></video>
+        </div>
+
+        <div class="col-md-4 ">
+            <!-- 나의 카메라 -->
+            <div class="my-cam">
+                <video id="localVideo" autoplay="autoplay" muted="muted" playsinline="playsinline"></video>
+            </div>
+
+            <!-- 오디오, 카메라 설정 -->
+            <div class="row " id="setting">
+                <div class="col">
+                    <img src="../images/unmute.png" alt="" id="muteBtn">
                 </div>
-
-                <!-- 오디오, 카메라 설정 -->
-                <div class="row " id="setting">
-                    <div class="col">
-                        <img src="../images/unmute.png" alt="" id="muteBtn">
-                    </div>
-                    <div class="col">
-                        <img src="../images/cameraon.png" alt="" id="cameraBtn">
-                    </div>
+                <div class="col">
+                    <img src="../images/cameraon.png" alt="" id="cameraBtn">
                 </div>
+            </div>
 
-                <!-- 대화록 -->
-                <div class="minute box_part" id="min" style=" height: 20rem;">
-                    <div class="minute-title" id="title">대화록</div>
+            <!-- 대화록 -->
+            <div class="minute box_part" id="min" style=" height: 20rem;">
+                <div class="minute-title" id="title">대화록</div>
 
-                    <div class="min-content">
-                        <div class="chatLog " id="chat" contenteditable="contenteditable" style="margin: 0.3rem">
+                <div class="min-content">
+                    <div class="chatLog " id="chat" contenteditable="contenteditable" style="margin: 0.3rem">
 
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div class="mdc-dialog" id="room-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
         aria-describedby="my-dialog-content">
         <div class="mdc-dialog__container">
             <div class="mdc-dialog__surface">
-                <h2 class="mdc-dialog__title justify-content-center" id="my-dialog-title" style="text-align:center">방 참가하기</h2>
+                <h2 class="mdc-dialog__title justify-content-center" id="my-dialog-title" style="text-align:center">방
+                    참가하기</h2>
                 <div class="mdc-dialog__content" id="my-dialog-content">
                     방 코드를 입력하세요.
                     <div class="mdc-text-field">
@@ -229,8 +231,9 @@
                     </div>
                 </div>
                 <footer class="mdc-dialog__actions justify-content-center" style="align-items:center">
-                    <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button justify-content-center"
-                        data-mdc-dialog-action="yes" style="width: 40%;">
+                    <button id="confirmJoinBtn" type="button"
+                        class="mdc-button mdc-dialog__button justify-content-center" data-mdc-dialog-action="yes"
+                        style="width: 40%;">
                         <span class="mdc-button__label">확인</span>
                     </button>
                     <button id="cancelBtn" type="button" class="mdc-button mdc-dialog__button justify-content-center"
