@@ -15,7 +15,7 @@ let speechList = {};
 let emotionRateList = {};
 
 async function init_ff(rid = null) {
-    rid = 'Uy8BJW8LoXRgy1lPjYMy'; //
+    // rid = 'Uy8BJW8LoXRgy1lPjYMy'; //
     console.log("roomId : " + rid);
     if (rid == null) {
         return;
@@ -43,7 +43,7 @@ async function init_ff(rid = null) {
                         opId = caller;
                     }
 
-                    opId = '3jSfETcMRWRfiB4TPa732qn01BT2'; //
+                    // opId = '3jSfETcMRWRfiB4TPa732qn01BT2'; //
                     // get name of opponent
                     const userCol = collection(db, "users");
                     const opRef = doc(userCol, opId);
