@@ -7,7 +7,7 @@ import {
   updateDoc,
   onSnapshot
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-import { startTime, uid, emotionHistory, emotionCount, itv } from "./meeting_stt.js";
+import { startTime, uid, emotionHistory, emotionCount, GV, startShowTips, stopShowTips } from "./meeting_stt.js";
 import { showTips, trigger } from "./meeting_tips.js";
 
 var leftchannel = [];
@@ -202,14 +202,11 @@ async function stopRecord(ref = null) {
         updateEmotion();
         
         if (trigger(emotionHistory) != false) {
-          if (itv != null) {
-            clearInterval(itv);
-          }
+          
           showTips(emotionHistory);
 
-          itv = setInterval(() => {
-            showTips(emotionHistory, 1);
-          }, 4000);
+          stopShowTips();
+          startShowTips();
         }
         updateDoc(ref, { emotion: emt });
       })

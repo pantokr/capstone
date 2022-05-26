@@ -1,5 +1,5 @@
 import "../firebase_initialization.js";
-import { startSTT } from "./meeting_stt.js"
+import { startSTT, startShowTips, stopShowTips, GV } from "./meeting_stt.js"
 import {
     getFirestore,
     collection,

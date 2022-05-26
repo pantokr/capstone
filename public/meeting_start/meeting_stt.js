@@ -20,14 +20,33 @@ let uid = null;
 //good, sad, bad, normal count
 var emotionCount = [0, 0, 0, 0];
 var emotionHistory = [];
-var itv = null;
+
+const GV = {
+    isPause: false,
+    st: null
+}
+
+const startShowTips = function () {
+    GV.isPause = false;
+    GV.st = setInterval(function () {
+        if (GV.isPause == false) {
+            showTips(emotionHistory, 1);
+        }else{
+            stopShowTips();
+            startShowTips();
+        }
+    }, 4000)
+}
+
+const stopShowTips = function () {
+    clearInterval(GV.st);
+    GV.isPause = true;
+}
 
 async function startSTT(roomId, isCaller) {
     showTips(emotionHistory, 2);
 
-    itv = setInterval(() => {
-        showTips(emotionCount, 1);
-    }, 4000);
+    startShowTips();
 
     faceapi.nets.tinyFaceDetector.loadFromUri("./models");
     faceapi.nets.faceLandmark68Net.loadFromUri("./models");
@@ -332,4 +351,4 @@ async function startSTT(roomId, isCaller) {
     }
 }
 
-export { startSTT, startTime, uid, emotionHistory, emotionCount, itv };
+export { startSTT, startTime, uid, emotionHistory, emotionCount, GV, startShowTips, stopShowTips };

@@ -15,7 +15,7 @@ let speechList = {};
 let emotionRateList = {};
 
 async function init_ff(rid = null) {
-    // rid = 'YSGZ755uzuoVICc74tEd'; //
+    rid = 'Uy8BJW8LoXRgy1lPjYMy'; //
     console.log("roomId : " + rid);
     if (rid == null) {
         return;
@@ -43,7 +43,7 @@ async function init_ff(rid = null) {
                         opId = caller;
                     }
 
-                    // opId = '3jSfETcMRWRfiB4TPa732qn01BT2'; //
+                    opId = '3jSfETcMRWRfiB4TPa732qn01BT2'; //
                     // get name of opponent
                     const userCol = collection(db, "users");
                     const opRef = doc(userCol, opId);
@@ -78,6 +78,7 @@ async function init_ff(rid = null) {
                     //console.log(keywordList);
 
                     async function getKeyword(d, emt) {
+
                         let col = null;
                         if (emt == "Bad") {
                             col = collection(d, "Bad");
@@ -103,7 +104,7 @@ async function init_ff(rid = null) {
 
                 }
             });
-        }, 4000);
+        }, 1000);
     });
 }
 
@@ -169,21 +170,10 @@ function getFrequentKeyword() {
     var t = Object.keys(max_list)[Math.floor(Math.random() * Object.keys(max_list).length)];
     return t;
 }
-// 넘겨 받은 RoomID의 모든 대화목록
-// function getSpeechesByRoomId(rid) {
-//     return speechList[rid];
-// }
 
-// // RoomID의 감정 스택
-// function getEmotionStackByRoomId(rid) {
+function getFrequentType(){
 
-//     for (var key in speechList) { }
-// }
-
-// 감정 비율 (그 대화에서 있었던 감정의 개수)
-// function getEmotionRateByRoomId(rid) {
-//     return emotionRateList[rid];
-// }
+}
 
 export {
     init_ff, getKeywordHistory, getFrequentKeyword
