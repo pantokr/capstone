@@ -230,8 +230,7 @@ async function startSTT(roomId, isCaller) {
                     const keyName = Object.keys(data)[i];
                     const keyType = data[keyName].type;
 
-                    if (keyType != 'PS_NAME' &&
-                        keyType != 'CV_SPORTS' &&
+                    if (keyType != 'CV_SPORTS' &&
                         keyType != 'CV_FOOD' &&
                         keyType.substr(0, 2) != 'LC' &&
                         keyType.substr(0, 2) != 'AM') {
