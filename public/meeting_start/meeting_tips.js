@@ -366,11 +366,17 @@ function showTips(emotionHistory, isTriggered = 0) {
 
 function analyzeUser() {
   var str = getFrequentKeyword();
-  if(str == null){
+  if (str == null) {
     str = "\"" + randomQuestions[Math.floor(Math.random() * randomQuestions.length)] + "\"라고 질문해보는 것은 어떤가요?";
   }
-  else{
-    str = "상대방이 최근 가장 많이 언급한 키워드는 \"" + str + "\"입니다.";
+  else {
+    const rand = Math.floor(Math.random() * 2);
+    if (rand == 1) {
+      str = "상대방이 최근 가장 많이 언급한 키워드는 \"" + str + "\"입니다.";
+    }
+    else {
+      str = "\"" + randomQuestions[Math.floor(Math.random() * randomQuestions.length)] + "\"라고 질문해보는 것은 어떤가요?";
+    }
   }
   console.log(str);
   return str;
