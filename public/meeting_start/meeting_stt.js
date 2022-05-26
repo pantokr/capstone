@@ -35,7 +35,7 @@ const startShowTips = function () {
             stopShowTips();
             startShowTips();
         }
-    }, 4000)
+    }, 10000)
 }
 
 const stopShowTips = function () {
