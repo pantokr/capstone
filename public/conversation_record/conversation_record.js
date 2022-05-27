@@ -75,19 +75,24 @@ async function drawChart() {
   const angry = document.getElementById('angry');
 
   let ph = document.createElement('p');
-  ph.textContent = await getFrequentKeyword("Good");
+  ph.setAttribute('id', 'ph');
+  
+  ph.textContent = `'` + await getFrequentKeyword("Good") + `'`;
   happy.appendChild(ph);
 
   let pb = document.createElement('p');
-  pb.textContent = await getFrequentKeyword("Bad");
+  pb.setAttribute('id', 'pb');
+  pb.textContent = `'` + await getFrequentKeyword("Bad") + `'`;
   angry.appendChild(pb);
 
   let ps = document.createElement('p');
-  ps.textContent = await getFrequentKeyword("Sad");
+  ps.setAttribute('id', 'ps');
+  ps.textContent = `'` + await getFrequentKeyword("Sad") + `'`;
   sad.appendChild(ps);
 
   let pn = document.createElement('p');
-  pn.textContent = await getFrequentKeyword("Normal");
+  pn.setAttribute('id', 'pn');
+  pn.textContent = `'` + await getFrequentKeyword("Normal") + `'`;
   neutral.appendChild(pn);
 
   var data = google.visualization.arrayToDataTable([

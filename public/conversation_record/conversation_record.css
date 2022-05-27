@@ -137,3 +137,11 @@
 #desc{
   font-size: 1.2rem;
 }
+
+#ph, #pb, #ps, #pn{
+  /* border-radius: 10px; */
+  /* background-color: transparent; */
+  /* border: 3px solid #ddeef4; */
+  /* padding: .2rem; */
+  color: #343d49;
+}
