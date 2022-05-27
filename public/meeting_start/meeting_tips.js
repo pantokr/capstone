@@ -371,6 +371,7 @@ function analyzeUser() {
   }
   else {
     const rand = Math.floor(Math.random() * 2);
+    console.log(rand);
     if (rand == 1) {
       str = "상대방이 최근 가장 많이 언급한 키워드는 \"" + str + "\"입니다.";
     }

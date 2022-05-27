@@ -149,6 +149,7 @@ async function startSTT(roomId, isCaller) {
 
                 if (speecher == name) {
                     //emotion count
+                    console.log("나의 stt : ", parsed_data.text, "나의 감정: ", emotion);
                     if (emotion == "Good") {
                         emotionCount[0]++;
                         setKeyword(0, parsed_data);

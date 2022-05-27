@@ -43,8 +43,9 @@ async function init_ff(rid = null) {
                         opId = caller;
                     }
 
-                    // opId = '3jSfETcMRWRfiB4TPa732qn01BT2'; //
+                    opId = 'HFzzpL21GSReUX7Zuy08EkpHR4Z2';
                     // get name of opponent
+                    console.log(opId);
                     const userCol = collection(db, "users");
                     const opRef = doc(userCol, opId);
                     console.log("opId : " + opId);

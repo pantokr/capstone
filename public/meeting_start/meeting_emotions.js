@@ -198,7 +198,8 @@ async function stopRecord(ref = null) {
         var v_emt = transformEmotion(res.emotion);
         voiceMaxValue = res.accuracy;
 
-        var emt = uniteEmotion(v_emt, f_emt);
+        // var emt = uniteEmotion(v_emt, f_emt);
+        var emt = v_emt;
         updateEmotion();
         
         if (trigger(emotionHistory) != false) {
