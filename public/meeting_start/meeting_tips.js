@@ -11,7 +11,7 @@ import {
   onSnapshot,
   deleteDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-import { getKeywordHistory, getFrequentKeyword } from "./firestore_functions.js";
+import { getKeywordHistory, getFrequentKeyword, getFrequentType, getGoodKeyword, getBadKeyword, getSadKeyword } from "./firestore_functions.js";
 // import { emotionHistory } from "./meeting_emotions.js"
 // init();
 
@@ -365,22 +365,62 @@ function showTips(emotionHistory, isTriggered = 0) {
 }
 
 function analyzeUser() {
-  var str = getFrequentKeyword();
-  if (str == null) {
-    str = "\"" + randomQuestions[Math.floor(Math.random() * randomQuestions.length)] + "\"";
-  }
-  else {
-    const rand = Math.floor(Math.random() * 2);
-    console.log(rand);
-    if (rand == 1) {
-      str = "상대방이 최근 가장 많이 언급한 키워드는 \"" + str + "\"입니다.";
+
+  const rand = Math.floor(Math.random() * 6);
+  if (rand == 1) {
+    var str = getFrequentKeyword();
+    if (str != null) {
+      str = "상대방이 최근 가장 많이 언급한 키워드 중 하나는 \"" + str + "\"입니다.";
+      return str;
     }
     else {
-      str = "\"" + randomQuestions[Math.floor(Math.random() * randomQuestions.length)] + "\"";
+      return analyzeUser();
     }
   }
-  console.log(str);
-  return str;
+  else if (rand == 2) {
+    var str = getFrequentType();
+    if (str != null) {
+      str = "상대방이 최근 가장 관심 있는 주제는 " + str + "입니다.";
+      return str;
+    }
+    else {
+      return analyzeUser();
+    }
+  }
+  else if (rand == 3) {
+    var str = getGoodKeyword();
+    if (str != null) {
+      str = "상대방이 최근 제일 많이 웃었던 키워드는 \"" + str + "\"입니다";
+      return str;
+    }
+    else {
+      return analyzeUser();
+    }
+  }
+  else if (rand == 4) {
+    var str = getBadKeyword();
+    if (str != null) {
+      str = "상대방이 최근 제일 화냈던 키워드는 \"" + str + "\"입니다";
+      return str;
+    }
+    else {
+      return analyzeUser();
+    }
+  }
+  else if (rand == 5){
+    var str = getSadKeyword();
+    if (str != null) {
+      str = "상대방의 최근 우울했던 키워드는 \"" + str + "\"입니다";
+      return str;
+    }
+    else {
+      return analyzeUser();
+    }
+  }
+  else {
+    str = "\"" + randomQuestions[Math.floor(Math.random() * randomQuestions.length)] + "\"";
+    return str;
+  }
 }
 
 export { showTips, trigger };

@@ -15,10 +15,10 @@ let speechList = {};
 let emotionRateList = {};
 
 async function init_ff(rid = null) {
-    // rid = 'Uy8BJW8LoXRgy1lPjYMy'; //
+    // rid = '40BpClNoboXdj8WnhJso'; //
     console.log("roomId : " + rid);
     if (rid == null) {
-        return;
+        rid = '40BpClNoboXdj8WnhJso';
     }
     onAuthStateChanged(auth, (user) => {
         console.log("auth");
@@ -76,6 +76,9 @@ async function init_ff(rid = null) {
 
                         keywordList[d.id] = t_list;
                     }
+
+                    var t = getKeywordHistory();
+                    console.log(t);
                     //console.log(keywordList);
 
                     async function getKeyword(d, emt) {
@@ -105,7 +108,7 @@ async function init_ff(rid = null) {
 
                 }
             });
-        }, 1000);
+        }, 4000);
     });
 }
 
@@ -172,10 +175,93 @@ function getFrequentKeyword() {
     return t;
 }
 
-function getFrequentType(){
+function getFrequentType() {
+    var keyType = keywordList;
+    // sports, food, location, animal
+    var t_list = [0, 0, 0, 0];
+    for (var key in keyType) {
+        if (keywordList[key] != null) {
+            for (var key_e in keywordList[key]) {
+                if (keywordList[key][key_e] != null) {
+                    var type = keywordList[key][key_e].type;
+                    var count = keywordList[key][key_e].count;
 
+                    if (type == 'CV_SPORTS') {
+                        t_list[0] += count;
+                    }
+                    else if (type == 'CV_FOOD') {
+                        t_list[1] += count;
+                    }
+                    else if (type.substr(0, 2) == 'LC') {
+                        t_list[2] += count;
+                    }
+                    else {
+                        t_list[3] += count;
+                    }
+                }
+            }
+        }
+    }
+
+    var m = t_list.indexOf(Math.max(t_list));
+    if (m == 0) {
+        return "스포츠";
+    }
+    else if (m == 1) {
+        return "음식";
+    }
+    else if (m == 2) {
+        return "여행";
+    }
+    else {
+        return "동물";
+    }
+}
+
+function getGoodKeyword() {
+
+    var t_list = []
+
+    for (var key in keywordList) {
+        if (keywordList[key] != null) {
+            if (keywordList[key]['Good'] != null) {
+                t_list.push(keywordList[key]['Good'].text);
+            }
+        }
+    }
+    var ret = t_list[Math.floor(Math.random() * t_list.length)];
+    return ret;
+}
+
+function getBadKeyword() {
+    var t_list = []
+
+    for (var key in keywordList) {
+        if (keywordList[key] != null) {
+            if (keywordList[key]['Bad'] != null) {
+                t_list.push(keywordList[key]['Bad'].text);
+            }
+        }
+    }
+    var ret = t_list[Math.floor(Math.random() * t_list.length)];
+    return ret;
+}
+
+function getSadKeyword() {
+    var t_list = []
+
+    for (var key in keywordList) {
+        if (keywordList[key] != null) {
+            if (keywordList[key]['Sad'] != null) {
+                t_list.push(keywordList[key]['Sad'].text);
+            }
+        }
+    }
+
+    var ret = t_list[Math.floor(Math.random() * t_list.length)];
+    return ret;
 }
 
 export {
-    init_ff, getKeywordHistory, getFrequentKeyword
+    init_ff, getKeywordHistory, getFrequentKeyword, getFrequentType, getGoodKeyword, getBadKeyword, getSadKeyword
 }
