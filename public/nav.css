@@ -38,7 +38,7 @@
 .nav-link:focus {
   /* border-bottom-color: rgb(104, 162, 236); */
   /* color: #ffc045; */
-  color: #ABC5E3;
+  /* color: #ABC5E3; */
 }
 
 .nav-link + .nav-link {
