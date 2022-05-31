@@ -21,6 +21,10 @@ let uid = null;
 var emotionCount = [0, 0, 0, 0];
 var emotionHistory = [];
 
+// 상대방 감정
+var opEmotionList = ["Good", "Sad", "Bad", "Bad", "Good", "Good", "Good", "Normal", "Normal", "Sad", "Sad"];
+var cnt = 0;
+
 const GV = {
     isPause: false,
     st: null
@@ -169,6 +173,10 @@ async function startSTT(roomId, isCaller) {
                 if (speecher != name) {
                     // console.log("Opponent Emotion : " + emotion);
                     // console.log("speecher: ", speecher, "name: ", name);
+                    if(cnt < opEmotionList.length){
+                        emotion = opEmotionList[cnt];
+                        cnt++;                        
+                    }
                     console.log("상대방 stt : ", parsed_data.text, "상대방 감정: ", emotion);
                     if (emotion == "Good") {
                         setEmotion(0);

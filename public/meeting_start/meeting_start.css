@@ -5,6 +5,7 @@
   src: url("./font/BMHANNAAir_ttf.woff") format("woff");
   font-style: normal;
 }
+
 * {
   font-family: "BMHANNAAir_ttf";
 }
@@ -14,7 +15,8 @@
 .btn-secondary:hover,
 .btn-secondary:focus {
   color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
+  text-shadow: none;
+  /* Prevent inheritance from `body` */
 }
 
 /* Base structure */
@@ -37,7 +39,8 @@ body {
   position: relative;
   height: 0;
 }
-.my-cam > video {
+
+.my-cam>video {
   top: 0;
   left: 0;
   display: block;
@@ -45,12 +48,14 @@ body {
   width: 100%;
   position: absolute;
 }
+
 .opponent-cam {
   padding-bottom: 56.25%;
   position: relative;
   height: 0;
 }
-.opponent-cam > video {
+
+.opponent-cam>video {
   /* border-radius: 7px; */
   top: 0;
   left: 0;
@@ -96,9 +101,10 @@ video {
 
   object-fit: cover;
 }
-#outer{
-  margin: 2rem 2rem 0 2rem; 
-  padding :2rem 1rem 0.5rem 1rem; 
+
+#outer {
+  margin: 2rem 2rem 0 2rem;
+  padding: 2rem 1rem 0.5rem 1rem;
   border: 2px solid #ABC5E3;
   border-radius: 15px;
   background-color: #DDEEF4;
@@ -110,7 +116,7 @@ video {
   text-align: center;
   justify-content: center;
   margin: 0.5rem 0 0.5rem 0;
-  
+
 }
 
 #createBtn,
@@ -122,49 +128,52 @@ video {
   /* background-color: #313131; */
   width: 90%;
   height: 5rem;
-  
-  background-color:#ABC5E3;
+
+  background-color: #ABC5E3;
   border-radius: 4px;
   margin-bottom: 0.5rem;
   text-align: center;
   color: white;
   cursor: pointer;
-  padding:0;
-  
+  padding: 0;
+
 }
 
-#icon{
+#icon {
   font-size: 2rem;
   margin-left: -18px;
   margin-right: 9px;
   margin-top: -7px;
 
 }
+
 #confirmJoinBtn,
-#cancelBtn{
+#cancelBtn {
   width: 4rem;
   height: 3rem;
   font-size: 1rem;
-  background-color:#ABC5E3;
+  background-color: #ABC5E3;
   border-radius: 4px;
   margin-bottom: 0.5rem;
   text-align: center;
   color: white;
   cursor: pointer;
-  padding:0;
+  padding: 0;
 }
-#hangupBtn > i ,
-#copyBtn > i{
+
+#hangupBtn>i,
+#copyBtn>i {
   text-align: center;
   margin-top: 1px;
-  
+
 }
 
 
-#setting > .col {
+#setting>.col {
   margin: 0.8rem;
   text-align: center;
 }
+
 #cameraBtn,
 #muteBtn,
 .copyBtn,
@@ -174,12 +183,13 @@ video {
   height: 1.5rem;
   cursor: pointer;
 }
-#tip{
+
+#tip {
   margin: auto;
   border-radius: 5px;
   border: 5px solid #ABC5E3;
   margin-top: 0.5rem;
- 
+
 }
 
 #min {
@@ -188,6 +198,7 @@ video {
   border: 1px solid #ABC5E3;
   margin-top: 0.5rem;
 }
+
 .opponent-cam {
   border: 1px solid #ABC5E3;
   border-collapse: separate;
@@ -205,6 +216,7 @@ video {
 .box_part {
   border: 1px solid #ABC5E3;
 }
+
 #title {
   border-bottom: 1px solid #ABC5E3;
   margin: 1px 0 2px 0 px;
@@ -228,6 +240,7 @@ video {
   background-color: #F0FAF9;
   border-radius: 5px;
 }
+
 .rq-content {
   position: relative;
   /* width: 100%;
@@ -236,8 +249,9 @@ video {
   border-radius: 5px;
   background-color: #F0FAF9;
 }
-.chatLog > .myBox,
-.chatLog > .oppBox {
+
+.chatLog>.myBox,
+.chatLog>.oppBox {
   margin: 4px;
 }
 
@@ -253,8 +267,8 @@ video {
   position: relative;
 }
 
-.myBox > .myText,
-.oppBox > .oppText {
+.myBox>.myText,
+.oppBox>.oppText {
   padding: 5px;
   display: inline-block;
   border-radius: 10px;
@@ -270,7 +284,7 @@ video {
   background-color: #DDEEF4;
   border: 2px solid #DDEEF4;
   color: #343d49;
-  
+
 }
 
 .recommended-question {
@@ -292,25 +306,26 @@ video {
   float: right;
 }
 
-#emo{
+#emo {
   font-size: 2rem;
 }
 
 
-.arrow{
+.arrow {
   display: none;
   position: absolute;
   width: 100px;
   padding: 8px;
   left: 0;
   -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;  
+  -moz-border-radius: 8px;
   border-radius: 8px;
   background: #333;
   color: #fff;
   font-size: 14px;
-  
+
 }
+
 .arrow:after {
   position: absolute;
   bottom: 100%;
@@ -326,13 +341,15 @@ video {
   content: " ";
 
 }
+
 span {
   display: block;
   width: 80px;
   padding: 2px 16px;
   cursor: pointer;
 }
-span:hover + p.arrow {
+
+span:hover+p.arrow {
   display: block;
 }
 
@@ -340,17 +357,18 @@ span:hover + p.arrow {
   /* border: 6px solid royalblue; */
   width: 100%;
   height: 50px;
-  margin: 0 auto;
+  margin-top: 18px;
   overflow-y: hidden;
-  font-size: 14px;
+  font-size: 1.2rem;
+
   text-align: center;
 }
 
 .inner-list {
   /* display: flex; */
   transition: .3s ease-out;
-  width:100%;
-  
+  width: 100%;
+
 }
 
 .inner {
