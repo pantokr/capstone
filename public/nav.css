@@ -81,3 +81,10 @@ li {
 .feature {
   cursor: pointer;
 }
+
+.feature{
+  transition: all 0.2s linear;
+}
+.feature:hover{
+  transform: scale(1.2);
+}
