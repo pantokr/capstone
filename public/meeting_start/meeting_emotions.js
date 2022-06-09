@@ -5,9 +5,17 @@ import {
   doc,
   setDoc,
   updateDoc,
-  onSnapshot
+  onSnapshot,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-import { startTime, uid, emotionHistory, emotionCount, GV, startShowTips, stopShowTips } from "./meeting_stt.js";
+import {
+  startTime,
+  uid,
+  emotionHistory,
+  emotionCount,
+  GV,
+  startShowTips,
+  stopShowTips,
+} from "./meeting_stt.js";
 import { showTips, trigger } from "./meeting_tips.js";
 
 var leftchannel = [];
@@ -24,14 +32,11 @@ var voiceMaxValue;
 // stopRecord(ref); } 얼굴 인식 감정 분석 함수
 async function recognizeFaceEmotion() {
   // 3초마다 얼굴 감정 분석 faceExpressionsRecognition();
-  const localVideo = document.getElementById("localVideo");
+  const remoteVideo = document.getElementById("localVideo");
   //얼굴 인식 모델 load
 
   const detections = await faceapi
-    .detectAllFaces(
-      localVideo,
-      new faceapi.TinyFaceDetectorOptions()
-    )
+    .detectAllFaces(remoteVideo, new faceapi.TinyFaceDetectorOptions())
     .withFaceLandmarks()
     .withFaceExpressions();
   // console.log(detections[0]); console.log(detections[0].expressions);
@@ -40,14 +45,10 @@ async function recognizeFaceEmotion() {
     return "Normal";
   }
 
-  var emotions = Object
-    .keys(detections[0].expressions)
-    .map(function (key) {
-      return detections[0].expressions[key];
-    });
-  var max = Math
-    .max
-    .apply(null, emotions);
+  var emotions = Object.keys(detections[0].expressions).map(function (key) {
+    return detections[0].expressions[key];
+  });
+  var max = Math.max.apply(null, emotions);
   faceMaxValue = max;
   // 객체 배열 속 key 값을 console로 찍기
 
@@ -60,9 +61,7 @@ async function recognizeFaceEmotion() {
   return emt;
 
   function getKeyByValue(object, value) {
-    return Object
-      .keys(object)
-      .find((key) => object[key] === value);
+    return Object.keys(object).find((key) => object[key] === value);
   }
 }
 
@@ -78,48 +77,56 @@ async function startRecord() {
   blob = null;
 
   // Initialize recorder
-  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-  navigator.getUserMedia({
-    audio: true
-  }, function (e) {
-    // creates the audio context
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    context = new AudioContext();
+  navigator.getUserMedia =
+    navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia ||
+    navigator.msGetUserMedia;
+  navigator.getUserMedia(
+    {
+      audio: true,
+    },
+    function (e) {
+      // creates the audio context
+      window.AudioContext = window.AudioContext || window.webkitAudioContext;
+      context = new AudioContext();
 
-    // creates an audio node from the microphone incoming stream
-    mediaStream = context.createMediaStreamSource(e);
+      // creates an audio node from the microphone incoming stream
+      mediaStream = context.createMediaStreamSource(e);
 
-    // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createScriptProcessor
-    // bufferSize: the onaudioprocess event is called when the buffer is full
-    var bufferSize = 2048;
-    var numberOfInputChannels = 2;
-    var numberOfOutputChannels = 2;
-    if (context.createScriptProcessor) {
-      recorder = context.createScriptProcessor(
-        bufferSize,
-        numberOfInputChannels,
-        numberOfOutputChannels
-      );
-    } else {
-      recorder = context.createJavaScriptNode(
-        bufferSize,
-        numberOfInputChannels,
-        numberOfOutputChannels
-      );
+      // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createScriptProcessor
+      // bufferSize: the onaudioprocess event is called when the buffer is full
+      var bufferSize = 2048;
+      var numberOfInputChannels = 2;
+      var numberOfOutputChannels = 2;
+      if (context.createScriptProcessor) {
+        recorder = context.createScriptProcessor(
+          bufferSize,
+          numberOfInputChannels,
+          numberOfOutputChannels
+        );
+      } else {
+        recorder = context.createJavaScriptNode(
+          bufferSize,
+          numberOfInputChannels,
+          numberOfOutputChannels
+        );
+      }
+
+      recorder.onaudioprocess = function (e) {
+        leftchannel.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+        rightchannel.push(new Float32Array(e.inputBuffer.getChannelData(1)));
+        recordingLength += bufferSize;
+      };
+
+      // we connect the recorder
+      mediaStream.connect(recorder);
+      recorder.connect(context.destination);
+    },
+    function (e) {
+      console.error(e);
     }
-
-    recorder.onaudioprocess = function (e) {
-      leftchannel.push(new Float32Array(e.inputBuffer.getChannelData(0)));
-      rightchannel.push(new Float32Array(e.inputBuffer.getChannelData(1)));
-      recordingLength += bufferSize;
-    };
-
-    // we connect the recorder
-    mediaStream.connect(recorder);
-    recorder.connect(context.destination);
-  }, function (e) {
-    console.error(e);
-  });
+  );
 }
 async function stopRecord(ref = null) {
   // console.log('Stop Recording.');
@@ -179,19 +186,18 @@ async function stopRecord(ref = null) {
 
   var reader = new FileReader();
   // var f_emt = await recognizeFaceEmotion();
+  var tmpFaceResult = 0;
 
   reader.onloadend = function () {
-    var base64 = reader
-      .result
-      .split(",")[1];
+    var base64 = reader.result.split(",")[1];
 
     fetch("https://open-py.jp.ngrok.io/voice-emotion", {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ wav_base64: base64 })
+      body: JSON.stringify({ wav_base64: base64 }),
     })
       .then((res) => res.json())
       .then((res) => {
@@ -201,9 +207,8 @@ async function stopRecord(ref = null) {
         // var emt = uniteEmotion(v_emt, f_emt);
         var emt = v_emt;
         updateEmotion();
-        
+
         if (trigger(emotionHistory) != false) {
-          
           showTips(emotionHistory);
 
           stopShowTips();
@@ -217,6 +222,15 @@ async function stopRecord(ref = null) {
   };
   reader.readAsDataURL(blob);
   var f_emt = await recognizeFaceEmotion();
+  if (f_emt == "Good") {
+    setEmotion(1);
+  } else if (f_emt == "Sad") {
+    setEmotion(2);
+  } else if (f_emt == "Bad") {
+    setEmotion(3);
+  } else {
+    setEmotion(4);
+  }
 }
 
 function flattenArray(channelBuffer, recordingLength) {
@@ -236,7 +250,7 @@ function interleave(leftChannel, rightChannel) {
 
   var inputIndex = 0;
 
-  for (var index = 0; index < length;) {
+  for (var index = 0; index < length; ) {
     result[index++] = leftChannel[inputIndex];
     result[index++] = rightChannel[inputIndex];
     inputIndex++;
@@ -287,15 +301,20 @@ function uniteEmotion(v, f) {
     // console.log("emotion result : " + v);
     return v;
   }
-  if ((v == "Good" && f == "Bad") || (v == "Good" && f == "Sad") || (v == "Sad" && f == "Good") || (v == "Sad" && f == "Bad") || (v == "Bad" && f == "Good") || (v == "Bad" && f == "Sad")) {
+  if (
+    (v == "Good" && f == "Bad") ||
+    (v == "Good" && f == "Sad") ||
+    (v == "Sad" && f == "Good") ||
+    (v == "Sad" && f == "Bad") ||
+    (v == "Bad" && f == "Good") ||
+    (v == "Bad" && f == "Sad")
+  ) {
     if (faceMaxValue == voiceMaxValue) {
       //   console.log("emotion result : " + v);
       return v;
     }
     // console.log("emotion result : " + (faceMaxValue > voiceMaxValue) ? f : v);
-    return faceMaxValue > voiceMaxValue
-      ? f
-      : v;
+    return faceMaxValue > voiceMaxValue ? f : v;
   } else if (v == "Normal" && f != "Normal") {
     // console.log("emotion result : " + f);
     return f;
@@ -332,12 +351,8 @@ function updateEmotion() {
     good: emotionCount[0],
     sad: emotionCount[1],
     bad: emotionCount[2],
-    normal: emotionCount[3]
+    normal: emotionCount[3],
   });
 }
 
-export {
-  startRecord,
-  stopRecord,
-  setEmotion
-};
+export { startRecord, stopRecord, setEmotion };
